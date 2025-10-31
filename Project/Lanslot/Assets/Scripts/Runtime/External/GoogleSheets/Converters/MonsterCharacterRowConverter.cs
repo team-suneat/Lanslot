@@ -1,0 +1,61 @@
+﻿using System.Collections.Generic;
+using TeamSuneat.Data;
+
+namespace TeamSuneat
+{
+    public sealed class MonsterCharacterRowConverter : IGoogleSheetRowConverter<MonsterCharacterData>
+    {
+        public bool TryConvert(Dictionary<string, string> row, out MonsterCharacterData model, IList<string> warnings)
+        {
+            model = null;
+
+            if (!row.TryGetValue("Name", out string nameStr) || !GoogleSheetValueParsers.TryParseEnum<CharacterNames>(nameStr, out CharacterNames name))
+            {
+                warnings?.Add($"필수 컬럼 Name 누락 또는 enum 파싱 실패: {nameStr}");
+                return false;
+            }
+
+            // 선택: 표시 이름
+            row.TryGetValue("DisplayName", out string displayName);
+
+            if (!row.TryGetValue("Health", out string maxHPString) || !GoogleSheetValueParsers.TryParseFloat(maxHPString, out float maxHP))
+            {
+                warnings?.Add($"Name {name}: Health 파싱 실패: {maxHPString}");
+                return false;
+            }
+
+            if (!row.TryGetValue("Damage", out string damageString) || !GoogleSheetValueParsers.TryParseFloat(damageString, out float damage))
+            {
+                warnings?.Add($"Name {name}: Damage 파싱 실패: {damageString}");
+                return false;
+            }
+
+            BuildTypes[] builds;
+            if (row.TryGetValue("SupportedBuildTypes", out string buildsStr))
+            {
+                if (!GoogleSheetValueParsers.TryParseEnumArray<BuildTypes>(buildsStr, out builds))
+                {
+                    builds = System.Array.Empty<BuildTypes>();
+                    warnings?.Add($"Name {name}: SupportedBuildTypes 파싱 실패 → 빈 배열 사용");
+                }
+            }
+            else
+            {
+                builds = System.Array.Empty<BuildTypes>();
+            }
+
+            // 모델 생성 및 기본 필드 설정
+            MonsterCharacterData m = new()
+            {
+                Name = name,
+                DisplayName = displayName,
+                Health = maxHP,
+                Damage = damage,
+                SupportedBuildTypes = builds,
+            };
+
+            model = m;
+            return true;
+        }
+    }
+}

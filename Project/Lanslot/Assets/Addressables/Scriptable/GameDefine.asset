@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4081162c731c7d54bb1a0ebe7f6fa36f, type: 3}
+  m_Name: GameDefine
+  m_EditorClassIdentifier: 
+  Data:
+    MAX_ATTACK_SPEED_RATE: 2
+    MAX_DAMAGE_ARMOR_REDUCTION_RATE: 0
+    MAX_DAMAGE_RESISTANCE_REDUCTION_RATE: 0
+    MAX_DAMAGE_REDUCTION_RATE: 0.7
+    MIN_CRITICAL_CHANCE_RATE: 0
+    MAX_CRITICAL_CHANCE_RATE: 0.75
+    MAX_DODGE_CHANCE_RATE: 0.75
+    EDITOR_BUILD_TYPE: 0

@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Scriptable
+  m_EditorClassIdentifier: 
+  m_GroupName: Scriptable
+  m_GUID: 9c8a3fb1d489a2043a3b1d63467b7d70
+  m_SerializeEntries:
+  - m_GUID: 023cd9c4b0511534284f2eecd94164af
+    m_Address: Assets/Addressables/Scriptable/LevelExp.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scriptable
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5ce62921ee649b740a79d267065c5be7
+    m_Address: Assets/Addressables/Scriptable/Flicker_Dash.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scriptable
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 69dcdc3aa0006eb45a2600a6674f03f0
+    m_Address: Assets/Addressables/Scriptable/Floaty_Content.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scriptable
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7517224cbbcd5f542a9945d3b5c1cd57
+    m_Address: Assets/Addressables/Scriptable/LogSetting.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scriptable
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d452892f14649e41b88926b8554bade
+    m_Address: Assets/Addressables/Scriptable/Floaty_PhysicalCritical.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scriptable
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a6f4b923892827946a943ebaf1ecfc6d
+    m_Address: Assets/Addressables/Scriptable/Floaty_Physical.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scriptable
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ad1b6581760058e459b56aa024aaef49
+    m_Address: Assets/Addressables/Scriptable/Floaty_PlayerDamaged.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scriptable
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c1fa8cce5a610cb46a1289d35432806a
+    m_Address: Assets/Addressables/Scriptable/Flicker_Damage.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scriptable
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d5ba9619f3cbea249880391928f43482
+    m_Address: Assets/Addressables/Scriptable/Stage_Stage1.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scriptable
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d707796b98d9c4e41a148c680c6fc49e
+    m_Address: Assets/Addressables/Scriptable/Floaty_HealLife.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scriptable
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f8e89ddd967dbd94386820034bee2ff4
+    m_Address: Assets/Addressables/Scriptable/GameDefine.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scriptable
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 0bfdb79b140772546ac483b0ad9449ba, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 8e869c6e5330ecd459ce637600229b7e, type: 2}
+    - {fileID: 11400000, guid: e07249ca9063d0b40a96199d677cbc33, type: 2}

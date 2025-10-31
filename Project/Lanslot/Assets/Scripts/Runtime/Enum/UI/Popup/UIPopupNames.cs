@@ -1,0 +1,9 @@
+namespace TeamSuneat
+{
+    public enum UIPopupNames
+    {
+        None = 0,
+
+        Character,
+    }
+}
