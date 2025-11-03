@@ -13,14 +13,10 @@ namespace TeamSuneat.Data
         private readonly Dictionary<int, BuffAsset> _buffs = new();
         private readonly Dictionary<int, BuffStateEffectAsset> _buffStateEffects = new();
         private readonly Dictionary<int, PassiveAsset> _passives = new();
-        private readonly Dictionary<int, StageAsset> _stages = new();
-        private readonly Dictionary<int, AreaAsset> _areas = new();
         private readonly Dictionary<int, FontAsset> _fonts = new();
         private readonly Dictionary<int, FloatyAsset> _floatys = new();
-        private readonly Dictionary<int, FlickerAsset> _flickers = new();        
+        private readonly Dictionary<int, FlickerAsset> _flickers = new();
         private readonly Dictionary<int, SoundAsset> _sounds = new();
-        private readonly Dictionary<int, CharacterStatAsset> _characterStats = new();
-        private readonly Dictionary<int, WeaponAsset> _weapons = new();
 
         public void Clear()
         {
@@ -33,13 +29,9 @@ namespace TeamSuneat.Data
             _buffs.Clear();
             _buffStateEffects.Clear();
             _passives.Clear();
-            _stages.Clear();
-            _areas.Clear();
             _fonts.Clear();
             _floatys.Clear();
             _flickers.Clear();
-            _characterStats.Clear();
-            _weapons.Clear();
         }
 
         public void RefreshAll()
@@ -47,13 +39,10 @@ namespace TeamSuneat.Data
             RefreshAllBuff();
             RefreshAllPassive();
             RefreshAllHitmarks();
-            RefreshAllArea();
             RefreshAllFonts();
             RefreshAllFlickers();
             RefreshAllFloatys();
             RefreshAllSounds();
-            RefreshAllCharacterStats();
-            RefreshAllWeapon();
         }
     }
 }

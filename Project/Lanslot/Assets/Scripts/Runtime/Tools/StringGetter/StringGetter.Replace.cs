@@ -82,9 +82,9 @@ namespace TeamSuneat
                 foreach (Match match in matches)
                 {
                     string nameString = match.Groups[1].Value;
-                    if (Enum.TryParse(nameString, out CharacterNames enumCharacterName))
+                    if (Enum.TryParse(nameString, out CharacterNames enumPlayerName))
                     {
-                        input = input.Replace(match.Value, $"<style=Character>{enumCharacterName.GetLocalizedString(languageName)}</style>");
+                        input = input.Replace(match.Value, $"<style=Character>{enumPlayerName.GetLocalizedString(languageName)}</style>");
                         continue;
                     }
 

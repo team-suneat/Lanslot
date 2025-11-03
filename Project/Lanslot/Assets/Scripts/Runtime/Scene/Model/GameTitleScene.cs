@@ -101,10 +101,10 @@ namespace TeamSuneat
 
         private void SpawnPopup()
         {
-            UIPopup popup = UIManager.Instance.PopupManager.SpawnCenterPopup(UIPopupNames.Character, OnDespawnPopup);
+            UIPopup popup = UIManager.Instance.PopupManager.SpawnCenterPopup(UIPopupNames.GameStartSelection, OnDespawnPopup);
             if (popup != null)
             {
-                UICharacterPopup characterPopup = popup as UICharacterPopup;
+                UIGameStartSelectionPopup characterPopup = popup as UIGameStartSelectionPopup;
                 characterPopup.Setup();
             }
         }

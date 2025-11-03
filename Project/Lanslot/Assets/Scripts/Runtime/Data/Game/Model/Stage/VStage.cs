@@ -1,61 +1,58 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace TeamSuneat.Data
+namespace TeamSuneat.Data.Game
 {
-    [Serializable]
+    [System.Serializable]
     public class VStage
     {
-        /// <summary> 스테이지 이름 (Key) </summary>
         [NonSerialized]
-        public StageNames StageName;
+        public List<StageNames> Stages = new();
+        public List<string> StageStrings = new();
 
-        public string StageNameString;
-
-        /// <summary> 스테이지 진행 상황 </summary>
-        [NonSerialized]
-        public StageProgress Progress; // (None, Completed, Rewarded)
-
-        public string ProgressString;
-
-        /// <summary> 스테이지에서 등장할 수 있는 정예 몬스터의 수 </summary>
-        public int EliteCount;
-
-        /// <summary> 스테이지의 웨이브 인덱스 </summary>
-        public int WaveIndex;
-
-        /// <summary> 스테이지의 전투 중단 여부 </summary>
-        public bool IsBattlePause;
-
-        public VStage()
-        {
-        }
-
-        public VStage(StageAssetData assetData)
-        {
-            StageName = assetData.Name;
-            Progress = StageProgress.None;
-
-            StageNameString = assetData.Name.ToString();
-            ProgressString = StageProgress.None.ToString();
-        }
+        public StageNames CurrentStage;
+        public string CurrentStageString;
 
         public void OnLoadGameData()
         {
-            EnumEx.ConvertTo(ref StageName, StageNameString);
-            EnumEx.ConvertTo(ref Progress, ProgressString);
+            EnumEx.ConvertTo(ref Stages, StageStrings);
+            EnumEx.ConvertTo(ref CurrentStage, CurrentStageString);
         }
 
-        public bool TrySetProgress(StageProgress progress)
+        public void ClearIngameData()
         {
-            if (Progress != progress)
-            {
-                Progress = progress;
-                ProgressString = progress.ToString();
+        }
 
-                return true;
+        public void Register(StageNames stageName)
+        {
+            if (!Stages.Contains(stageName))
+            {
+                Stages.Add(stageName);
             }
 
-            return false;
+            if (!StageStrings.Contains(stageName.ToString()))
+            {
+                StageStrings.Add(stageName.ToString());
+            }
+        }
+
+        public void Unregister(StageNames stageName)
+        {
+            if (Stages.Contains(stageName))
+            {
+                Stages.Remove(stageName);
+            }
+
+            if (StageStrings.Contains(stageName.ToString()))
+            {
+                StageStrings.Remove(stageName.ToString());
+            }
+        }
+
+        public void Select(StageNames stageName)
+        {
+            CurrentStage = stageName;
+            CurrentStageString = stageName.ToString();
         }
     }
 }

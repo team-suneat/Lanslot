@@ -13,6 +13,9 @@ namespace TeamSuneat
         AttackCount,             // 공격 횟수 (일정 시간 내 공격 가능한 횟수/스택)
         MultiHitCount,           // 공격 1회당 타격 수(멀티 히트)
 
+        AttackRange,             // 공격 사거리
+        AttackArea,              // 공격 영역
+
         Damage,                  // 피해량
         DamageMulti,             // 피해량 배율(%)
         DamageMultiToElite,      // 엘리트 몬스터에게 주는 피해량 증가 배율(%)

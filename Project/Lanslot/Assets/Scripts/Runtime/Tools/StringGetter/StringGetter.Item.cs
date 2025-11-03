@@ -6,7 +6,6 @@ namespace TeamSuneat
 {
     public static partial class StringGetter
     {
-
         public static string GetNameString(this ItemNames key)
         {
             return GetNameString(key, GameSetting.Instance.Language.Name);
@@ -219,26 +218,12 @@ namespace TeamSuneat
             return JsonDataManager.FindStringClone(stringBuilder.ToString(), languageName);
         }
 
-        public static string GetLocalizedString(this ItemSubCategories key)
-        {
-            return GetLocalizedString(key, GameSetting.Instance.Language.Name);
-        }
-
-        public static string GetLocalizedString(this ItemSubCategories key, LanguageNames languageName)
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append("SubCategory_Item_Name_");
-            stringBuilder.Append(key.ToString());
-
-            return JsonDataManager.FindStringClone(stringBuilder.ToString(), languageName);
-        }
-
         public static string ReplaceItemSubDesc(string content)
         {
             content = ReplaceStatName(content);
             content = ReplaceAreaName(content);
             content = ReplaceStageName(content);
-            
+
             content = ReplaceMonsterName(content);
             content = ReplaceItemName(content);
 

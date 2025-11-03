@@ -87,7 +87,7 @@ namespace TeamSuneat
             ProfileInfo.Stat.AddDeathDefianceCount(1);
             ProfileInfo.Stat.RegisterDeathDefianceSource(modifier.SourceName);
 
-            string ownerCharacterName = Vital.Owner.Name.GetNameString();
+            string ownerCharacterName = Vital.Owner.Name.GetLocalizedString();
             UIManager.Instance.SpawnSoliloquyIngame(SoliloquyTypes.DeathDefiance, ownerCharacterName);
         }
 

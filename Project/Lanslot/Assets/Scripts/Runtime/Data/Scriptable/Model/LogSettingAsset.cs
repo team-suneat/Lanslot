@@ -23,11 +23,6 @@ namespace TeamSuneat
         [FoldoutGroup("[캐릭터]")][SuffixLabel("캐릭터 웨이브")] public bool CharacterWave;
         [FoldoutGroup("[캐릭터]")][SuffixLabel("캐릭터 능력")] public bool Ability;
 
-        [FoldoutGroup("[캐릭터 AI]")][SuffixLabel("AI")] public bool AI;
-        [FoldoutGroup("[캐릭터 AI]")][SuffixLabel("AI 행동")] public bool AI_Action;
-        [FoldoutGroup("[캐릭터 AI]")][SuffixLabel("AI 결정")] public bool AI_Decision;
-        [FoldoutGroup("[캐릭터 AI]")][SuffixLabel("AI 상태전환")] public bool AI_Transition;
-
         [FoldoutGroup("[캐릭터 랜더러]")][SuffixLabel("애니메이션")] public bool Animation;
         [FoldoutGroup("[캐릭터 랜더러]")][SuffixLabel("랜더러")] public bool Renderer;
 
@@ -42,37 +37,20 @@ namespace TeamSuneat
         [FoldoutGroup("[전투]")][SuffixLabel("상태")] public bool State;
         [FoldoutGroup("[전투]")][SuffixLabel("능력치")] public bool Stat;
         [FoldoutGroup("[전투]")][SuffixLabel("전투자원")] public bool BattleResource;
-        [FoldoutGroup("[전투]")][SuffixLabel("캐릭터 전투자원")] public bool Vital;        
+        [FoldoutGroup("[전투]")][SuffixLabel("캐릭터 전투자원")] public bool Vital;
         [FoldoutGroup("[전투]")][SuffixLabel("탐지")] public bool Detect;
 
         [FoldoutGroup("[기술]")][SuffixLabel("기술")] public bool Skill;
-        [FoldoutGroup("[기술]")][SuffixLabel("기술 애니메이션")] public bool Skill_Animation;
-        [FoldoutGroup("[기술]")][SuffixLabel("기술 버퍼")] public bool Skill_Buffer;
-        [FoldoutGroup("[기술]")][SuffixLabel("기술 비용")] public bool Skill_Cost;
-        [FoldoutGroup("[기술]")][SuffixLabel("기술 재사용 대기")] public bool Skill_Cooldown;
-        [FoldoutGroup("[기술]")][SuffixLabel("기술 순서")] public bool Skill_Order;
-        [FoldoutGroup("[기술]")][SuffixLabel("기술 시각 효과")] public bool Skill_VFX;
 
         [FoldoutGroup("[상호작용]")][SuffixLabel("상호작용")] public bool Interaciton;
         [FoldoutGroup("[상호작용]")][SuffixLabel("NPC")] public bool NPC;
         [FoldoutGroup("[상호작용]")][SuffixLabel("드랍 오브젝트")] public bool DropObject;
         [FoldoutGroup("[상호작용]")][SuffixLabel("포탈")] public bool Portal;
         [FoldoutGroup("[상호작용]")][SuffixLabel("영역 이벤트")] public bool AreaEvent;
-        [FoldoutGroup("[상호작용]")][SuffixLabel("판매")] public bool Sell;
 
         [FoldoutGroup("[아이템]")][SuffixLabel("아이템")] public bool Item;
-        [FoldoutGroup("[아이템]")][SuffixLabel("아이템 능력치")] public bool ItemStat;
-        [FoldoutGroup("[아이템]")][SuffixLabel("아이템 드랍")] public bool ItemDrop;
-        [FoldoutGroup("[아이템]")][SuffixLabel("아이템 착용")] public bool ItemEquip;
-        [FoldoutGroup("[아이템]")][SuffixLabel("아이템 옵션")] public bool ItemOption;
-
         [FoldoutGroup("[아이템 종류]")][SuffixLabel("무기")] public bool Weapon;
-        [FoldoutGroup("[아이템 종류]")][SuffixLabel("유물")] public bool Relic;
         [FoldoutGroup("[아이템 종류]")][SuffixLabel("물약")] public bool Potion;
-        [FoldoutGroup("[아이템 종류]")][SuffixLabel("비약")] public bool Elixir;
-        [FoldoutGroup("[아이템 종류]")][SuffixLabel("정수")] public bool Essence;
-        [FoldoutGroup("[아이템 종류]")][SuffixLabel("요리 및 조리법")] public bool Food;
-        [FoldoutGroup("[아이템 종류]")][SuffixLabel("유물 조화 기도")] public bool Prayers;
 
         [FoldoutGroup("[해금]")][SuffixLabel("퀘스트")] public bool Quest;
         [FoldoutGroup("[해금]")][SuffixLabel("퀘스트 조건")] public bool QuestCondition;
@@ -92,6 +70,7 @@ namespace TeamSuneat
 
         [FoldoutGroup("[세이브 데이터]")][SuffixLabel("게임 데이터")] public bool GameData;
         [FoldoutGroup("[세이브 데이터]")][SuffixLabel("게임 데이터 - 기술")] public bool GameData_Skill;
+        [FoldoutGroup("[세이브 데이터]")][SuffixLabel("게임 데이터 - 무기")] public bool GameData_Weapon;
 
         [FoldoutGroup("[세이브 데이터 - 인벤토리]")][SuffixLabel("재화")] public bool Currency;
         [FoldoutGroup("[세이브 데이터 - 인벤토리]")][SuffixLabel("소지품")] public bool Inventory;
@@ -165,11 +144,6 @@ namespace TeamSuneat
             AreaEvent = true;
             Ability = true;
 
-            AI = true;
-            AI_Action = true;
-            AI_Decision = true;
-            AI_Transition = true;
-
             Animation = true;
             Renderer = true;
 
@@ -203,20 +177,16 @@ namespace TeamSuneat
             Storage = true;
             Inventory = true;
             GameData_Skill = true;
+            GameData_Weapon = true;
 
             Develop = true;
             DropObject = true;
             Currency = true;
 
-            ItemStat = true;
-            ItemDrop = true;
-            ItemEquip = true;
-
             Effect = true;
             Global = true;
 
             Item = true;
-            ItemOption = true;
 
             Cursor = true;
             Input = true;
@@ -230,26 +200,11 @@ namespace TeamSuneat
             PassiveTrigger = true;
             Portal = true;
             Potion = true;
-            Food = true;
-            Elixir = true;
-            Essence = true;
-
-            Prayers = true;
-
-
-            Relic = true;
             Resource = true;
             Path = true;
 
             Setting = true;
-            Sell = true;
             Skill = true;
-            Skill_Animation = true;
-            Skill_Buffer = true;
-            Skill_Cost = true;
-            Skill_Cooldown = true;
-            Skill_Order = true;
-            Skill_VFX = true;
 
             Stage = true;
             Stage_Monster = true;
@@ -305,11 +260,6 @@ namespace TeamSuneat
             AreaEvent = false;
             Ability = false;
 
-            AI = false;
-            AI_Action = false;
-            AI_Decision = false;
-            AI_Transition = false;
-
             Animation = false;
             Renderer = false;
 
@@ -342,22 +292,20 @@ namespace TeamSuneat
             Tutorial = false;
             Storage = false;
             Inventory = false;
+
             GameData_Skill = false;
+            GameData_Weapon = false;
+
             Difficulty = false;
 
             Develop = false;
             DropObject = false;
             Currency = false;
 
-            ItemStat = false;
-            ItemDrop = false;
-            ItemEquip = false;
-
             Effect = false;
             Global = false;
 
             Item = false;
-            ItemOption = false;
 
             Cursor = false;
             Input = false;
@@ -371,26 +319,11 @@ namespace TeamSuneat
             PassiveTrigger = false;
             Portal = false;
             Potion = false;
-            Food = false;
-            Elixir = false;
-            Essence = false;
-
-            Prayers = false;
-
-
-            Relic = false;
             Resource = false;
             Path = false;
 
             Setting = false;
-            Sell = false;
             Skill = false;
-            Skill_Animation = false;
-            Skill_Buffer = false;
-            Skill_Cost = false;
-            Skill_Cooldown = false;
-            Skill_Order = false;
-            Skill_VFX = false;
 
             Stage = false;
             Stage_Monster = false;
@@ -454,11 +387,6 @@ namespace TeamSuneat
                 LogTags.AreaEvent => AreaEvent,
                 LogTags.Ability => Ability,
 
-                LogTags.AI => AI,
-                LogTags.AI_Action => AI_Action,
-                LogTags.AI_Decision => AI_Decision,
-                LogTags.AI_Transition => AI_Transition,
-
                 LogTags.Animation => Animation,
                 LogTags.Renderer => Renderer,
 
@@ -491,7 +419,10 @@ namespace TeamSuneat
                 LogTags.Tutorial => Tutorial,
                 LogTags.Storage => Storage,
                 LogTags.Inventory => Inventory,
+
                 LogTags.GameData_Skill => GameData_Skill,
+                LogTags.GameData_Weapon => GameData_Weapon,
+
                 LogTags.Difficulty => Difficulty,
 
                 LogTags.Develop => Develop,
@@ -501,10 +432,6 @@ namespace TeamSuneat
 
                 LogTags.Currency => Currency,
                 LogTags.Item => Item,
-                LogTags.ItemStat => ItemStat,
-                LogTags.ItemDrop => ItemDrop,
-                LogTags.ItemEquip => ItemEquip,
-                LogTags.ItemOption => ItemOption,
 
                 LogTags.Cursor => Cursor,
                 LogTags.Input => Input,
@@ -516,26 +443,11 @@ namespace TeamSuneat
                 LogTags.PassiveTrigger => PassiveTrigger,
                 LogTags.Portal => Portal,
                 LogTags.Potion => Potion,
-                LogTags.Food => Food,
-                LogTags.Elixir => Elixir,
-                LogTags.Essence => Essence,
-
-                LogTags.Prayers => Prayers,
-
-
-                LogTags.Relic => Relic,
                 LogTags.Resource => Resource,
                 LogTags.Path => Path,
 
                 LogTags.Setting => Setting,
-                LogTags.Sell => Sell,
                 LogTags.Skill => Skill,
-                LogTags.Skill_Animation => Skill_Animation,
-                LogTags.Skill_Buffer => Skill_Buffer,
-                LogTags.Skill_Cost => Skill_Cost,
-                LogTags.Skill_Cooldown => Skill_Cooldown,
-                LogTags.Skill_Order => Skill_Order,
-                LogTags.Skill_VFX => Skill_VFX,
 
                 LogTags.Stage => Stage,
                 LogTags.Stage_Monster => Stage_Monster,
@@ -580,11 +492,6 @@ namespace TeamSuneat
                 case LogTags.AreaEvent: { AreaEvent = true; } break;
                 case LogTags.Ability: { Ability = true; } break;
 
-                case LogTags.AI: { AI = true; } break;
-                case LogTags.AI_Action: { AI_Action = true; } break;
-                case LogTags.AI_Decision: { AI_Decision = true; } break;
-                case LogTags.AI_Transition: { AI_Transition = true; } break;
-
                 case LogTags.Animation: { Animation = true; } break;
                 case LogTags.Renderer: { Renderer = true; } break;
 
@@ -618,7 +525,10 @@ namespace TeamSuneat
                 case LogTags.Tutorial: { Tutorial = true; } break;
                 case LogTags.Storage: { Storage = true; } break;
                 case LogTags.Inventory: { Inventory = true; } break;
+
                 case LogTags.GameData_Skill: { GameData_Skill = true; } break;
+                case LogTags.GameData_Weapon: { GameData_Weapon = true; } break;
+
                 case LogTags.Difficulty: { Difficulty = true; } break;
 
                 case LogTags.Develop: { Develop = true; } break;
@@ -628,10 +538,6 @@ namespace TeamSuneat
                 case LogTags.Global: { Global = true; } break;
                 case LogTags.Currency: { Currency = true; } break;
                 case LogTags.Item: { Item = true; } break;
-                case LogTags.ItemStat: { ItemStat = true; } break;
-                case LogTags.ItemDrop: { ItemDrop = true; } break;
-                case LogTags.ItemEquip: { ItemEquip = true; } break;
-                case LogTags.ItemOption: { ItemOption = true; } break;
                 case LogTags.Cursor: { Cursor = true; } break;
                 case LogTags.Input: { Input = true; } break;
                 case LogTags.Interaciton: { Interaciton = true; } break;
@@ -640,22 +546,10 @@ namespace TeamSuneat
                 case LogTags.PassiveTrigger: { PassiveTrigger = true; } break;
                 case LogTags.Portal: { Portal = true; } break;
                 case LogTags.Potion: { Potion = true; } break;
-                case LogTags.Food: { Food = true; } break;
-                case LogTags.Elixir: { Elixir = true; } break;
-                case LogTags.Essence: { Essence = true; } break;
-                case LogTags.Prayers: { Prayers = true; } break;
-                case LogTags.Relic: { Relic = true; } break;
                 case LogTags.Resource: { Resource = true; } break;
                 case LogTags.Path: { Path = true; } break;
                 case LogTags.Setting: { Setting = true; } break;
-                case LogTags.Sell: { Sell = true; } break;
                 case LogTags.Skill: { Skill = true; } break;
-                case LogTags.Skill_Animation: { Skill_Animation = true; } break;
-                case LogTags.Skill_Buffer: { Skill_Buffer = true; } break;
-                case LogTags.Skill_Cost: { Skill_Cost = true; } break;
-                case LogTags.Skill_Cooldown: { Skill_Cooldown = true; } break;
-                case LogTags.Skill_Order: { Skill_Order = true; } break;
-                case LogTags.Skill_VFX: { Skill_VFX = true; } break;
                 case LogTags.Stage: { Stage = true; } break;
                 case LogTags.Stage_Monster: { Stage_Monster = true; } break;
                 case LogTags.Stage_Reward: { Stage_Reward = true; } break;
@@ -693,11 +587,6 @@ namespace TeamSuneat
                 case LogTags.AreaEvent: { AreaEvent = false; } break;
                 case LogTags.Ability: { Ability = false; } break;
 
-                case LogTags.AI: { AI = false; } break;
-                case LogTags.AI_Action: { AI_Action = false; } break;
-                case LogTags.AI_Decision: { AI_Decision = false; } break;
-                case LogTags.AI_Transition: { AI_Transition = false; } break;
-
                 case LogTags.Animation: { Animation = false; } break;
                 case LogTags.Renderer: { Renderer = false; } break;
 
@@ -730,7 +619,9 @@ namespace TeamSuneat
                 case LogTags.Tutorial: { Tutorial = false; } break;
                 case LogTags.Storage: { Storage = false; } break;
                 case LogTags.Inventory: { Inventory = false; } break;
+
                 case LogTags.GameData_Skill: { GameData_Skill = false; } break;
+                case LogTags.GameData_Weapon: { GameData_Weapon = false; } break;
 
                 case LogTags.Difficulty: { Difficulty = false; } break;
 
@@ -742,10 +633,6 @@ namespace TeamSuneat
 
                 case LogTags.Currency: { Currency = false; } break;
                 case LogTags.Item: { Item = false; } break;
-                case LogTags.ItemStat: { ItemStat = false; } break;
-                case LogTags.ItemDrop: { ItemDrop = false; } break;
-                case LogTags.ItemEquip: { ItemEquip = false; } break;
-                case LogTags.ItemOption: { ItemOption = false; } break;
 
                 case LogTags.Cursor: { Cursor = false; } break;
                 case LogTags.Input: { Input = false; } break;
@@ -757,26 +644,11 @@ namespace TeamSuneat
                 case LogTags.PassiveTrigger: { PassiveTrigger = false; } break;
                 case LogTags.Portal: { Portal = false; } break;
                 case LogTags.Potion: { Potion = false; } break;
-                case LogTags.Food: { Food = false; } break;
-                case LogTags.Elixir: { Elixir = false; } break;
-                case LogTags.Essence: { Essence = false; } break;
-
-                case LogTags.Prayers: { Prayers = false; } break;
-
-                case LogTags.Relic: { Relic = false; } break;
                 case LogTags.Resource: { Resource = false; } break;
                 case LogTags.Path: { Path = false; } break;
 
                 case LogTags.Setting: { Setting = false; } break;
-                case LogTags.Sell: { Sell = false; } break;
-
                 case LogTags.Skill: { Skill = false; } break;
-                case LogTags.Skill_Animation: { Skill_Animation = false; } break;
-                case LogTags.Skill_Buffer: { Skill_Buffer = false; } break;
-                case LogTags.Skill_Cost: { Skill_Cost = false; } break;
-                case LogTags.Skill_Cooldown: { Skill_Cooldown = false; } break;
-                case LogTags.Skill_Order: { Skill_Order = false; } break;
-                case LogTags.Skill_VFX: { Skill_VFX = false; } break;
 
                 case LogTags.Stage: { Stage = false; } break;
                 case LogTags.Stage_Monster: { Stage_Monster = false; } break;

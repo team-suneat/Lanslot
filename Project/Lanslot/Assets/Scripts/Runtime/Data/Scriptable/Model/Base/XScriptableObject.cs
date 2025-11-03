@@ -1,8 +1,8 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 
@@ -325,7 +325,12 @@ namespace TeamSuneat.Data
 
         #region Inspector Color Methods
 
-        protected Color GetCharacterNameFieldColor(CharacterNames key)
+        protected Color GetPlayerFieldColor(CharacterNames key)
+        {
+            return GetFieldColor(key);
+        }
+
+        protected Color GetMonsterFieldColor(CharacterNames key)
         {
             return GetFieldColor(key);
         }

@@ -10,7 +10,7 @@ namespace TeamSuneat
             return $"Character_Name_{key}";
         }
 
-        public static string GetNameString(this CharacterNames key)
+        public static string GetLocalizedString(this CharacterNames key)
         {
             return GetLocalizedString(key, GameSetting.Instance.Language.Name);
         }
@@ -21,12 +21,12 @@ namespace TeamSuneat
             return JsonDataManager.FindStringClone(stringKey, languageName);
         }
 
-        //
-
         public static string GetDescString(this CharacterNames key)
         {
             string stringKey = $"Character_Desc_{key}";
             return JsonDataManager.FindStringClone(stringKey);
         }
+
+        //
     }
 }

@@ -20,13 +20,6 @@ MonoBehaviour:
   CharacterSpawn: 1
   CharacterWave: 1
   Ability: 1
-  Physics: 1
-  ForceVelocity: 1
-  Blink: 1
-  AI: 1
-  AI_Action: 1
-  AI_Decision: 1
-  AI_Transition: 1
   Animation: 1
   Renderer: 1
   Attack: 1
@@ -41,33 +34,16 @@ MonoBehaviour:
   Stat: 1
   BattleResource: 1
   Vital: 1
-  Projectile: 1
   Detect: 1
   Skill: 1
-  Skill_Animation: 1
-  Skill_Buffer: 1
-  Skill_Cost: 1
-  Skill_Cooldown: 1
-  Skill_Order: 1
-  Skill_VFX: 1
   Interaciton: 1
   NPC: 1
   DropObject: 1
   Portal: 1
   AreaEvent: 1
-  Sell: 1
   Item: 1
-  ItemStat: 1
-  ItemDrop: 1
-  ItemEquip: 1
-  ItemOption: 1
   Weapon: 1
-  Relic: 1
   Potion: 1
-  Elixir: 1
-  Essence: 1
-  Food: 1
-  Prayers: 1
   Quest: 1
   QuestCondition: 1
   Tutorial: 1
@@ -83,6 +59,7 @@ MonoBehaviour:
   Path: 1
   GameData: 1
   GameData_Skill: 1
+  GameData_Weapon: 1
   Currency: 1
   Inventory: 1
   InventoryPopup_DataFlow: 1

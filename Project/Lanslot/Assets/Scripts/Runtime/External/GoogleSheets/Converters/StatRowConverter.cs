@@ -5,13 +5,13 @@ namespace TeamSuneat
 {
     public sealed class StatRowConverter : IGoogleSheetRowConverter<StatData>
     {
-        public bool TryConvert(Dictionary<string, string> row, out StatData model, IList<string> warnings)
+        public bool TryConvert(Dictionary<string, string> row, out StatData model)
         {
             model = null;
 
             if (!row.TryGetValue("Name", out string nameStr) || !GoogleSheetValueParsers.TryParseEnum(nameStr, out StatNames name))
             {
-                warnings?.Add($"필수 컬럼 Name 누락 또는 enum 파싱 실패: {nameStr}");
+                Log.Warning($"필수 컬럼 Name 누락 또는 enum 파싱 실패: {nameStr}");
                 return false;
             }
 
@@ -20,28 +20,28 @@ namespace TeamSuneat
 
             if (!row.TryGetValue("DefaultValue", out string defaultValueStr) || !GoogleSheetValueParsers.TryParseFloat(defaultValueStr, out float defaultValue))
             {
-                warnings?.Add($"Name {name}: DefaultValue 파싱 실패: {defaultValueStr}");
+                Log.Warning($"Name {name}: DefaultValue 파싱 실패: {defaultValueStr}");
                 return false;
             }
 
             if (!row.TryGetValue("Digit", out string digitStr) || !GoogleSheetValueParsers.TryParseInt(digitStr, out _))
             {
-                warnings?.Add($"Name {name}: Digit 파싱 실패: {digitStr}");
+                Log.Warning($"Name {name}: Digit 파싱 실패: {digitStr}");
                 return false;
             }
             if (!row.TryGetValue("UseRange", out string useRangeStr) || !GoogleSheetValueParsers.TryParseBool(useRangeStr, out bool useRange))
             {
-                warnings?.Add($"Name {name}: UseRange 파싱 실패: {useRangeStr}");
+                Log.Warning($"Name {name}: UseRange 파싱 실패: {useRangeStr}");
                 return false;
             }
             if (!row.TryGetValue("MinValue", out string minValueStr) || !GoogleSheetValueParsers.TryParseFloat(minValueStr, out float minValue))
             {
-                warnings?.Add($"Name {name}: MinValue 파싱 실패: {minValueStr}");
+                Log.Warning($"Name {name}: MinValue 파싱 실패: {minValueStr}");
                 return false;
             }
             if (!row.TryGetValue("MaxValue", out string maxValueStr) || !GoogleSheetValueParsers.TryParseFloat(maxValueStr, out float maxValue))
             {
-                warnings?.Add($"Name {name}: MaxValue 파싱 실패: {maxValueStr}");
+                Log.Warning($"Name {name}: MaxValue 파싱 실패: {maxValueStr}");
                 return false;
             }
 

@@ -111,16 +111,12 @@ namespace TeamSuneat
             string datasetName,
             Action<IEnumerable<TModel>> setDataAction) where TModel : class
         {
-            if (!GoogleSheetConversionRunner.ConvertByGid<TModel>(gid, rows, out List<TModel> list, out List<string> warns))
+            if (!GoogleSheetConversionRunner.ConvertByGid<TModel>(gid, rows, out List<TModel> list))
             {
                 Debug.LogError($"[GoogleSheetRuntimeSync] {datasetName} 변환 실패");
                 return false;
             }
 
-            if (warns != null && warns.Count > 0)
-            {
-                Debug.LogWarning($"[GoogleSheetRuntimeSync] {datasetName} 경고 {warns.Count}건");
-            }
 
             setDataAction(list);
             return true;

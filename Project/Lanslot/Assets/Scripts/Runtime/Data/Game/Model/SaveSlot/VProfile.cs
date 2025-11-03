@@ -11,7 +11,7 @@ namespace TeamSuneat.Data.Game
         public VCharacterWeapon Weapon;
         public VCurrency Currency;
         public VCharacterStat Stat;
-        public VCharacterStage Stage;
+        public VStage Stage;
         public VStatistics Statistics;
 
         public CharacterNames CharacterName => Character.SelectedCharacterName;
@@ -24,8 +24,8 @@ namespace TeamSuneat.Data.Game
             Weapon.OnLoadData();
             Currency.OnLoadGameData();
             Stat.OnLoadGameData();
-            Stage.OnLoadGameData();
             Statistics.OnLoadGameData();
+            Stage.OnLoadGameData();
         }
 
         public void CreateEmptyData()
@@ -35,8 +35,8 @@ namespace TeamSuneat.Data.Game
             Weapon ??= new VCharacterWeapon();
             Currency ??= new();
             Stat ??= new VCharacterStat();
-            Stage ??= VCharacterStage.CreateDefault();
             Statistics ??= new();
+            Stage ??= new VStage();
         }
 
         public void ClearIngameData()
@@ -48,9 +48,6 @@ namespace TeamSuneat.Data.Game
             Stat.ResetCurrentVitalValue();
 
             Log.Info(LogTags.GameData, $"[Character] {CharacterName.ToLogString()}, 플레이어 캐릭터의 인게임 데이터를 초기화합니다.");
-
-            // 스테이지 정보를 초기화합니다.
-            Stage.Initialize();
 
             // 인게임 재화를 초기화합니다.
             Currency.ClearIngameCurrencies();

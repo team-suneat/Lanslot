@@ -5,34 +5,42 @@ namespace TeamSuneat
 {
     public sealed class WeaponRowConverter : IGoogleSheetRowConverter<WeaponData>
     {
-        public bool TryConvert(Dictionary<string, string> row, out WeaponData model, IList<string> warnings)
+        public bool TryConvert(Dictionary<string, string> row, out WeaponData model)
         {
             model = null;
 
             // 필수: Name
             if (!row.TryGetValue("Name", out string nameStr) || !GoogleSheetValueParsers.TryParseEnum(nameStr, out WeaponNames name))
             {
-                warnings?.Add($"필수 컬럼 Name 누락 또는 enum 파싱 실패: {nameStr}");
+                Log.Warning($"필수 컬럼 Name 누락 또는 enum 파싱 실패: {nameStr}");
                 return false;
             }
 
             // 선택: 표시 이름
             row.TryGetValue("DisplayName", out string displayName);
 
-            // 선택: AttackRange / Passive / Hitmark / Reward
-            AttackRangeTypes[] attackRanges;
-            if (row.TryGetValue("AttackRange", out string attackRangeStr))
+            if (!row.TryGetValue("AttackRange", out string attackRangeStr) || !GoogleSheetValueParsers.TryParseInt(attackRangeStr, out int attackRange))
             {
-                if (!GoogleSheetValueParsers.TryParseEnumArray(attackRangeStr, out attackRanges))
-                {
-                    attackRanges = System.Array.Empty<AttackRangeTypes>();
-                    warnings?.Add($"Name {name}: AttackRange 파싱 실패 → 빈 배열 사용");
-                }
+                Log.Warning($"Name {name}: AttackRange 파싱 실패: {attackRangeStr}");
+                return false;
             }
-            else
+            if (!row.TryGetValue("AttackRow", out string attackRowStr) || !GoogleSheetValueParsers.TryParseInt(attackRowStr, out int attackRow))
             {
-                attackRanges = System.Array.Empty<AttackRangeTypes>();
+                Log.Warning($"Name {name}: AttackRow 파싱 실패: {attackRowStr}");
+                return false;
             }
+            if (!row.TryGetValue("AttackColumn", out string attackColumnStr) || !GoogleSheetValueParsers.TryParseInt(attackColumnStr, out int attackColumn))
+            {
+                Log.Warning($"Name {name}: AttackColumn 파싱 실패: {attackColumnStr}");
+                return false;
+            }
+            if (!row.TryGetValue("MultiHitCount", out string multiHitCountStr) || !GoogleSheetValueParsers.TryParseInt(multiHitCountStr, out int multiHitCount))
+            {
+                Log.Warning($"Name {name}: MultiHitCount 파싱 실패: {multiHitCountStr}");
+                return false;
+            }
+
+            // 선택: Passive / Hitmark / Reward
             row.TryGetValue("Passive", out string passiveStr);
             row.TryGetValue("Hitmark", out string hitmarkStr);
             row.TryGetValue("Reward", out string rewardStr);
@@ -44,7 +52,7 @@ namespace TeamSuneat
                 if (!GoogleSheetValueParsers.TryParseEnumArray(buildsStr, out builds))
                 {
                     builds = System.Array.Empty<BuildTypes>();
-                    warnings?.Add($"Name {name}: SupportedBuildTypes 파싱 실패 → 빈 배열 사용");
+                    Log.Warning($"Name {name}: SupportedBuildTypes 파싱 실패 → 빈 배열 사용");
                 }
             }
             else
@@ -58,7 +66,10 @@ namespace TeamSuneat
                 Name = name,
                 SupportedBuildTypes = builds,
                 DisplayName = displayName,
-                AttackRanges = attackRanges,                
+                AttackRange = attackRange,
+                AttackRow = attackRow,
+                AttackColumn = attackColumn,
+                MultiHitCount = multiHitCount,
             };
 
             // enum 파싱 (실패 시 기본값 유지)
@@ -70,7 +81,7 @@ namespace TeamSuneat
                 }
                 else
                 {
-                    warnings?.Add($"Name {name}: Passive enum 파싱 실패('{passiveStr}')");
+                    Log.Warning($"Name {name}: Passive enum 파싱 실패('{passiveStr}')");
                 }
             }
             if (!string.IsNullOrEmpty(hitmarkStr))
@@ -81,7 +92,7 @@ namespace TeamSuneat
                 }
                 else
                 {
-                    warnings?.Add($"Name {name}: Hitmark enum 파싱 실패('{hitmarkStr}')");
+                    Log.Warning($"Name {name}: Hitmark enum 파싱 실패('{hitmarkStr}')");
                 }
             }
             if (!string.IsNullOrEmpty(rewardStr))
@@ -92,7 +103,7 @@ namespace TeamSuneat
                 }
                 else
                 {
-                    warnings?.Add($"Name {name}: Reward(Currency) enum 파싱 실패('{rewardStr}')");
+                    Log.Warning($"Name {name}: Reward(Currency) enum 파싱 실패('{rewardStr}')");
                 }
             }
 
@@ -100,6 +111,6 @@ namespace TeamSuneat
 
             model = m;
             return true;
-        }        
+        }
     }
 }

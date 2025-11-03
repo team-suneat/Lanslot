@@ -25,7 +25,6 @@ namespace TeamSuneat
         public override void AutoSetting()
         {
             base.AutoSetting();
-
             RefreshNameString();
         }
 
@@ -33,11 +32,11 @@ namespace TeamSuneat
         {
             if (Application.isPlaying)
             {
-                SetGameObjectName($"{Name.ToString()}({SID.ToString()})");
+                SetGameObjectName($"{NameString}({SID.ToString()})");
             }
             else
             {
-                SetGameObjectName(Name.ToString());
+                SetGameObjectName(NameString);
             }
         }
 

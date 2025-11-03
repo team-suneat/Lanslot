@@ -228,6 +228,9 @@ namespace TeamSuneat
             // 아무것도 구현되지 않았습니다.
         }
 
+        public virtual void AddCharacterStats()
+        { }
+
         private void AddDefaultStats()
         {
             StatNames[] statNames = EnumEx.GetValues<StatNames>();

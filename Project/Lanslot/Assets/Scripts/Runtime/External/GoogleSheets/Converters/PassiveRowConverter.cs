@@ -5,13 +5,13 @@ namespace TeamSuneat
 {
     public sealed class PassiveRowConverter : IGoogleSheetRowConverter<PassiveData>
     {
-        public bool TryConvert(Dictionary<string, string> row, out PassiveData model, IList<string> warnings)
+        public bool TryConvert(Dictionary<string, string> row, out PassiveData model)
         {
             model = null;
 
             if (!row.TryGetValue("Name", out string nameStr) || !GoogleSheetValueParsers.TryParseEnum(nameStr, out PassiveNames name))
             {
-                warnings?.Add($"필수 컬럼 Name 누락 또는 enum 파싱 실패: {nameStr}");
+                Log.Warning($"필수 컬럼 Name 누락 또는 enum 파싱 실패: {nameStr}");
                 return false;
             }
 

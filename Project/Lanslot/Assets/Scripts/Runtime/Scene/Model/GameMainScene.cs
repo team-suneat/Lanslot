@@ -78,7 +78,6 @@ namespace TeamSuneat
         {
             if (DetermineChangeScene("GameTitle"))
             {
-                CharacterManager.Instance.DoDestroyPlayerOnLoad();
                 CharacterManager.Instance.UnregisterPlayer();
                 GameApp.Instance.gameManager.ResetStage();
 
@@ -90,7 +89,6 @@ namespace TeamSuneat
         {
             if (DetermineChangeScene("GameMain"))
             {
-                CharacterManager.Instance.DontDestroyPlayerOnLoad();
                 GameApp.Instance.gameManager.ResetStage();
 
                 // if (_stageSpawnHandler == null)
@@ -130,20 +128,14 @@ namespace TeamSuneat
                     return;
                 }
 
-                StageNames currentStageName = profileInfo.Stage.CurrentStageName;
+                StageNames currentStageName = profileInfo.Stage.CurrentStage;
                 Log.Info(LogTags.Stage, "스테이지 로드 시작: {0}", currentStageName);
 
                 // StageAssetData 로드
-                StageAssetData stageData = ScriptableDataManager.Instance.FindStage(currentStageName)?.Data;
+                StageData stageData = JsonDataManager.FindStageDataClone(currentStageName);
                 if (stageData == null)
                 {
                     Log.Error(LogTags.Stage, "스테이지 데이터를 찾을 수 없습니다: {0}", currentStageName);
-                    return;
-                }
-
-                if (!stageData.HasValidWaves)
-                {
-                    Log.Error(LogTags.Stage, "유효한 웨이브가 없는 스테이지입니다: {0}", currentStageName);
                     return;
                 }
 

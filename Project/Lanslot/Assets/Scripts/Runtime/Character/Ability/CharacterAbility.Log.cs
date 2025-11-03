@@ -6,7 +6,7 @@ namespace TeamSuneat
 
         private string FormatEntityLog(string content)
         {
-            return string.Format("[Entity] {0}, {1}, {2}", Type, Owner.Name.ToLogString(), content);
+            return string.Format("[Entity] {0}, {1}, {2}", Type, Owner.NameString, content);
         }
 
         protected virtual void LogProgress(string content)

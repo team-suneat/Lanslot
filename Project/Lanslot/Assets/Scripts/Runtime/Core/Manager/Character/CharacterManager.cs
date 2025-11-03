@@ -81,16 +81,34 @@ namespace TeamSuneat
 
         #region Player
 
-        public void Register(PlayerCharacter playerCharacter)
+        public void RegisterPlayer(PlayerCharacter playerCharacter)
         {
-            Player = playerCharacter;
+            if (playerCharacter != null)
+            {
+                Player = playerCharacter;
+
+                Log.Info(LogTags.CharacterSpawn, "[Manager] {0}(SID:{1}) 플레이어 캐릭터를 등록합니다.",
+                    playerCharacter.Name.ToLogString(), playerCharacter.SID.ToSelectString());
+            }
         }
 
-        public void Unregister(PlayerCharacter playerCharacter)
+        public void UnregisterPlayer(PlayerCharacter playerCharacter)
         {
-            if (Player == playerCharacter)
+            if (playerCharacter != null)
             {
-                Player = null;
+                if (Player == playerCharacter)
+                {
+                    Player = null;
+
+                    Log.Info(LogTags.CharacterSpawn, "[Manager] {0}(SID:{1}) 인게임 몬스터 캐릭터를 등록 해제합니다.",
+                        playerCharacter.Name.ToLogString(), playerCharacter.SID.ToSelectString());
+                }
+                else
+                {
+                    Log.Error("등록 해제하려는 플레이어가 같지 않습니다. 등록된:{0}(SID:{1}), 등록해제 시도:{2}(SID:{3})",
+                        Player.Name.ToLogString(), Player.SID.ToSelectString(),
+                        playerCharacter.Name.ToLogString(), playerCharacter.SID.ToSelectString());
+                }
             }
         }
 
@@ -98,45 +116,10 @@ namespace TeamSuneat
         {
             if (Player != null)
             {
+                Log.Info(LogTags.CharacterSpawn, "[Manager] {0}(SID:{1}) 플레이어 캐릭터를 등록 해제합니다.",
+                    Player.Name.ToLogString(), Player.SID.ToSelectString());
+
                 Player = null;
-            }
-        }
-
-        public void DontDestroyPlayerOnLoad()
-        {
-            if (Player != null)
-            {
-                if (Player.IsAlive)
-                {
-                    Player.transform.SetParent(null);
-                    Object.DontDestroyOnLoad(Player.gameObject);
-
-                    Log.Info(LogTags.CharacterSpawn, "[Manager] {0}(SID:{1}) 플레이어 캐릭터를 삭제할 수 없도록 설정합니다.",
-                        Player.Name.ToLogString(), Player.SID.ToSelectString());
-                }
-            }
-        }
-
-        public void DoDestroyPlayerOnLoad()
-        {
-            if (Player != null)
-            {
-                UnityEngine.SceneManagement.Scene gameMainScene = UnityEngine.SceneManagement.SceneManager.GetSceneByName("GameMain");
-                if (gameMainScene.isLoaded)
-                {
-                    Player.transform.SetParent(null);
-                    UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(Player.gameObject, gameMainScene);
-                    Log.Info(LogTags.CharacterSpawn, "[Manager] {0}(SID:{1}) 플레이어 캐릭터를 삭제할 수 있도록 설정합니다.",
-                        Player.Name.ToLogString(), Player.SID.ToSelectString());
-                }
-            }
-        }
-
-        public void TeleportPlayer(Vector3 targetPosition)
-        {
-            if (Player != null)
-            {
-                Player.position = targetPosition;
             }
         }
 

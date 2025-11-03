@@ -5,13 +5,13 @@ namespace TeamSuneat
 {
     public sealed class MonsterCharacterRowConverter : IGoogleSheetRowConverter<MonsterCharacterData>
     {
-        public bool TryConvert(Dictionary<string, string> row, out MonsterCharacterData model, IList<string> warnings)
+        public bool TryConvert(Dictionary<string, string> row, out MonsterCharacterData model)
         {
             model = null;
 
             if (!row.TryGetValue("Name", out string nameStr) || !GoogleSheetValueParsers.TryParseEnum<CharacterNames>(nameStr, out CharacterNames name))
             {
-                warnings?.Add($"필수 컬럼 Name 누락 또는 enum 파싱 실패: {nameStr}");
+                Log.Warning($"필수 컬럼 Name 누락 또는 enum 파싱 실패: {nameStr}");
                 return false;
             }
 
@@ -20,13 +20,13 @@ namespace TeamSuneat
 
             if (!row.TryGetValue("Health", out string maxHPString) || !GoogleSheetValueParsers.TryParseFloat(maxHPString, out float maxHP))
             {
-                warnings?.Add($"Name {name}: Health 파싱 실패: {maxHPString}");
+                Log.Warning($"Name {name}: Health 파싱 실패: {maxHPString}");
                 return false;
             }
 
             if (!row.TryGetValue("Damage", out string damageString) || !GoogleSheetValueParsers.TryParseFloat(damageString, out float damage))
             {
-                warnings?.Add($"Name {name}: Damage 파싱 실패: {damageString}");
+                Log.Warning($"Name {name}: Damage 파싱 실패: {damageString}");
                 return false;
             }
 
@@ -36,7 +36,7 @@ namespace TeamSuneat
                 if (!GoogleSheetValueParsers.TryParseEnumArray<BuildTypes>(buildsStr, out builds))
                 {
                     builds = System.Array.Empty<BuildTypes>();
-                    warnings?.Add($"Name {name}: SupportedBuildTypes 파싱 실패 → 빈 배열 사용");
+                    Log.Warning($"Name {name}: SupportedBuildTypes 파싱 실패 → 빈 배열 사용");
                 }
             }
             else

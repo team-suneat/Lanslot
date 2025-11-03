@@ -34,22 +34,6 @@
 
         #endregion Character
 
-        #region Character-AI
-
-        /// <summary> AI </summary>
-        AI,
-
-        /// <summary> AI 행동 </summary>
-        AI_Action,
-
-        /// <summary> AI 결정 </summary>
-        AI_Decision,
-
-        /// <summary> AI 상태전환 </summary>
-        AI_Transition,
-
-        #endregion Character-AI
-
         #region Character-Battle
 
         /// <summary> 공격 </summary>
@@ -89,19 +73,6 @@
         Vital,
 
         #endregion Character-Battle
-
-        #region Character-Skill
-
-        Skill, // 기술
-        Skill_Animation,    // 기술 애니메이션
-        Skill_Buffer,       // 기술 버퍼
-        Skill_Cost,         // 기술 비용
-        Skill_Cooldown,     // 기술 재사용 대기시간
-        Skill_Handle,        // 기술 핸들러
-        Skill_Order,        // 기술 순서
-        Skill_VFX,          // 기술 시각 효과
-
-        #endregion Character-Skill
 
         #region Character-Data
 
@@ -151,6 +122,9 @@
         /// <summary> 게임 데이터 : 통계 </summary>
         GameData_Statistics,
 
+        /// <summary> 게임 데이터 : 무기 </summary>
+        GameData_Weapon,
+
         /// <summary> 퀘스트 </summary>
         Quest,
 
@@ -166,7 +140,7 @@
         /// <summary> 창고 </summary>
         Storage,
 
-        /// <summary> 세계 난이도 </summary>
+        /// <summary> 난이도 </summary>
         Difficulty,
 
         #endregion Game-Data
@@ -199,44 +173,8 @@
         /// <summary> 재화 </summary>
         Currency,
 
-        /// <summary> 정수 </summary>
-        Essence,
-
-        /// <summary> 음식 </summary>
-        Food,
-
-        /// <summary> 비약 </summary>
-        Elixir,
-
         /// <summary> 아이템 </summary>
         Item,
-
-        /// <summary> 아이템 능력치 </summary>
-        ItemStat,
-
-        /// <summary> 아이템 드랍 </summary>
-        ItemDrop,
-
-        /// <summary> 아이템 착용 </summary>
-        ItemEquip,
-
-        /// <summary> 아이템 옵션 </summary>
-        ItemOption,
-
-        /// <summary> 조리법 </summary>
-        Recipe,
-
-        /// <summary> 유물 </summary>
-        Relic,
-
-        /// <summary> 판매 </summary>
-        Sell,
-
-        /// <summary> 영혼 보석 </summary>
-        SoulGem,
-
-        /// <summary> 기도 </summary>
-        Prayers,
 
         /// <summary> 무기 </summary>
         Weapon,
@@ -265,6 +203,9 @@
         Renderer,
 
         #endregion Renderer
+
+        /// <summary> 기술 </summary>
+        Skill,
 
         #region Setting
 

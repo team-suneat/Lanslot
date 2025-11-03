@@ -124,21 +124,8 @@ namespace TeamSuneat
                 return;
             }
 
-            bool ok = GoogleSheetConversionRunner.ConvertByGid(gid, rows, out List<IData> list, out List<string> warns);
-            Debug.Log($"[GoogleSheets] {key} 변환 결과 - 입력:{rows.Count}, 성공:{list?.Count ?? 0}, 경고:{warns?.Count ?? 0}");
-            if (warns != null && warns.Count > 0)
-            {
-                int max = Mathf.Min(10, warns.Count);
-                for (int i = 0; i < max; i++)
-                {
-                    Debug.LogWarning($"[GoogleSheets] {warns[i]}");
-                }
-
-                if (warns.Count > max)
-                {
-                    Debug.LogWarning($"[GoogleSheets] ... 경고 {warns.Count - max}건 더 있음");
-                }
-            }
+            bool ok = GoogleSheetConversionRunner.ConvertByGid(gid, rows, out List<IData> list);
+            Debug.Log($"[GoogleSheets] {key} 변환 결과 - 입력:{rows.Count}, 성공:{list?.Count ?? 0}");
 
             if (!ok || list == null)
             {

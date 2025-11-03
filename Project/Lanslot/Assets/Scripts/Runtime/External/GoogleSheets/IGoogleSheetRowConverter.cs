@@ -8,6 +8,6 @@ namespace TeamSuneat
     /// </summary>
     public interface IGoogleSheetRowConverter<TModel>
     {
-        bool TryConvert(Dictionary<string, string> row, out TModel model, IList<string> warnings);
+        bool TryConvert(Dictionary<string, string> row, out TModel model);
     }
 }

@@ -19,7 +19,7 @@ namespace TeamSuneat
         [FoldoutGroup("#Character/Component")][ChildGameObjectsOnly] public Animator Animator;
 
         [FoldoutGroup("#Character/Component")][ChildGameObjectsOnly] public AttackSystem Attack;
-        [FoldoutGroup("#Character/Component")][ChildGameObjectsOnly] public BuffSystem Buff;        
+        [FoldoutGroup("#Character/Component")][ChildGameObjectsOnly] public BuffSystem Buff;
 
         [FoldoutGroup("#Character/Component")][ChildGameObjectsOnly] public PassiveSystem Passive;
         [FoldoutGroup("#Character/Component")][ChildGameObjectsOnly] public StatSystem Stat;
@@ -76,7 +76,7 @@ namespace TeamSuneat
         [FoldoutGroup("#Character/Shield")] public Vector2 VFXGuardRandomArea;
 
         // ───────────────────────────────────────────────────────────────────────────────────────────────────────────────
-       
+
         [FoldoutGroup("#Character/Direction")]
         public SpawnFacingDirections DirectionOnStart = SpawnFacingDirections.Right;
 

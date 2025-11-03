@@ -5,7 +5,7 @@ namespace TeamSuneat
 {
     public sealed class StringRowConverter : IGoogleSheetRowConverter<StringData>
     {
-        public bool TryConvert(Dictionary<string, string> row, out StringData model, IList<string> warnings)
+        public bool TryConvert(Dictionary<string, string> row, out StringData model)
         {
             model = null;
 
@@ -15,7 +15,7 @@ namespace TeamSuneat
 
             if (!row.TryGetValue("Arguments", out string argumentsString) || !GoogleSheetValueParsers.TryParseInt(argumentsString, out int arguments))
             {
-                warnings?.Add($"{id}: Arguments 파싱 실패: {argumentsString}");
+                Log.Warning($"{id}: Arguments 파싱 실패: {argumentsString}");
                 return false;
             }
 

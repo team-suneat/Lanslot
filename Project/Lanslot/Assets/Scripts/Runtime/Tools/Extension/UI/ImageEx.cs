@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.UI.Image;
 
 namespace TeamSuneat
 {
@@ -80,6 +81,14 @@ namespace TeamSuneat
             if (image != null)
             {
                 image.color = color;
+            }
+        }
+
+        public static void SetColor(this Image image, Color color, float alpha)
+        {
+            if (image != null)
+            {
+                image.color = new Color(color.r, color.g, color.b, alpha);
             }
         }
 

@@ -6,12 +6,12 @@ namespace TeamSuneat
 {
     public static partial class StringGetter
     {
-        public static string GetNameString(this WeaponNames key)
+        public static string GetLocalizedString(this WeaponNames key)
         {
-            return GetNameString(key, GameSetting.Instance.Language.Name);
+            return GetLocalizedString(key, GameSetting.Instance.Language.Name);
         }
 
-        public static string GetNameString(this WeaponNames key, LanguageNames languageName)
+        public static string GetLocalizedString(this WeaponNames key, LanguageNames languageName)
         {
             if (key == WeaponNames.None)
             {

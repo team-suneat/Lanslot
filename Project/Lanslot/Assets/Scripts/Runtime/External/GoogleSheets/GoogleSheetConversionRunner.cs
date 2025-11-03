@@ -29,20 +29,19 @@ namespace TeamSuneat
         /// 특정 gid에 맞는 컨버터로 변환을 시도합니다.
         /// 변환에 성공하면 result에 결과 리스트가 담기고 true를 반환합니다.
         /// </summary>
-        public static bool ConvertByGid<TModel>(string gid, IReadOnlyList<Dictionary<string, string>> rows, out List<TModel> result, out List<string> warnings)
+        public static bool ConvertByGid<TModel>(string gid, IReadOnlyList<Dictionary<string, string>> rows, out List<TModel> result)
         {
             result = new List<TModel>();
-            warnings = new List<string>();
 
             if (!gidToConverter.TryGetValue(gid, out object converterObj))
             {
-                warnings.Add($"컨버터 미등록 GID: {gid}");
+                Log.Warning($"컨버터 미등록 GID: {gid}");
                 return false;
             }
 
             if (converterObj is not IGoogleSheetRowConverter<TModel> converter)
             {
-                warnings.Add($"타입 불일치 컨버터 GID: {gid} (요청 타입: {typeof(TModel).Name})");
+                Log.Warning($"타입 불일치 컨버터 GID: {gid} (요청 타입: {typeof(TModel).Name})");
                 return false;
             }
 
@@ -54,7 +53,7 @@ namespace TeamSuneat
                     continue;
                 }
 
-                if (converter.TryConvert(row, out TModel model, warnings))
+                if (converter.TryConvert(row, out TModel model))
                 {
                     result.Add(model);
                     success++;

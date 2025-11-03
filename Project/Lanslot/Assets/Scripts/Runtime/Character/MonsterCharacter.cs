@@ -1,11 +1,13 @@
 ﻿using Sirenix.OdinInspector;
+using TeamSuneat.Data;
 using UnityEngine;
 
 namespace TeamSuneat
 {
     public class MonsterCharacter : Character
     {
-        [FoldoutGroup("#Character/Component/Monster")][SerializeField] private DropObjectSpawner _dropObjectSpawner;
+        [FoldoutGroup("#Character/Component/Monster")]
+        [SerializeField] private DropObjectSpawner _dropObjectSpawner;
 
         public override Transform Target => null;
 
@@ -65,6 +67,17 @@ namespace TeamSuneat
         public override void ExitCrwodControlToState()
         {
             // 턴제 게임에서는 AI가 없으므로 빈 구현
+        }
+
+        //
+        public override void AddCharacterStats()
+        {
+            MonsterCharacterData data = JsonDataManager.FindMonsterCharacterDataClone(Name);
+            if (data != null)
+            {
+                Stat.AddWithSourceInfo(StatNames.Health, data.Health, this, NameString, "CharacterBase");
+                Stat.AddWithSourceInfo(StatNames.Damage, data.Damage, this, NameString, "CharacterBase");
+            }
         }
 
         //

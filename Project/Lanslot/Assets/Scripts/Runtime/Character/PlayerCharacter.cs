@@ -29,8 +29,6 @@ namespace TeamSuneat
         {
             SetupLevel();
 
-            CharacterManager.Instance.Register(this);
-
             ProfileInfo.Character.Register(Name);
 
             base.Initialize();
@@ -41,7 +39,7 @@ namespace TeamSuneat
             base.BattleReady();
 
             Buff?.OnBattleReady();
-
+            CharacterManager.Instance.RegisterPlayer(this);
             SetupAnimatorLayerWeight();
 
             IsBattleReady = true;
@@ -78,10 +76,10 @@ namespace TeamSuneat
             {
                 int previousLife = MyVital.CurrentLife;
 
-                CharacterStatAsset statAsset = ScriptableDataManager.Instance.GetCharacterStatAsset(Name);
-                if (statAsset != null)
+                PlayerCharacterData characterData = JsonDataManager.FindPlayerCharacterDataClone(Name);
+                if (characterData != null)
                 {
-                    ApplyGrowthStats(statAsset);
+                    ApplyGrowthStats(characterData);
                     LogInfo("캐릭터 스탯이 스크립터블 데이터에서 적용되었습니다. 캐릭터: {0}, 레벨: {1}", Name, Level);
                 }
 
@@ -115,13 +113,54 @@ namespace TeamSuneat
             _ = ResourcesManager.SpawnFloatyText(content, true, transform);
         }
 
+        public override void AddCharacterStats()
+        {
+            PlayerCharacterData data = JsonDataManager.FindPlayerCharacterDataClone(Name);
+            if (data != null)
+            {
+                // 기본 스탯 적용
+                ApplyBaseStats(data);
+
+                // 레벨별 성장 스탯 적용
+                ApplyGrowthStats(data);
+
+                LogInfo("캐릭터 스탯이 스크립터블 데이터에서 적용되었습니다. 캐릭터: {0}, 레벨: {1}", Name, Level);
+            }
+        }
+
+        private void ApplyBaseStats(PlayerCharacterData data)
+        {
+            for (int i = 0; i < data.BaseStats.Length; i++)
+            {
+                StatNames baseStatName = data.BaseStats[i];
+                float baseStatValue = data.BaseStatValues[i];
+
+                if (baseStatName == StatNames.None || baseStatValue.IsZero()) continue;
+
+                Stat.AddWithSourceInfo(baseStatName, baseStatValue, this, NameString, "CharacterBase");
+            }
+        }
+
+        private void ApplyGrowthStats(PlayerCharacterData data)
+        {
+            for (int i = 0; i < data.GrowStats.Length; i++)
+            {
+                StatNames baseStatName = data.GrowStats[i];
+                float baseStatValue = data.GrowStatValues[i];
+
+                if (baseStatName == StatNames.None || baseStatValue.IsZero()) continue;
+
+                Stat.AddWithSourceInfo(baseStatName, baseStatValue, this, NameString, "CharacterGrowth");
+            }
+        }
+
         //
 
         protected override void OnDeath(DamageResult damageResult)
         {
             base.OnDeath(damageResult);
 
-            CharacterManager.Instance.Unregister(this);
+            CharacterManager.Instance.UnregisterPlayer(this);
             GameApp.Instance.data.ClearIngameData();
 
             CoroutineNextTimer(1f, SendGlobalEventForMoveToTitle);

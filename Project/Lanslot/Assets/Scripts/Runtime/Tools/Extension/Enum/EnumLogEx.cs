@@ -275,12 +275,6 @@ namespace TeamSuneat
             return GetColorString(GameColors.Item, content.ToString());
         }
 
-        public static string ToLogString(this ItemSubCategories key)
-        {
-            string content = key.GetLocalizedString(LanguageNames.Korean);
-            return GetColorString(GameColors.Item, content);
-        }
-
         public static string ToLogString(this EquipmentSlotTypes content)
         {
             return GetColorString(GameColors.Item, content.ToString());

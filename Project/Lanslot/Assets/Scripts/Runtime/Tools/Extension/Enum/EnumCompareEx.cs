@@ -264,32 +264,6 @@ namespace TeamSuneat
             return true;
         }
 
-        public static bool Compare(this ItemSubCategories[] values1, ItemSubCategories[] values2)
-        {
-            if (values1 != null && values2 == null)
-            {
-                return false;
-            }
-            if (values1 == null && values2 != null)
-            {
-                return false;
-            }
-            if (values1.Length != values2.Length)
-            {
-                return false;
-            }
-
-            for (int i = 0; i < values1.Length; i++)
-            {
-                if (values1[i] != values2[i])
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
         public static bool Compare(this CurrencyNames[] values1, CurrencyNames[] values2)
         {
             if (values1 != null && values2 == null)

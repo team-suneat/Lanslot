@@ -8,14 +8,14 @@ namespace TeamSuneat
     /// </summary>
     public sealed class PotionRowConverter : IGoogleSheetRowConverter<PotionData>
     {
-        public bool TryConvert(Dictionary<string, string> row, out PotionData model, IList<string> warnings)
+        public bool TryConvert(Dictionary<string, string> row, out PotionData model)
         {
             model = null;
 
             
             if (!row.TryGetValue("Name", out string nameStr) || !GoogleSheetValueParsers.TryParseEnum(nameStr, out PotionNames name))
             {
-                warnings?.Add($"필수 컬럼 Name 누락 또는 enum 파싱 실패: {nameStr}");
+                Log.Warning($"필수 컬럼 Name 누락 또는 enum 파싱 실패: {nameStr}");
                 return false;
             }
 
@@ -25,14 +25,14 @@ namespace TeamSuneat
             
             if (!row.TryGetValue("StatName", out string statNameStr) || !GoogleSheetValueParsers.TryParseEnum(statNameStr, out StatNames statName))
             {
-                warnings?.Add($"Name {name}: StatName 누락 또는 enum 파싱 실패: {statNameStr}");
+                Log.Warning($"Name {name}: StatName 누락 또는 enum 파싱 실패: {statNameStr}");
                 return false;
             }
 
             
             if (!row.TryGetValue("StatValue", out string statValueStr) || !GoogleSheetValueParsers.TryParseFloat(statValueStr, out float statValue))
             {
-                warnings?.Add($"Name {name}: StatValue 파싱 실패: {statValueStr}");
+                Log.Warning($"Name {name}: StatValue 파싱 실패: {statValueStr}");
                 return false;
             }
 
@@ -43,7 +43,7 @@ namespace TeamSuneat
                 if (!GoogleSheetValueParsers.TryParseEnumArray(buildsStr, out builds))
                 {
                     builds = System.Array.Empty<BuildTypes>();
-                    warnings?.Add($"Name {name}: SupportedBuildTypes 파싱 실패 → 빈 배열 사용");
+                    Log.Warning($"Name {name}: SupportedBuildTypes 파싱 실패 → 빈 배열 사용");
                 }
             }
             else

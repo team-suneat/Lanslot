@@ -15,14 +15,10 @@ namespace TeamSuneat.Data
             else if (!_buffStateEffects.IsValid()) { return false; }
             else if (!_passives.IsValid()) { return false; }
             else if (!_hitmarks.IsValid()) { return false; }
-            else if (!_areas.IsValid()) { return false; }
-            else if (!_stages.IsValid()) { return false; }
             else if (!_fonts.IsValid()) { return false; }
             else if (!_floatys.IsValid()) { return false; }
             else if (!_flickers.IsValid()) { return false; }
             else if (!_sounds.IsValid()) { return false; }
-            else if (!_characterStats.IsValid()) { return false; }
-            else if (!_weapons.IsValid()) { return false; }
 
             return true;
         }
@@ -35,19 +31,6 @@ namespace TeamSuneat.Data
             // 사운드 OnLoadData() 메서드 호출
             foreach (KeyValuePair<int, SoundAsset> asset in _sounds)
             {
-                asset.Value.OnLoadData();
-            }
-
-            // 캐릭터 스탯 OnLoadData() 메서드 호출
-            foreach (KeyValuePair<int, CharacterStatAsset> asset in _characterStats)
-            {
-                asset.Value.OnLoadData();
-            }
-
-            // 무기 OnLoadData() 메서드 호출
-            foreach (KeyValuePair<int, WeaponAsset> asset in _weapons)
-            {
-                asset.Value.OnLoadData();
             }
         }
 
@@ -91,14 +74,6 @@ namespace TeamSuneat.Data
                 {
                     count += 1;
                 }
-                else if (LoadAreaSync(path))
-                {
-                    count += 1;
-                }
-                else if (LoadStageSync(path))
-                {
-                    count += 1;
-                }
                 else if (LoadFontSync(path))
                 {
                     count += 1;
@@ -112,10 +87,6 @@ namespace TeamSuneat.Data
                     count += 1;
                 }
                 else if (LoadSoundSync(path))
-                {
-                    count += 1;
-                }
-                else if (LoadWeaponSync(path))
                 {
                     count += 1;
                 }
@@ -189,22 +160,6 @@ namespace TeamSuneat.Data
                         }
                         break;
 
-                    case AreaAsset area:
-                        if (!_areas.ContainsKey(area.TID))
-                        {
-                            _areas[area.TID] = area;
-                            count++;
-                        }
-                        break;
-
-                    case StageAsset stage:
-                        if (!_stages.ContainsKey(stage.TID))
-                        {
-                            _stages[stage.TID] = stage;
-                            count++;
-                        }
-                        break;
-
                     case FontAsset font:
                         if (!_fonts.ContainsKey(font.TID))
                         {
@@ -233,23 +188,6 @@ namespace TeamSuneat.Data
                         if (!_sounds.ContainsKey(sound.TID))
                         {
                             _sounds[sound.TID] = sound;
-                            count++;
-                        }
-                        break;
-
-                    case CharacterStatAsset characterStat:
-                        int characterKey = BitConvert.Enum32ToInt(characterStat.Name);
-                        if (characterKey != 0 && !_characterStats.ContainsKey(characterKey))
-                        {
-                            _characterStats[characterKey] = characterStat;
-                            count++;
-                        }
-                        break;
-
-                    case WeaponAsset weapon:
-                        if (!_weapons.ContainsKey(weapon.TID))
-                        {
-                            _weapons[weapon.TID] = weapon;
                             count++;
                         }
                         break;

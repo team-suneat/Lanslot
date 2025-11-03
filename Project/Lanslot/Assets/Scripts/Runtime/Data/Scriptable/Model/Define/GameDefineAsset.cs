@@ -36,6 +36,6 @@ namespace TeamSuneat.Data
 
         [Title("빌드 (Build)")]
         [LabelText("에디터에서 사용하는 빌드 타입")]
-        public BuildTypes EDITOR_BUILD_TYPE;
+        public BuildTypes EDITOR_BUILD_TYPE = BuildTypes.Editor;
     }
 }
