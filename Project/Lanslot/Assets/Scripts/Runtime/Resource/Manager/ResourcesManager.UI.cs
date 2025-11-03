@@ -95,7 +95,7 @@ namespace TeamSuneat
 
                 UIFloatyMoveNames moveName = UIFloatyMoveNames.Content;
                 if (currencyName == CurrencyNames.Gold) moveName = UIFloatyMoveNames.Gold;
-                else if (currencyName == CurrencyNames.Diamond) moveName = UIFloatyMoveNames.Gem;
+                else if (currencyName == CurrencyNames.Gem) moveName = UIFloatyMoveNames.Gem;
 
                 component.Setup(content, moveName);
                 component.StartMove();

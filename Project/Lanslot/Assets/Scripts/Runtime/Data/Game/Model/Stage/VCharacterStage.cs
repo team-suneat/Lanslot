@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace TeamSuneat.Data.Game
 {
     [System.Serializable]
-    public class VStage
+    public class VCharacterStage
     {
         [NonSerialized]
         public List<StageNames> Stages = new();

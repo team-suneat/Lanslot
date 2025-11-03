@@ -310,7 +310,7 @@ namespace TeamSuneat
                                 input = input.Replace(match.Value, $"<style=Gold>{enumCurrencyName.GetLocalizedString(languageName)}</style>");
                                 break;
 
-                            case CurrencyNames.Diamond:
+                            case CurrencyNames.Gem:
                                 input = input.Replace(match.Value, $"<style=Diamond>{enumCurrencyName.GetLocalizedString(languageName)}</style>");
                                 break;
                         }

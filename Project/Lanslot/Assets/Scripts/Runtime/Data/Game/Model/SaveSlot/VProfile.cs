@@ -11,7 +11,7 @@ namespace TeamSuneat.Data.Game
         public VCharacterWeapon Weapon;
         public VCurrency Currency;
         public VCharacterStat Stat;
-        public VStage Stage;
+        public VCharacterStage Stage;
         public VStatistics Statistics;
 
         public CharacterNames CharacterName => Character.SelectedCharacterName;
@@ -36,7 +36,7 @@ namespace TeamSuneat.Data.Game
             Currency ??= new();
             Stat ??= new VCharacterStat();
             Statistics ??= new();
-            Stage ??= new VStage();
+            Stage ??= new VCharacterStage();
         }
 
         public void ClearIngameData()

@@ -29,7 +29,6 @@ Build(Dev)/
 
 # ===== 프로젝트 전용 =====
 Assets/StreamingAssets/build_info
-Json/
 *.zip
 steam_appid.txt
 RewiredBackup/

@@ -182,8 +182,6 @@ GameObject:
   - component: {fileID: 3119988586667581016}
   - component: {fileID: 1492684325747265586}
   - component: {fileID: 2132845055380083826}
-  - component: {fileID: 2510815233263879503}
-  - component: {fileID: 936896301953155247}
   - component: {fileID: 7411223104113322636}
   - component: {fileID: 2229219151035523723}
   - component: {fileID: 7974149315696298526}
@@ -237,8 +235,7 @@ MonoBehaviour:
   RenderController: {fileID: 7411223104113322636}
   CinemachineController: {fileID: 2132845055380083826}
   SettingsController: {fileID: 2229219151035523723}
-  LookController: {fileID: 936896301953155247}
-  FollowController: {fileID: 2510815233263879503}
+  TurnBasedController: {fileID: 0}
 --- !u!114 &1492684325747265586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,37 +269,6 @@ MonoBehaviour:
   _defaultLookaheadTime: 0.5
   _defaultSoftZoneWidth: 1
   _framingTransposer: {fileID: 0}
---- !u!114 &2510815233263879503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5208761733379764861}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4a2b28f92633904391209382e94a23c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cameraFollow: {fileID: 8870489557397576496}
---- !u!114 &936896301953155247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5208761733379764861}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70c5651dd4111444f866ef0e8a2672ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cameraLook: {fileID: 0}
-  _inputThreshold: 0.5
-  _lookUpOffset: {x: 0, y: 5, z: 0}
-  _lookDownOffset: {x: 0, y: -5, z: 0}
-  _offsetTransitionSpeed: 5
-  _virtualCamera: {fileID: 0}
 --- !u!114 &7411223104113322636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,7 +488,6 @@ GameObject:
   - component: {fileID: 5877865787898963205}
   - component: {fileID: 3074152743522547962}
   - component: {fileID: 3880772337074230738}
-  - component: {fileID: 8870489557397576496}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -607,15 +572,3 @@ MonoBehaviour:
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
   FollowOffset: {x: 0, y: 0, z: -10}
---- !u!114 &8870489557397576496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8812606809006674215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4dfa2ed2c493be4fb52f1f6f1f8f4d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

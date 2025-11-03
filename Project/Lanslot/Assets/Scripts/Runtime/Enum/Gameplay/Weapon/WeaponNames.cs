@@ -12,5 +12,8 @@
         Pineapple,          // 파인애플
         PaladinShield,      // 성기사 방패
         CoinPurse,          // 금화 주머니
+        GemPurse,           // 보석 주머니
+        Stone,              // 돌
+        Shovel,             // 삽
     }
 }

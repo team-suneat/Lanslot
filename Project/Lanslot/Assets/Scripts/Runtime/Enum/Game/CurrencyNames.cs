@@ -4,6 +4,6 @@ namespace TeamSuneat
     {
         None = 0,
         Gold, 
-        Diamond,
+        Gem,
     }
 }
