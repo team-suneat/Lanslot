@@ -94,12 +94,7 @@ namespace TeamSuneat
             TryAddAttackerCalculateStatValue(StatNames.CriticalChance, ref criticalChance);
 
             GameDefineAssetData defineAssetData = ScriptableDataManager.Instance.GetGameDefine().Data;
-            float resultCriticalChance = criticalChance + targetCriticalChance;
-            if (resultCriticalChance > defineAssetData.MAX_CRITICAL_CHANCE_RATE)
-            {
-                LogMaxCriticalChanceExceeded(resultCriticalChance, defineAssetData.MAX_CRITICAL_CHANCE_RATE);
-                resultCriticalChance = defineAssetData.MAX_CRITICAL_CHANCE_RATE;
-            }
+            float resultCriticalChance = criticalChance + targetCriticalChance;       
 
             // 치명타 확률이 0% 이하이면 치명타 발생하지 않음
             if (resultCriticalChance <= 0f)

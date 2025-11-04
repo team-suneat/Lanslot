@@ -17,9 +17,11 @@ namespace TeamSuneat
         /// </summary>
         public static async Task<bool> FetchConvertAndApplyAllAsync()
         {
-            if (!GameDefine.IS_DEVELOPMENT_BUILD)
+            // GameDefineAsset에서 구글 시트 동기화가 활성화되어 있는지 확인
+            GameDefineAsset defineAsset = ScriptableDataManager.Instance?.GetGameDefine();
+            if (defineAsset == null || !defineAsset.IsGoogleSheetSyncEnabled())
             {
-                // 개발용 빌드가 아니라면 이미 변환된 json 파일을 읽어오도록 합니다.
+                // 구글 시트 동기화가 비활성화되어 있으면 JSON 파일을 읽어오도록 합니다.
                 return false;
             }
 

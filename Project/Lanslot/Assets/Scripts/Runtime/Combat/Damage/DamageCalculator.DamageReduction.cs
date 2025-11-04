@@ -13,15 +13,8 @@ namespace TeamSuneat
             GameDefineAssetData defineAssetData = defineAsset.Data;
             float damageReduction = 1f;
 
-            // 공통 피해 감소율
-            float commonRate = CalculateDamageReduction(damageResult); // 피해 감소율: 0.3이면 30% 감소
-            float minReductionFactor = defineAssetData.MAX_DAMAGE_REDUCTION_RATE;
-
-            if (commonRate > minReductionFactor)
-            {
-                AddLogMaxPhysicalDamageReduction(commonRate, minReductionFactor);
-                commonRate = minReductionFactor;
-            }
+            // 공통 피해 감소율 : 0.3이면 30% 감소
+            float commonRate = CalculateDamageReduction(damageResult);
 
             // 피해 감소율
             float combinedMultiplier = 1 - commonRate; // 예: 1 - 0.3 = 0.7(70%)
@@ -61,13 +54,6 @@ namespace TeamSuneat
             float magicRate = 0f;
             float baseReductionRate = commonRate + magicRate;
 
-            float maxReduction = defineAssetData.MAX_DAMAGE_REDUCTION_RATE;
-            if (baseReductionRate > maxReduction)
-            {
-                AddLogMaxMagicDamageReduction(baseReductionRate, maxReduction);
-                baseReductionRate = maxReduction;
-            }
-
             float baseMultiplier = 1f - baseReductionRate;
             damageReduction *= baseMultiplier;
 
@@ -101,22 +87,6 @@ namespace TeamSuneat
             }
 
             return damageReduction;
-        }
-
-        //
-
-        private float CalculateDamageReductionFromResistance(DamageAssetData damageAsset)
-        {
-            float magicalResistanceRate = 0f;
-            float elementResistanceRate = 0f;
-            GameDefineAssetData defineAssetData = ScriptableDataManager.Instance.GetGameDefine().Data;
-            float result = (magicalResistanceRate + elementResistanceRate) * 0.5f;
-            if (result > defineAssetData.MAX_DAMAGE_RESISTANCE_REDUCTION_RATE)
-            {
-                result = defineAssetData.MAX_DAMAGE_RESISTANCE_REDUCTION_RATE;
-            }
-
-            return result;
         }
 
         #region Log

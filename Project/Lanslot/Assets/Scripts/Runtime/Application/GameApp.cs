@@ -60,16 +60,16 @@ namespace TeamSuneat
         private async void LoadAsync()
         {
             await PathManager.LoadAllAsync();
+            await ScriptableDataManager.Instance.LoadScriptableAssetsAsync();
 
             // 구글 시트에서 동기화
             bool googleSheetSynced = await GoogleSheetRuntimeSync.FetchConvertAndApplyAllAsync();
             if (!googleSheetSynced)
             {
-                //  생성된 JSON 파일 로드
+                // 미리 생성된 JSON 파일을 로드
                 await JsonDataManager.LoadJsonSheetsAsync();
             }
 
-            await ScriptableDataManager.Instance.LoadScriptableAssetsAsync();
             await ResourcesManager.LoadResourcesByLabelAsync<GameObject>("Ingame");
 
             // LOAD SAVED DATA
