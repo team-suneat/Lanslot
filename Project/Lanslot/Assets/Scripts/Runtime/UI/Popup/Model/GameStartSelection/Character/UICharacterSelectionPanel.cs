@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using TeamSuneat.Data;
+using TeamSuneat.Data.Game;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -21,6 +22,7 @@ namespace TeamSuneat.UserInterface
         private int _currentSelectedIndex;
 
         private readonly UnityEvent<CharacterNames> _onCharacterSelectedEvent = new(); // 캐릭터 선택 완료 이벤트
+        private readonly UnityEvent<CharacterNames> _onCharacterSelectionChangedEvent = new(); // 캐릭터 선택 변경 이벤트
 
         private void Awake()
         {
@@ -48,16 +50,27 @@ namespace TeamSuneat.UserInterface
             _onCharacterSelectedEvent.AddListener(action);
         }
 
+        /// <summary>
+        /// 캐릭터 선택 변경 이벤트를 등록합니다.
+        /// </summary>
+        public void RegisterCharacterSelectionChangedEvent(UnityAction<CharacterNames> action)
+        {
+            _onCharacterSelectionChangedEvent.AddListener(action);
+        }
+
         private void SetupCharacterCells()
         {
+            VProfile profileInfo = GameApp.GetSelectedProfile();
+
             for (int i = 0; i < _characterCells.Length; i++)
             {
                 if (_characterList.Count > i)
                 {
                     PlayerCharacterData charData = _characterList[i];
                     bool isSelected = i == _currentSelectedIndex;
-
-                    _characterCells[i].Setup(charData.Name, i, isSelected);
+                    // 소지하지 않은 캐릭터는 잠금 처리
+                    bool isLocked = !profileInfo.Character.Contains(charData.Name);
+                    _characterCells[i].Setup(charData.Name, i, isSelected, isLocked);
                     _characterCells[i].RegisterClickEvent(OnSelectCharacter);
                     _characterCells[i].SetActive(true);
                 }
@@ -98,6 +111,13 @@ namespace TeamSuneat.UserInterface
                 {
                     _characterCells[i].Deselect();
                 }
+            }
+
+            // 선택 변경 이벤트 발생
+            if (_characterList.IsValid(index))
+            {
+                CharacterNames selectedCharacter = _characterList[index].Name;
+                _onCharacterSelectionChangedEvent?.Invoke(selectedCharacter);
             }
         }
 

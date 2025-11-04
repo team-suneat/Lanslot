@@ -43,7 +43,7 @@ namespace TeamSuneat.Setting
         {
             get
             {
-                if (!GameDefine.EDITOR_OR_DEVELOPMENT_BUILD)
+                if (!GameDefine.IS_EDITOR_OR_DEVELOPMENT_BUILD)
                 {
                     return false;
                 }
@@ -66,7 +66,7 @@ namespace TeamSuneat.Setting
         {
             get
             {
-                if (!GameDefine.EDITOR_OR_DEVELOPMENT_BUILD)
+                if (!GameDefine.IS_EDITOR_OR_DEVELOPMENT_BUILD)
                 {
                     return false;
                 }
@@ -89,7 +89,7 @@ namespace TeamSuneat.Setting
         {
             get
             {
-                if (!GameDefine.EDITOR_OR_DEVELOPMENT_BUILD) { return false; }
+                if (!GameDefine.IS_EDITOR_OR_DEVELOPMENT_BUILD) { return false; }
                 if (!_isInitialized)
                 {
                     Initialize();
@@ -110,7 +110,7 @@ namespace TeamSuneat.Setting
         {
             get
             {
-                if (!GameDefine.EDITOR_OR_DEVELOPMENT_BUILD) { return CriticalTypes.None; }
+                if (!GameDefine.IS_EDITOR_OR_DEVELOPMENT_BUILD) { return CriticalTypes.None; }
                 if (!_isInitialized)
                 {
                     Initialize();
@@ -129,7 +129,7 @@ namespace TeamSuneat.Setting
         {
             get
             {
-                if (!GameDefine.EDITOR_OR_DEVELOPMENT_BUILD) { return TriggerChanceTypes.None; }
+                if (!GameDefine.IS_EDITOR_OR_DEVELOPMENT_BUILD) { return TriggerChanceTypes.None; }
                 if (!_isInitialized)
                 {
                     Initialize();
@@ -150,7 +150,7 @@ namespace TeamSuneat.Setting
         {
             get
             {
-                if (!GameDefine.EDITOR_OR_DEVELOPMENT_BUILD) { return false; }
+                if (!GameDefine.IS_EDITOR_OR_DEVELOPMENT_BUILD) { return false; }
                 if (!_isInitialized)
                 {
                     Initialize();
@@ -169,7 +169,7 @@ namespace TeamSuneat.Setting
         {
             get
             {
-                if (!GameDefine.EDITOR_OR_DEVELOPMENT_BUILD) { return false; }
+                if (!GameDefine.IS_EDITOR_OR_DEVELOPMENT_BUILD) { return false; }
                 if (!_isInitialized)
                 {
                     Initialize();
@@ -188,7 +188,7 @@ namespace TeamSuneat.Setting
         {
             get
             {
-                if (!GameDefine.EDITOR_OR_DEVELOPMENT_BUILD) { return false; }
+                if (!GameDefine.IS_EDITOR_OR_DEVELOPMENT_BUILD) { return false; }
                 if (!_isInitialized)
                 {
                     Initialize();
@@ -207,7 +207,7 @@ namespace TeamSuneat.Setting
         {
             get
             {
-                if (!GameDefine.EDITOR_OR_DEVELOPMENT_BUILD) { return false; }
+                if (!GameDefine.IS_EDITOR_OR_DEVELOPMENT_BUILD) { return false; }
                 if (!_isInitialized)
                 {
                     Initialize();
@@ -226,7 +226,7 @@ namespace TeamSuneat.Setting
         {
             get
             {
-                if (!GameDefine.EDITOR_OR_DEVELOPMENT_BUILD) { return false; }
+                if (!GameDefine.IS_EDITOR_OR_DEVELOPMENT_BUILD) { return false; }
                 if (!_isInitialized)
                 {
                     Initialize();
@@ -245,7 +245,7 @@ namespace TeamSuneat.Setting
         {
             get
             {
-                if (!GameDefine.EDITOR_OR_DEVELOPMENT_BUILD) { return false; }
+                if (!GameDefine.IS_EDITOR_OR_DEVELOPMENT_BUILD) { return false; }
                 if (!_isInitialized)
                 {
                     Initialize();
@@ -264,7 +264,7 @@ namespace TeamSuneat.Setting
         {
             get
             {
-                if (!GameDefine.EDITOR_OR_DEVELOPMENT_BUILD) { return false; }
+                if (!GameDefine.IS_EDITOR_OR_DEVELOPMENT_BUILD) { return false; }
                 if (!_isInitialized)
                 {
                     Initialize();
@@ -282,7 +282,7 @@ namespace TeamSuneat.Setting
         {
             get
             {
-                if (!GameDefine.EDITOR_OR_DEVELOPMENT_BUILD) { return GradeNames.None; }
+                if (!GameDefine.IS_EDITOR_OR_DEVELOPMENT_BUILD) { return GradeNames.None; }
                 if (!_isInitialized)
                 {
                     Initialize();

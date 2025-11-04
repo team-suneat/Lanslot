@@ -68,6 +68,7 @@ namespace TeamSuneat.UserInterface
         private void RegisterCharacterSelectedEvent()
         {
             _characterSelectionPanel?.RegisterCharacterSelectedEvent(OnCharacterSelected);
+            _characterSelectionPanel?.RegisterCharacterSelectionChangedEvent(OnCharacterSelectionChanged);
         }
 
         private void RegisterWeaponsSelectedEvent()
@@ -86,6 +87,9 @@ namespace TeamSuneat.UserInterface
             _nextButton?.SetActive(true);
             _backButton?.SetActive(false);
             _completeButton?.SetActive(false);
+
+            // 초기 선택된 캐릭터에 따라 버튼 상태 설정
+            RefreshNextButtonState();
         }
 
         private void ShowWeaponSelection()
@@ -128,6 +132,41 @@ namespace TeamSuneat.UserInterface
         private void OnCharacterSelected(CharacterNames characterName)
         {
             _selectedCharacter = characterName;
+        }
+
+        private void OnCharacterSelectionChanged(CharacterNames characterName)
+        {
+            _selectedCharacter = characterName;
+            RefreshNextButtonState();
+        }
+
+        private void RefreshNextButtonState()
+        {
+            if (_nextButton == null || _currentStep != SelectionStep.Character)
+            {
+                return;
+            }
+
+            CharacterNames selectedCharacter = _characterSelectionPanel?.GetSelectedCharacter() ?? CharacterNames.None;
+            
+            if (selectedCharacter == CharacterNames.None)
+            {
+                _nextButton.Lock();
+                return;
+            }
+
+            // 선택된 캐릭터가 해금되었는지 확인
+            VProfile profileInfo = GameApp.GetSelectedProfile();
+            bool isUnlocked = profileInfo?.Character.Contains(selectedCharacter) ?? false;
+
+            if (isUnlocked)
+            {
+                _nextButton.Unlock();
+            }
+            else
+            {
+                _nextButton.Lock();
+            }
         }
 
         private void OnDecideCharacterSelection()

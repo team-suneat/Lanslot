@@ -13,7 +13,7 @@ namespace TeamSuneat.Setting
 
         public void AddDamage(DamageResult damageResult, float attackTime)
         {
-            if (!GameDefine.EDITOR_OR_DEVELOPMENT_BUILD)
+            if (!GameDefine.IS_EDITOR_OR_DEVELOPMENT_BUILD)
             {
                 return;
             }

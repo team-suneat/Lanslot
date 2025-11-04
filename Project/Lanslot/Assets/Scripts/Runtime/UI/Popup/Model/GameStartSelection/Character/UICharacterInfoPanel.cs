@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using TeamSuneat.Data;
+using TeamSuneat.Data.Game;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -14,6 +15,8 @@ namespace TeamSuneat.UserInterface
         [Title("Character")]
         [SerializeField] private Image iconImage;                     // 캐릭터 아이콘/초상화
         [SerializeField] private UILocalizedText nameText;            // 캐릭터 이름
+        [SerializeField] private UILocalizedText rankText;            // 랭크 텍스트
+        [SerializeField] private Slider experienceSlider;              // 경험치 슬라이더
 
         [Title("Weapon")]
         [SerializeField] private Image weaponIconImage;               // 무기 아이콘
@@ -27,20 +30,104 @@ namespace TeamSuneat.UserInterface
 
         public void Bind(PlayerCharacterData data)
         {
-            string spriteName = SpriteEx.GetSpriteName(data.Name);
+            VProfile profileInfo = GameApp.GetSelectedProfile();
+            bool isLocked = !profileInfo.Character.Contains(data.Name);
+
+            VCharacterInfo characterInfo = profileInfo.Character.GetCharacterInfo(data.Name);
+
+            BindCharacterInfo(data, isLocked, characterInfo);
+            BindWeaponInfo(data, isLocked);
+            BindPassiveInfo(data, isLocked);
+        }
+
+        private void BindCharacterInfo(PlayerCharacterData data, bool isLocked, VCharacterInfo characterInfo)
+        {
+            BindCharacterBasicInfo(data, isLocked);
+            BindCharacterRankInfo(isLocked, characterInfo);
+        }
+
+        private void BindCharacterBasicInfo(PlayerCharacterData data, bool isLocked)
+        {
+            // 캐릭터 아이콘: 잠금된 경우 CharacterNames.None으로 스프라이트 가져오기
+            CharacterNames spriteCharacterName = isLocked ? CharacterNames.None : data.Name;
+            string spriteName = SpriteEx.GetSpriteName(spriteCharacterName);
             _ = (iconImage?.TrySetSprite(spriteName));
             nameText?.SetText(data.DisplayName);
+        }
 
-            spriteName = SpriteEx.GetSpriteName(data.Weapon);
+        private void BindCharacterRankInfo(bool isLocked, VCharacterInfo characterInfo)
+        {
+            // 랭크 및 경험치 정보 표시
+            if (isLocked || characterInfo == null)
+            {
+                rankText?.SetText("???");
+                if (experienceSlider != null)
+                {
+                    experienceSlider.value = 0f;
+                }
+            }
+            else
+            {
+                // 랭크 텍스트 표시
+                rankText?.SetText($"Rank {characterInfo.Rank}");
 
-            _ = (weaponIconImage?.TrySetSprite(spriteName, false));
-            weaponNameText?.SetText(data.Weapon.GetLocalizedString());
-            weaponDescText?.SetText(data.Weapon.GetDescString());
+                // 경험치 슬라이더 비율 계산
+                BindRankExperience(characterInfo);
+            }
+        }
 
-            _ = SpriteEx.GetSpriteName(data.Passive);
+        private void BindRankExperience(VCharacterInfo characterInfo)
+        {
+            if (experienceSlider == null)
+            {
+                return;
+            }
 
-            passiveNameText?.SetText(data.Passive.GetNameString());
-            passiveDescText?.SetText(data.Passive.GetDescString());
+            CharacterRankExpData rankExpData = JsonDataManager.FindCharacterRankExpDataClone(characterInfo.Rank);
+            
+            // 다음 랭크 데이터가 없거나 필요 경험치가 0이면 최대 랭크 (100%)
+            if (rankExpData == null || rankExpData.RequiredExperience <= 0)
+            {
+                experienceSlider.value = 1f;
+                return;
+            }
+
+            // 현재 경험치 / 필요 경험치 비율 계산
+            float experienceRatio = characterInfo.RankExperience.SafeDivide(rankExpData.RequiredExperience);
+            experienceSlider.value = Mathf.Clamp01(experienceRatio);
+        }
+
+        private void BindWeaponInfo(PlayerCharacterData data, bool isLocked)
+        {
+            if (isLocked)
+            {
+                // 잠금된 경우 "???" 표시
+                weaponNameText?.SetText("???");
+                weaponDescText?.SetText("???");
+            }
+            else
+            {
+                string spriteName = SpriteEx.GetSpriteName(data.Weapon);
+                _ = (weaponIconImage?.TrySetSprite(spriteName, false));
+                weaponNameText?.SetText(data.Weapon.GetLocalizedString());
+                weaponDescText?.SetText(data.Weapon.GetDescString());
+            }
+        }
+
+        private void BindPassiveInfo(PlayerCharacterData data, bool isLocked)
+        {
+            if (isLocked)
+            {
+                // 잠금된 경우 "???" 표시
+                passiveNameText?.SetText("???");
+                passiveDescText?.SetText("???");
+            }
+            else
+            {
+                _ = SpriteEx.GetSpriteName(data.Passive);
+                passiveNameText?.SetText(data.Passive.GetNameString());
+                passiveDescText?.SetText(data.Passive.GetDescString());
+            }
         }
     }
 }

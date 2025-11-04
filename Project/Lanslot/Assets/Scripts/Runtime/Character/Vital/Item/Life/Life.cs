@@ -150,49 +150,6 @@ namespace TeamSuneat
             ClearTemporarilyInvulnerable();
         }
 
-        public override void LoadCurrentValue()
-        {
-            if (Vital.Owner != null && Vital.Owner.IsPlayer)
-            {
-                Data.Game.VProfile profieInfo = GameApp.GetSelectedProfile();
-                if (profieInfo != null)
-                {
-                    if (profieInfo.Stat.CurrentLife != 0)
-                    {
-                        Current = profieInfo.Stat.CurrentLife;
-
-                        LogInfo("플레이어 캐릭터의 저장된 남은 생명력을 불러옵니다. {0}/{1}", Current.ToSelectString(), Max);
-                        return;
-                    }
-                }
-            }
-
-            Current = Max;
-
-            LogInfo("남은 생명력을 최대 생명력으로 설정합니다. {0}/{1}", Current, Max);
-        }
-
-        public override void LoadMaxValue()
-        {
-            if (Vital.Owner != null && Vital.Owner.IsPlayer)
-            {
-                Data.Game.VProfile profieInfo = GameApp.GetSelectedProfile();
-                if (profieInfo != null)
-                {
-                    if (profieInfo.Stat.MaxLife != 0)
-                    {
-                        Max = profieInfo.Stat.MaxLife;
-
-                        LogInfo("플레이어 캐릭터의 저장된 남은 생명력을 불러옵니다. {0}/{1}", Current, Max.ToSelectString());
-
-                        return;
-                    }
-                }
-            }
-
-            RefreshMaxValue();
-        }
-
         public override void RefreshMaxValue(bool shouldAddExcessToCurrent = false)
         {
             if (Vital == null || Vital.Owner == null || Vital.Owner.Stat == null)
@@ -423,7 +380,7 @@ namespace TeamSuneat
 
                 if (Vital.Owner != null)
                 {
-                    TryPlayDamageAnimation(damageResult);
+                    _ = TryPlayDamageAnimation(damageResult);
                 }
 
                 EnablePostDamageInvulnerability(InvincibilityDurationOnDamage);
@@ -508,12 +465,12 @@ namespace TeamSuneat
 
         public void SpawnHealFloatyText(int healValue)
         {
-            SpawnFloatyText(healValue.ToString(), DamageTextPoint, UIFloatyMoveNames.HealLife);
+            _ = SpawnFloatyText(healValue.ToString(), DamageTextPoint, UIFloatyMoveNames.HealLife);
         }
 
         private void SpawnUseFloatyText(int useValue)
         {
-            SpawnFloatyText(useValue.ToString(), DamageTextPoint, UIFloatyMoveNames.Physical);
+            _ = SpawnFloatyText(useValue.ToString(), DamageTextPoint, UIFloatyMoveNames.Physical);
         }
 
         private void SpawnDamageFloatyText(DamageResult damageResult, VitalResourceTypes vitalResourceType)
@@ -533,18 +490,18 @@ namespace TeamSuneat
             }
             if (damageResult.TargetVitalCollider != null)
             {
-                SpawnFloatyText(content, damageResult.TargetVitalCollider.transform, moveType);
+                _ = SpawnFloatyText(content, damageResult.TargetVitalCollider.transform, moveType);
             }
             else
             {
                 Collider2D vitalCollider = Vital.GetNotGuardCollider();
                 if (vitalCollider != null)
                 {
-                    SpawnFloatyText(content, vitalCollider.transform, moveType);
+                    _ = SpawnFloatyText(content, vitalCollider.transform, moveType);
                 }
                 else if (Vital.Owner != null)
                 {
-                    SpawnFloatyText(content, DamageTextPoint, moveType);
+                    _ = SpawnFloatyText(content, DamageTextPoint, moveType);
                 }
             }
         }
@@ -556,41 +513,41 @@ namespace TeamSuneat
             switch (damageResult.DamageType)
             {
                 case DamageTypes.Physical:
-                    AudioManager.Instance.PlaySFXOneShotScaled(SoundNames.Damage_Physical, position);
+                    _ = AudioManager.Instance.PlaySFXOneShotScaled(SoundNames.Damage_Physical, position);
                     break;
 
                 case DamageTypes.Fire:
                 case DamageTypes.FireOverTime:
-                    AudioManager.Instance.PlaySFXOneShotScaled(SoundNames.Damage_Fire, position);
+                    _ = AudioManager.Instance.PlaySFXOneShotScaled(SoundNames.Damage_Fire, position);
                     break;
 
                 case DamageTypes.Cold:
                 case DamageTypes.ColdOverTime:
-                    AudioManager.Instance.PlaySFXOneShotScaled(SoundNames.Damage_Cold, position);
+                    _ = AudioManager.Instance.PlaySFXOneShotScaled(SoundNames.Damage_Cold, position);
                     break;
 
                 case DamageTypes.Lightning:
                 case DamageTypes.LightningOverTime:
-                    AudioManager.Instance.PlaySFXOneShotScaled(SoundNames.Damage_Lightning, position);
+                    _ = AudioManager.Instance.PlaySFXOneShotScaled(SoundNames.Damage_Lightning, position);
                     break;
 
                 case DamageTypes.Poison:
                 case DamageTypes.PoisonOverTime:
-                    AudioManager.Instance.PlaySFXOneShotScaled(SoundNames.Damage_Poison, position);
+                    _ = AudioManager.Instance.PlaySFXOneShotScaled(SoundNames.Damage_Poison, position);
                     break;
 
                 case DamageTypes.Darkness:
                 case DamageTypes.DarknessOverTime:
-                    AudioManager.Instance.PlaySFXOneShotScaled(SoundNames.Damage_Darkness, position);
+                    _ = AudioManager.Instance.PlaySFXOneShotScaled(SoundNames.Damage_Darkness, position);
                     break;
 
                 case DamageTypes.Holy:
                 case DamageTypes.HolyOverTime:
-                    AudioManager.Instance.PlaySFXOneShotScaled(SoundNames.Damage_Holy, position);
+                    _ = AudioManager.Instance.PlaySFXOneShotScaled(SoundNames.Damage_Holy, position);
                     break;
 
                 case DamageTypes.BleedOverTime:
-                    AudioManager.Instance.PlaySFXOneShotScaled(SoundNames.Damage_Blood, position);
+                    _ = AudioManager.Instance.PlaySFXOneShotScaled(SoundNames.Damage_Blood, position);
                     break;
             }
         }
@@ -723,7 +680,7 @@ namespace TeamSuneat
 
             if (damageResult.Attacker.IsPlayer)
             {
-                GlobalEvent<DamageResult>.Send(GlobalEventType.PLAYER_CHARACTER_KILL_MONSTER, damageResult);
+                _ = GlobalEvent<DamageResult>.Send(GlobalEventType.PLAYER_CHARACTER_KILL_MONSTER, damageResult);
             }
         }
 
@@ -731,7 +688,7 @@ namespace TeamSuneat
         {
             if (Vital != null)
             {
-                CoroutineNextTimer(DelayBeforeDestruction, Vital.Despawn);
+                _ = CoroutineNextTimer(DelayBeforeDestruction, Vital.Despawn);
             }
         }
 
@@ -764,11 +721,11 @@ namespace TeamSuneat
 
             if (Vital.Owner.IsPlayer)
             {
-                GlobalEvent<int, int>.Send(GlobalEventType.PLAYER_CHARACTER_HEALD, Current, Max);
+                _ = GlobalEvent<int, int>.Send(GlobalEventType.PLAYER_CHARACTER_HEALD, Current, Max);
             }
             else
             {
-                GlobalEvent<int, int>.Send(GlobalEventType.MONSTER_CHARACTER_HEALD, Current, Max);
+                _ = GlobalEvent<int, int>.Send(GlobalEventType.MONSTER_CHARACTER_HEALD, Current, Max);
             }
         }
 
@@ -964,11 +921,11 @@ namespace TeamSuneat
 
             if (Vital.Owner.IsPlayer)
             {
-                GlobalEvent<int, int>.Send(GlobalEventType.PLAYER_CHARACTER_REFRESH_LIFE, Current, Max);
+                _ = GlobalEvent<int, int>.Send(GlobalEventType.PLAYER_CHARACTER_REFRESH_LIFE, Current, Max);
             }
             else
             {
-                GlobalEvent<int, int>.Send(GlobalEventType.MONSTER_CHARACTER_REFRESH_LIFE, Current, Max);
+                _ = GlobalEvent<int, int>.Send(GlobalEventType.MONSTER_CHARACTER_REFRESH_LIFE, Current, Max);
             }
         }
 
@@ -982,44 +939,44 @@ namespace TeamSuneat
             {
                 case DamageTypes.Fire:
                 case DamageTypes.FireOverTime:
-                    VFXManager.Spawn("fx_damage_fire", damagePosition, true);
+                    _ = VFXManager.Spawn("fx_damage_fire", damagePosition, true);
                     break;
 
                 case DamageTypes.Cold:
                 case DamageTypes.ColdOverTime:
-                    VFXManager.Spawn("fx_damage_cold", damagePosition, true);
+                    _ = VFXManager.Spawn("fx_damage_cold", damagePosition, true);
                     break;
 
                 case DamageTypes.Lightning:
                 case DamageTypes.LightningOverTime:
                     if (damageResult.TargetCharacter != null && damageResult.TargetCharacter.IsPlayer)
                     {
-                        VFXManager.Spawn("fx_damage_lightning_player", damagePosition, true);
+                        _ = VFXManager.Spawn("fx_damage_lightning_player", damagePosition, true);
                     }
                     else
                     {
-                        VFXManager.Spawn("fx_damage_lightning", damagePosition, true);
+                        _ = VFXManager.Spawn("fx_damage_lightning", damagePosition, true);
                     }
 
                     break;
 
                 case DamageTypes.Poison:
                 case DamageTypes.PoisonOverTime:
-                    VFXManager.Spawn("fx_damage_poison", damagePosition, true);
+                    _ = VFXManager.Spawn("fx_damage_poison", damagePosition, true);
                     break;
 
                 case DamageTypes.Darkness:
                 case DamageTypes.DarknessOverTime:
-                    VFXManager.Spawn("fx_damage_darkness", damagePosition, true);
+                    _ = VFXManager.Spawn("fx_damage_darkness", damagePosition, true);
                     break;
 
                 case DamageTypes.Holy:
                 case DamageTypes.HolyOverTime:
-                    VFXManager.Spawn("fx_damage_holy", damagePosition, true);
+                    _ = VFXManager.Spawn("fx_damage_holy", damagePosition, true);
                     break;
 
                 case DamageTypes.BleedOverTime:
-                    VFXManager.Spawn("fx_damage_blood", damagePosition, true);
+                    _ = VFXManager.Spawn("fx_damage_blood", damagePosition, true);
                     break;
             }
         }
@@ -1033,7 +990,7 @@ namespace TeamSuneat
 
             if (Vital.Owner.IsPlayer)
             {
-                VFXManager.Spawn("fx_player_damage_blood", damagePosition, true);
+                _ = VFXManager.Spawn("fx_player_damage_blood", damagePosition, true);
             }
         }
 
@@ -1055,22 +1012,22 @@ namespace TeamSuneat
                 case VFXInstantDamageType.Sharp:
                     if (Vital.Owner != null && Vital.Owner.IsPlayer)
                     {
-                        VFXManager.Spawn("fx_player_damage_sharp", damagePosition, true);
+                        _ = VFXManager.Spawn("fx_player_damage_sharp", damagePosition, true);
                     }
                     else
                     {
-                        VFXManager.Spawn("fx_monster_damage_sharp", damagePosition, true);
+                        _ = VFXManager.Spawn("fx_monster_damage_sharp", damagePosition, true);
                     }
                     break;
 
                 case VFXInstantDamageType.Blunt:
                     if (Vital.Owner != null && Vital.Owner.IsPlayer)
                     {
-                        VFXManager.Spawn("fx_player_damage_blunt", damagePosition, true);
+                        _ = VFXManager.Spawn("fx_player_damage_blunt", damagePosition, true);
                     }
                     else
                     {
-                        VFXManager.Spawn("fx_monster_damage_blunt", damagePosition, true);
+                        _ = VFXManager.Spawn("fx_monster_damage_blunt", damagePosition, true);
                     }
                     break;
             }

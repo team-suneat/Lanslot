@@ -154,6 +154,8 @@ namespace TeamSuneat
 
         public virtual void LoadCurrentValue()
         {
+            Current = Max;
+            LogInfo("현재 생명력을 최대 생명력 값으로 불러옵니다. {0}/{1}", Current, Max);
         }
 
         public virtual void Regenerate(int value)

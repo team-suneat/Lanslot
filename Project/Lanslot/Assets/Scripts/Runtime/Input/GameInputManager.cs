@@ -23,7 +23,7 @@ namespace TeamSuneat
         {
             get
             {
-                if (GameDefine.EDITOR_OR_DEVELOPMENT_BUILD)
+                if (GameDefine.IS_EDITOR_OR_DEVELOPMENT_BUILD)
                 {
                     return ControllerType.Custom;
                 }
@@ -32,7 +32,7 @@ namespace TeamSuneat
             }
             set
             {
-                if (GameDefine.EDITOR_OR_DEVELOPMENT_BUILD)
+                if (GameDefine.IS_EDITOR_OR_DEVELOPMENT_BUILD)
                 {
                     _fixedControllerType = value;
                 }
@@ -43,7 +43,7 @@ namespace TeamSuneat
         {
             get
             {
-                if (GameDefine.EDITOR_OR_DEVELOPMENT_BUILD)
+                if (GameDefine.IS_EDITOR_OR_DEVELOPMENT_BUILD)
                 {
                     return JoystickTypes.None;
                 }

@@ -18,6 +18,8 @@ namespace TeamSuneat
             { GoogleSheetDatasetGids.WeaponLevel, new WeaponLevelRowConverter() },
             { GoogleSheetDatasetGids.Potion, new PotionRowConverter() },
             { GoogleSheetDatasetGids.String, new StringRowConverter() },
+            { GoogleSheetDatasetGids.CharacterLevelExp, new CharacterLevelExpRowConverter() },
+            { GoogleSheetDatasetGids.CharacterRankExp, new CharacterRankExpRowConverter() },
         };
 
         public static bool HasConverterForGid(string gid)

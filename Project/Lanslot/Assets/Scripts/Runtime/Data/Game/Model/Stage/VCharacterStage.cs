@@ -28,11 +28,11 @@ namespace TeamSuneat.Data.Game
             if (!Stages.Contains(stageName))
             {
                 Stages.Add(stageName);
-            }
-
-            if (!StageStrings.Contains(stageName.ToString()))
-            {
-                StageStrings.Add(stageName.ToString());
+                string stageString = stageName.ToString();
+                if (!StageStrings.Contains(stageString))
+                {
+                    StageStrings.Add(stageString);
+                }
             }
         }
 
@@ -41,11 +41,11 @@ namespace TeamSuneat.Data.Game
             if (Stages.Contains(stageName))
             {
                 Stages.Remove(stageName);
-            }
-
-            if (StageStrings.Contains(stageName.ToString()))
-            {
-                StageStrings.Remove(stageName.ToString());
+                string stageString = stageName.ToString();
+                if (StageStrings.Contains(stageString))
+                {
+                    StageStrings.Remove(stageString);
+                }
             }
         }
 
@@ -53,6 +53,11 @@ namespace TeamSuneat.Data.Game
         {
             CurrentStage = stageName;
             CurrentStageString = stageName.ToString();
+        }
+
+        public static VCharacterStage CreateDefault()
+        {
+            return new VCharacterStage();
         }
     }
 }

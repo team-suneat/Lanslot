@@ -14,6 +14,8 @@ namespace TeamSuneat.Data
             WeaponLevel,
             Potion,
             String,
+            CharacterLevelExp,
+            CharacterRankExp,
         }
     }
 }

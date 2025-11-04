@@ -25,6 +25,8 @@ namespace TeamSuneat
                 GoogleSheetDatasetGids.WeaponLevel,
                 GoogleSheetDatasetGids.Potion,
                 GoogleSheetDatasetGids.String,
+                GoogleSheetDatasetGids.CharacterLevelExp,
+                GoogleSheetDatasetGids.CharacterRankExp,
             };
 
             for (int idx = 0; idx < gids.Length; idx++)
@@ -62,6 +64,8 @@ namespace TeamSuneat
             ConvertWeaponLevelToJson();
             ConvertPotionToJson();
             ConvertStringToJson();
+            ConvertCharacterLevelExpToJson();
+            ConvertCharacterRankExpToJson();
         }
 
         [MenuItem("Tools/Google Sheets/Convert To Json/PlayerCharacter")]
@@ -110,6 +114,18 @@ namespace TeamSuneat
         public static async void ConvertStringToJson()
         {
             ConvertCacheToJson<StringData>("String", GoogleSheetDatasetGids.String);
+        }
+
+        [MenuItem("Tools/Google Sheets/Convert To Json/CharacterLevelExp")]
+        public static async void ConvertCharacterLevelExpToJson()
+        {
+            ConvertCacheToJson<CharacterLevelExpData>("CharacterLevelExp", GoogleSheetDatasetGids.CharacterLevelExp);
+        }
+
+        [MenuItem("Tools/Google Sheets/Convert To Json/CharacterRankExp")]
+        public static async void ConvertCharacterRankExpToJson()
+        {
+            ConvertCacheToJson<CharacterRankExpData>("CharacterRankExp", GoogleSheetDatasetGids.CharacterRankExp);
         }
 
         private static async void ConvertCacheToJson<IData>(string key, string gid)

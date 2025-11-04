@@ -17,6 +17,8 @@ namespace TeamSuneat
         WeaponLevel,
         Potion,
         String,
+        CharacterLevelExp,
+        CharacterRankExp,
     }
 
     /// <summary>
@@ -35,6 +37,8 @@ namespace TeamSuneat
         public const string WeaponLevel = "1159863095";
         public const string Potion = "1558675697";
         public const string String = "595378682";
+        public const string CharacterLevelExp = "913942234";
+        public const string CharacterRankExp = "2053898515";
 
         private static readonly Dictionary<GoogleSheetDatasetId, string> DatasetIdToGid = new()
     {
@@ -46,6 +50,8 @@ namespace TeamSuneat
         { GoogleSheetDatasetId.WeaponLevel, WeaponLevel },
         { GoogleSheetDatasetId.Potion, Potion },
         { GoogleSheetDatasetId.String, String },
+        { GoogleSheetDatasetId.CharacterLevelExp, CharacterLevelExp },
+        { GoogleSheetDatasetId.CharacterRankExp, CharacterRankExp },
     };
 
         public static string GetGid(GoogleSheetDatasetId datasetId)

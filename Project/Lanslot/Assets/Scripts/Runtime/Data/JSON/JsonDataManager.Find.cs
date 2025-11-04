@@ -131,5 +131,25 @@ namespace TeamSuneat.Data
 
             return new WeaponData();
         }
+
+        public static CharacterLevelExpData FindCharacterLevelExpDataClone(int level)
+        {
+            if (_characterLevelExpSheetData.ContainsKey(level))
+            {
+                return _characterLevelExpSheetData[level];
+            }
+
+            return new CharacterLevelExpData();
+        }
+
+        public static CharacterRankExpData FindCharacterRankExpDataClone(int rank)
+        {
+            if (_characterRankExpSheetData.ContainsKey(rank))
+            {
+                return _characterRankExpSheetData[rank];
+            }
+
+            return new CharacterRankExpData();
+        }
     }
 }

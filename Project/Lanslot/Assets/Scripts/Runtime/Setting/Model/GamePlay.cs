@@ -160,7 +160,7 @@ namespace TeamSuneat.Setting
         {
             get
             {
-                if (GameDefine.EDITOR_OR_DEVELOPMENT_BUILD)
+                if (GameDefine.IS_EDITOR_OR_DEVELOPMENT_BUILD)
                 {
                     return _showInvulnerableRenderer;
                 }
@@ -181,7 +181,7 @@ namespace TeamSuneat.Setting
         {
             get
             {
-                if (GameDefine.EDITOR_OR_DEVELOPMENT_BUILD)
+                if (GameDefine.IS_EDITOR_OR_DEVELOPMENT_BUILD)
                 {
                     return _showMonsterAttackCooldown;
                 }

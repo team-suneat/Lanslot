@@ -29,7 +29,7 @@ namespace TeamSuneat
         {
             SetupLevel();
 
-            ProfileInfo.Character.Register(Name);
+            ProfileInfo.Character.Unlock(Name);
 
             base.Initialize();
         }

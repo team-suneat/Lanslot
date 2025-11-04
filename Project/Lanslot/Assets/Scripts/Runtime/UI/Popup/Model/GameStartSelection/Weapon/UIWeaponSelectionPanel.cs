@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using System.Text;
 using TeamSuneat.Data;
 using TeamSuneat.Data.Game;
 using UnityEngine;
@@ -21,8 +22,8 @@ namespace TeamSuneat.UserInterface
         private const int MAX_SELECTED_WEAPONS = 3;
         private List<WeaponData> _weaponList;
         private readonly List<int> _selectedWeaponIndices = new(); // 선택된 무기 인덱스 리스트 (최대 2개)
-        private UnityEvent<List<WeaponNames>> _onWeaponsSelectedEvent = new(); // 무기 선택 완료 이벤트
-        private int _lockedWeaponIndex = -1; // 잠금된 무기 인덱스 (기본 무기)
+        private readonly UnityEvent<List<WeaponNames>> _onWeaponsSelectedEvent = new(); // 무기 선택 완료 이벤트
+        private int _decidedWeaponIndex = -1; // 결정된 무기 인덱스 (선택한 캐릭터의 기본 무기)
 
         private void Awake()
         {
@@ -35,9 +36,9 @@ namespace TeamSuneat.UserInterface
         {
             _weaponList = JsonDataManager.GetWeaponDataClones();
             _selectedWeaponIndices.Clear();
-            _lockedWeaponIndex = -1;
+            _decidedWeaponIndex = -1;
 
-            // 기본 무기 설정을 먼저 수행 (셀 설정 전에 잠금 인덱스 결정)
+            // 기본 무기 설정을 먼저 수행 (셀 설정 전에 결정된 무기 인덱스 결정)
             FindDefaultWeaponIndex();
             SetupWeaponCells();
             SetupWeaponInfoPanel();
@@ -50,15 +51,20 @@ namespace TeamSuneat.UserInterface
 
         private void SetupWeaponCells()
         {
+            VProfile profileInfo = GameApp.GetSelectedProfile();
+
             for (int i = 0; i < _weaponCells.Length; i++)
             {
                 if (_weaponList.Count > i)
                 {
                     WeaponData weaponData = _weaponList[i];
                     bool isSelected = _selectedWeaponIndices.Contains(i);
-                    bool isLocked = i == _lockedWeaponIndex;
+                    bool isDecided = i == _decidedWeaponIndex;
 
-                    _weaponCells[i].Setup(weaponData, i, isSelected, isLocked);
+                    // 소지하지 않은 무기는 잠금 처리
+                    bool isLocked = !(profileInfo?.Weapon.CheckUnlocked(weaponData.Name) ?? false);
+
+                    _weaponCells[i].Setup(weaponData, i, isSelected, isDecided, isLocked);
                     _weaponCells[i].RegisterClickEvent(OnSelectWeapon);
                     _weaponCells[i].SetActive(true);
                 }
@@ -99,7 +105,7 @@ namespace TeamSuneat.UserInterface
             {
                 if (_weaponList[i].Name == defaultWeapon)
                 {
-                    _lockedWeaponIndex = i;
+                    _decidedWeaponIndex = i;
                     _selectedWeaponIndices.Add(i);
                     break;
                 }
@@ -108,10 +114,10 @@ namespace TeamSuneat.UserInterface
 
         private void SetupWeaponInfoPanel()
         {
-            // 잠금된 기본 무기 정보 표시 (있는 경우)
-            if (_lockedWeaponIndex >= 0 && _weaponList.IsValid(_lockedWeaponIndex))
+            // 결정된 기본 무기 정보 표시 (있는 경우)
+            if (_decidedWeaponIndex >= 0 && _weaponList.IsValid(_decidedWeaponIndex))
             {
-                UpdateWeaponInfoPanel(_lockedWeaponIndex);
+                UpdateWeaponInfoPanel(_decidedWeaponIndex);
             }
             // 그렇지 않으면 첫 번째 무기 정보 표시
             else if (_weaponList.Count > 0)
@@ -136,14 +142,20 @@ namespace TeamSuneat.UserInterface
                 return;
             }
 
-            // 잠금된 무기는 클릭해도 무시
-            if (index == _lockedWeaponIndex)
+            // 무기 정보 패널 업데이트 (선택한 무기 정보 표시)
+            UpdateWeaponInfoPanel(index);
+
+            // 결정된 무기는 클릭해도 무시 (선택 해제 불가)
+            if (index == _decidedWeaponIndex)
             {
                 return;
             }
 
-            // 무기 정보 패널 업데이트 (선택한 무기 정보 표시)
-            UpdateWeaponInfoPanel(index);
+            // 잠금된 무기는 클릭해도 무시 (선택 불가)
+            if (_weaponCells[index].IsLocked)
+            {
+                return;
+            }
 
             // 이미 선택된 무기인 경우 선택 해제
             if (_selectedWeaponIndices.Contains(index))
@@ -153,14 +165,14 @@ namespace TeamSuneat.UserInterface
             }
             else
             {
-                // 최대 선택 개수 초과 시 잠금되지 않은 무기 중 가장 먼저 선택된 무기 해제
+                // 최대 선택 개수 초과 시 결정되지 않은 무기 중 가장 먼저 선택된 무기 해제
                 if (_selectedWeaponIndices.Count >= MAX_SELECTED_WEAPONS)
                 {
-                    // 잠금되지 않은 무기 중 가장 먼저 선택된 것을 찾아서 해제
+                    // 결정되지 않은 무기 중 가장 먼저 선택된 것을 찾아서 해제
                     for (int i = 0; i < _selectedWeaponIndices.Count; i++)
                     {
                         int selectedIndex = _selectedWeaponIndices[i];
-                        if (selectedIndex != _lockedWeaponIndex)
+                        if (selectedIndex != _decidedWeaponIndex)
                         {
                             _selectedWeaponIndices.RemoveAt(i);
                             _weaponCells[selectedIndex].Deselect();

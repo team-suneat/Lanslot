@@ -4,9 +4,9 @@ namespace TeamSuneat
     {
         None = 0,
         Common,
-        Uncommon,                
+        Uncommon,
         Rare,
         Epic,
-        Legendary,        
+        Legendary,
     }
 }

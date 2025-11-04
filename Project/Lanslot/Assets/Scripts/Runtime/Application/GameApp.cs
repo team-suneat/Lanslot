@@ -61,11 +61,11 @@ namespace TeamSuneat
         {
             await PathManager.LoadAllAsync();
 
-            // 개발/에디터 빌드에서는 구글 시트에서 동기화, 프로덕션 빌드에서는 빌드 시점 JSON 로드
+            // 구글 시트에서 동기화
             bool googleSheetSynced = await GoogleSheetRuntimeSync.FetchConvertAndApplyAllAsync();
             if (!googleSheetSynced)
             {
-                // 프로덕션 빌드이거나 구글 시트 동기화 실패 시 빌드 시점에 생성된 JSON 파일 로드
+                //  생성된 JSON 파일 로드
                 await JsonDataManager.LoadJsonSheetsAsync();
             }
 

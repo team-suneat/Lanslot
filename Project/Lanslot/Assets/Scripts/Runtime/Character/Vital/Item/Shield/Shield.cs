@@ -1,7 +1,6 @@
-﻿using TeamSuneat.Data;
+﻿using Sirenix.OdinInspector;
 using TeamSuneat.Feedbacks;
 using TeamSuneat.UserInterface;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace TeamSuneat
@@ -30,37 +29,8 @@ namespace TeamSuneat
 
         public override void LoadCurrentValue()
         {
-            LoadCurrentValueFromSavedData();
-        }
+            base.LoadCurrentValue();
 
-        /// <summary> 저장된 데이터에서 보호막 현재값을 불러옵니다. (초기화 시에만 사용) </summary>
-        public void LoadCurrentValueFromSavedData()
-        {
-            if (Vital.Owner != null && Vital.Owner.IsPlayer)
-            {
-                Data.Game.VProfile profileInfo  = GameApp.GetSelectedProfile();
-                if (profileInfo != null)
-                {
-                    int current = profileInfo.Stat.CurrentShield;
-                    if (current != 0)
-                    {
-                        Current = Mathf.Min(current, Max);
-                        Vital.RefreshShieldGauge();
-                        LogShieldLoaded(Current, Max);
-                        return;
-                    }
-                }
-            }
-
-            Current = Max;
-            Vital.RefreshShieldGauge();
-            LogShieldInitialized(Current, Max);
-        }
-
-        /// <summary> 능력치 변경 시 보호막 현재값을 최대값으로 설정합니다. </summary>
-        public void LoadCurrentValueToMax()
-        {
-            Current = Max;
             Vital.RefreshShieldGauge();
             LogShieldInitialized(Current, Max);
         }

@@ -16,6 +16,8 @@ namespace TeamSuneat.Data
             OnLoadJsonData(_potionSheetData.Values);
             OnLoadJsonData(_stringSheetData.Values);
             OnLoadJsonData(_weaponLevelSheetData);
+            OnLoadJsonData(_characterLevelExpSheetData.Values);
+            OnLoadJsonData(_characterRankExpSheetData.Values);
         }
 
         private static void OnLoadJsonData(IEnumerable<IData<int>> datas)

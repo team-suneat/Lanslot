@@ -17,9 +17,9 @@ namespace TeamSuneat
         /// </summary>
         public static async Task<bool> FetchConvertAndApplyAllAsync()
         {
-            if (!GameDefine.EDITOR_OR_DEVELOPMENT_BUILD)
+            if (!GameDefine.IS_DEVELOPMENT_BUILD)
             {
-                // 에디터 또는 개발용 빌드가 아니라면 스프레드 시트의 내용을 적용하지 않습니다.
+                // 개발용 빌드가 아니라면 이미 변환된 json 파일을 읽어오도록 합니다.
                 return false;
             }
 
@@ -94,6 +94,12 @@ namespace TeamSuneat
 
                 case GoogleSheetDatasetId.String:
                     return ProcessDatasetInternal<StringData>(datasetId, gid, rows, datasetName, JsonDataManager.SetStringData);
+
+                case GoogleSheetDatasetId.CharacterLevelExp:
+                    return ProcessDatasetInternal<CharacterLevelExpData>(datasetId, gid, rows, datasetName, JsonDataManager.SetCharacterLevelExpData);
+
+                case GoogleSheetDatasetId.CharacterRankExp:
+                    return ProcessDatasetInternal<CharacterRankExpData>(datasetId, gid, rows, datasetName, JsonDataManager.SetCharacterRankExpData);
 
                 default:
                     Debug.LogWarning($"[GoogleSheetRuntimeSync] 미지원 데이터셋: {datasetId}");

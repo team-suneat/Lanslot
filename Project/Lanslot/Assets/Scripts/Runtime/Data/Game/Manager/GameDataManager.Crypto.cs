@@ -22,7 +22,7 @@ namespace TeamSuneat.Data.Game
         /// <returns>AES 적용 여부</returns>
         private bool TryApplyAES()
         {
-            if (GameDefine.EDITOR_OR_DEVELOPMENT_BUILD)
+            if (GameDefine.IS_EDITOR_OR_DEVELOPMENT_BUILD)
             {
                 if (!GameDefine.USE_AES_EDITOR)
                 {

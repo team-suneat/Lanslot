@@ -58,17 +58,17 @@ namespace TeamSuneat.UserInterface
             // 레벨별 스탯 정보 조회
             _currentWeaponLevelDataList = JsonDataManager.GetWeaponLevelDataClone(weaponData.Name);
 
-            // 무기 정보 표시
-            DisplayWeaponInfo(weaponData);
+            // 무기 정보 바인딩
+            BindWeaponInfo(weaponData);
         }
 
-        private void DisplayWeaponInfo(WeaponData weaponData)
+        private void BindWeaponInfo(WeaponData weaponData)
         {
-            DisplayWeaponBasicInfo(weaponData);
-            DisplayWeaponStats(weaponData);
+            BindWeaponBasicInfo(weaponData);
+            BindWeaponStats(weaponData);
         }
 
-        private void DisplayWeaponBasicInfo(WeaponData weaponData)
+        private void BindWeaponBasicInfo(WeaponData weaponData)
         {
             // 무기 아이콘
             string spriteName = SpriteEx.GetSpriteName(weaponData.Name);
@@ -81,7 +81,7 @@ namespace TeamSuneat.UserInterface
             _weaponDescText?.SetText(weaponData.Name.GetDescString());
         }
 
-        private void DisplayWeaponStats(WeaponData weaponData)
+        private void BindWeaponStats(WeaponData weaponData)
         {
             // WeaponLevelData에서 조회하는 스탯
             SetStatTextFromWeaponLevelData(_damageText, StatNames.Damage);

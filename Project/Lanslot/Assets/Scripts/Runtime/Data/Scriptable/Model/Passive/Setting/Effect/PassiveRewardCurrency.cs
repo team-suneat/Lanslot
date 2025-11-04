@@ -80,7 +80,7 @@ namespace TeamSuneat.Data
                 else if (Amount < 0)
                 {
                     int useAmount = Mathf.Abs(Amount);
-                    int myAmount = profileInfo.Currency.Find(currencyName);
+                    int myAmount = profileInfo.Currency.GetAmount(currencyName);
                     if (useAmount > myAmount)
                     {
                         useAmount = myAmount;
@@ -92,14 +92,14 @@ namespace TeamSuneat.Data
 
                 if (Rate > 0)
                 {
-                    int useAmount = Mathf.RoundToInt(profileInfo.Currency.Find(currencyName) * Rate);
+                    int useAmount = Mathf.RoundToInt(profileInfo.Currency.GetAmount(currencyName) * Rate);
                     profileInfo.Currency.Add(currencyName, useAmount);
                     _ = ResourcesManager.SpawnCurrencyFloatyText(currencyName, useAmount, parent);
                 }
                 else if (Rate < 0)
                 {
-                    int useAmount = Mathf.RoundToInt(profileInfo.Currency.Find(currencyName) * Mathf.Abs(Rate));
-                    int myAmount = profileInfo.Currency.Find(currencyName);
+                    int useAmount = Mathf.RoundToInt(profileInfo.Currency.GetAmount(currencyName) * Mathf.Abs(Rate));
+                    int myAmount = profileInfo.Currency.GetAmount(currencyName);
                     if (useAmount > myAmount)
                     {
                         useAmount = myAmount;

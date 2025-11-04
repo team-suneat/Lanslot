@@ -23,6 +23,8 @@ namespace TeamSuneat.Data
         private static readonly Dictionary<int, PotionData> _potionSheetData = new();
         private static readonly Dictionary<int, StageData> _stageSheetData = new();
         private static readonly Dictionary<string, StringData> _stringSheetData = new();
+        private static readonly Dictionary<int, CharacterLevelExpData> _characterLevelExpSheetData = new();
+        private static readonly Dictionary<int, CharacterRankExpData> _characterRankExpSheetData = new();
 
         #endregion Field
 
@@ -37,6 +39,8 @@ namespace TeamSuneat.Data
             _potionSheetData.Clear();
             _stageSheetData.Clear();
             _stringSheetData.Clear();
+            _characterLevelExpSheetData.Clear();
+            _characterRankExpSheetData.Clear();
         }
 
         public static bool CheckLoaded()
@@ -261,6 +265,56 @@ namespace TeamSuneat.Data
                     continue;
                 }
                 _stringSheetData.Add(key, item);
+            }
+        }
+
+        public static void SetCharacterLevelExpData(IEnumerable<CharacterLevelExpData> list)
+        {
+            _characterLevelExpSheetData.Clear();
+            if (list == null)
+            {
+                return;
+            }
+
+            foreach (CharacterLevelExpData item in list)
+            {
+                if (item == null)
+                {
+                    continue;
+                }
+
+                int key = item.GetKey();
+                if (_characterLevelExpSheetData.ContainsKey(key))
+                {
+                    LogWarning("CharacterLevelExpData 키 중복: {0}", key);
+                    continue;
+                }
+                _characterLevelExpSheetData.Add(key, item);
+            }
+        }
+
+        public static void SetCharacterRankExpData(IEnumerable<CharacterRankExpData> list)
+        {
+            _characterRankExpSheetData.Clear();
+            if (list == null)
+            {
+                return;
+            }
+
+            foreach (CharacterRankExpData item in list)
+            {
+                if (item == null)
+                {
+                    continue;
+                }
+
+                int key = item.GetKey();
+                if (_characterRankExpSheetData.ContainsKey(key))
+                {
+                    LogWarning("CharacterRankExpData 키 중복: {0}", key);
+                    continue;
+                }
+                _characterRankExpSheetData.Add(key, item);
             }
         }
     }

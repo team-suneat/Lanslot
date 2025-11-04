@@ -13,7 +13,7 @@ namespace TeamSuneat.Data.Game
 
         public static void SetSaveFilePath()
         {
-            if (GameDefine.EDITOR_OR_DEVELOPMENT_BUILD)
+            if (GameDefine.IS_EDITOR_OR_DEVELOPMENT_BUILD)
             {
                 if (GameDefine.USE_AES_EDITOR)
                 {

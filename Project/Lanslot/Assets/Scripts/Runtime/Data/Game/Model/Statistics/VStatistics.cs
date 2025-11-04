@@ -43,5 +43,10 @@ namespace TeamSuneat.Data
         public void ClearIngameData()
         {
         }
+
+        public static VStatistics CreateDefault()
+        {
+            return new VStatistics();
+        }
     }
 }

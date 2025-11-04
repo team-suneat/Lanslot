@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace TeamSuneat.Data
+namespace TeamSuneat.Data.Game
 {
     [Serializable]
     public class VCurrency
@@ -16,7 +16,7 @@ namespace TeamSuneat.Data
         {
         }
 
-        public int Find(string currencyId)
+        public int GetAmount(string currencyId)
         {
             if (string.IsNullOrEmpty(currencyId))
             {
@@ -54,7 +54,7 @@ namespace TeamSuneat.Data
 
         public bool CanUse(string currencyId, int amount)
         {
-            int currentAmount = Find(currencyId);
+            int currentAmount = GetAmount(currencyId);
             return currentAmount >= amount;
         }
 
@@ -95,9 +95,9 @@ namespace TeamSuneat.Data
             }
         }
 
-        public int Find(CurrencyNames currencyName)
+        public int GetAmount(CurrencyNames currencyName)
         {
-            return Find(currencyName.ToString());
+            return GetAmount(currencyName.ToString());
         }
 
         public void Add(CurrencyNames currencyName, int amount)
@@ -114,9 +114,9 @@ namespace TeamSuneat.Data
 
         public void Use(CurrencyNames currencyName, int amount)
         {
-            int before = Find(currencyName);
+            int before = GetAmount(currencyName);
             Use(currencyName.ToString(), amount);
-            int after = Find(currencyName);
+            int after = GetAmount(currencyName);
             if (after < before)
             {
                 GlobalEvent<CurrencyNames>.Send(GlobalEventType.CURRENCY_PAYED, currencyName);
@@ -132,6 +132,11 @@ namespace TeamSuneat.Data
         public void ClearIngameCurrencies()
         {
             UseAll(CurrencyNames.Gold);
+        }
+
+        public static VCurrency CreateDefault()
+        {
+            return new VCurrency();
         }
     }
 }

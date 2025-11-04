@@ -22,6 +22,7 @@ namespace TeamSuneat.UserInterface
 
         public int Index { get; set; }
         public WeaponNames WeaponName { get; private set; }
+        public bool IsDecided { get; private set; }
         public bool IsLocked { get; private set; }
 
         public override void AutoGetComponents()
@@ -32,27 +33,6 @@ namespace TeamSuneat.UserInterface
             _iconImage = this.FindComponent<Image>("Weapon Icon Image");
             _nameText = this.FindComponent<UILocalizedText>("Weapon Name Text");
             _clickButton = this.FindComponent<UIPointerEventButton>("Click Button");
-        }
-
-        /// <summary>
-        /// 셀 정보를 바인딩(초기화)합니다.
-        /// </summary>
-        public void Setup(WeaponData weaponData, int index, bool isSelected, bool isLocked = false)
-        {
-            Index = index;
-            WeaponName = weaponData.Name;
-            IsLocked = isLocked;
-
-            string spriteName = SpriteEx.GetSpriteName(weaponData.Name);
-            _ = (_iconImage?.TrySetSprite(spriteName, false));
-
-            _nameText?.SetText(weaponData.Name.GetLocalizedString());
-
-            if (_frameImage != null)
-            {
-                _frameImage.SetActive(isSelected);
-                _frameImage.SetColor(isLocked ? GameColors.ActivateYellow : GameColors.Ivory, 0.75f);
-            }
         }
 
         private void Awake()
@@ -66,14 +46,76 @@ namespace TeamSuneat.UserInterface
 
         private void OnClickButton()
         {
-            // 잠금된 셀은 클릭 이벤트를 발생시키지 않음
-            if (IsLocked)
-            {
-                return;
-            }
-
             _onCellClick?.Invoke(Index);
         }
+
+        //
+
+        /// <summary>
+        /// 셀 정보를 바인딩(초기화)합니다.
+        /// </summary>
+        public void Setup(WeaponData weaponData, int index, bool isSelected, bool isDecided, bool isLocked)
+        {
+            Index = index;
+            WeaponName = weaponData.Name;
+            IsDecided = isDecided;
+            IsLocked = isLocked;
+
+            SetIconImage(weaponData.Name, isDecided, isLocked);
+            SetNameText(weaponData.Name, isLocked);
+            RefreshSelected(isSelected);
+            RefreshFrameColor(isDecided);
+        }
+
+        private void SetIconImage(WeaponNames weaponName, bool isDecided, bool isLocked)
+        {
+            if (_iconImage != null)
+            {
+                // 잠금된 무기는 WeaponNames.None으로 스프라이트를 가져옴
+                WeaponNames spriteWeaponName = isLocked ? WeaponNames.None : weaponName;
+                string spriteName = SpriteEx.GetSpriteName(spriteWeaponName);
+                _ = _iconImage.TrySetSprite(spriteName, false);
+
+                // 잠금된 무기는 시각적으로 구분 (아이콘 색상 변경)
+                if (isLocked)
+                {
+                    _iconImage.SetColor(GameColors.DeepCharcoalBlack);
+                }
+                else
+                {
+                    _iconImage.SetColor(GameColors.White);
+                }
+            }
+        }
+
+        private void SetNameText(WeaponNames weaponName, bool isLocked)
+        {
+            if (_nameText != null)
+            {
+                string content = weaponName.GetLocalizedString();
+                _nameText.SetText(content);
+                _nameText.SetTextColor(isLocked ? GameColors.Disable : GameColors.CreamIvory);
+            }
+        }
+
+        private void RefreshSelected(bool isSelected)
+        {
+            if (_frameImage != null)
+            {
+                _frameImage.SetActive(isSelected);
+            }
+        }
+
+        private void RefreshFrameColor(bool isDecided)
+        {
+            if (_frameImage != null)
+            {
+                // 결정된 무기는 프레임 색상을 노란색으로 표시
+                _frameImage.SetColor(isDecided ? GameColors.ActivateYellow : GameColors.Ivory, 0.75f);
+            }
+        }
+
+        //
 
         public void RegisterClickEvent(UnityAction<int> action)
         {
@@ -85,13 +127,13 @@ namespace TeamSuneat.UserInterface
             _frameImage?.SetActive(true);
 
             VProfile profieInfo = GameApp.GetSelectedProfile();
-            profieInfo?.Weapon.SelectWeapon(WeaponName);
+            profieInfo?.Weapon.AddWeapon(WeaponName);
         }
 
         public void Deselect()
         {
-            // 잠금된 셀은 선택 해제할 수 없음
-            if (IsLocked)
+            // 미리 결정된 셀은 선택 해제할 수 없음
+            if (IsDecided)
             {
                 return;
             }
@@ -99,26 +141,7 @@ namespace TeamSuneat.UserInterface
             _frameImage?.SetActive(false);
 
             VProfile profieInfo = GameApp.GetSelectedProfile();
-            profieInfo?.Weapon.DeselectWeapon(WeaponName);
-        }
-
-        /// <summary>
-        /// 셀을 잠금 처리합니다. 잠금된 셀은 선택 해제할 수 없습니다.
-        /// </summary>
-        public void Lock()
-        {
-            IsLocked = true;
-            _frameImage?.SetColor(GameColors.ActivateYellow, 0.75f);
-            Select(); // 잠금 시 선택 상태로 만듦
-        }
-
-        /// <summary>
-        /// 셀의 잠금을 해제합니다.
-        /// </summary>
-        public void Unlock()
-        {
-            IsLocked = false;
-            _frameImage?.SetColor(GameColors.Ivory, 0.75f);
+            profieInfo?.Weapon.RemoveWeapon(WeaponName);
         }
     }
 }

@@ -5,38 +5,47 @@ namespace TeamSuneat.Data.Game
     {
         /// <summary> 할당한 아이템의 고유 번호</summary>
         public int IssuedItemSID;
-
         public VCharacter Character;
         public VCharacterLevel Level;
-        public VCharacterWeapon Weapon;
-        public VCurrency Currency;
         public VCharacterStat Stat;
-        public VCharacterStage Stage;
-        public VStatistics Statistics;
 
-        public CharacterNames CharacterName => Character.SelectedCharacterName;
+        public VCharacterWeapon Weapon;
+        public VCharacterPotion Potion;
+        public VCharacterItem Item;
+        public VCurrency Currency;
+
+        public VCharacterStage Stage;
+        public VCharacterSlot Slot;
+        public VStatistics Statistics;
 
         public void OnLoadGameData()
         {
             CreateEmptyData();
 
             Character.OnLoadGameData();
-            Weapon.OnLoadData();
+            Weapon.OnLoadGameData();
+            Potion.OnLoadGameData();
+            Item.OnLoadGameData();
             Currency.OnLoadGameData();
+
+            Stage.OnLoadGameData();
+            Slot.OnLoadGameData();
             Stat.OnLoadGameData();
             Statistics.OnLoadGameData();
-            Stage.OnLoadGameData();
         }
 
         public void CreateEmptyData()
         {
-            Character ??= new VCharacter();
-            Level ??= new VCharacterLevel();
-            Weapon ??= new VCharacterWeapon();
-            Currency ??= new();
-            Stat ??= new VCharacterStat();
-            Statistics ??= new();
-            Stage ??= new VCharacterStage();
+            Character ??= VCharacter.CreateDefault();
+            Level ??= VCharacterLevel.CreateDefault();
+            Weapon ??= VCharacterWeapon.CreateDefault();
+            Potion ??= VCharacterPotion.CreateDefault();
+            Item ??= VCharacterItem.CreateDefault();
+            Currency ??= VCurrency.CreateDefault();
+            Stage ??= VCharacterStage.CreateDefault();
+            Slot ??= VCharacterSlot.CreateDefault();
+            Stat ??= VCharacterStat.CreateDefault();
+            Statistics ??= VStatistics.CreateDefault();
         }
 
         public void ClearIngameData()
@@ -44,34 +53,30 @@ namespace TeamSuneat.Data.Game
             // 사망시 레벨과 경험치를 초기화합니다.
             Level.ResetValues();
 
-            // 전투 자원을 초기화합니다.
-            Stat.ResetCurrentVitalValue();
+            // 인게임 무기 정보를 초기화합니다.
+            Weapon.ClearIngameData();
 
-            Log.Info(LogTags.GameData, $"[Character] {CharacterName.ToLogString()}, 플레이어 캐릭터의 인게임 데이터를 초기화합니다.");
+            // 인게임 물약 정보를 초기화합니다.
+            Potion.ClearIngameData();
+
+            // 인게임 아이템 정보를 초기화합니다.
+            Item.ClearIngameData();
 
             // 인게임 재화를 초기화합니다.
             Currency.ClearIngameCurrencies();
 
-            // 무기 정보를 초기화합니다.
-            Weapon.ClearIngameData();
+            // 인게임 능력치 정보를 초기화합니다.
+            Stat.ClearIngameData();
 
+            // 인게임 통계 정보를 초기화합니다.
             Statistics.ClearIngameData();
         }
 
         public static VProfile CreateDefault()
         {
             Log.Info(LogTags.GameData, $"새로운 게임 데이터를 생성합니다.");
-
             VProfile defaultProfile = new();
             defaultProfile.CreateEmptyData();
-
-            // 기본 캐릭터 추가
-            defaultProfile.Character.Register(CharacterNames.IronWarden);
-            defaultProfile.Character.Register(CharacterNames.ShadowAssassin);
-            defaultProfile.Character.Register(CharacterNames.BloodRaven);
-
-            // 기본 캐릭터 선택
-            defaultProfile.Character.Select(CharacterNames.IronWarden);
 
             return defaultProfile;
         }

@@ -4,7 +4,20 @@
     {
         #region 기본 설정
 
-        public static bool DEVELOPMENT_BUILD
+        public static bool IS_EDITOR
+        {
+            get
+            {
+#if UNITY_EDITOR 
+                return true;
+#endif
+
+                return false;
+            }
+        }
+
+
+        public static bool IS_DEVELOPMENT_BUILD
         {
             get
             {
@@ -16,7 +29,7 @@
             }
         }
 
-        public static bool EDITOR_OR_DEVELOPMENT_BUILD
+        public static bool IS_EDITOR_OR_DEVELOPMENT_BUILD
         {
             get
             {

@@ -31,7 +31,7 @@ namespace TeamSuneat.Data
                     return !SupportedBuildTypes.Contains(defineAsset.Data.EDITOR_BUILD_TYPE);
                 }
 #endif
-                if (GameDefine.DEVELOPMENT_BUILD)
+                if (GameDefine.IS_DEVELOPMENT_BUILD)
                 {
                     return !SupportedBuildTypes.Contains(BuildTypes.Development);
                 }

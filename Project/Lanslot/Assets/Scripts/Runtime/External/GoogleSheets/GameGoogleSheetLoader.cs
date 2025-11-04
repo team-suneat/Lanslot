@@ -87,7 +87,7 @@ namespace TeamSuneat
                 throw new ArgumentException("cacheFileName 비어있음", nameof(cacheFileName));
             }
 
-            bool allowCache = GameDefine.EDITOR_OR_DEVELOPMENT_BUILD;
+            bool allowCache = GameDefine.IS_EDITOR_OR_DEVELOPMENT_BUILD;
             string cachePath = allowCache ? Path.Combine(Application.persistentDataPath, cacheFileName) : null;
             string csvText = await DownloadTextAsync(csvUrl);
 

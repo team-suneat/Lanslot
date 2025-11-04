@@ -85,5 +85,14 @@ namespace TeamSuneat.Data.Game
             CharacterManager.Instance.Player.OnLevelDown();
             GlobalEvent<int>.Send(GlobalEventType.GAME_DATA_CHARACTER_LEVEL_CHANGED, Level);
         }
+
+        public static VCharacterLevel CreateDefault()
+        {
+            return new VCharacterLevel()
+            {
+                Level = 1,
+                Experience = 0,
+            };
+        }
     }
 }

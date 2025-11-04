@@ -7,11 +7,28 @@ namespace TeamSuneat.Data
 {
     public partial class JsonDataManager
     {
+        /// <summary>
+        /// JSON 파일이 {"items": [...]} 형태로 저장되어 있으므로 래퍼 클래스를 사용하여 역직렬화
+        /// </summary>
+        private sealed class ListWrapper<T>
+        {
+            public List<T> items;
+        }
+
         public static List<T> DeserializeObject<T>(string jsonData)
         {
             try
             {
-                return JsonConvert.DeserializeObject<List<T>>(jsonData);
+                // JSON이 {"items": [...]} 형태이므로 래퍼 클래스로 역직렬화
+                ListWrapper<T> wrapper = JsonConvert.DeserializeObject<ListWrapper<T>>(jsonData);
+
+                if (wrapper == null || wrapper.items == null)
+                {
+                    Debug.LogWarning(typeof(T).ToString() + ", Json 파일의 items 필드가 null입니다.");
+                    return new List<T>();
+                }
+
+                return wrapper.items;
             }
             catch (Exception e)
             {
@@ -94,6 +111,18 @@ namespace TeamSuneat.Data
                         ParseStringJsonData(sheet, jsonData);
                     }
                     break;
+
+                case _Sheet.CharacterLevelExp:
+                    {
+                        ParseCharacterLevelExpJsonData(sheet, jsonData);
+                    }
+                    break;
+
+                case _Sheet.CharacterRankExp:
+                    {
+                        ParseCharacterRankExpJsonData(sheet, jsonData);
+                    }
+                    break;
             }
         }
 
@@ -170,14 +199,7 @@ namespace TeamSuneat.Data
             {
                 dataList[i].Refresh();
 
-                if (!_weaponLevelSheetData.ContainsKey(dataList[i].GetKey()))
-                {
-                    _weaponLevelSheetData.Add(dataList[i].GetKey(), dataList[i]);
-                }
-                else
-                {
-                    LogErrorSameKeyAlreadyExists(dataList[i].Name.ToString(), sheet.ToString());
-                }
+                _weaponLevelSheetData.Add(dataList[i].GetKey(), dataList[i]);
             }
 
             Log.Progress(LogTags.JsonData, $"({sheet.ToSelectString()}) Json 데이터를 읽어옵니다. 불러온 데이터의 수: {dataList.Count.ToSelectString()})");
@@ -240,6 +262,48 @@ namespace TeamSuneat.Data
                 else
                 {
                     LogErrorSameKeyAlreadyExists(dataList[i].GetKey().ToString(), sheet.ToString());
+                }
+            }
+
+            Log.Progress(LogTags.JsonData, $"({sheet.ToSelectString()}) Json 데이터를 읽어옵니다. 불러온 데이터의 수: {dataList.Count.ToSelectString()})");
+        }
+
+        private static void ParseCharacterLevelExpJsonData(_Sheet sheet, string jsonData)
+        {
+            List<CharacterLevelExpData> dataList = DeserializeJsonData<CharacterLevelExpData>(jsonData);
+
+            for (int i = 0; i < dataList.Count; i++)
+            {
+                dataList[i].Refresh();
+
+                if (!_characterLevelExpSheetData.ContainsKey(dataList[i].GetKey()))
+                {
+                    _characterLevelExpSheetData.Add(dataList[i].GetKey(), dataList[i]);
+                }
+                else
+                {
+                    LogErrorSameKeyAlreadyExists(dataList[i].Level.ToString(), sheet.ToString());
+                }
+            }
+
+            Log.Progress(LogTags.JsonData, $"({sheet.ToSelectString()}) Json 데이터를 읽어옵니다. 불러온 데이터의 수: {dataList.Count.ToSelectString()})");
+        }
+
+        private static void ParseCharacterRankExpJsonData(_Sheet sheet, string jsonData)
+        {
+            List<CharacterRankExpData> dataList = DeserializeJsonData<CharacterRankExpData>(jsonData);
+
+            for (int i = 0; i < dataList.Count; i++)
+            {
+                dataList[i].Refresh();
+
+                if (!_characterRankExpSheetData.ContainsKey(dataList[i].GetKey()))
+                {
+                    _characterRankExpSheetData.Add(dataList[i].GetKey(), dataList[i]);
+                }
+                else
+                {
+                    LogErrorSameKeyAlreadyExists(dataList[i].Rank.ToString(), sheet.ToString());
                 }
             }
 
