@@ -14,19 +14,22 @@ namespace TeamSuneat.UserInterface
         [FoldoutGroup("#Components")][SerializeField] private HUDSlotMachineItem[] _items;
         [FoldoutGroup("#Components")][SerializeField] private UILocalizedText _statusText;
 
-        [FoldoutGroup("#Settings")][SerializeField] private SlotMachineData _slotMachineData;
+        [FoldoutGroup("#Settings")][SerializeField] private int _slotCount = 6;
+        [FoldoutGroup("#Settings")][SerializeField] private float _spinDuration = 2f;
+        [FoldoutGroup("#Settings")][SerializeField] private float _stopDelay = 0.5f;
+        [FoldoutGroup("#Settings")][SerializeField] private Sprite[] _availableSprites;
 
         [FoldoutGroup("#Event")][SerializeField] private UnityEvent OnAllSlotsStopped;
-        [FoldoutGroup("#Event")][SerializeField] private UnityEvent<SlotItemData[]> OnSlotResult;
+        [FoldoutGroup("#Event")][SerializeField] private UnityEvent<Sprite[]> OnSlotResult;
 
         private int _stoppedSlotCount = 0;
         private int _currentStopIndex = 0;
-        private SlotItemData[] _currentResults;
+        private Sprite[] _currentResults;
 
         public SlotMachineState CurrentState { get; private set; } = SlotMachineState.None;
         public bool CanSpin => CurrentState == SlotMachineState.Idle;
 
-        public System.Action<SlotItemData[]> OnSlotMachineCompleted;
+        public System.Action<Sprite[]> OnSlotMachineCompleted;
 
         private void Awake()
         {
@@ -99,12 +102,12 @@ namespace TeamSuneat.UserInterface
             SetState(SlotMachineState.Spinning);
             _stoppedSlotCount = 0;
             _currentStopIndex = 0;
-            _currentResults = new SlotItemData[_items.Length];
+            _currentResults = new Sprite[_items.Length];
 
             // 모든 슬롯 시작
             for (int i = 0; i < _items.Length; i++)
             {
-                _items[i].StartSpin(_slotMachineData.AvailableItems);
+                _items[i].StartSpin(_availableSprites);
             }
 
             UpdateUI();
@@ -125,9 +128,9 @@ namespace TeamSuneat.UserInterface
             {
                 if (_items[i].CurrentState == SlotState.Spinning)
                 {
-                    SlotItemData targetItem = GetRandomItem();
-                    _items[i].StopSpin(targetItem);
-                    _currentResults[i] = targetItem;
+                    Sprite targetSprite = GetRandomSprite();
+                    _items[i].StopSpin(targetSprite);
+                    _currentResults[i] = targetSprite;
                     _currentStopIndex++;
                     break;
                 }
@@ -176,36 +179,17 @@ namespace TeamSuneat.UserInterface
         }
 
         /// <summary>
-        /// 랜덤 아이템 선택
+        /// 랜덤 스프라이트 선택
         /// </summary>
-        private SlotItemData GetRandomItem()
+        private Sprite GetRandomSprite()
         {
-            if (_slotMachineData?.AvailableItems == null || _slotMachineData.AvailableItems.Length == 0)
+            if (_availableSprites == null || _availableSprites.Length == 0)
             {
-                Debug.LogWarning("사용 가능한 아이템이 없습니다.");
+                Debug.LogWarning("사용 가능한 스프라이트가 없습니다.");
                 return null;
             }
 
-            // 가중치 기반 랜덤 아이템 선택
-            float totalWeight = 0f;
-            foreach (SlotItemData item in _slotMachineData.AvailableItems)
-            {
-                totalWeight += item.Weight;
-            }
-
-            float randomValue = UnityEngine.Random.Range(0f, totalWeight);
-            float currentWeight = 0f;
-
-            foreach (SlotItemData item in _slotMachineData.AvailableItems)
-            {
-                currentWeight += item.Weight;
-                if (randomValue <= currentWeight)
-                {
-                    return item;
-                }
-            }
-
-            return _slotMachineData.AvailableItems[0]; // 기본값
+            return _availableSprites[Random.Range(0, _availableSprites.Length)];
         }
 
         /// <summary>
@@ -288,11 +272,11 @@ namespace TeamSuneat.UserInterface
         }
 
         /// <summary>
-        /// 슬롯 머신 데이터 설정
+        /// 사용 가능한 스프라이트 설정
         /// </summary>
-        public void SetSlotMachineData(SlotMachineData data)
+        public void SetAvailableSprites(Sprite[] sprites)
         {
-            _slotMachineData = data;
+            _availableSprites = sprites;
         }
     }
 }

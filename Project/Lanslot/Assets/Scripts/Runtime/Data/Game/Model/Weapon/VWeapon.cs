@@ -7,7 +7,7 @@ namespace TeamSuneat.Data.Game
     public class VWeapon
     {
         [NonSerialized]
-        public WeaponNames Name;
+        public ItemNames Name;
         public string NameString;
         public int Level;
 
@@ -25,7 +25,7 @@ namespace TeamSuneat.Data.Game
             Level = 0;
         }
 
-        public VWeapon(WeaponNames weaponName)
+        public VWeapon(ItemNames weaponName)
         {
             Name = weaponName;
             NameString = weaponName.ToString();

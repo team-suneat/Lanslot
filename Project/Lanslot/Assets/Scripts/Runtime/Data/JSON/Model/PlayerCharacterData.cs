@@ -7,7 +7,7 @@ namespace TeamSuneat.Data
     {
         public CharacterNames Name;
         public string DisplayName;
-        public WeaponNames Weapon;
+        public ItemNames Weapon;
         public PassiveNames Passive;
         public StatNames[] BaseStats;
         public float[] BaseStatValues;

@@ -25,12 +25,12 @@ namespace TeamSuneat.Data.Game
 
         //
 
-        public bool CheckUnlocked(WeaponNames weaponName)
+        public bool CheckUnlocked(ItemNames weaponName)
         {
             return UnlockedWeapons.Contains(weaponName.ToString());
         }
 
-        public void Unlock(WeaponNames weaponName)
+        public void Unlock(ItemNames weaponName)
         {
             string key = weaponName.ToString();
             if (!UnlockedWeapons.Contains(key))
@@ -42,12 +42,12 @@ namespace TeamSuneat.Data.Game
 
         //
 
-        public bool HasWeapon(WeaponNames weaponName)
+        public bool HasWeapon(ItemNames weaponName)
         {
             return Weapons.ContainsKey(weaponName.ToString());
         }
 
-        public void AddWeapon(WeaponNames weaponName)
+        public void AddWeapon(ItemNames weaponName)
         {
             string key = weaponName.ToString();
             if (!Weapons.ContainsKey(key))
@@ -59,7 +59,7 @@ namespace TeamSuneat.Data.Game
             }
         }
 
-        public void AddWeapon(WeaponNames weaponName, GradeNames gradeName, StatNames statName)
+        public void AddWeapon(ItemNames weaponName, GradeNames gradeName, StatNames statName)
         {
             AddWeapon(weaponName);
 
@@ -74,7 +74,7 @@ namespace TeamSuneat.Data.Game
             }
         }
 
-        public void RemoveWeapon(WeaponNames weaponName)
+        public void RemoveWeapon(ItemNames weaponName)
         {
             string key = weaponName.ToString();
             if (Weapons.ContainsKey(key))
@@ -90,14 +90,14 @@ namespace TeamSuneat.Data.Game
         {
             VCharacterWeapon defaultWeapons = new();
 
-            defaultWeapons.Unlock(WeaponNames.WarriorSword);
-            defaultWeapons.Unlock(WeaponNames.ExecutionerDagger);
-            defaultWeapons.Unlock(WeaponNames.CrimsonAxe);
-            defaultWeapons.Unlock(WeaponNames.PaladinShield);
-            defaultWeapons.Unlock(WeaponNames.CoinPurse);
-            defaultWeapons.Unlock(WeaponNames.GemPurse);
-            defaultWeapons.Unlock(WeaponNames.Stone);
-            defaultWeapons.Unlock(WeaponNames.Shovel);
+            defaultWeapons.Unlock(ItemNames.WarriorSword);
+            defaultWeapons.Unlock(ItemNames.ExecutionerDagger);
+            defaultWeapons.Unlock(ItemNames.CrimsonAxe);
+            defaultWeapons.Unlock(ItemNames.PaladinShield);
+            defaultWeapons.Unlock(ItemNames.CoinPurse);
+            defaultWeapons.Unlock(ItemNames.GemPurse);
+            defaultWeapons.Unlock(ItemNames.Stone);
+            defaultWeapons.Unlock(ItemNames.Shovel);
 
             return defaultWeapons;
         }

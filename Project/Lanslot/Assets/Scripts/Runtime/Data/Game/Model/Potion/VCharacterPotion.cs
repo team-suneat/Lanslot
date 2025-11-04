@@ -1,36 +1,76 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace TeamSuneat.Data.Game
 {
     [System.Serializable]
     public class VCharacterPotion
     {
-        [NonSerialized]
-        public List<PotionNames> Potions = new();
-        public List<string> PotionStrings = new();
+        public Dictionary<string, VPotion> Potions = new();
+        public List<string> UnlockedPotions = new();
 
         public void OnLoadGameData()
         {
-            EnumEx.ConvertTo(ref Potions, PotionStrings);
+            if (Potions.IsValid())
+            {
+                foreach (KeyValuePair<string, VPotion> potion in Potions)
+                {
+                    potion.Value.OnLoadGameData();
+                }
+            }
         }
 
         public void ClearIngameData()
         {
             Potions.Clear();
-            PotionStrings.Clear();
         }
 
-        public void AddPotion(PotionNames potionName)
+        //
+
+        public bool CheckUnlocked(ItemNames potionName)
         {
-            if (!Potions.Contains(potionName))
+            return UnlockedPotions.Contains(potionName.ToString());
+        }
+
+        public void Unlock(ItemNames potionName)
+        {
+            string key = potionName.ToString();
+            if (!UnlockedPotions.Contains(key))
             {
-                Potions.Add(potionName);
-                string key = potionName.ToString();
-                if (!PotionStrings.Contains(key))
-                {
-                    PotionStrings.Add(key);
-                }
+                UnlockedPotions.Add(key);
+            }
+        }
+
+        //
+
+        public bool HasPotion(ItemNames potionName)
+        {
+            return Potions.ContainsKey(potionName.ToString());
+        }
+
+        public void AddPotion(ItemNames potionName)
+        {
+            string key = potionName.ToString();
+            if (!Potions.ContainsKey(key))
+            {
+                Potions.Add(key, new VPotion(potionName));
+            }
+        }
+
+        public void RemovePotion(ItemNames potionName)
+        {
+            string key = potionName.ToString();
+            if (Potions.ContainsKey(key))
+            {
+                Potions.Remove(key);
+            }
+        }
+
+        public void LevelUpPotion(ItemNames potionName)
+        {
+            string key = potionName.ToString();
+            if (Potions.ContainsKey(key))
+            {
+                Potions[key].LevelUp();
             }
         }
 

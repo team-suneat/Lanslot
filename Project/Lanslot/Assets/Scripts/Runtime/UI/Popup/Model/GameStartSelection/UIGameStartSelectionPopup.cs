@@ -188,7 +188,7 @@ namespace TeamSuneat.UserInterface
             ShowWeaponSelection();
         }
 
-        private void OnWeaponsSelected(List<WeaponNames> selectedWeapons)
+        private void OnWeaponsSelected(List<ItemNames> selectedWeapons)
         {
             // 이벤트만 수신, 실제 저장은 OnDecideWeaponSelection에서 수행
         }

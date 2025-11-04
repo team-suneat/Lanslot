@@ -9,7 +9,7 @@ namespace TeamSuneat
         {
             model = null;
 
-            if (!row.TryGetValue("Name", out string nameStr) || !GoogleSheetValueParsers.TryParseEnum(nameStr, out WeaponNames name))
+            if (!row.TryGetValue("Name", out string nameStr) || !GoogleSheetValueParsers.TryParseEnum(nameStr, out ItemNames name))
             {
                 Log.Warning($"필수 컬럼 Name 누락 또는 enum 파싱 실패: {nameStr}");
                 return false;
@@ -50,7 +50,7 @@ namespace TeamSuneat
             return true;
         }
 
-        private static bool TryParseFloat(Dictionary<string, string> row, string key, out float value, WeaponNames name, StatNames stat)
+        private static bool TryParseFloat(Dictionary<string, string> row, string key, out float value, ItemNames name, StatNames stat)
         {
             value = 0f;
             if (!row.TryGetValue(key, out string s) || string.IsNullOrEmpty(s))

@@ -28,7 +28,7 @@ namespace TeamSuneat.Data
         {
             List<WeaponData> result = new();
 
-            WeaponNames[] allWeaponNames = EnumEx.GetValues<WeaponNames>();
+            ItemNames[] allWeaponNames = EnumEx.GetValues<ItemNames>();
             int weaponTID;
 
             for (int i = 1; i < allWeaponNames.Length; i++)
@@ -47,7 +47,7 @@ namespace TeamSuneat.Data
             return result;
         }
 
-        public static List<WeaponLevelData> GetWeaponLevelDataClone(WeaponNames weaponName)
+        public static List<WeaponLevelData> GetWeaponLevelDataClone(ItemNames weaponName)
         {
             int weaponTID = weaponName.ToInt();
             if (_weaponLevelSheetData.ContainsKey(weaponTID))

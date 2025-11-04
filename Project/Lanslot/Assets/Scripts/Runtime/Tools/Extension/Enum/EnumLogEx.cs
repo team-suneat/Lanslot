@@ -227,26 +227,6 @@ namespace TeamSuneat
             }
         }
 
-        public static string ToLogString(this PotionNames content)
-        {
-            if (ScriptableDataManager.Instance.CheckLogWithLoadString())
-            {
-                string dataString = content.GetLocalizedString(LanguageNames.Korean);
-                if (string.IsNullOrEmpty(dataString))
-                {
-                    return GetColorString(GameColors.Item, content.ToString());
-                }
-                else
-                {
-                    return GetColorString(GameColors.Item, dataString);
-                }
-            }
-            else
-            {
-                return GetColorString(GameColors.Item, content.ToString());
-            }
-        }
-
         public static string ToLogString(this GradeNames key)
         {
             string content = key.GetLocalizedString(LanguageNames.Korean);
@@ -335,24 +315,6 @@ namespace TeamSuneat
         public static string ToLogString(this MapTypes content)
         {
             return GetColorString(GameColors.LogStage, content.ToString());
-        }
-
-        public static string ToLogString(this StageProgress content)
-        {
-            return GetColorString(GameColors.LogStage, content.ToString());
-        }
-
-        public static string ToLogString(this RewardTypes key)
-        {
-            string content = key.GetLocalizedString(LanguageNames.Korean);
-            if (string.IsNullOrEmpty(content))
-            {
-                return GetColorString(GameColors.LogStage, key.ToString());
-            }
-            else
-            {
-                return GetColorString(GameColors.LogStage, content);
-            }
         }
 
         public static string ToLogString(this DifficultyEnums key)

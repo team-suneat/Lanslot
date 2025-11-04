@@ -3,7 +3,7 @@ namespace TeamSuneat.Data
     [System.Serializable]
     public class WeaponLevelData : IData<int>
     {
-        public WeaponNames Name;
+        public ItemNames Name;
         public string DisplayName;
 
         public StatNames StatName;

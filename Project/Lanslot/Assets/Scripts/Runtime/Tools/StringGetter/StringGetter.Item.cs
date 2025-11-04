@@ -6,7 +6,7 @@ namespace TeamSuneat
 {
     public static partial class StringGetter
     {
-        public static string GetNameString(this ItemNames key)
+        public static string GetLocalizedString(this ItemNames key)
         {
             return GetNameString(key, GameSetting.Instance.Language.Name);
         }
@@ -62,7 +62,7 @@ namespace TeamSuneat
         public static string GetDescString(this ItemNames key, string[] values, LanguageNames languageName)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append("Desc_");
+            stringBuilder.Append("Item_Desc_");
             stringBuilder.Append(key.ToString());
 
             StringData stringData = JsonDataManager.FindStringData(stringBuilder.ToString());
@@ -138,7 +138,7 @@ namespace TeamSuneat
         public static string GetObtainNoticeString(this ItemNames key)
         {
             string format = JsonDataManager.FindStringClone("Notice_Obtain_Item1");
-            string value = string.Format(format, key.GetNameString());
+            string value = string.Format(format, key.GetLocalizedString());
 
             return value;
         }
@@ -146,7 +146,7 @@ namespace TeamSuneat
         public static string GetObtainNoticeString(this ItemNames key, GradeNames gradeName)
         {
             string format = JsonDataManager.FindStringClone("Notice_Obtain_Item2");
-            string value = string.Format(format, gradeName.ToString(), key.GetNameString());
+            string value = string.Format(format, gradeName.ToString(), key.GetLocalizedString());
 
             return value;
         }

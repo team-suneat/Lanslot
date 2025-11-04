@@ -22,7 +22,7 @@ namespace TeamSuneat.UserInterface
         private const int MAX_SELECTED_WEAPONS = 3;
         private List<WeaponData> _weaponList;
         private readonly List<int> _selectedWeaponIndices = new(); // 선택된 무기 인덱스 리스트 (최대 2개)
-        private readonly UnityEvent<List<WeaponNames>> _onWeaponsSelectedEvent = new(); // 무기 선택 완료 이벤트
+        private readonly UnityEvent<List<ItemNames>> _onWeaponsSelectedEvent = new(); // 무기 선택 완료 이벤트
         private int _decidedWeaponIndex = -1; // 결정된 무기 인덱스 (선택한 캐릭터의 기본 무기)
 
         private void Awake()
@@ -44,7 +44,7 @@ namespace TeamSuneat.UserInterface
             SetupWeaponInfoPanel();
         }
 
-        public void RegisterWeaponsSelectedEvent(UnityAction<List<WeaponNames>> action)
+        public void RegisterWeaponsSelectedEvent(UnityAction<List<ItemNames>> action)
         {
             _onWeaponsSelectedEvent.AddListener(action);
         }
@@ -94,13 +94,13 @@ namespace TeamSuneat.UserInterface
 
             // 선택된 캐릭터 데이터 조회
             PlayerCharacterData characterData = JsonDataManager.FindPlayerCharacterDataClone(selectedCharacter);
-            if (characterData == null || characterData.Weapon == WeaponNames.None)
+            if (characterData == null || characterData.Weapon == ItemNames.None)
             {
                 return;
             }
 
             // 기본 무기 인덱스 찾기
-            WeaponNames defaultWeapon = characterData.Weapon;
+            ItemNames defaultWeapon = characterData.Weapon;
             for (int i = 0; i < _weaponList.Count; i++)
             {
                 if (_weaponList[i].Name == defaultWeapon)
@@ -187,9 +187,9 @@ namespace TeamSuneat.UserInterface
             }
         }
 
-        public List<WeaponNames> GetSelectedWeapons()
+        public List<ItemNames> GetSelectedWeapons()
         {
-            List<WeaponNames> result = new();
+            List<ItemNames> result = new();
             for (int i = 0; i < _selectedWeaponIndices.Count; i++)
             {
                 int index = _selectedWeaponIndices[i];
@@ -208,7 +208,7 @@ namespace TeamSuneat.UserInterface
 
         public void ConfirmWeaponSelection()
         {
-            List<WeaponNames> selectedWeapons = GetSelectedWeapons();
+            List<ItemNames> selectedWeapons = GetSelectedWeapons();
             if (selectedWeapons.Count == MAX_SELECTED_WEAPONS)
             {
                 _onWeaponsSelectedEvent?.Invoke(selectedWeapons);

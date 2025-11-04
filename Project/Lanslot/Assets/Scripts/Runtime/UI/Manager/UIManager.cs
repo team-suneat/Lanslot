@@ -15,9 +15,7 @@ namespace TeamSuneat.UserInterface
 
         public UIDetailsManager DetailsManager;
 
-        [Title("HUD")]
-        public UICanvasGroupFader HUDCanvasGroupFader;
-        public HUDStageTimer Timer;
+        public HUDManager HUDManager;
 
         public Vector3 WorldPositionMin { get; set; }
         public Vector3 WorldPositionMax { get; set; }
@@ -32,11 +30,9 @@ namespace TeamSuneat.UserInterface
         {
             base.AutoGetComponents();
 
-            HUDCanvasGroupFader = GetComponentInChildren<UICanvasGroupFader>();
-            Timer = GetComponentInChildren<HUDStageTimer>();
-
             CanvasManager = GetComponent<UICanvasManager>();
             PopupManager = GetComponentInChildren<UIPopupManager>();
+            HUDManager = GetComponentInChildren<HUDManager>();
             GaugeManager = GetComponentInChildren<UIGaugeManager>();
             DetailsManager = GetComponentInChildren<UIDetailsManager>();
         }
@@ -60,6 +56,7 @@ namespace TeamSuneat.UserInterface
             }
 
             PopupManager?.LogicUpdate();
+            HUDManager?.LogicUpdate();
         }
 
         internal void SpawnSoliloquyNotice(SoliloquyTypes content)

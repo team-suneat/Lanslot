@@ -17,7 +17,7 @@ namespace TeamSuneat
 
             row.TryGetValue("DisplayName", out string displayName);
 
-            if (!row.TryGetValue("Weapon", out string weaponStr) || !GoogleSheetValueParsers.TryParseEnum(weaponStr, out WeaponNames weapon))
+            if (!row.TryGetValue("Weapon", out string weaponStr) || !GoogleSheetValueParsers.TryParseEnum(weaponStr, out ItemNames weapon))
             {
                 Log.Warning($"Name {name}: Weapon enum 파싱 실패: {weaponStr}");
                 return false;

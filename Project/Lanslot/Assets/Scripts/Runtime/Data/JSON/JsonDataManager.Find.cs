@@ -49,7 +49,7 @@ namespace TeamSuneat.Data
             return new StageData();
         }
 
-        public static PotionData FindPotionDataClone(PotionNames key)
+        public static PotionData FindPotionDataClone(ItemNames key)
         {
             return FindPotionDataClone(BitConvert.Enum32ToInt(key));
         }
@@ -117,7 +117,7 @@ namespace TeamSuneat.Data
             return new StringData();
         }
 
-        public static WeaponData FindWeaponDataClone(WeaponNames key)
+        public static WeaponData FindWeaponDataClone(ItemNames key)
         {
             return FindWeaponDataClone(BitConvert.Enum32ToInt(key));
         }

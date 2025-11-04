@@ -5,7 +5,7 @@ namespace TeamSuneat.Data
     [System.Serializable]
     public class WeaponData : IData<int>
     {
-        public WeaponNames Name;
+        public ItemNames Name;
         public string DisplayName;
 
         public int AttackRange;

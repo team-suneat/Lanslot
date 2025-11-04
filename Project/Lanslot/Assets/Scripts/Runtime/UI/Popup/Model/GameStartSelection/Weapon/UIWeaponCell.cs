@@ -21,7 +21,7 @@ namespace TeamSuneat.UserInterface
         private readonly UnityEvent<int> _onCellClick = new();
 
         public int Index { get; set; }
-        public WeaponNames WeaponName { get; private set; }
+        public ItemNames WeaponName { get; private set; }
         public bool IsDecided { get; private set; }
         public bool IsLocked { get; private set; }
 
@@ -67,12 +67,12 @@ namespace TeamSuneat.UserInterface
             RefreshFrameColor(isDecided);
         }
 
-        private void SetIconImage(WeaponNames weaponName, bool isDecided, bool isLocked)
+        private void SetIconImage(ItemNames weaponName, bool isDecided, bool isLocked)
         {
             if (_iconImage != null)
             {
                 // 잠금된 무기는 WeaponNames.None으로 스프라이트를 가져옴
-                WeaponNames spriteWeaponName = isLocked ? WeaponNames.None : weaponName;
+                ItemNames spriteWeaponName = isLocked ? ItemNames.None : weaponName;
                 string spriteName = SpriteEx.GetSpriteName(spriteWeaponName);
                 _ = _iconImage.TrySetSprite(spriteName, false);
 
@@ -88,7 +88,7 @@ namespace TeamSuneat.UserInterface
             }
         }
 
-        private void SetNameText(WeaponNames weaponName, bool isLocked)
+        private void SetNameText(ItemNames weaponName, bool isLocked)
         {
             if (_nameText != null)
             {

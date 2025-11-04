@@ -6,7 +6,7 @@ namespace TeamSuneat.Data
     [System.Serializable]
     public class PotionData : IData<int>
     {
-        public PotionNames Name;
+        public ItemNames Name;
         public string DisplayName;
         public StatNames StatName;
         public float StatValue;

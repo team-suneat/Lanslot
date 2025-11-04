@@ -49,7 +49,7 @@ namespace TeamSuneat.UserInterface
         {
             _currentWeaponData = weaponData;
 
-            if (weaponData == null || weaponData.Name == WeaponNames.None)
+            if (weaponData == null || weaponData.Name == ItemNames.None)
             {
                 Clear();
                 return;
