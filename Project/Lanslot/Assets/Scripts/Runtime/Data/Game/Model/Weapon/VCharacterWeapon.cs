@@ -8,6 +8,20 @@ namespace TeamSuneat.Data.Game
         public Dictionary<string, VWeapon> Weapons = new();
         public List<string> UnlockedWeapons = new();
 
+        public List<ItemNames> GetWeaponNames()
+        {
+            List<ItemNames> itemNames = new();
+            ItemNames itemName = ItemNames.None;
+            foreach (KeyValuePair<string, VWeapon> kvp in Weapons)
+            {
+                if (EnumEx.ConvertTo(ref itemName, kvp.Key))
+                {
+                    itemNames.Add(itemName);
+                }
+            }
+            return itemNames;
+        }
+
         public void OnLoadGameData()
         {
             foreach (KeyValuePair<string, VWeapon> kvp in Weapons)
@@ -79,7 +93,7 @@ namespace TeamSuneat.Data.Game
             string key = weaponName.ToString();
             if (Weapons.ContainsKey(key))
             {
-                Weapons.Remove(key);
+                _ = Weapons.Remove(key);
                 Log.Info(LogTags.GameData_Weapon, "인게임 무기를 등록해제합니다: {0}", weaponName.ToLogString());
             }
         }

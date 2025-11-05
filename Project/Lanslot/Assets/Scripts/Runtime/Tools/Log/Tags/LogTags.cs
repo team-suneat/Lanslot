@@ -48,9 +48,7 @@
         /// <summary> 버프 </summary>
         Buff,
 
-        /// <summary> 버프 트리거 </summary>
-        BuffTrigger,
-
+      
         /// <summary> 피해량 계산 </summary>
         Damage,
 
@@ -107,17 +105,9 @@
         /// <summary> 게임 데이터 : 기술 </summary>
         GameData_Skill,
 
-        /// <summary> 게임 데이터 : 패시브 </summary>
-        GameData_Passive,
-
         /// <summary> 게임 데이터 : 스테이지 </summary>
         GameData_Stage,
 
-        /// <summary> 게임 데이터 : 스테이지 </summary>
-        GameData_Relic,
-
-        /// <summary> 게임 데이터 : 아이템 후보 </summary>
-        GameData_ItemCandidate,
 
         /// <summary> 게임 데이터 : 통계 </summary>
         GameData_Statistics,
@@ -152,22 +142,6 @@
 
         #endregion Develop
 
-        #region Interaction
-
-        /// <summary> 영역 이벤트 </summary>
-        AreaEvent,
-
-        /// <summary> 드랍 오브젝트 </summary>
-        DropObject,
-
-        /// <summary> 상호작용 </summary>
-        Interaciton,
-
-        /// <summary> NPC </summary>
-        NPC,
-
-        #endregion Interaction
-
         #region Item
 
         /// <summary> 재화 </summary>
@@ -182,13 +156,14 @@
         /// <summary> 물약 </summary>
         Potion,
 
+        /// <summary> 드랍 오브젝트 </summary>
+        DropObject,
+
         #endregion Item
 
         #region MapObject
 
-        /// <summary> 포탈 </summary>
-        Portal,
-
+   
         /// <summary> 포지션 그룹 </summary>
         PositionGroup,
 
@@ -214,9 +189,6 @@
 
         /// <summary> 음향 </summary>
         Audio,
-        Audio_BGM,
-        Audio_AMB,
-        Audio_SFX,
 
         Video,
 
@@ -239,7 +211,6 @@
 
         #region Stage
 
-        Map,
 
         Stage, // 스테이지
         Stage_Monster, // 스테이지 몬스터
@@ -248,7 +219,7 @@
         Tile, // 타일
         Collision, // 충돌체
 
-        Rift, // 균열
+      
 
         #endregion Stage
 
@@ -304,11 +275,6 @@
         /// <summary> UI 게이지 </summary>
         UI_Gauge,
 
-        /// <summary> UI 미니맵 </summary>
-        UI_Minimap,
-
-        /// <summary> UI 인디케이터 </summary>
-        UI_Indicator,
 
         /// <summary> UI 인벤토리 </summary>
         UI_Inventory,
@@ -316,8 +282,6 @@
         /// <summary> UI 대장장이 </summary>
         UI_Blacksmith,
 
-        /// <summary> UI 스팀 리더보드 </summary>
-        UI_Leaderboard,
 
         /// <summary> UI 팝업 </summary>
         UI_Popup,
@@ -340,8 +304,9 @@
         /// <summary> UI 단축키 </summary>
         UI_Shortcut,
 
-        /// <summary> 룬 조합서 </summary>
-        BookOfRunes,
+        /// <summary> 슬롯머신 </summary>
+        UI_SlotMachine,
+
         Battle,
 
         #endregion UI

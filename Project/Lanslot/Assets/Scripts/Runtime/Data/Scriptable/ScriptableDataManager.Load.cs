@@ -10,7 +10,6 @@ namespace TeamSuneat.Data
         {
             if (_logSetting == default) { return false; }
             else if (_gameDefine == default) { return false; }
-            else if (_levelExp == default) { return false; }
             else if (!_buffs.IsValid()) { return false; }
             else if (!_buffStateEffects.IsValid()) { return false; }
             else if (!_passives.IsValid()) { return false; }
@@ -51,10 +50,6 @@ namespace TeamSuneat.Data
                     count += 1;
                 }
                 else if (LoadGameDefineSync(path))
-                {
-                    count += 1;
-                }
-                else if (LoadLevelExpSync(path))
                 {
                     count += 1;
                 }
@@ -120,11 +115,6 @@ namespace TeamSuneat.Data
 
                     case GameDefineAsset gameDefine:
                         _gameDefine = gameDefine;
-                        count++;
-                        break;
-
-                    case LevelExpAsset levelExp:
-                        _levelExp = levelExp;
                         count++;
                         break;
 

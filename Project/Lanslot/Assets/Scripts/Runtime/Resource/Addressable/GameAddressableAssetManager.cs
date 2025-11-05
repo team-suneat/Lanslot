@@ -10,7 +10,7 @@ namespace TeamSuneat
         private static readonly Dictionary<string, object> _resourcesCache = new();
         private static readonly Dictionary<string, AsyncOperationHandle> _asyncOperationHandles = new();
 
-        #region 리소스 로드
+        #region 리소스 불러오기
 
         public T LoadResource<T>(string key) where T : UnityEngine.Object
         {
@@ -45,26 +45,26 @@ namespace TeamSuneat
 
             try
             {
-                // 비동기 로드 시작
+                // 비동기 불러오기 시작
                 AsyncOperationHandle<T> asyncOperation = Addressables.LoadAssetAsync<T>(path);
                 _asyncOperationHandles[path] = asyncOperation;
 
                 T resource = await asyncOperation.Task;
                 if (resource != null)
                 {
-                    Log.Info(LogTags.Resource, "AssetReference 리소스를 비동기로 로드했습니다: {0}", path);
+                    Log.Info(LogTags.Resource, "비동기로 불러온 AssetReference 리소스를 캐시합니다: {0}", path);
                     _resourcesCache[path] = resource;
                     return resource;
                 }
                 else
                 {
-                    Log.Error("Addressable 리소스 로드 실패: {0}", path);
+                    Log.Error("Addressable 리소스 불러오기 실패: {0}", path);
                     return null;
                 }
             }
             catch (System.Exception ex)
             {
-                Log.Error("Addressable 리소스 로드 중 오류 발생: {0}, 오류: {1}", path, ex.Message);
+                Log.Error("Addressable 리소스 불러오기 중 오류 발생: {0}, 오류: {1}", path, ex.Message);
                 return null;
             }
         }
@@ -88,7 +88,7 @@ namespace TeamSuneat
 
             try
             {
-                // 비동기 로드 시작
+                // 비동기 불러오기 시작
                 AsyncOperationHandle<T> asyncOperation = assetReference.LoadAssetAsync<T>();
                 _asyncOperationHandles[key] = asyncOperation;
 
@@ -97,18 +97,18 @@ namespace TeamSuneat
                 if (resource != null)
                 {
                     _resourcesCache[key] = resource;
-                    Log.Info(LogTags.Resource, "AssetReference 리소스를 비동기로 로드했습니다: {0}", key);
+                    Log.Info(LogTags.Resource, "AssetReference 리소스를 비동기로 불러오기했습니다: {0}", key);
                     return resource;
                 }
                 else
                 {
-                    Log.Error(LogTags.Resource, "AssetReference 리소스 로드 실패: {0}", key);
+                    Log.Error(LogTags.Resource, "AssetReference 리소스 불러오기 실패: {0}", key);
                     return null;
                 }
             }
             catch (System.Exception ex)
             {
-                Log.Error(LogTags.Resource, "AssetReference 리소스 로드 중 오류 발생: {0}, 오류: {1}", key, ex.Message);
+                Log.Error(LogTags.Resource, "AssetReference 리소스 불러오기 중 오류 발생: {0}, 오류: {1}", key, ex.Message);
                 return null;
             }
         }
@@ -123,7 +123,7 @@ namespace TeamSuneat
                 IList<T> assets = await handle.Task;
                 if (assets != null && assets.Count > 0)
                 {
-                    Log.Info(LogTags.Resource, "라벨로 {0}개의 리소스를 로드했습니다: {1}", assets.Count, label);
+                    Log.Info(LogTags.Resource, "{0} 라벨로 {1} 타입의 리소스를 {2}개 불러왔습니다.", label, typeof(T), assets.Count);
                     for (int i = 0; i < assets.Count; i++)
                     {
                         T asset = assets[i];
@@ -131,25 +131,25 @@ namespace TeamSuneat
                         if (!string.IsNullOrEmpty(path))
                         {
                             _resourcesCache.Add(path, asset);
-                            Log.Progress(LogTags.Resource, "{0} 리소스를 로드했습니다. Path: {1}", asset.name, path);
+                            Log.Progress(LogTags.Resource, "불러온 {0} 리소스를 캐시합니다. Path: {1}", asset.name, path);
                         }
                     }
                     return assets;
                 }
                 else
                 {
-                    Log.Warning(LogTags.Resource, "라벨로 리소스를 찾을 수 없습니다: {0}", label);
+                    Log.Warning(LogTags.Resource, "{0} 라벨로 리소스를 찾을 수 없습니다.", label);
                     return new List<T>();
                 }
             }
             catch (System.Exception ex)
             {
-                Log.Error(LogTags.Resource, "라벨 리소스 로드 중 오류 발생: {0}, 오류: {1}", label, ex.Message);
+                Log.Error(LogTags.Resource, "{0} 라벨 리소스 불러오기 중 오류 발생: {1}", label, ex.Message);
                 return new List<T>();
             }
         }
 
-        #endregion 리소스 로드
+        #endregion 리소스 불러오기
 
         #region 리소스 해제
 

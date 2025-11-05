@@ -65,10 +65,8 @@ namespace TeamSuneat.UserInterface
         {
             if (_iconImage != null)
             {
-                // 잠금된 경우 CharacterNames.None으로 스프라이트를 가져옴
-                CharacterNames spriteCharacterName = isLocked ? CharacterNames.None : characterName;
-                string spriteName = SpriteEx.GetSpriteName(spriteCharacterName);
-                _ = _iconImage.TrySetSprite(spriteName, false);
+                Sprite sprite = characterName.LoadSprite();
+                _iconImage.SetSprite(sprite, false);
 
                 if (isLocked)
                 {
@@ -119,7 +117,7 @@ namespace TeamSuneat.UserInterface
             _frameImage?.SetActive(true);
 
             VProfile profieInfo = GameApp.GetSelectedProfile();
-            profieInfo.Character.Select(CharacterName);
+            // profieInfo.Character.Select(CharacterName);
         }
 
         public void Deselect()

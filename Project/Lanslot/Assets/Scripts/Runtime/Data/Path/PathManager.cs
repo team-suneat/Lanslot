@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.U2D;
 
 #if UNITY_EDITOR
 
@@ -175,9 +176,13 @@ namespace TeamSuneat
             {
                 return new string[] { ".ttf", ".otf" };
             }
+            else if (type == typeof(SpriteAtlas))
+            {
+                return new string[] { ".spriteatlasv2" };
+            }
             else
             {
-                // 기본적으로 일반적인 확장자들 시도
+                Log.Warning(LogTags.Path, "({0}) 타입에 따른 확장명을 찾을 수 없습니다. 일반적인 확장자들을 시도합니다.", type.ToString());
                 return new string[] { ".prefab", ".asset", ".mat", ".png", ".jpg", ".jpeg", ".tga", ".psd", ".fbx", ".obj", ".mesh" };
             }
         }
@@ -279,11 +284,13 @@ namespace TeamSuneat
         }
 
 #if UNITY_EDITOR
+
         [MenuItem("Tools/Path/파일 경로 저장")]
         public static void UpdatePathMetaDataForMenu()
         {
             UpdatePathMetaData();
         }
+
 #endif
 
         public static void UpdatePathMetaData()
@@ -480,7 +487,7 @@ namespace TeamSuneat
 
         public static string FindAtlasPath(string name)
         {
-            return FindPathWithExtension(name, ".spriteatlas");
+            return FindPathWithExtension(name, ".spriteatlasv2");
         }
 
         public static string FindImagePath(string name)

@@ -2151,8 +2151,7 @@ MonoBehaviour:
   PopupManager: {fileID: 1843076381}
   GaugeManager: {fileID: 1843076380}
   DetailsManager: {fileID: 1843076379}
-  HUDCanvasGroupFader: {fileID: 1843076377}
-  Timer: {fileID: 0}
+  HUDManager: {fileID: 0}
 --- !u!4 &1843076384
 Transform:
   m_ObjectHideFlags: 0

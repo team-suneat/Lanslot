@@ -15,12 +15,6 @@ MonoBehaviour:
   m_GroupName: Scriptable
   m_GUID: 9c8a3fb1d489a2043a3b1d63467b7d70
   m_SerializeEntries:
-  - m_GUID: 023cd9c4b0511534284f2eecd94164af
-    m_Address: Assets/Addressables/Scriptable/LevelExp.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Scriptable
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5ce62921ee649b740a79d267065c5be7
     m_Address: Assets/Addressables/Scriptable/Flicker_Dash.asset
     m_ReadOnly: 0
@@ -59,12 +53,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c1fa8cce5a610cb46a1289d35432806a
     m_Address: Assets/Addressables/Scriptable/Flicker_Damage.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Scriptable
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d5ba9619f3cbea249880391928f43482
-    m_Address: Assets/Addressables/Scriptable/Stage_Stage1.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Scriptable

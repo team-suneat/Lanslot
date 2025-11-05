@@ -318,9 +318,16 @@ namespace TeamSuneat
         /// <summary>
         /// 스프라이트를 로드합니다.
         /// </summary>
-        public static Sprite LoadSprite(string spritePath)
+        public static Sprite LoadSprite(string spriteName, string atlasName)
         {
-            return LoadResource<Sprite>(spritePath);
+            string atlasPath = PathManager.FindAtlasPath(atlasName);
+            if (!string.IsNullOrEmpty(atlasPath))
+            {
+                SpriteAtlas spriteAtlas = LoadResource<SpriteAtlas>(atlasPath);
+                return spriteAtlas?.GetSprite(spriteName);
+            }
+
+            return null;
         }
 
         /// <summary>

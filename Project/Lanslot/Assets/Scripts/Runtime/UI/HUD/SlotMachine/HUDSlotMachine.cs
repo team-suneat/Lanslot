@@ -1,4 +1,6 @@
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
+using TeamSuneat.Data.Game;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,15 +11,15 @@ namespace TeamSuneat.UserInterface
     /// </summary>
     public class HUDSlotMachine : XBehaviour
     {
-        [FoldoutGroup("#Components")][SerializeField] private UIPointerEventButton _spinButton;
-        [FoldoutGroup("#Components")][SerializeField] private UIPointerEventButton _stopButton;
+        [FoldoutGroup("#Components")][SerializeField] private HUDSlotMachineActionButton _actionButtonComponent;
         [FoldoutGroup("#Components")][SerializeField] private HUDSlotMachineItem[] _items;
         [FoldoutGroup("#Components")][SerializeField] private UILocalizedText _statusText;
 
         [FoldoutGroup("#Settings")][SerializeField] private int _slotCount = 6;
         [FoldoutGroup("#Settings")][SerializeField] private float _spinDuration = 2f;
         [FoldoutGroup("#Settings")][SerializeField] private float _stopDelay = 0.5f;
-        [FoldoutGroup("#Settings")][SerializeField] private Sprite[] _availableSprites;
+        private Sprite[] _availableSprites;
+        private ItemNames[] _availableItemNames;
 
         [FoldoutGroup("#Event")][SerializeField] private UnityEvent OnAllSlotsStopped;
         [FoldoutGroup("#Event")][SerializeField] private UnityEvent<Sprite[]> OnSlotResult;
@@ -40,10 +42,9 @@ namespace TeamSuneat.UserInterface
         {
             base.AutoGetComponents();
 
-            _spinButton = this.FindComponent<UIPointerEventButton>("Spin Button");
-            _stopButton = this.FindComponent<UIPointerEventButton>("Stop Button");
+            _actionButtonComponent ??= GetComponentInChildren<HUDSlotMachineActionButton>();
             _items = GetComponentsInChildren<HUDSlotMachineItem>();
-            _statusText = GetComponentInChildren<UILocalizedText>();
+            _statusText = this.FindComponent<UILocalizedText>("Status Text");
         }
 
         protected override void OnStart()
@@ -64,8 +65,15 @@ namespace TeamSuneat.UserInterface
         /// </summary>
         private void Initialize()
         {
+            LoadAvailableSprites();
             SetState(SlotMachineState.Idle);
             SetupSlots();
+            
+            if (_actionButtonComponent != null)
+            {
+                _actionButtonComponent.Initialize(CurrentState);
+            }
+            
             UpdateUI();
         }
 
@@ -85,8 +93,11 @@ namespace TeamSuneat.UserInterface
         /// </summary>
         private void SetupEvents()
         {
-            _spinButton.RegisterClickEvent(OnSpinButtonClick);
-            _stopButton.RegisterClickEvent(OnStopButtonClick);
+            if (_actionButtonComponent != null)
+            {
+                _actionButtonComponent.OnSpinRequested.AddListener(StartSpin);
+                _actionButtonComponent.OnStopRequested.AddListener(StopNextSlot);
+            }
         }
 
         /// <summary>
@@ -96,6 +107,7 @@ namespace TeamSuneat.UserInterface
         {
             if (!CanSpin)
             {
+                Log.Warning(LogTags.UI_SlotMachine, "슬롯머신을 시작할 수 없습니다. 현재 상태: {0}", CurrentState);
                 return;
             }
 
@@ -103,6 +115,8 @@ namespace TeamSuneat.UserInterface
             _stoppedSlotCount = 0;
             _currentStopIndex = 0;
             _currentResults = new Sprite[_items.Length];
+
+            Log.Info(LogTags.UI_SlotMachine, "슬롯머신 스핀 시작. 슬롯 개수: {0}", _items.Length);
 
             // 모든 슬롯 시작
             for (int i = 0; i < _items.Length; i++)
@@ -120,6 +134,7 @@ namespace TeamSuneat.UserInterface
         {
             if (CurrentState != SlotMachineState.Spinning)
             {
+                Log.Warning(LogTags.UI_SlotMachine, "슬롯을 멈출 수 없습니다. 현재 상태: {0}", CurrentState);
                 return;
             }
 
@@ -128,10 +143,11 @@ namespace TeamSuneat.UserInterface
             {
                 if (_items[i].CurrentState == SlotState.Spinning)
                 {
-                    Sprite targetSprite = GetRandomSprite();
-                    _items[i].StopSpin(targetSprite);
-                    _currentResults[i] = targetSprite;
+                    (Sprite sprite, ItemNames itemName) = GetRandomItem();
+                    _items[i].StopSpin(sprite, itemName);
+                    _currentResults[i] = sprite;
                     _currentStopIndex++;
+                    Log.Info(LogTags.UI_SlotMachine, "슬롯 멈춤. 인덱스: {0}/{1}", _currentStopIndex, _items.Length);
                     break;
                 }
             }
@@ -148,6 +164,7 @@ namespace TeamSuneat.UserInterface
 
             if (_stoppedSlotCount >= _items.Length)
             {
+                Log.Info(LogTags.UI_SlotMachine, "모든 슬롯이 멈췄습니다. 결과 처리 중.");
                 OnAllSlotsStopped?.Invoke();
                 OnSlotResult?.Invoke(_currentResults);
                 OnSlotMachineCompleted?.Invoke(_currentResults);
@@ -156,40 +173,26 @@ namespace TeamSuneat.UserInterface
             }
         }
 
-        /// <summary>
-        /// 스핀 버튼 클릭
-        /// </summary>
-        private void OnSpinButtonClick()
-        {
-            if (CurrentState == SlotMachineState.Idle)
-            {
-                StartSpin();
-            }
-        }
 
         /// <summary>
-        /// 스톱 버튼 클릭
+        /// 랜덤 아이템 선택 (스프라이트와 ItemNames)
         /// </summary>
-        private void OnStopButtonClick()
+        private (Sprite sprite, ItemNames itemName) GetRandomItem()
         {
-            if (CurrentState == SlotMachineState.Spinning)
+            if (_availableSprites == null || _availableSprites.Length == 0 || _availableItemNames == null || _availableItemNames.Length == 0)
             {
-                StopNextSlot();
-            }
-        }
-
-        /// <summary>
-        /// 랜덤 스프라이트 선택
-        /// </summary>
-        private Sprite GetRandomSprite()
-        {
-            if (_availableSprites == null || _availableSprites.Length == 0)
-            {
-                Debug.LogWarning("사용 가능한 스프라이트가 없습니다.");
-                return null;
+                Log.Warning(LogTags.UI_SlotMachine, "사용 가능한 아이템이 없습니다.");
+                return (null, ItemNames.None);
             }
 
-            return _availableSprites[Random.Range(0, _availableSprites.Length)];
+            if (_availableSprites.Length != _availableItemNames.Length)
+            {
+                Log.Warning(LogTags.UI_SlotMachine, "스프라이트와 ItemNames 배열의 길이가 일치하지 않습니다.");
+                return (null, ItemNames.None);
+            }
+
+            int randomIndex = Random.Range(0, _availableSprites.Length);
+            return (_availableSprites[randomIndex], _availableItemNames[randomIndex]);
         }
 
         /// <summary>
@@ -197,7 +200,17 @@ namespace TeamSuneat.UserInterface
         /// </summary>
         private void SetState(SlotMachineState newState)
         {
+            if (CurrentState != newState)
+            {
+                Log.Info(LogTags.UI_SlotMachine, "슬롯머신 상태 변경: {0} -> {1}", CurrentState, newState);
+            }
             CurrentState = newState;
+            
+            // 버튼 컴포넌트에 상태 업데이트
+            if (_actionButtonComponent != null)
+            {
+                _actionButtonComponent.UpdateState(newState, _currentStopIndex, _items.Length);
+            }
         }
 
         /// <summary>
@@ -226,9 +239,6 @@ namespace TeamSuneat.UserInterface
                     {
                         _statusText.SetText("스핀 버튼을 눌러주세요");
                     }
-
-                    _spinButton.Unlock();
-                    _stopButton.Lock();
                     break;
 
                 case SlotMachineState.Spinning:
@@ -236,9 +246,12 @@ namespace TeamSuneat.UserInterface
                     {
                         _statusText.SetText($"스톱 버튼을 눌러 슬롯을 멈추세요 ({_currentStopIndex}/{_items.Length})");
                     }
-
-                    _spinButton.Lock();
-                    _stopButton.Unlock();
+                    
+                    // 스핀 중에는 버튼 컴포넌트에 현재 인덱스 업데이트
+                    if (_actionButtonComponent != null)
+                    {
+                        _actionButtonComponent.UpdateState(CurrentState, _currentStopIndex, _items.Length);
+                    }
                     break;
 
                 case SlotMachineState.Result:
@@ -246,9 +259,6 @@ namespace TeamSuneat.UserInterface
                     {
                         _statusText.SetText("결과를 확인하세요");
                     }
-
-                    _spinButton.Unlock();
-                    _stopButton.Lock();
                     break;
             }
         }
@@ -258,6 +268,7 @@ namespace TeamSuneat.UserInterface
         /// </summary>
         public void ResetSlotMachine()
         {
+            Log.Info(LogTags.UI_SlotMachine, "슬롯머신 리셋");
             SetState(SlotMachineState.Idle);
             _stoppedSlotCount = 0;
             _currentStopIndex = 0;
@@ -277,6 +288,164 @@ namespace TeamSuneat.UserInterface
         public void SetAvailableSprites(Sprite[] sprites)
         {
             _availableSprites = sprites;
+        }
+
+        /// <summary>
+        /// 현재 소지한 아이템(무기, 물약, 아이템)의 이름을 수집합니다.
+        /// </summary>
+        private List<ItemNames> CollectAvailableItemNames()
+        {
+            HashSet<ItemNames> itemNameSet = new();
+            VProfile profile = GameApp.GetSelectedProfile();
+
+            if (profile == null)
+            {
+                Log.Warning(LogTags.UI_SlotMachine, "프로필을 찾을 수 없습니다. 스프라이트를 로드할 수 없습니다.");
+                return new List<ItemNames>();
+            }
+
+            int weaponCount = 0;
+            int potionCount = 0;
+            int itemCount = 0;
+
+            // 무기 수집 (현재 소지한 무기)
+            if (profile.Weapon != null)
+            {
+                List<ItemNames> weaponNames = profile.Weapon.GetWeaponNames();
+                if (weaponNames.IsValid())
+                {
+                    for (int i = 0; i < weaponNames.Count; i++)
+                    {
+                        if (itemNameSet.Add(weaponNames[i]))
+                        {
+                            weaponCount++;
+                        }
+                    }
+                }
+            }
+
+            // 물약 수집 (현재 소지한 물약)
+            if (profile.Potion != null)
+            {
+                List<ItemNames> potionNames = profile.Potion.GetPotionNames();
+                if (potionNames.IsValid())
+                {
+                    for (int i = 0; i < potionNames.Count; i++)
+                    {
+                        if (itemNameSet.Add(potionNames[i]))
+                        {
+                            potionCount++;
+                        }
+                    }
+                }
+            }
+
+            // 일반 아이템 수집 (현재 소지한 아이템)
+            if (profile.Item != null)
+            {
+                List<ItemNames> itemNames = profile.Item.GetItemNames();
+                if (itemNames.IsValid())
+                {
+                    for (int i = 0; i < itemNames.Count; i++)
+                    {
+                        if (itemNameSet.Add(itemNames[i]))
+                        {
+                            itemCount++;
+                        }
+                    }
+                }
+            }
+
+            List<ItemNames> result = new(itemNameSet);
+
+            Log.Info(LogTags.UI_SlotMachine, "수집된 아이템 개수: {0}개 (무기: {1}개, 물약: {2}개, 아이템: {3}개)",
+                result.Count, weaponCount, potionCount, itemCount);
+
+            return result;
+        }
+
+        /// <summary>
+        /// 아이템 이름 리스트를 스프라이트 배열로 변환합니다.
+        /// </summary>
+        private (List<Sprite> sprites, List<ItemNames> itemNames) LoadSpritesFromItemNames(List<ItemNames> itemNames)
+        {
+            List<Sprite> loadedSprites = new();
+            List<ItemNames> validItemNames = new();
+
+            if (itemNames == null || itemNames.Count == 0)
+            {
+                Log.Warning(LogTags.UI_SlotMachine, "로드할 아이템이 없습니다.");
+                return (loadedSprites, validItemNames);
+            }
+
+            int successCount = 0;
+            int failCount = 0;
+
+            for (int i = 0; i < itemNames.Count; i++)
+            {
+                ItemNames itemName = itemNames[i];
+                if (itemName == ItemNames.None)
+                {
+                    continue;
+                }
+
+                Sprite sprite = itemName.LoadSprite();
+                if (sprite != null)
+                {
+                    loadedSprites.Add(sprite);
+                    validItemNames.Add(itemName);
+                    successCount++;
+                }
+                else
+                {
+                    failCount++;
+                    Log.Warning(LogTags.UI_SlotMachine, "스프라이트를 로드할 수 없습니다: {0}", itemName);
+                }
+            }
+
+            Log.Info(LogTags.UI_SlotMachine, "스프라이트 로드 완료: 성공 {0}개, 실패 {1}개", successCount, failCount);
+
+            return (loadedSprites, validItemNames);
+        }
+
+        /// <summary>
+        /// 스프라이트 이름으로 스프라이트를 로드합니다. (아틀라스 포함)
+        /// </summary>
+        private Sprite LoadSpriteByName(string spriteName)
+        {
+            if (string.IsNullOrEmpty(spriteName))
+            {
+                return null;
+            }
+
+            Sprite sprite = ResourcesManager.LoadSprite(spriteName, "atlas_items");
+            if (sprite != null)
+            {
+                return sprite;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// 현재 가진 아이템의 스프라이트를 로드합니다.
+        /// </summary>
+        public void LoadAvailableSprites()
+        {
+            List<ItemNames> itemNames = CollectAvailableItemNames();
+            (List<Sprite> loadedSprites, List<ItemNames> validItemNames) = LoadSpritesFromItemNames(itemNames);
+
+            _availableSprites = loadedSprites.ToArray();
+            _availableItemNames = validItemNames.ToArray();
+
+            if (_availableSprites.Length == 0)
+            {
+                Log.Warning(LogTags.UI_SlotMachine, "로드된 스프라이트가 없습니다. 슬롯머신을 사용할 수 없습니다.");
+            }
+            else
+            {
+                Log.Info(LogTags.UI_SlotMachine, "사용 가능한 스프라이트 로드 완료: {0}개", _availableSprites.Length);
+            }
         }
     }
 }

@@ -8,6 +8,20 @@ namespace TeamSuneat.Data.Game
         public Dictionary<string, VPotion> Potions = new();
         public List<string> UnlockedPotions = new();
 
+        public List<ItemNames> GetPotionNames()
+        {
+            List<ItemNames> itemNames = new();
+            ItemNames itemName = ItemNames.None;
+            foreach (KeyValuePair<string, VPotion> kvp in Potions)
+            {
+                if (EnumEx.ConvertTo(ref itemName, kvp.Key))
+                {
+                    itemNames.Add(itemName);
+                }
+            }
+            return itemNames;
+        }
+
         public void OnLoadGameData()
         {
             if (Potions.IsValid())
@@ -61,7 +75,7 @@ namespace TeamSuneat.Data.Game
             string key = potionName.ToString();
             if (Potions.ContainsKey(key))
             {
-                Potions.Remove(key);
+                _ = Potions.Remove(key);
             }
         }
 

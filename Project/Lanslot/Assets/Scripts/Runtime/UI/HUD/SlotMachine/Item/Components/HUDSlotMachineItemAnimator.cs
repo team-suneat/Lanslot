@@ -1,6 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using TeamSuneat;
 
 namespace TeamSuneat.UserInterface
 {
@@ -45,6 +46,8 @@ namespace TeamSuneat.UserInterface
         {
             if (_scroller == null || targetSprite == null)
             {
+                Log.Warning(LogTags.UI_SlotMachine, "멈춤 애니메이션을 시작할 수 없습니다. Scroller: {0}, TargetSprite: {1}", 
+                    _scroller != null ? "있음" : "null", targetSprite != null ? "있음" : "null");
                 onComplete?.Invoke();
                 return;
             }
@@ -90,7 +93,7 @@ namespace TeamSuneat.UserInterface
         /// </summary>
         private RectTransform FindOrCreateTargetSprite(Sprite targetSprite)
         {
-            if (_scroller == null || targetSprite == null)
+            if (!ValidateScrollerData(targetSprite))
             {
                 return null;
             }
@@ -98,12 +101,48 @@ namespace TeamSuneat.UserInterface
             Image[] slotItemImages = _scroller.SlotItemImages;
             RectTransform[] slotItemTransforms = _scroller.SlotItemTransforms;
 
+            // 현재 스크롤 아이템들 중에서 목표 스프라이트와 일치하는 것 찾기
+            RectTransform foundTransform = FindTargetSprite(targetSprite, slotItemImages, slotItemTransforms);
+            if (foundTransform != null)
+            {
+                return foundTransform;
+            }
+
+            // 없으면 가장 가운데에 가까운 아이템을 목표 스프라이트로 설정
+            return CreateTargetSpriteAtClosestItem(targetSprite, slotItemImages, slotItemTransforms);
+        }
+
+        /// <summary>
+        /// Scroller 데이터 유효성 검증
+        /// </summary>
+        private bool ValidateScrollerData(Sprite targetSprite)
+        {
+            if (_scroller == null || targetSprite == null)
+            {
+                return false;
+            }
+
+            Image[] slotItemImages = _scroller.SlotItemImages;
+            RectTransform[] slotItemTransforms = _scroller.SlotItemTransforms;
+
+            if (slotItemImages == null || slotItemTransforms == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// 목표 스프라이트와 일치하는 아이템 찾기
+        /// </summary>
+        private RectTransform FindTargetSprite(Sprite targetSprite, Image[] slotItemImages, RectTransform[] slotItemTransforms)
+        {
             if (slotItemImages == null || slotItemTransforms == null)
             {
                 return null;
             }
 
-            // 현재 스크롤 아이템들 중에서 목표 스프라이트와 일치하는 것 찾기
             for (int i = 0; i < slotItemImages.Length; i++)
             {
                 if (slotItemImages[i] != null && slotItemImages[i].sprite == targetSprite)
@@ -112,38 +151,64 @@ namespace TeamSuneat.UserInterface
                 }
             }
 
-            // 없으면 가장 가운데에 가까운 아이템을 목표 스프라이트로 설정
-            if (slotItemImages.Length > 0 && slotItemTransforms.Length > 0)
+            return null;
+        }
+
+        /// <summary>
+        /// 마스크 중심에 가장 가까운 아이템을 목표 스프라이트로 설정
+        /// </summary>
+        private RectTransform CreateTargetSpriteAtClosestItem(Sprite targetSprite, Image[] slotItemImages, RectTransform[] slotItemTransforms)
+        {
+            if (slotItemImages == null || slotItemTransforms == null || 
+                slotItemImages.Length == 0 || slotItemTransforms.Length == 0)
             {
-                // 마스크 중심에 가장 가까운 아이템 찾기
-                float currentScrollY = _scroller.ScrollContent.anchoredPosition.y;
-                int closestIndex = 0;
-                float closestDistance = float.MaxValue;
-                float itemHeight = _scroller.ItemHeight;
-
-                for (int i = 0; i < slotItemTransforms.Length; i++)
-                {
-                    if (slotItemTransforms[i] == null)
-                    {
-                        continue;
-                    }
-
-                    float itemCenterY = currentScrollY + slotItemTransforms[i].anchoredPosition.y - (itemHeight * 0.5f);
-                    float distance = Mathf.Abs(itemCenterY);
-
-                    if (distance < closestDistance)
-                    {
-                        closestDistance = distance;
-                        closestIndex = i;
-                    }
-                }
-
-                // 가장 가까운 아이템을 목표 스프라이트로 설정
-                slotItemImages[closestIndex].SetSprite(targetSprite);
-                return slotItemTransforms[closestIndex];
+                return null;
             }
 
-            return null;
+            int closestIndex = FindClosestItemIndexToCenter(slotItemTransforms);
+            if (closestIndex < 0 || closestIndex >= slotItemImages.Length)
+            {
+                return null;
+            }
+
+            // 가장 가까운 아이템을 목표 스프라이트로 설정
+            slotItemImages[closestIndex].SetSprite(targetSprite);
+            return slotItemTransforms[closestIndex];
+        }
+
+        /// <summary>
+        /// 마스크 중심에 가장 가까운 아이템의 인덱스 찾기
+        /// </summary>
+        private int FindClosestItemIndexToCenter(RectTransform[] slotItemTransforms)
+        {
+            if (slotItemTransforms == null || slotItemTransforms.Length == 0)
+            {
+                return -1;
+            }
+
+            float currentScrollY = _scroller.ScrollContent.anchoredPosition.y;
+            int closestIndex = 0;
+            float closestDistance = float.MaxValue;
+            float itemHeight = _scroller.ItemHeight;
+
+            for (int i = 0; i < slotItemTransforms.Length; i++)
+            {
+                if (slotItemTransforms[i] == null)
+                {
+                    continue;
+                }
+
+                float itemCenterY = currentScrollY + slotItemTransforms[i].anchoredPosition.y - (itemHeight * 0.5f);
+                float distance = Mathf.Abs(itemCenterY);
+
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestIndex = i;
+                }
+            }
+
+            return closestIndex;
         }
 
         /// <summary>

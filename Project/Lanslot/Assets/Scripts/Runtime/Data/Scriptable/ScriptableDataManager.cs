@@ -6,8 +6,7 @@ namespace TeamSuneat.Data
     public partial class ScriptableDataManager : Singleton<ScriptableDataManager>
     {
         private GameDefineAsset _gameDefine;
-        private LogSettingAsset _logSetting;
-        private LevelExpAsset _levelExp;
+        private LogSettingAsset _logSetting;        
 
         private readonly Dictionary<int, HitmarkAsset> _hitmarks = new();
         private readonly Dictionary<int, BuffAsset> _buffs = new();
@@ -22,7 +21,6 @@ namespace TeamSuneat.Data
         {
             _logSetting = null;
             _gameDefine = null;
-            _levelExp = null;
 
             _sounds.Clear();
             _hitmarks.Clear();

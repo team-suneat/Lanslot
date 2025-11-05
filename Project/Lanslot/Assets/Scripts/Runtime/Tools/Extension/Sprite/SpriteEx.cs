@@ -1,4 +1,5 @@
 using System.Text;
+using UnityEngine;
 
 namespace TeamSuneat
 {
@@ -10,23 +11,27 @@ namespace TeamSuneat
         private const string ITEM_ICON_FORMAT = "ui_item_icon_";
         private const string CURRENCY_ICON_FORMAT = "ui_currency_icon_";
 
+        private const string CHARACTER_ATLAS_NAME = "atlas_character";
+        private const string ITEM_ATLAS_NAME = "atlas_item";
+
+
         // 공통 StringBuilder 인스턴스
         private static readonly StringBuilder _stringBuilder = new();
 
         public static string GetSpriteName(this CharacterNames key)
         {
-            _stringBuilder.Clear();
-            _stringBuilder.Append(CHARACTER_ICON_FORMAT);
-            _stringBuilder.Append(key.ToLowerString());
+            _ = _stringBuilder.Clear();
+            _ = _stringBuilder.Append(CHARACTER_ICON_FORMAT);
+            _ = _stringBuilder.Append(key.ToLowerString());
 
             return _stringBuilder.ToString();
         }
 
         public static string GetSpriteName(this PassiveNames key)
         {
-            _stringBuilder.Clear();
-            _stringBuilder.Append(PASSIVE_ICON_FORMAT);
-            _stringBuilder.Append(key.ToLowerString());
+            _ = _stringBuilder.Clear();
+            _ = _stringBuilder.Append(PASSIVE_ICON_FORMAT);
+            _ = _stringBuilder.Append(key.ToLowerString());
 
             return _stringBuilder.ToString();
         }
@@ -47,6 +52,40 @@ namespace TeamSuneat
             _ = _stringBuilder.Append(key.ToLowerString());
 
             return _stringBuilder.ToString();
+        }
+
+        //
+
+        public static Sprite LoadSprite(this CharacterNames characterName)
+        {
+            if (characterName == CharacterNames.None)
+            {
+                return null;
+            }
+
+            string spriteName = GetSpriteName(characterName);
+            if (string.IsNullOrEmpty(spriteName))
+            {
+                return null;
+            }
+
+            return ResourcesManager.LoadSprite(spriteName, CHARACTER_ATLAS_NAME);
+        }
+
+        public static Sprite LoadSprite(this ItemNames itemName)
+        {
+            if (itemName == ItemNames.None)
+            {
+                return null;
+            }
+
+            string spriteName = GetSpriteName(itemName);
+            if (string.IsNullOrEmpty(spriteName))
+            {
+                return null;
+            }
+
+            return ResourcesManager.LoadSprite(spriteName, ITEM_ATLAS_NAME);
         }
     }
 }

@@ -1,6 +1,5 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
-using System.Text;
 using TeamSuneat.Data;
 using TeamSuneat.Data.Game;
 using UnityEngine;
@@ -107,6 +106,9 @@ namespace TeamSuneat.UserInterface
                 {
                     _decidedWeaponIndex = i;
                     _selectedWeaponIndices.Add(i);
+
+                    // 기본 무기 등록
+                    profileInfo.Weapon.AddWeapon(defaultWeapon);
                     break;
                 }
             }

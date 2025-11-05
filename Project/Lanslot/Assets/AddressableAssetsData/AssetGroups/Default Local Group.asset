@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 8ae69caa87d75de4a951c5e9b4709838
   m_SerializeEntries:
+  - m_GUID: 577e02325167be74b8eb99ec2a3eae09
+    m_Address: Assets/Addressables/Atlas/atlas_ui.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Ingame
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6260e59fad323a944b16b300f37a5aa4
     m_Address: Assets/Addressables/Prefab/UIGameStartSelectionPopup.prefab
     m_ReadOnly: 0
@@ -23,6 +29,24 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6ea9e6f359d93f64dafbde024ea380ad
     m_Address: Assets/Addressables/Prefab/UIGauge.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Ingame
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9b327578e2bfff645ab591cdd0c24dea
+    m_Address: Assets/Addressables/Atlas/atlas_item.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Ingame
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ae6ae2529c719ce49bd627568abc1c78
+    m_Address: Assets/Addressables/Prefab/UISlotItem.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Ingame
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b28b1b959ac99b847ac38b1d32bc2ec4
+    m_Address: Assets/Addressables/Atlas/atlas_character.spriteatlasv2
     m_ReadOnly: 0
     m_SerializedLabels:
     - Ingame

@@ -71,10 +71,8 @@ namespace TeamSuneat.UserInterface
         {
             if (_iconImage != null)
             {
-                // 잠금된 무기는 WeaponNames.None으로 스프라이트를 가져옴
-                ItemNames spriteWeaponName = isLocked ? ItemNames.None : weaponName;
-                string spriteName = SpriteEx.GetSpriteName(spriteWeaponName);
-                _ = _iconImage.TrySetSprite(spriteName, false);
+                Sprite sprite = weaponName.LoadSprite();
+                _iconImage.SetSprite(sprite, false);
 
                 // 잠금된 무기는 시각적으로 구분 (아이콘 색상 변경)
                 if (isLocked)

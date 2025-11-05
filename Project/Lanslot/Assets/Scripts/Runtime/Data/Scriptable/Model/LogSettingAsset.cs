@@ -28,8 +28,6 @@ namespace TeamSuneat
 
         [FoldoutGroup("[전투]")][SuffixLabel("공격")] public bool Attack;
         [FoldoutGroup("[전투]")][SuffixLabel("공격(목표 공격)")] public bool Attack_Target;
-        [FoldoutGroup("[전투]")][SuffixLabel("공격(영역 공격)")] public bool Attack_Area;
-        [FoldoutGroup("[전투]")][SuffixLabel("공격(발사체 생성)")] public bool Attack_Projectile;
         [FoldoutGroup("[전투]")][SuffixLabel("피해량 계산")] public bool Damage;
         [FoldoutGroup("[전투]")][SuffixLabel("패시브")] public bool Passive;
         [FoldoutGroup("[전투]")][SuffixLabel("패시브 발동")] public bool PassiveTrigger;
@@ -42,15 +40,10 @@ namespace TeamSuneat
 
         [FoldoutGroup("[기술]")][SuffixLabel("기술")] public bool Skill;
 
-        [FoldoutGroup("[상호작용]")][SuffixLabel("상호작용")] public bool Interaciton;
-        [FoldoutGroup("[상호작용]")][SuffixLabel("NPC")] public bool NPC;
-        [FoldoutGroup("[상호작용]")][SuffixLabel("드랍 오브젝트")] public bool DropObject;
-        [FoldoutGroup("[상호작용]")][SuffixLabel("포탈")] public bool Portal;
-        [FoldoutGroup("[상호작용]")][SuffixLabel("영역 이벤트")] public bool AreaEvent;
-
         [FoldoutGroup("[아이템]")][SuffixLabel("아이템")] public bool Item;
         [FoldoutGroup("[아이템 종류]")][SuffixLabel("무기")] public bool Weapon;
         [FoldoutGroup("[아이템 종류]")][SuffixLabel("물약")] public bool Potion;
+        [FoldoutGroup("[아이템]")][SuffixLabel("드랍 오브젝트")] public bool DropObject;
 
         [FoldoutGroup("[해금]")][SuffixLabel("퀘스트")] public bool Quest;
         [FoldoutGroup("[해금]")][SuffixLabel("퀘스트 조건")] public bool QuestCondition;
@@ -74,10 +67,6 @@ namespace TeamSuneat
 
         [FoldoutGroup("[세이브 데이터 - 인벤토리]")][SuffixLabel("재화")] public bool Currency;
         [FoldoutGroup("[세이브 데이터 - 인벤토리]")][SuffixLabel("소지품")] public bool Inventory;
-        [FoldoutGroup("[세이브 데이터 - 인벤토리]")][SuffixLabel("인벤토리 이벤트 데이터")] public bool InventoryPopup_DataFlow;
-        [FoldoutGroup("[세이브 데이터 - 인벤토리]")][SuffixLabel("인벤토리 슬롯 탐색")] public bool InventoryPopup_Search;
-        [FoldoutGroup("[세이브 데이터 - 인벤토리]")][SuffixLabel("인벤토리 장착")] public bool InventoryPopup_Equip;
-        [FoldoutGroup("[세이브 데이터 - 인벤토리]")][SuffixLabel("인벤토리 유물")] public bool InventoryPopup_Relic;
         [FoldoutGroup("[세이브 데이터 - 인벤토리]")][SuffixLabel("창고")] public bool Storage;
 
         [FoldoutGroup("[게임 설정]")][SuffixLabel("설정")] public bool Setting;
@@ -92,15 +81,12 @@ namespace TeamSuneat
         [FoldoutGroup("[지역]")][SuffixLabel("스테이지 보상")] public bool Stage_Reward;
         [FoldoutGroup("[지역]")][SuffixLabel("타일")] public bool Tile;
         [FoldoutGroup("[지역]")][SuffixLabel("타일")] public bool Collision;
-        [FoldoutGroup("[지역]")][SuffixLabel("월드맵 입력")] public bool WorldMapPopup_Input;
-        [FoldoutGroup("[지역]")][SuffixLabel("월드맵 데이터")] public bool WorldMapPopup_Data;
 
         [FoldoutGroup("[글로벌]")][SuffixLabel("글로벌 이벤트")] public bool Global;
         [FoldoutGroup("[글로벌]")][SuffixLabel("스트링 텍스트")] public bool String;
         [FoldoutGroup("[글로벌]")][SuffixLabel("개발용")] public bool Develop;
 
         [FoldoutGroup("[UI]")] public bool UI;
-        [FoldoutGroup("[UI]")][SuffixLabel("미니맵")] public bool UI_Minimap;
         [FoldoutGroup("[UI]")][SuffixLabel("버튼")] public bool UI_Button;
         [FoldoutGroup("[UI]")][SuffixLabel("게이지")] public bool UI_Gauge;
         [FoldoutGroup("[UI]")][SuffixLabel("팝업")] public bool UI_Popup;
@@ -110,14 +96,8 @@ namespace TeamSuneat
         [FoldoutGroup("[UI]")][SuffixLabel("선택 이벤트")] public bool UI_SelectEvent;
         [FoldoutGroup("[UI]")][SuffixLabel("탭")] public bool UI_Tab;
         [FoldoutGroup("[UI]")][SuffixLabel("기술")] public bool UI_Skill;
-        [FoldoutGroup("[UI]")][SuffixLabel("거래 - 데이터 경로")] public bool TradePopup_DataFlow;
-        [FoldoutGroup("[UI]")][SuffixLabel("거래 - 슬롯 탐색")] public bool TradePopup_SearchSlot;
-        [FoldoutGroup("[UI]")][SuffixLabel("룬 조합서")] public bool BookOfRunes;
-        [FoldoutGroup("[UI]")][SuffixLabel("캐릭터 HUD")] public bool HUDCharacter;
-        [FoldoutGroup("[UI]")][SuffixLabel("전직")] public bool PromotionPopup;
+        [FoldoutGroup("[UI]")][SuffixLabel("슬롯머신")] public bool UI_SlotMachine;
 
-        [FoldoutGroup("#Option")]
-        [SuffixLabel("스트링 불러오기")]
         public bool LoadString;
 
         #region FOR EDITOR
@@ -141,7 +121,6 @@ namespace TeamSuneat
         private void SwitchOnAll()
         {
             Analytics = true;
-            AreaEvent = true;
             Ability = true;
 
             Animation = true;
@@ -149,8 +128,6 @@ namespace TeamSuneat
 
             Attack = true;
             Attack_Target = true;
-            Attack_Area = true;
-            Attack_Projectile = true;
             Audio = true;
             Video = true;
 
@@ -180,25 +157,21 @@ namespace TeamSuneat
             GameData_Weapon = true;
 
             Develop = true;
-            DropObject = true;
             Currency = true;
 
             Effect = true;
             Global = true;
 
             Item = true;
+            DropObject = true;
 
             Cursor = true;
             Input = true;
-            Interaciton = true;
             JsonData = true;
             ScriptableData = true;
 
-            NPC = true;
-
             Passive = true;
             PassiveTrigger = true;
-            Portal = true;
             Potion = true;
             Resource = true;
             Path = true;
@@ -222,7 +195,6 @@ namespace TeamSuneat
             PositionGroup = true;
 
             UI = true;
-            UI_Minimap = true;
             UI_Button = true;
             UI_Gauge = true;
             UI_Popup = true;
@@ -236,28 +208,13 @@ namespace TeamSuneat
             BattleResource = true;
             Weapon = true;
 
-            InventoryPopup_DataFlow = true;
-            InventoryPopup_Search = true;
-            InventoryPopup_Equip = true;
-            InventoryPopup_Relic = true;
-
-            TradePopup_DataFlow = true;
-            TradePopup_SearchSlot = true;
-
-            BookOfRunes = true;
-
             UI_Skill = true;
-            HUDCharacter = true;
-            PromotionPopup = true;
-
-            WorldMapPopup_Input = true;
-            WorldMapPopup_Data = true;
+            UI_SlotMachine = true;
         }
 
         private void SwitchOffAll()
         {
             Analytics = false;
-            AreaEvent = false;
             Ability = false;
 
             Animation = false;
@@ -265,8 +222,6 @@ namespace TeamSuneat
 
             Attack = false;
             Attack_Target = false;
-            Attack_Area = false;
-            Attack_Projectile = false;
             Audio = false;
             Video = false;
 
@@ -299,25 +254,21 @@ namespace TeamSuneat
             Difficulty = false;
 
             Develop = false;
-            DropObject = false;
             Currency = false;
 
             Effect = false;
             Global = false;
 
             Item = false;
+            DropObject = false;
 
             Cursor = false;
             Input = false;
-            Interaciton = false;
             JsonData = false;
             ScriptableData = false;
 
-            NPC = false;
-
             Passive = false;
             PassiveTrigger = false;
-            Portal = false;
             Potion = false;
             Resource = false;
             Path = false;
@@ -339,7 +290,6 @@ namespace TeamSuneat
             PositionGroup = false;
 
             UI = false;
-            UI_Minimap = false;
             UI_Button = false;
             UI_Gauge = false;
             UI_Popup = false;
@@ -353,22 +303,8 @@ namespace TeamSuneat
             BattleResource = false;
             Weapon = false;
 
-            InventoryPopup_DataFlow = false;
-            InventoryPopup_Search = false;
-            InventoryPopup_Equip = false;
-            InventoryPopup_Relic = false;
-
-            TradePopup_DataFlow = false;
-            TradePopup_SearchSlot = false;
-
-            BookOfRunes = false;
-
             UI_Skill = false;
-            HUDCharacter = false;
-            PromotionPopup = false;
-
-            WorldMapPopup_Input = false;
-            WorldMapPopup_Data = false;
+            UI_SlotMachine = false;
         }
 
         public void OnLoadData()
@@ -384,7 +320,6 @@ namespace TeamSuneat
             {
                 LogTags.Analytics => Analytics,
 
-                LogTags.AreaEvent => AreaEvent,
                 LogTags.Ability => Ability,
 
                 LogTags.Animation => Animation,
@@ -426,22 +361,18 @@ namespace TeamSuneat
                 LogTags.Difficulty => Difficulty,
 
                 LogTags.Develop => Develop,
-                LogTags.DropObject => DropObject,
                 LogTags.Effect => Effect,
                 LogTags.Global => Global,
 
                 LogTags.Currency => Currency,
                 LogTags.Item => Item,
+                LogTags.DropObject => DropObject,
 
                 LogTags.Cursor => Cursor,
                 LogTags.Input => Input,
-                LogTags.Interaciton => Interaciton,
-
-                LogTags.NPC => NPC,
 
                 LogTags.Passive => Passive,
                 LogTags.PassiveTrigger => PassiveTrigger,
-                LogTags.Portal => Portal,
                 LogTags.Potion => Potion,
                 LogTags.Resource => Resource,
                 LogTags.Path => Path,
@@ -462,7 +393,6 @@ namespace TeamSuneat
                 LogTags.PositionGroup => PositionGroup,
 
                 LogTags.UI => UI,
-                LogTags.UI_Minimap => UI_Minimap,
                 LogTags.UI_Button => UI_Button,
                 LogTags.UI_Gauge => UI_Gauge,
                 LogTags.UI_Popup => UI_Popup,
@@ -476,9 +406,8 @@ namespace TeamSuneat
                 LogTags.BattleResource => BattleResource,
                 LogTags.Weapon => Weapon,
 
-                LogTags.BookOfRunes => BookOfRunes,
-
                 LogTags.UI_Skill => UI_Skill,
+                LogTags.UI_SlotMachine => UI_SlotMachine,
 
                 _ => false,
             };
@@ -489,7 +418,6 @@ namespace TeamSuneat
             switch (logTag)
             {
                 case LogTags.Analytics: { Analytics = true; } break;
-                case LogTags.AreaEvent: { AreaEvent = true; } break;
                 case LogTags.Ability: { Ability = true; } break;
 
                 case LogTags.Animation: { Animation = true; } break;
@@ -532,19 +460,16 @@ namespace TeamSuneat
                 case LogTags.Difficulty: { Difficulty = true; } break;
 
                 case LogTags.Develop: { Develop = true; } break;
-                case LogTags.DropObject: { DropObject = true; } break;
 
                 case LogTags.Effect: { Effect = true; } break;
                 case LogTags.Global: { Global = true; } break;
                 case LogTags.Currency: { Currency = true; } break;
                 case LogTags.Item: { Item = true; } break;
+                case LogTags.DropObject: { DropObject = true; } break;
                 case LogTags.Cursor: { Cursor = true; } break;
                 case LogTags.Input: { Input = true; } break;
-                case LogTags.Interaciton: { Interaciton = true; } break;
-                case LogTags.NPC: { NPC = true; } break;
                 case LogTags.Passive: { Passive = true; } break;
                 case LogTags.PassiveTrigger: { PassiveTrigger = true; } break;
-                case LogTags.Portal: { Portal = true; } break;
                 case LogTags.Potion: { Potion = true; } break;
                 case LogTags.Resource: { Resource = true; } break;
                 case LogTags.Path: { Path = true; } break;
@@ -561,7 +486,6 @@ namespace TeamSuneat
                 case LogTags.Timeline: { Timeline = true; } break;
                 case LogTags.PositionGroup: { PositionGroup = true; } break;
                 case LogTags.UI: { UI = true; } break;
-                case LogTags.UI_Minimap: { UI_Minimap = true; } break;
                 case LogTags.UI_Button: { UI_Button = true; } break;
                 case LogTags.UI_Gauge: { UI_Gauge = true; } break;
                 case LogTags.UI_Popup: { UI_Popup = true; } break;
@@ -573,8 +497,8 @@ namespace TeamSuneat
                 case LogTags.Vital: { Vital = true; } break;
                 case LogTags.BattleResource: { BattleResource = true; } break;
                 case LogTags.Weapon: { Weapon = true; } break;
-                case LogTags.BookOfRunes: { BookOfRunes = true; } break;
                 case LogTags.UI_Skill: { UI_Skill = true; } break;
+                case LogTags.UI_SlotMachine: { UI_SlotMachine = true; } break;
             }
             ;
         }
@@ -584,7 +508,6 @@ namespace TeamSuneat
             switch (logTag)
             {
                 case LogTags.Analytics: { Analytics = false; } break;
-                case LogTags.AreaEvent: { AreaEvent = false; } break;
                 case LogTags.Ability: { Ability = false; } break;
 
                 case LogTags.Animation: { Animation = false; } break;
@@ -626,23 +549,19 @@ namespace TeamSuneat
                 case LogTags.Difficulty: { Difficulty = false; } break;
 
                 case LogTags.Develop: { Develop = false; } break;
-                case LogTags.DropObject: { DropObject = false; } break;
                 case LogTags.Effect: { Effect = false; } break;
 
                 case LogTags.Global: { Global = false; } break;
 
                 case LogTags.Currency: { Currency = false; } break;
                 case LogTags.Item: { Item = false; } break;
+                case LogTags.DropObject: { DropObject = false; } break;
 
                 case LogTags.Cursor: { Cursor = false; } break;
                 case LogTags.Input: { Input = false; } break;
-                case LogTags.Interaciton: { Interaciton = false; } break;
-
-                case LogTags.NPC: { NPC = false; } break;
 
                 case LogTags.Passive: { Passive = false; } break;
                 case LogTags.PassiveTrigger: { PassiveTrigger = false; } break;
-                case LogTags.Portal: { Portal = false; } break;
                 case LogTags.Potion: { Potion = false; } break;
                 case LogTags.Resource: { Resource = false; } break;
                 case LogTags.Path: { Path = false; } break;
@@ -664,7 +583,6 @@ namespace TeamSuneat
                 case LogTags.PositionGroup: { PositionGroup = false; } break;
 
                 case LogTags.UI: { UI = false; } break;
-                case LogTags.UI_Minimap: { UI_Minimap = false; } break;
                 case LogTags.UI_Button: { UI_Button = false; } break;
                 case LogTags.UI_Gauge: { UI_Gauge = false; } break;
                 case LogTags.UI_Popup: { UI_Popup = false; } break;
@@ -678,9 +596,8 @@ namespace TeamSuneat
                 case LogTags.BattleResource: { BattleResource = false; } break;
                 case LogTags.Weapon: { Weapon = false; } break;
 
-                case LogTags.BookOfRunes: { BookOfRunes = false; } break;
-
                 case LogTags.UI_Skill: { UI_Skill = false; } break;
+                case LogTags.UI_SlotMachine: { UI_SlotMachine = false; } break;
             }
             ;
         }

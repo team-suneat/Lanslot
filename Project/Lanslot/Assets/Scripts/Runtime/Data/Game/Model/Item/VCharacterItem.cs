@@ -8,6 +8,20 @@ namespace TeamSuneat.Data.Game
         public Dictionary<string, VItem> Items = new();
         public List<string> UnlockedItems = new();
 
+        public List<ItemNames> GetItemNames()
+        {
+            List<ItemNames> itemNames = new();
+            ItemNames itemName = ItemNames.None;
+            foreach (KeyValuePair<string, VItem> kvp in Items)
+            {
+                if (EnumEx.ConvertTo(ref itemName, kvp.Key))
+                {
+                    itemNames.Add(itemName);
+                }
+            }
+            return itemNames;
+        }
+
         public void OnLoadGameData()
         {
             if (Items.IsValid())

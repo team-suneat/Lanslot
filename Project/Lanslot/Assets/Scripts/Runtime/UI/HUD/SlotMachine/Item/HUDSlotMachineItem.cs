@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace TeamSuneat.UserInterface
@@ -7,13 +8,14 @@ namespace TeamSuneat.UserInterface
     /// </summary>
     public class HUDSlotMachineItem : XBehaviour
     {
-        [Header("컴포넌트")]
-        [SerializeField] private HUDSlotMachineItemScroller _scroller;
-        [SerializeField] private HUDSlotMachineItemLock _lock;
-        [SerializeField] private HUDSlotMachineItemAnimator _animator;
+        [FoldoutGroup("#Component")][SerializeField] private HUDSlotMachineItemScroller _scroller;
+        [FoldoutGroup("#Component")][SerializeField] private HUDSlotMachineItemLock _lock;
+        [FoldoutGroup("#Component")][SerializeField] private HUDSlotMachineItemAnimator _animator;
+        [FoldoutGroup("#Component")][SerializeField] private UILocalizedText _itemNameText;
 
         private SlotState _currentState = SlotState.None;
         private Sprite _currentSprite;
+        private ItemNames _currentItemName = ItemNames.None;
 
         public SlotState CurrentState => _currentState;
         public Sprite CurrentSprite => _currentSprite;
@@ -28,6 +30,7 @@ namespace TeamSuneat.UserInterface
             _scroller ??= GetComponentInChildren<HUDSlotMachineItemScroller>();
             _lock ??= GetComponentInChildren<HUDSlotMachineItemLock>();
             _animator ??= GetComponent<HUDSlotMachineItemAnimator>();
+            _itemNameText ??= this.FindComponent<UILocalizedText>("ItemName Text");
         }
 
         protected override void OnStart()
@@ -39,6 +42,9 @@ namespace TeamSuneat.UserInterface
             {
                 _animator.SetScroller(_scroller);
             }
+
+            // 아이템 이름 텍스트 초기화
+            ResetItemNameText();
 
             SetState(SlotState.Idle);
         }
@@ -55,6 +61,7 @@ namespace TeamSuneat.UserInterface
         {
             if (_currentState != SlotState.Idle)
             {
+                Log.Warning(LogTags.UI_SlotMachine, "슬롯 스핀을 시작할 수 없습니다. 현재 상태: {0}", _currentState);
                 return;
             }
 
@@ -76,14 +83,22 @@ namespace TeamSuneat.UserInterface
         /// <summary>
         /// 슬롯 스핀 중지
         /// </summary>
-        public void StopSpin(Sprite targetSprite)
+        public void StopSpin(Sprite targetSprite, ItemNames itemName)
         {
             if (_currentState != SlotState.Spinning)
             {
+                Log.Warning(LogTags.UI_SlotMachine, "슬롯 스핀을 중지할 수 없습니다. 현재 상태: {0}", _currentState);
+                return;
+            }
+
+            if (targetSprite == null)
+            {
+                Log.Warning(LogTags.UI_SlotMachine, "목표 스프라이트가 null입니다.");
                 return;
             }
 
             _currentSprite = targetSprite;
+            _currentItemName = itemName;
             SetState(SlotState.Stopping);
 
             // 애니메이션 시작
@@ -103,6 +118,10 @@ namespace TeamSuneat.UserInterface
         private void OnAnimationComplete()
         {
             SetState(SlotState.Stopped);
+
+            // 아이템 이름 설정
+            SetItemNameText();
+
             OnSlotStopped?.Invoke(this);
         }
 
@@ -184,6 +203,10 @@ namespace TeamSuneat.UserInterface
 
             SetState(SlotState.Idle);
             _currentSprite = null;
+            _currentItemName = ItemNames.None;
+
+            // 아이템 이름 텍스트 초기화
+            ResetItemNameText();
 
             // 각 컴포넌트 리셋
             if (_scroller != null)
@@ -194,6 +217,37 @@ namespace TeamSuneat.UserInterface
             if (_lock != null)
             {
                 _lock.Reset();
+            }
+        }
+
+        /// <summary>
+        /// 아이템 이름 텍스트 설정
+        /// </summary>
+        private void SetItemNameText()
+        {
+            if (_itemNameText == null)
+            {
+                return;
+            }
+
+            if (_currentItemName == ItemNames.None)
+            {
+                ResetItemNameText();
+                return;
+            }
+
+            string itemNameString = _currentItemName.GetLocalizedString();
+            _itemNameText.SetText(itemNameString);
+        }
+
+        /// <summary>
+        /// 아이템 이름 텍스트 초기화
+        /// </summary>
+        private void ResetItemNameText()
+        {
+            if (_itemNameText != null)
+            {
+                _itemNameText.ResetText();
             }
         }
     }

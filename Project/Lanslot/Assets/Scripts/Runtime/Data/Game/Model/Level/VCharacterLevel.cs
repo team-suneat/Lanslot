@@ -23,8 +23,8 @@ namespace TeamSuneat.Data.Game
                 return 0;
             }
 
-            LevelExpAsset levelExpAsset = ScriptableDataManager.Instance.GetLevelExpAsset();
-            int nextExperience = levelExpAsset.GetRequiredExpForNextLevel(Level);
+            CharacterLevelExpData data = JsonDataManager.FindCharacterLevelExpDataClone(Level);
+            int nextExperience = data.RequiredExperience;
             float increasedExperience = CharacterManager.Instance.Player.Stat.FindValueOrDefault(StatNames.XPGain);
 
             Log.Info(LogTags.GameData, "[Character] 받는 경험치 획득량을 결정합니다. EXP: {0}, 추가 획득량 {1}", experience, increasedExperience);
@@ -38,7 +38,7 @@ namespace TeamSuneat.Data.Game
                 resultLevel = LevelUp();
             }
 
-            GlobalEvent<int, int>.Send(GlobalEventType.GAME_DATA_CHARACTER_ADD_EXPERIENCE, Experience, nextExperience);
+            _ = GlobalEvent<int, int>.Send(GlobalEventType.GAME_DATA_CHARACTER_ADD_EXPERIENCE, Experience, nextExperience);
             return resultLevel;
         }
 
@@ -74,7 +74,7 @@ namespace TeamSuneat.Data.Game
                 CharacterManager.Instance.Player.OnLevelup(addedLevel);
             }
 
-            GlobalEvent<int>.Send(GlobalEventType.GAME_DATA_CHARACTER_LEVEL_CHANGED, Level);
+            _ = GlobalEvent<int>.Send(GlobalEventType.GAME_DATA_CHARACTER_LEVEL_CHANGED, Level);
             return addedLevel;
         }
 
@@ -83,7 +83,7 @@ namespace TeamSuneat.Data.Game
             Level = Mathf.Max(Level - 1, 1);
             Log.Info(LogTags.GameData, "[Character] 플레이어 캐릭터의 레벨이 떨어졌습니다. {0}", Level.ToString());
             CharacterManager.Instance.Player.OnLevelDown();
-            GlobalEvent<int>.Send(GlobalEventType.GAME_DATA_CHARACTER_LEVEL_CHANGED, Level);
+            _ = GlobalEvent<int>.Send(GlobalEventType.GAME_DATA_CHARACTER_LEVEL_CHANGED, Level);
         }
 
         public static VCharacterLevel CreateDefault()

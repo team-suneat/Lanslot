@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.UI.Image;
 
 namespace TeamSuneat
 {
@@ -36,25 +35,7 @@ namespace TeamSuneat
             return false;
         }
 
-        public static Vector3 GetAnchoredPosition3D(this Image image)
-        {
-            if (image != null)
-            {
-                RectTransform rectTransform = image.GetComponent<RectTransform>();
-                return rectTransform.anchoredPosition3D;
-            }
-
-            return Vector3.zero;
-        }
-
-        public static void SetAnchoredPosition3D(this Image image, Vector3 anchoredPosition3D)
-        {
-            if (image != null)
-            {
-                RectTransform rectTransform = image.GetComponent<RectTransform>();
-                rectTransform.anchoredPosition3D = anchoredPosition3D;
-            }
-        }
+        //
 
         public static void SetSprite(this Image image, Sprite sprite, bool useNativeSize = false)
         {

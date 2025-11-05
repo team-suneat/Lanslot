@@ -2,6 +2,7 @@
 using TeamSuneat.Data.Game;
 using TeamSuneat.Setting;
 using UnityEngine;
+using UnityEngine.U2D;
 
 namespace TeamSuneat
 {
@@ -70,6 +71,7 @@ namespace TeamSuneat
                 await JsonDataManager.LoadJsonSheetsAsync();
             }
 
+            await ResourcesManager.LoadResourcesByLabelAsync<SpriteAtlas>("Ingame");
             await ResourcesManager.LoadResourcesByLabelAsync<GameObject>("Ingame");
 
             // LOAD SAVED DATA
