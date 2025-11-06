@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using TeamSuneat.Data;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,19 +13,10 @@ namespace TeamSuneat.UserInterface
     {
         [FoldoutGroup("#Components")]
         [SerializeField] private UIPointerEventButton _actionButton;
-        
+
         [FoldoutGroup("#Components")]
         [SerializeField] private UILocalizedText _buttonText;
 
-        [FoldoutGroup("#Settings")]
-        [SerializeField] private string _spinText = "스핀";
-        
-        [FoldoutGroup("#Settings")]
-        [SerializeField] private string _stopText = "스톱";
-
-        [FoldoutGroup("#Events")]
-        public UnityEvent OnSpinRequested;
-        
         [FoldoutGroup("#Events")]
         public UnityEvent OnStopRequested;
 
@@ -57,6 +49,22 @@ namespace TeamSuneat.UserInterface
             }
         }
 
+        private void OnButtonClick()
+        {
+            switch (_currentState)
+            {
+                case SlotMachineState.Spinning:
+                    OnStopRequested?.Invoke();
+                    break;
+            }
+        }
+
+        public void Initialize(SlotMachineState initialState)
+        {
+            _currentState = initialState;
+            UpdateButtonUI();
+        }
+
         /// <summary>
         /// 상태 업데이트 (HUDSlotMachine에서 호출)
         /// </summary>
@@ -83,33 +91,20 @@ namespace TeamSuneat.UserInterface
         {
             switch (_currentState)
             {
-                case SlotMachineState.Idle:
-                    SetButtonText(_spinText);
-                    SetButtonEnabled(true);
-                    break;
-
                 case SlotMachineState.Spinning:
-                    string stopTextWithCount = totalSlots > 0 
-                        ? $"{_stopText} ({currentStopIndex}/{totalSlots})" 
-                        : _stopText;
-                    SetButtonText(stopTextWithCount);
-                    SetButtonEnabled(true);
-                    break;
-
-                case SlotMachineState.Result:
-                    SetButtonText(_spinText);
-                    SetButtonEnabled(true);
+                    {
+                        string content = JsonDataManager.FindStringClone("Button_Stop");
+                        SetButtonText(content);
+                        SetButtonEnabled(true);
+                    }
                     break;
 
                 default:
                     SetButtonEnabled(false);
-                    break;
+                    return;
             }
         }
 
-        /// <summary>
-        /// 버튼 텍스트 설정
-        /// </summary>
         private void SetButtonText(string text)
         {
             if (_buttonText != null)
@@ -118,9 +113,6 @@ namespace TeamSuneat.UserInterface
             }
         }
 
-        /// <summary>
-        /// 버튼 활성화/비활성화
-        /// </summary>
         private void SetButtonEnabled(bool enabled)
         {
             if (_actionButton == null)
@@ -137,36 +129,5 @@ namespace TeamSuneat.UserInterface
                 _actionButton.Lock();
             }
         }
-
-        /// <summary>
-        /// 버튼 클릭 이벤트
-        /// </summary>
-        private void OnButtonClick()
-        {
-            switch (_currentState)
-            {
-                case SlotMachineState.Idle:
-                    OnSpinRequested?.Invoke();
-                    break;
-
-                case SlotMachineState.Spinning:
-                    OnStopRequested?.Invoke();
-                    break;
-
-                default:
-                    // Idle과 Spinning 상태가 아니면 동작하지 않음
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// 초기화
-        /// </summary>
-        public void Initialize(SlotMachineState initialState)
-        {
-            _currentState = initialState;
-            UpdateButtonUI();
-        }
     }
 }
-

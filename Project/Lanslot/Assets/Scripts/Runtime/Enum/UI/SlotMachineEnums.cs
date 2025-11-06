@@ -6,7 +6,6 @@ namespace TeamSuneat
     public enum SlotMachineState
     {
         None,
-        Idle,           // 대기 상태
         Spinning,       // 슬롯이 돌아가는 중
         Stopping,       // 슬롯이 멈추는 중
         Stopped,        // 모든 슬롯이 멈춤

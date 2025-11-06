@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using UnityEngine;
 
 namespace TeamSuneat.Data
 {
@@ -7,7 +8,8 @@ namespace TeamSuneat.Data
     {
         public StageNames Name;
         public string DisplayName;
-        public BuildTypes[] SupportedBuildTypes;
+        public BuildTypes[] SupportedBuildTypes;        
+        public int Width;
 
         public bool IsBlock
         {

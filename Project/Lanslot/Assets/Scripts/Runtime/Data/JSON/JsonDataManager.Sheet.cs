@@ -13,6 +13,8 @@ namespace TeamSuneat.Data
             Weapon,
             WeaponLevel,
             Potion,
+            Stage,
+            Wave,
             String,
             CharacterLevelExp,
             CharacterRankExp,

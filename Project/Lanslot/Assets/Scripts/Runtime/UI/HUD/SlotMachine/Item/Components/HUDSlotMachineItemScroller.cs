@@ -1,7 +1,6 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
-using TeamSuneat;
-using Sirenix.OdinInspector;
 
 namespace TeamSuneat.UserInterface
 {
@@ -10,99 +9,134 @@ namespace TeamSuneat.UserInterface
     /// </summary>
     public class HUDSlotMachineItemScroller : XBehaviour
     {
-        [FoldoutGroup("#Component")][SerializeField] private RectTransform _maskContainer;
-        [FoldoutGroup("#Component")][SerializeField] private RectTransform _scrollContent;
+        [FoldoutGroup("#Setting")]
+        [SerializeField]
+        private float _scrollSpeed = 500f;
 
-        [FoldoutGroup("#Setting")][SerializeField] private float _scrollSpeed = 500f;
-        [FoldoutGroup("#Setting")][SerializeField] private float _itemHeight = 50f;
+        [FoldoutGroup("#Setting")]
+        [SerializeField]
+        [Tooltip("화면에 보이는 아이템 수 대비 생성할 아이템의 배수. 예: 1.5 = 보이는 아이템 수의 1.5배")]
+        private float _itemMultiplier = 2f;
 
-        private Image[] _slotItemImages;
-        private RectTransform[] _slotItemTransforms;
+        [field: FoldoutGroup("#Component")]
+        [field: SerializeField]
+        public RectTransform MaskContainer { get; private set; }
+
+        [field: FoldoutGroup("#Component")]
+        [field: SerializeField]
+        public RectTransform ScrollContent { get; private set; }
+
+        [field: FoldoutGroup("#Setting")]
+        [field: SerializeField]
+        public float ItemHeight { get; } = 50f;
+
+        // 상태 관리
         private Sprite[] _availableSprites;
-        private bool _isInitialized = false;
         private bool _isScrolling = false;
         private float _scrollOffset = 0f;
-        private int _itemCountPerSlot = 0;
+        private int _itemCountPerSlot = 0; // 후보 수
+        private int _totalItemCount = 0; // 실제 생성된 아이템 수
+        private float _centerOffset = 0f; // 중앙 정렬을 위한 오프셋
 
-        public RectTransform MaskContainer => _maskContainer;
-        public RectTransform ScrollContent => _scrollContent;
-        public Image[] SlotItemImages => _slotItemImages;
-        public RectTransform[] SlotItemTransforms => _slotItemTransforms;
-        public float ItemHeight => _itemHeight;
-        public bool IsInitialized => _isInitialized;
+        // 프로퍼티
+        public int ItemCountPerSlot => _itemCountPerSlot;
+        public float CenterOffset => _centerOffset;
+
+        // 아이템 관리
+        public Image[] SlotItemImages { get; private set; }
+
+        public RectTransform[] SlotItemTransforms { get; private set; }
+        private int[] _itemSpriteIndices; // 각 아이템의 스프라이트 인덱스
+
+        public bool IsInitialized { get; private set; } = false;
 
         public override void AutoGetComponents()
         {
             base.AutoGetComponents();
 
-            _maskContainer ??= GetComponent<RectTransform>();
-            _scrollContent ??= this.FindComponent<RectTransform>("Scroll Content");
+            MaskContainer ??= GetComponent<RectTransform>();
+            ScrollContent ??= this.FindComponent<RectTransform>("Scroll Content");
         }
 
-        /// <summary>
-        /// 스크롤 시스템 초기화
-        /// </summary>
+        // ============================================
+        // 초기화
+        // ============================================
+
         private void Initialize(int itemCount)
         {
-            if (_scrollContent == null)
+            if (ScrollContent == null)
             {
                 Log.Error(LogTags.UI_SlotMachine, "ScrollContent가 null입니다.");
                 return;
             }
 
-            if (_maskContainer == null)
+            if (MaskContainer == null)
             {
                 Log.Warning(LogTags.UI_SlotMachine, "MaskContainer가 null입니다.");
             }
 
-            // 기존 아이템이 있다면 제거
-            if (_isInitialized && _slotItemTransforms != null)
+            if (IsInitialized)
             {
-                for (int i = 0; i < _slotItemTransforms.Length; i++)
-                {
-                    if (_slotItemTransforms[i] != null)
-                    {
-                        GameObject.Destroy(_slotItemTransforms[i].gameObject);
-                    }
-                }
+                DespawnSlotItems();
             }
 
             _itemCountPerSlot = itemCount;
+            _totalItemCount = CalculateTotalItemCount();
             SetupScrollContentSize();
             CreateSlotItems();
 
-            _isInitialized = true;
+            if (!IsInitialized)
+            {
+                IsInitialized = true;
+            }
         }
 
         /// <summary>
-        /// 스크롤 컨텐츠 크기 설정
+        /// 생성할 총 아이템 수 계산
         /// </summary>
+        private int CalculateTotalItemCount()
+        {
+            if (MaskContainer == null)
+            {
+                // MaskContainer가 없으면 후보 수의 기본 배수 사용
+                return Mathf.Max(_itemCountPerSlot * 2, _itemCountPerSlot + 3);
+            }
+
+            // 화면에 보이는 아이템 수 계산
+            float visibleHeight = MaskContainer.rect.height;
+            int visibleItemCount = Mathf.CeilToInt(visibleHeight / ItemHeight);
+
+            // 최소 개수 보장 (보이는 개수 + 여유분)
+            int minItemCount = visibleItemCount + 3;
+
+            // 후보 수의 배수로 계산
+            int multipliedCount = Mathf.CeilToInt(_itemCountPerSlot * _itemMultiplier);
+
+            // 두 값 중 더 큰 값 사용
+            return Mathf.Max(minItemCount, multipliedCount);
+        }
+
         private void SetupScrollContentSize()
         {
-            float totalHeight = _itemHeight * _itemCountPerSlot;
-            _scrollContent.sizeDelta = new Vector2(_scrollContent.sizeDelta.x, totalHeight);
+            float totalHeight = ItemHeight * _totalItemCount;
+            ScrollContent.sizeDelta = new Vector2(ScrollContent.sizeDelta.x, totalHeight);
         }
 
-        /// <summary>
-        /// 슬롯 아이템들 생성
-        /// </summary>
         private void CreateSlotItems()
         {
-            _slotItemImages = new Image[_itemCountPerSlot];
-            _slotItemTransforms = new RectTransform[_itemCountPerSlot];
+            SlotItemImages = new Image[_totalItemCount];
+            SlotItemTransforms = new RectTransform[_totalItemCount];
+            _itemSpriteIndices = new int[_totalItemCount];
 
-            for (int i = 0; i < _itemCountPerSlot; i++)
+            for (int i = 0; i < _totalItemCount; i++)
             {
                 CreateSlotItem(i);
             }
         }
 
-        /// <summary>
-        /// 개별 슬롯 아이템 생성
-        /// </summary>
         private void CreateSlotItem(int index)
         {
-            GameObject itemObj = ResourcesManager.SpawnPrefab("UISlotItem", _scrollContent);
+            GameObject itemObj = ResourcesManager.SpawnPrefab("UISlotItem", ScrollContent);
             if (itemObj == null)
             {
                 Log.Error(LogTags.UI_SlotMachine, "슬롯 아이템 프리팹을 생성할 수 없습니다. 인덱스: {0}", index);
@@ -119,8 +153,8 @@ namespace TeamSuneat.UserInterface
             rectTransform.anchorMin = new Vector2(0, 1);
             rectTransform.anchorMax = new Vector2(1, 1);
             rectTransform.pivot = new Vector2(0.5f, 1);
-            rectTransform.sizeDelta = new Vector2(_itemHeight, _itemHeight);
-            rectTransform.anchoredPosition = new Vector2(0, -index * _itemHeight);
+            rectTransform.sizeDelta = new Vector2(ItemHeight, ItemHeight);
+            rectTransform.anchoredPosition = new Vector2(0, -index * ItemHeight);
 
             Image image = itemObj.GetComponent<Image>();
             if (image == null)
@@ -131,13 +165,29 @@ namespace TeamSuneat.UserInterface
 
             image.preserveAspect = true;
 
-            _slotItemImages[index] = image;
-            _slotItemTransforms[index] = rectTransform;
+            SlotItemImages[index] = image;
+            SlotItemTransforms[index] = rectTransform;
         }
 
-        /// <summary>
-        /// 스크롤 시작
-        /// </summary>
+        private void DespawnSlotItems()
+        {
+            if (SlotItemTransforms != null)
+            {
+                for (int i = 0; i < SlotItemTransforms.Length; i++)
+                {
+                    if (SlotItemTransforms[i] != null)
+                    {
+                        ResourcesManager.Despawn(SlotItemTransforms[i].gameObject);
+                    }
+                }
+
+                SlotItemTransforms = null;
+            }
+
+            SlotItemImages = null;
+            _itemSpriteIndices = null;
+        }
+
         public void StartScrolling(Sprite[] sprites)
         {
             if (sprites == null || sprites.Length == 0)
@@ -146,8 +196,8 @@ namespace TeamSuneat.UserInterface
                 return;
             }
 
-            // 스프라이트 배열 길이만큼 아이템 개수 설정
-            if (!_isInitialized || _itemCountPerSlot != sprites.Length)
+            // 초기화
+            if (!IsInitialized || _itemCountPerSlot != sprites.Length)
             {
                 Initialize(sprites.Length);
             }
@@ -158,55 +208,14 @@ namespace TeamSuneat.UserInterface
             _isScrolling = true;
         }
 
-        /// <summary>
-        /// 스크롤 중지
-        /// </summary>
         public void StopScrolling()
         {
             _isScrolling = false;
         }
 
-        /// <summary>
-        /// 스크롤 아이템들 설정
-        /// </summary>
-        private void SetupScrollItems(Sprite[] sprites)
-        {
-            if (sprites == null || sprites.Length == 0 || _slotItemImages == null)
-            {
-                return;
-            }
-
-            for (int i = 0; i < _slotItemImages.Length; i++)
-            {
-                if (_slotItemImages[i] == null)
-                {
-                    continue;
-                }
-
-                _slotItemImages[i].SetSprite(sprites[i]);
-            }
-        }
-
-        /// <summary>
-        /// 스크롤 위치 초기화
-        /// </summary>
-        public void ResetScrollPosition()
-        {
-            if (_scrollContent == null)
-            {
-                return;
-            }
-
-            _scrollOffset = 0f;
-            _scrollContent.anchoredPosition = Vector2.zero;
-        }
-
-        /// <summary>
-        /// 스크롤 업데이트
-        /// </summary>
         public void UpdateScrolling()
         {
-            if (!_isScrolling || _scrollContent == null || _slotItemTransforms == null)
+            if (!_isScrolling || ScrollContent == null || SlotItemTransforms == null)
             {
                 return;
             }
@@ -214,95 +223,139 @@ namespace TeamSuneat.UserInterface
             UpdateScrollPosition();
         }
 
-        /// <summary>
-        /// 스크롤 위치 업데이트 (모듈러 방식)
-        /// </summary>
+        private void SetupScrollItems(Sprite[] sprites)
+        {
+            if (!sprites.IsValid() || !SlotItemImages.IsValid())
+            {
+                return;
+            }
+
+            // 각 아이템에 스프라이트를 순환 배치하고 인덱스 저장
+            for (int i = 0; i < SlotItemImages.Length; i++)
+            {
+                Image image = SlotItemImages[i];
+                if (image == null)
+                {
+                    continue;
+                }
+
+                int spriteIndex = i % sprites.Length;
+                _itemSpriteIndices[i] = spriteIndex;
+                image.SetSprite(sprites[spriteIndex]);
+            }
+        }
+
+        private void ResetScrollPosition()
+        {
+            if (ScrollContent != null && MaskContainer != null)
+            {
+                // ScrollContent는 고정
+                ScrollContent.anchoredPosition = Vector2.zero;
+                _scrollOffset = 0f;
+
+                // 중앙 정렬을 위한 오프셋 계산
+                float centerItemIndex = _itemCountPerSlot - 0.5f;
+                float centerItemPosition = centerItemIndex * ItemHeight;
+                float maskCenterY = MaskContainer.rect.height * 0.5f;
+                _centerOffset = centerItemPosition - maskCenterY;
+
+                // 각 아이템의 초기 위치를 중앙 정렬 오프셋을 포함하여 설정
+                UpdateItemPositions();
+            }
+        }
+
         private void UpdateScrollPosition()
         {
+            // 스크롤 오프셋 증가
             float deltaY = _scrollSpeed * Time.deltaTime;
             _scrollOffset += deltaY;
 
-            float totalHeight = _itemHeight * _itemCountPerSlot;
-
-            // 모듈러 연산으로 순환 (배경 스크롤링처럼)
-            if (_scrollOffset >= totalHeight)
+            // 하나의 아이템 높이만큼 지나갔는지 확인
+            if (_scrollOffset >= ItemHeight)
             {
-                _scrollOffset -= totalHeight;
-                // 모든 아이템을 한 칸씩 위로 이동하고 스프라이트 재할당
+                _scrollOffset -= ItemHeight;
                 ShiftItemsUp();
             }
 
-            _scrollContent.anchoredPosition = new Vector2(0, -_scrollOffset);
+            // 각 아이템의 위치를 개별적으로 업데이트
+            UpdateItemPositions();
         }
 
-        /// <summary>
-        /// 아이템들을 한 칸씩 위로 이동 (순환)
-        /// </summary>
-        private void ShiftItemsUp()
+        private void UpdateItemPositions()
         {
-            if (_slotItemImages == null || _slotItemTransforms == null || _slotItemImages.Length == 0)
+            if (SlotItemTransforms == null)
             {
                 return;
             }
 
-            // 가장 위 아이템을 임시로 저장
-            Image topImage = _slotItemImages[0];
-            RectTransform topTransform = _slotItemTransforms[0];
+            // 각 아이템의 기본 위치에서 스크롤 오프셋과 중앙 정렬 오프셋을 적용
+            for (int i = 0; i < SlotItemTransforms.Length; i++)
+            {
+                if (SlotItemTransforms[i] == null)
+                {
+                    continue;
+                }
+
+                // 기본 위치: -i * ItemHeight (위에서 아래로)
+                // 스크롤 오프셋: 아래로 이동 (양수면 아래로)
+                // 중앙 정렬 오프셋: 초기 위치 조정
+                float baseY = -i * ItemHeight;
+                float finalY = baseY + _scrollOffset + _centerOffset;
+
+                SlotItemTransforms[i].anchoredPosition = new Vector2(0, finalY);
+            }
+        }
+
+        private void ShiftItemsUp()
+        {
+            if (SlotItemImages == null || SlotItemTransforms == null || _itemSpriteIndices == null)
+            {
+                return;
+            }
+
+            if (SlotItemImages.Length == 0 || _availableSprites == null || _availableSprites.Length == 0)
+            {
+                return;
+            }
+
+            int totalItemCount = SlotItemImages.Length;
+
+            // 가장 위 아이템 정보 저장
+            Image topImage = SlotItemImages[0];
+            RectTransform topTransform = SlotItemTransforms[0];
 
             // 모든 아이템을 한 칸씩 위로 이동
-            for (int i = 0; i < _itemCountPerSlot - 1; i++)
+            for (int i = 0; i < totalItemCount - 1; i++)
             {
-                _slotItemImages[i] = _slotItemImages[i + 1];
-                _slotItemTransforms[i] = _slotItemTransforms[i + 1];
-                _slotItemTransforms[i].anchoredPosition = new Vector2(0, -i * _itemHeight);
+                SlotItemImages[i] = SlotItemImages[i + 1];
+                SlotItemTransforms[i] = SlotItemTransforms[i + 1];
+                _itemSpriteIndices[i] = _itemSpriteIndices[i + 1];
             }
 
             // 가장 위 아이템을 가장 아래로 이동
-            _slotItemImages[_itemCountPerSlot - 1] = topImage;
-            _slotItemTransforms[_itemCountPerSlot - 1] = topTransform;
-            _slotItemTransforms[_itemCountPerSlot - 1].anchoredPosition = new Vector2(0, -(_itemCountPerSlot - 1) * _itemHeight);
+            SlotItemImages[totalItemCount - 1] = topImage;
+            SlotItemTransforms[totalItemCount - 1] = topTransform;
 
-            // 새로운 랜덤 스프라이트 할당
-            // AssignRandomSprite(_itemCountPerSlot - 1);
+            // 가장 아래로 이동한 아이템의 스프라이트를 업데이트
+            // 이동 전 가장 아래 아이템의 다음 스프라이트가 되어야 함
+            int bottomSpriteIndexBeforeShift = _itemSpriteIndices[totalItemCount - 1];
+            int nextSpriteIndex = (bottomSpriteIndexBeforeShift + 1) % _availableSprites.Length;
+            _itemSpriteIndices[totalItemCount - 1] = nextSpriteIndex;
+            topImage.SetSprite(_availableSprites[nextSpriteIndex]);
+
+            // 모든 아이템의 위치를 재계산 (UpdateItemPositions에서 처리)
         }
 
-        /// <summary>
-        /// 아이템에 랜덤 스프라이트 할당
-        /// </summary>
-        private void AssignRandomSprite(int itemIndex)
-        {
-            if (_availableSprites == null || _availableSprites.Length == 0 || _slotItemImages[itemIndex] == null)
-            {
-                return;
-            }
-
-            Sprite randomSprite = _availableSprites[Random.Range(0, _availableSprites.Length)];
-            _slotItemImages[itemIndex].SetSprite(randomSprite);
-        }
-
-        /// <summary>
-        /// 리셋
-        /// </summary>
         public void Reset()
         {
             _isScrolling = false;
             ResetScrollPosition();
+            DespawnSlotItems();
 
-            // 생성된 아이템들 제거
-            if (_slotItemTransforms != null)
-            {
-                for (int i = 0; i < _slotItemTransforms.Length; i++)
-                {
-                    if (_slotItemTransforms[i] != null)
-                    {
-                        GameObject.Destroy(_slotItemTransforms[i].gameObject);
-                    }
-                }
-            }
-
-            _slotItemImages = null;
-            _slotItemTransforms = null;
-            _isInitialized = false;
+            SlotItemImages = null;
+            SlotItemTransforms = null;
+            _itemSpriteIndices = null;
+            IsInitialized = false;
         }
     }
 }

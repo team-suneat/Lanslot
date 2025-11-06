@@ -532,8 +532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 060a5ea36575ea648b9ebaa393b81e03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maskContainer: {fileID: 2735266050964075246}
-  _scrollContent: {fileID: 6413423468479131394}
   _scrollSpeed: 500
-  _itemCountPerSlot: 5
-  _itemHeight: 50
+  _itemMultiplier: 2
+  <MaskContainer>k__BackingField: {fileID: 2735266050964075246}
+  <ScrollContent>k__BackingField: {fileID: 6413423468479131394}

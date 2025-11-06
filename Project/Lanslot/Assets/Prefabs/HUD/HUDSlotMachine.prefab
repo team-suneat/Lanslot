@@ -497,11 +497,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actionButton: {fileID: 399454009936180723}
   _buttonText: {fileID: 7377524569497704605}
-  _spinText: "\uC2A4\uD540"
-  _stopText: "\uC2A4\uD1B1"
-  OnSpinRequested:
-    m_PersistentCalls:
-      m_Calls: []
   OnStopRequested:
     m_PersistentCalls:
       m_Calls: []
@@ -624,7 +619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 460ed67952e449b469dea863443cb70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _actionButtonComponent: {fileID: 5199878553460989423}
+  _actionButton: {fileID: 0}
   _items:
   - {fileID: 7016653418213850959}
   - {fileID: 6352745015677623536}
@@ -972,14 +967,32 @@ PrefabInstance:
       propertyPath: _itemHeight
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 7796544514214695157, guid: a8b39f16b260dfd4fb51119ccbe2bfcf, type: 3}
+      propertyPath: <MaskContainer>k__BackingField
+      value: 
+      objectReference: {fileID: 2032884563535510591}
+    - target: {fileID: 7796544514214695157, guid: a8b39f16b260dfd4fb51119ccbe2bfcf, type: 3}
+      propertyPath: <ScrollContent>k__BackingField
+      value: 
+      objectReference: {fileID: 6972367085851943379}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8b39f16b260dfd4fb51119ccbe2bfcf, type: 3}
+--- !u!224 &2032884563535510591 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2735266050964075246, guid: a8b39f16b260dfd4fb51119ccbe2bfcf, type: 3}
+  m_PrefabInstance: {fileID: 4162412675219754705}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2074451826653221402 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2669001479261379787, guid: a8b39f16b260dfd4fb51119ccbe2bfcf, type: 3}
+  m_PrefabInstance: {fileID: 4162412675219754705}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &6972367085851943379 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6413423468479131394, guid: a8b39f16b260dfd4fb51119ccbe2bfcf, type: 3}
   m_PrefabInstance: {fileID: 4162412675219754705}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &7016653418213850959 stripped

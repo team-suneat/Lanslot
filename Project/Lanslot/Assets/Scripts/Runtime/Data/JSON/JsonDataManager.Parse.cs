@@ -97,6 +97,18 @@ namespace TeamSuneat.Data
                     }
                     break;
 
+                case _Sheet.Stage:
+                    {
+                        ParseStageJsonData(sheet, jsonData);
+                    }
+                    break;
+
+                case _Sheet.Wave:
+                    {
+                        ParseWaveJsonData(sheet, jsonData);
+                    }
+                    break;
+
                 //───────────────────────────────────────────────────────────────────────────────────────
                 case _Sheet.Stat:
                     {
@@ -305,6 +317,41 @@ namespace TeamSuneat.Data
                 {
                     LogErrorSameKeyAlreadyExists(dataList[i].Rank.ToString(), sheet.ToString());
                 }
+            }
+
+            Log.Progress(LogTags.JsonData, $"({sheet.ToSelectString()}) Json 데이터를 읽어옵니다. 불러온 데이터의 수: {dataList.Count.ToSelectString()})");
+        }
+
+        private static void ParseStageJsonData(_Sheet sheet, string jsonData)
+        {
+            List<StageData> dataList = DeserializeJsonData<StageData>(jsonData);
+
+            for (int i = 0; i < dataList.Count; i++)
+            {
+                dataList[i].Refresh();
+
+                if (!_stageSheetData.ContainsKey(dataList[i].GetKey()))
+                {
+                    _stageSheetData.Add(dataList[i].GetKey(), dataList[i]);
+                }
+                else
+                {
+                    LogErrorSameKeyAlreadyExists(dataList[i].Name.ToString(), sheet.ToString());
+                }
+            }
+
+            Log.Progress(LogTags.JsonData, $"({sheet.ToSelectString()}) Json 데이터를 읽어옵니다. 불러온 데이터의 수: {dataList.Count.ToSelectString()})");
+        }
+
+        private static void ParseWaveJsonData(_Sheet sheet, string jsonData)
+        {
+            List<WaveData> dataList = DeserializeJsonData<WaveData>(jsonData);
+
+            for (int i = 0; i < dataList.Count; i++)
+            {
+                dataList[i].Refresh();
+
+                _waveSheetData.Add(dataList[i].GetKey(), dataList[i]);
             }
 
             Log.Progress(LogTags.JsonData, $"({sheet.ToSelectString()}) Json 데이터를 읽어옵니다. 불러온 데이터의 수: {dataList.Count.ToSelectString()})");

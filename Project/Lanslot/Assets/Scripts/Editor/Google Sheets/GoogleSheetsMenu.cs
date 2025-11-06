@@ -24,6 +24,8 @@ namespace TeamSuneat
                 GoogleSheetDatasetGids.Weapon,
                 GoogleSheetDatasetGids.WeaponLevel,
                 GoogleSheetDatasetGids.Potion,
+                GoogleSheetDatasetGids.Stage,
+                GoogleSheetDatasetGids.Wave,
                 GoogleSheetDatasetGids.String,
                 GoogleSheetDatasetGids.CharacterLevelExp,
                 GoogleSheetDatasetGids.CharacterRankExp,
@@ -63,6 +65,8 @@ namespace TeamSuneat
             ConvertWeaponToJson();
             ConvertWeaponLevelToJson();
             ConvertPotionToJson();
+            ConvertStageToJson();
+            ConvertWaveToJson();
             ConvertStringToJson();
             ConvertCharacterLevelExpToJson();
             ConvertCharacterRankExpToJson();
@@ -108,6 +112,18 @@ namespace TeamSuneat
         public static async void ConvertPotionToJson()
         {
             ConvertCacheToJson<PotionData>("Potion", GoogleSheetDatasetGids.Potion);
+        }
+
+        [MenuItem("Tools/Google Sheets/Convert To Json/Stage")]
+        public static async void ConvertStageToJson()
+        {
+            ConvertCacheToJson<StageData>("Stage", GoogleSheetDatasetGids.Stage);
+        }
+
+        [MenuItem("Tools/Google Sheets/Convert To Json/Wave")]
+        public static async void ConvertWaveToJson()
+        {
+            ConvertCacheToJson<WaveData>("Wave", GoogleSheetDatasetGids.Wave);
         }
 
         [MenuItem("Tools/Google Sheets/Convert To Json/String")]

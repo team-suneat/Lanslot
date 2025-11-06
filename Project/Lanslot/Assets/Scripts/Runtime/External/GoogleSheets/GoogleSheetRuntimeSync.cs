@@ -94,6 +94,12 @@ namespace TeamSuneat
                 case GoogleSheetDatasetId.Potion:
                     return ProcessDatasetInternal<PotionData>(datasetId, gid, rows, datasetName, JsonDataManager.SetPotionData);
 
+                case GoogleSheetDatasetId.Stage:
+                    return ProcessDatasetInternal<StageData>(datasetId, gid, rows, datasetName, JsonDataManager.SetStageData);
+
+                case GoogleSheetDatasetId.Wave:
+                    return ProcessDatasetInternal<WaveData>(datasetId, gid, rows, datasetName, JsonDataManager.SetWaveData);
+
                 case GoogleSheetDatasetId.String:
                     return ProcessDatasetInternal<StringData>(datasetId, gid, rows, datasetName, JsonDataManager.SetStringData);
 

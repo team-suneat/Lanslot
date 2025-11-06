@@ -16,6 +16,8 @@ namespace TeamSuneat
         Weapon,
         WeaponLevel,
         Potion,
+        Stage,
+        Wave,
         String,
         CharacterLevelExp,
         CharacterRankExp,
@@ -36,6 +38,8 @@ namespace TeamSuneat
         public const string Weapon = "700832083";
         public const string WeaponLevel = "1159863095";
         public const string Potion = "1558675697";
+        public const string Stage = "1085377210";
+        public const string Wave = "500721965";
         public const string String = "595378682";
         public const string CharacterLevelExp = "913942234";
         public const string CharacterRankExp = "2053898515";
@@ -49,6 +53,8 @@ namespace TeamSuneat
         { GoogleSheetDatasetId.Weapon, Weapon },
         { GoogleSheetDatasetId.WeaponLevel, WeaponLevel },
         { GoogleSheetDatasetId.Potion, Potion },
+        { GoogleSheetDatasetId.Stage, Stage },
+        { GoogleSheetDatasetId.Wave, Wave },
         { GoogleSheetDatasetId.String, String },
         { GoogleSheetDatasetId.CharacterLevelExp, CharacterLevelExp },
         { GoogleSheetDatasetId.CharacterRankExp, CharacterRankExp },

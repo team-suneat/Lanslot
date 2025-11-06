@@ -10,6 +10,7 @@ namespace TeamSuneat.Data.Game
         public List<StageNames> Stages = new();
         public List<string> StageStrings = new();
 
+        [NonSerialized]
         public StageNames CurrentStage;
         public string CurrentStageString;
 
@@ -57,7 +58,11 @@ namespace TeamSuneat.Data.Game
 
         public static VCharacterStage CreateDefault()
         {
-            return new VCharacterStage();
+            return new VCharacterStage()
+            {
+                CurrentStage = StageNames.Stage1,
+                CurrentStageString = StageNames.Stage1.ToString(),
+            };
         }
     }
 }

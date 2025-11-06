@@ -2,7 +2,6 @@ using Sirenix.OdinInspector;
 using TeamSuneat.Data;
 using TeamSuneat.Data.Game;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace TeamSuneat.UserInterface
@@ -48,10 +47,8 @@ namespace TeamSuneat.UserInterface
 
         private void BindCharacterBasicInfo(PlayerCharacterData data, bool isLocked)
         {
-            // 캐릭터 아이콘: 잠금된 경우 CharacterNames.None으로 스프라이트 가져오기
-            CharacterNames spriteCharacterName = isLocked ? CharacterNames.None : data.Name;
-            string spriteName = SpriteEx.GetSpriteName(spriteCharacterName);
-            _ = (iconImage?.TrySetSprite(spriteName));
+            Sprite sprite = SpriteEx.LoadSprite(data.Name);
+            iconImage?.SetSprite(sprite);
             nameText?.SetText(data.DisplayName);
         }
 
@@ -84,7 +81,7 @@ namespace TeamSuneat.UserInterface
             }
 
             CharacterRankExpData rankExpData = JsonDataManager.FindCharacterRankExpDataClone(characterInfo.Rank);
-            
+
             // 다음 랭크 데이터가 없거나 필요 경험치가 0이면 최대 랭크 (100%)
             if (rankExpData == null || rankExpData.RequiredExperience <= 0)
             {
@@ -107,8 +104,8 @@ namespace TeamSuneat.UserInterface
             }
             else
             {
-                string spriteName = SpriteEx.GetSpriteName(data.Weapon);
-                _ = (weaponIconImage?.TrySetSprite(spriteName, false));
+                Sprite sprite = SpriteEx.LoadSprite(data.Weapon);
+                weaponIconImage?.SetSprite(sprite, false);
                 weaponNameText?.SetText(data.Weapon.GetLocalizedString());
                 weaponDescText?.SetText(data.Weapon.GetDescString());
             }

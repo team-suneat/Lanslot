@@ -17,6 +17,8 @@ namespace TeamSuneat
             { GoogleSheetDatasetGids.Weapon, new WeaponRowConverter() },
             { GoogleSheetDatasetGids.WeaponLevel, new WeaponLevelRowConverter() },
             { GoogleSheetDatasetGids.Potion, new PotionRowConverter() },
+            { GoogleSheetDatasetGids.Stage, new StageRowConverter() },
+            { GoogleSheetDatasetGids.Wave, new WaveRowConverter() },
             { GoogleSheetDatasetGids.String, new StringRowConverter() },
             { GoogleSheetDatasetGids.CharacterLevelExp, new CharacterLevelExpRowConverter() },
             { GoogleSheetDatasetGids.CharacterRankExp, new CharacterRankExpRowConverter() },

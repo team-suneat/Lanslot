@@ -70,10 +70,31 @@ namespace TeamSuneat.UserInterface
             float maskHeight = _scroller.MaskContainer != null ? _scroller.MaskContainer.rect.height : _scroller.ItemHeight;
             float itemHeight = _scroller.ItemHeight;
 
-            // 아이템의 중심이 마스크 중심에 오도록 계산
+            // 현재 스크롤 위치 가져오기
+            float currentScrollY = _scroller.ScrollContent.anchoredPosition.y;
+
+            // 목표 아이템의 실제 화면 위치 계산 (FindClosestItemIndexToCenter와 동일한 방식)
             // 아이템의 anchoredPosition은 위쪽 피벗 기준이므로, 중심은 Y - itemHeight/2
+            float itemCenterY = currentScrollY + targetItemTransform.anchoredPosition.y - (itemHeight * 0.5f);
+
+            // 목표 아이템이 위쪽에 있으면 아래로 한 바퀴 더 돌도록 조정
+            // 스크롤은 아래 방향이므로, 위쪽에 있는 아이템은 한 바퀴 더 돌아서 접근
+            // anchoredPosition은 수정하지 않고, 계산 시에만 조정된 값을 사용하여 모든 아이템의 상대 위치 유지
+            float adjustedItemY = targetItemTransform.anchoredPosition.y;
+            if (itemCenterY > 0)
+            {
+                float totalItemHeight = itemHeight * _scroller.SlotItemImages.Length;
+                
+                // 목표 아이템이 아래쪽에서 나타나도록 조정된 anchoredPosition 계산
+                // (실제로는 수정하지 않고 계산에만 사용)
+                adjustedItemY = targetItemTransform.anchoredPosition.y - totalItemHeight;
+                
+                // 조정된 위치로 itemCenterY 재계산
+                itemCenterY = currentScrollY + adjustedItemY - (itemHeight * 0.5f);
+            }
+
+            // 목표 스크롤 위치 계산
             // 스크롤 컨텐츠의 Y 위치를 조정하여 아이템 중심이 마스크 중심(0)에 오도록 함
-            float itemCenterY = targetItemTransform.anchoredPosition.y - (itemHeight * 0.5f);
             float targetScrollY = -itemCenterY;
 
             // DOTween으로 부드럽게 이동

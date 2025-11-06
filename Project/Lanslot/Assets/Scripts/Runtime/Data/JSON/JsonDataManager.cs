@@ -22,6 +22,7 @@ namespace TeamSuneat.Data
         private static readonly ListMultiMap<int, WeaponLevelData> _weaponLevelSheetData = new();
         private static readonly Dictionary<int, PotionData> _potionSheetData = new();
         private static readonly Dictionary<int, StageData> _stageSheetData = new();
+        private static readonly ListMultiMap<int, WaveData> _waveSheetData = new();
         private static readonly Dictionary<string, StringData> _stringSheetData = new();
         private static readonly Dictionary<int, CharacterLevelExpData> _characterLevelExpSheetData = new();
         private static readonly Dictionary<int, CharacterRankExpData> _characterRankExpSheetData = new();
@@ -38,6 +39,7 @@ namespace TeamSuneat.Data
             _weaponLevelSheetData.Clear();
             _potionSheetData.Clear();
             _stageSheetData.Clear();
+            _waveSheetData.Clear();
             _stringSheetData.Clear();
             _characterLevelExpSheetData.Clear();
             _characterRankExpSheetData.Clear();
@@ -315,6 +317,26 @@ namespace TeamSuneat.Data
                     continue;
                 }
                 _characterRankExpSheetData.Add(key, item);
+            }
+        }
+
+        public static void SetWaveData(IEnumerable<WaveData> list)
+        {
+            _waveSheetData.Clear();
+            if (list == null)
+            {
+                return;
+            }
+
+            foreach (WaveData item in list)
+            {
+                if (item == null)
+                {
+                    continue;
+                }
+
+                int key = item.GetKey();
+                _waveSheetData.Add(key, item);
             }
         }
     }

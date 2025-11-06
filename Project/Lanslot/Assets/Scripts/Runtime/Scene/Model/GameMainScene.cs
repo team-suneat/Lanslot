@@ -111,10 +111,13 @@ namespace TeamSuneat
 
         #region Stage Loading
 
-        private void LoadStage()
+        private async void LoadStage()
         {
             try
             {
+                // GameApp 초기화 완료 대기
+                await WaitForGameAppInitialized();
+
                 // 현재 스테이지 정보 가져오기
                 Data.Game.VProfile profileInfo = GameApp.GetSelectedProfile();
                 if (profileInfo == null)
@@ -140,7 +143,7 @@ namespace TeamSuneat
                 }
 
                 // StageSystem 프리팹 인스턴스화
-                // CreateStageSystem(currentStageName);
+                CreateStageSystem(currentStageName);
             }
             catch (System.Exception ex)
             {
@@ -148,10 +151,19 @@ namespace TeamSuneat
             }
         }
 
-        private async void CreateStageSystem(StageNames stageName)
+        private async System.Threading.Tasks.Task WaitForGameAppInitialized()
         {
-            _ = await ResourcesManager.LoadResourcesByLabelAsync<UnityEngine.GameObject>(stageName.ToString());
+            // GameApp이 존재하고 초기화될 때까지 대기
+            while (GameApp.Instance == null || !GameApp.Instance.IsInitialized)
+            {
+                await System.Threading.Tasks.Task.Delay(10); // 10ms마다 체크
+            }
 
+            Log.Info(LogTags.Stage, "GameApp 초기화 완료 확인");
+        }
+
+        private void CreateStageSystem(StageNames stageName)
+        {
             _currentStageSystem = ResourcesManager.SpawnStage(stageName, transform);
             _currentStageSystem.Initialize();
             _currentStageSystem.StartStage();

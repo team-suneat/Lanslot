@@ -71,8 +71,8 @@ namespace TeamSuneat.UserInterface
         private void BindWeaponBasicInfo(WeaponData weaponData)
         {
             // 무기 아이콘
-            string spriteName = SpriteEx.GetSpriteName(weaponData.Name);
-            _weaponIconImage?.TrySetSprite(spriteName, false);
+            Sprite sprite = SpriteEx.LoadSprite(weaponData.Name);
+            _weaponIconImage?.SetSprite(sprite, false);
 
             // 무기 이름
             _weaponNameText?.SetText(weaponData.Name.GetLocalizedString());
