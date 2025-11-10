@@ -9,7 +9,7 @@ namespace TeamSuneat
         {
             base.AutoGetComponents();
 
-            Owner = this.FindFirstParentComponent<Character>();            
+            Owner = this.FindFirstParentComponent<Character>();
             Collider = GetComponent<Collider2D>();
             Colliders = this.GetComponentsInOnlyChildren<Collider2D>();
 
@@ -64,12 +64,6 @@ namespace TeamSuneat
                     Collider = gameObject.AddComponent<Collider2D>();
                 }
             }
-        }
-
-        public override void AutoSetting()
-        {
-            base.AutoSetting();
-            RefreshLayerAndTag();
         }
 
         public override void AutoNaming()

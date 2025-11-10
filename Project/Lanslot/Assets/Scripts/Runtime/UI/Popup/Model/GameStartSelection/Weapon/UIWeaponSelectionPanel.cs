@@ -29,6 +29,14 @@ namespace TeamSuneat.UserInterface
             // 셀 컴포넌트 자동 찾기
             _weaponCells = GetComponentsInChildren<UIWeaponCell>();
             _weaponInfoPanel ??= GetComponentInChildren<UIWeaponInfoPanel>();
+
+            if (_weaponCells.IsValid())
+            {
+                for (int i = 0; i < _weaponCells.Length; i++)
+                {
+                    _weaponCells[i].RegisterClickEvent(OnSelectWeapon);
+                }
+            }
         }
 
         public void Setup()
@@ -64,7 +72,6 @@ namespace TeamSuneat.UserInterface
                     bool isLocked = !(profileInfo?.Weapon.CheckUnlocked(weaponData.Name) ?? false);
 
                     _weaponCells[i].Setup(weaponData, i, isSelected, isDecided, isLocked);
-                    _weaponCells[i].RegisterClickEvent(OnSelectWeapon);
                     _weaponCells[i].SetActive(true);
                 }
                 else

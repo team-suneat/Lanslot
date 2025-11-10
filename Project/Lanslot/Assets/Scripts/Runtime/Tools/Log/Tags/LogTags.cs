@@ -48,7 +48,6 @@
         /// <summary> 버프 </summary>
         Buff,
 
-      
         /// <summary> 피해량 계산 </summary>
         Damage,
 
@@ -108,7 +107,6 @@
         /// <summary> 게임 데이터 : 스테이지 </summary>
         GameData_Stage,
 
-
         /// <summary> 게임 데이터 : 통계 </summary>
         GameData_Statistics,
 
@@ -163,7 +161,6 @@
 
         #region MapObject
 
-   
         /// <summary> 포지션 그룹 </summary>
         PositionGroup,
 
@@ -211,15 +208,9 @@
 
         #region Stage
 
-
-        Stage, // 스테이지
-        Stage_Monster, // 스테이지 몬스터
-        Stage_Reward, // 스테이지 보상
-
-        Tile, // 타일
-        Collision, // 충돌체
-
-      
+        Stage,
+        Stage_Monster,
+        Tile,
 
         #endregion Stage
 
@@ -275,13 +266,8 @@
         /// <summary> UI 게이지 </summary>
         UI_Gauge,
 
-
         /// <summary> UI 인벤토리 </summary>
         UI_Inventory,
-
-        /// <summary> UI 대장장이 </summary>
-        UI_Blacksmith,
-
 
         /// <summary> UI 팝업 </summary>
         UI_Popup,

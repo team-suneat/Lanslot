@@ -45,17 +45,11 @@ namespace TeamSuneat
                 return false;
             }
 
-            if (!row.TryGetValue("EliteSpawnChance", out string eliteSpawnChanceStr) || !GoogleSheetValueParsers.TryParseFloat(eliteSpawnChanceStr, out float eliteSpawnChance))
-            {
-                Log.Warning($"StageName {stageName}, WaveNumber {waveNumber}: EliteSpawnChance 파싱 실패: {eliteSpawnChanceStr}");
-                return false;
-            }
-
-            if (!row.TryGetValue("WaveType", out string waveTypeStr) || !GoogleSheetValueParsers.TryParseEnum<WaveTypes>(waveTypeStr, out WaveTypes waveType))
+            if (!row.TryGetValue("Type", out string waveTypeStr) || !GoogleSheetValueParsers.TryParseEnum<WaveTypes>(waveTypeStr, out WaveTypes waveType))
             {
                 Log.Warning($"StageName {stageName}, WaveNumber {waveNumber}: WaveType 파싱 실패: {waveTypeStr}");
                 return false;
-            }           
+            }
 
             CharacterNames monster1 = CharacterNames.None;
             float monster1Chance = 0f;
@@ -99,7 +93,6 @@ namespace TeamSuneat
                 SpawnColumn = spawnColumn,
                 MinMonsterCount = minMonsterCount,
                 MaxMonsterCount = maxMonsterCount,
-                EliteSpawnChance = eliteSpawnChance,
                 Monster1 = monster1,
                 Monster1Chance = monster1Chance,
                 Monster2 = monster2,
@@ -113,4 +106,3 @@ namespace TeamSuneat
         }
     }
 }
-

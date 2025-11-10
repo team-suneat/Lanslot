@@ -6,7 +6,13 @@ namespace TeamSuneat
     {
         internal static StageSystem SpawnStage(StageNames stageName, Transform point)
         {
-            return SpawnPrefab<StageSystem>(stageName.ToString(), point);
+            StageSystem stageSystem = SpawnPrefab<StageSystem>(stageName.ToString(), point);
+            if (stageSystem != null)
+            {
+                stageSystem.ResetLocalTransform();
+            }
+
+            return stageSystem;
         }
     }
 }

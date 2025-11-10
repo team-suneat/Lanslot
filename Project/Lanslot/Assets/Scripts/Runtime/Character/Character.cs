@@ -105,9 +105,6 @@ namespace TeamSuneat
             AddCharacterStats();
             InitializeStateMachines();
 
-            IsBlockInput = false;
-            UnlockFlip();
-
             AssignAnimator();
             InitializeAbilities();
             ChangeConditionState(CharacterConditions.Normal);
@@ -180,7 +177,7 @@ namespace TeamSuneat
             }
 
             UpdateAnimators();
-            RotateModel();
+            
 
             Passive?.LogicUpdate();
         }
@@ -195,26 +192,7 @@ namespace TeamSuneat
             PhysicsProcessAbilities();
         }
 
-        #endregion Update
-
-        protected virtual void RotateModel()
-        {
-            if (!RotateModelOnDirectionChange)
-            {
-                return;
-            }
-
-            if (ModelRotationSpeed > 0f)
-            {
-                var angle = CharacterModel.transform.localEulerAngles;
-                var time = Time.deltaTime * ModelRotationSpeed;
-                CharacterModel.transform.localEulerAngles = Vector3.Lerp(angle, _targetModelRotation, time);
-            }
-            else
-            {
-                CharacterModel.transform.localEulerAngles = _targetModelRotation;
-            }
-        }
+        #endregion Update       
 
         protected virtual void RefreshGameLayer()
         {
@@ -286,25 +264,6 @@ namespace TeamSuneat
         }
 
         #endregion 상태 (State) : 움직임 또는 조건
-
-        #region 정지 (Freeze)
-
-        public virtual void Freeze()
-        {
-            if (ConditionState.CurrentState != CharacterConditions.Frozen)
-            {
-                _conditionStateBeforeFreeze = ConditionState.CurrentState;
-            }
-
-            ChangeConditionState(CharacterConditions.Frozen);
-        }
-
-        public virtual void UnFreeze()
-        {
-            ChangeConditionState(_conditionStateBeforeFreeze);
-        }
-
-        #endregion 정지 (Freeze)
 
         #region 데미지 시 (On Damage)
 

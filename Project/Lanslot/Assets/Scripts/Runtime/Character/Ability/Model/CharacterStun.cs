@@ -138,7 +138,7 @@ namespace TeamSuneat
         {
             bool isStunned = _conditionState.CurrentState == CharacterConditions.Stunned;
 
-            Animator?.UpdateAnimatorBool(_stunnedAnimationParameter, isStunned, Owner.AnimatorParameters, Owner.PerformAnimatorSanityChecks);
+            Animator?.UpdateAnimatorBool(_stunnedAnimationParameter, isStunned, Owner.AnimatorParameters);
         }
     }
 }

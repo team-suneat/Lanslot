@@ -8,7 +8,6 @@ namespace TeamSuneat
         protected override void OnStart()
         {
             base.OnStart();
-            RefreshLayerAndTag();
             Life.RegisterOnDeathEvent(OnDeath);
         }
 
@@ -16,21 +15,6 @@ namespace TeamSuneat
         {
             base.OnRelease();
             Life.UnregisterOnDeathEvent(OnDeath);
-        }
-
-        private void RefreshLayerAndTag()
-        {
-            tag = GameTags.Vital.ToString();
-
-            if (Owner != null)
-            {
-                gameObject.SetLayer(Owner.Layer);
-            }
-
-            if (gameObject.layer == GameLayers.Default)
-            {
-                LogErrorVitalLayer();
-            }
         }
 
         public virtual void OnBattleReady()

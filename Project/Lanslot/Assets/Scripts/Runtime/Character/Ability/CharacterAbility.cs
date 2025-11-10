@@ -68,11 +68,6 @@ namespace TeamSuneat
 
         protected bool _abilityInitialized = false;
 
-        [FoldoutGroup("#For Dev", 4)][SerializeField][ReadOnly] protected float _horizontalInput;
-        [FoldoutGroup("#For Dev", 4)][SerializeField][ReadOnly] protected float _verticalInput;
-
-        public Vector2 DirectionalInput => new Vector2(_horizontalInput, _verticalInput);
-
         protected bool _startFeedbackIsPlaying = false;
 
         public override void AutoGetComponents()
@@ -160,7 +155,6 @@ namespace TeamSuneat
 
         public virtual void EarlyProcessAbility()
         {
-            InternalHandleInput();
         }
 
         public virtual void ProcessAbility()
@@ -196,49 +190,6 @@ namespace TeamSuneat
         }
 
         #endregion Animator & Renderer
-
-        #region Input
-
-        protected virtual void InternalHandleInput()
-        {
-            if (GameInputManager.Instance == null)
-            {
-                return;
-            }
-
-            if (!Owner.IsAlive)
-            {
-                return;
-            }
-
-            if (Owner.IsBlockInput || GameSetting.Instance.Input.IsBlockCharacterInput)
-            {
-                ResetInput();
-
-                return;
-            }
-
-            if (Owner.IsPlayer)
-            {
-                // 턴제 게임에서는 캐릭터 이동이 없으므로 입력값을 0으로 설정
-                _verticalInput = 0f;
-                _horizontalInput = 0f;
-            }
-
-            HandleInput();
-        }
-
-        protected virtual void HandleInput()
-        {
-        }
-
-        public virtual void ResetInput()
-        {
-            _horizontalInput = 0f;
-            _verticalInput = 0f;
-        }
-
-        #endregion Input
 
         #region Feedback
 

@@ -1,5 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using TeamSuneat.Data;
+using TMPro;
 using UnityEngine;
 
 namespace TeamSuneat
@@ -9,12 +10,16 @@ namespace TeamSuneat
         [FoldoutGroup("#Character/Component/Monster")]
         [SerializeField] private DropObjectSpawner _dropObjectSpawner;
 
+        [FoldoutGroup("#Character/Component/Monster")]
+        [SerializeField] private TextMeshPro _nameText;
+
         public override Transform Target => null;
 
         public override void AutoGetComponents()
         {
             base.AutoGetComponents();
             _dropObjectSpawner = GetComponentInChildren<DropObjectSpawner>();
+            _nameText = GetComponentInChildren<TextMeshPro>();
         }
 
         protected override void OnStart()
@@ -24,6 +29,11 @@ namespace TeamSuneat
 
         public override void Initialize()
         {
+            if (_nameText != null)
+            {
+                _nameText.SetText(Name.GetLocalizedString());
+            }
+
             SetupLevel();
 
             base.Initialize();
@@ -57,16 +67,6 @@ namespace TeamSuneat
         public override void SetTarget(Character targetCharacter)
         {
             TargetCharacter = targetCharacter;
-        }
-
-        public override void SetTargetCamp(CharacterCamps characterCamp)
-        {
-            // 턴제 게임에서는 AI가 없으므로 빈 구현
-        }
-
-        public override void ExitCrwodControlToState()
-        {
-            // 턴제 게임에서는 AI가 없으므로 빈 구현
         }
 
         //

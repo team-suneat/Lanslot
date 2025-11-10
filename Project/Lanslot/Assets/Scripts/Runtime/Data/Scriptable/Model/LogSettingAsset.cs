@@ -78,9 +78,7 @@ namespace TeamSuneat
 
         [FoldoutGroup("[지역]")][SuffixLabel("스테이지")] public bool Stage;
         [FoldoutGroup("[지역]")][SuffixLabel("스테이지 몬스터")] public bool Stage_Monster;
-        [FoldoutGroup("[지역]")][SuffixLabel("스테이지 보상")] public bool Stage_Reward;
         [FoldoutGroup("[지역]")][SuffixLabel("타일")] public bool Tile;
-        [FoldoutGroup("[지역]")][SuffixLabel("타일")] public bool Collision;
 
         [FoldoutGroup("[글로벌]")][SuffixLabel("글로벌 이벤트")] public bool Global;
         [FoldoutGroup("[글로벌]")][SuffixLabel("스트링 텍스트")] public bool String;
@@ -91,8 +89,7 @@ namespace TeamSuneat
         [FoldoutGroup("[UI]")][SuffixLabel("게이지")] public bool UI_Gauge;
         [FoldoutGroup("[UI]")][SuffixLabel("팝업")] public bool UI_Popup;
         [FoldoutGroup("[UI]")][SuffixLabel("상세정보")] public bool UI_Details;
-        [FoldoutGroup("[UI]")][SuffixLabel("소지품")] public bool UI_Inventory;
-        [FoldoutGroup("[UI]")][SuffixLabel("대장장이")] public bool UI_Blacksmith;
+        [FoldoutGroup("[UI]")][SuffixLabel("소지품")] public bool UI_Inventory;        
         [FoldoutGroup("[UI]")][SuffixLabel("선택 이벤트")] public bool UI_SelectEvent;
         [FoldoutGroup("[UI]")][SuffixLabel("탭")] public bool UI_Tab;
         [FoldoutGroup("[UI]")][SuffixLabel("기술")] public bool UI_Skill;
@@ -181,7 +178,6 @@ namespace TeamSuneat
 
             Stage = true;
             Stage_Monster = true;
-            Stage_Reward = true;
 
             Difficulty = true;
 
@@ -190,7 +186,6 @@ namespace TeamSuneat
             String = true;
 
             Tile = true;
-            Collision = true;
             Timeline = true;
             PositionGroup = true;
 
@@ -200,7 +195,6 @@ namespace TeamSuneat
             UI_Popup = true;
             UI_Details = true;
             UI_Inventory = true;
-            UI_Blacksmith = true;
             UI_SelectEvent = true;
             UI_Tab = true;
 
@@ -278,14 +272,12 @@ namespace TeamSuneat
 
             Stage = false;
             Stage_Monster = false;
-            Stage_Reward = false;
 
             Stat = false;
             State = false;
             String = false;
 
             Tile = false;
-            Collision = false;
             Timeline = false;
             PositionGroup = false;
 
@@ -295,7 +287,6 @@ namespace TeamSuneat
             UI_Popup = false;
             UI_Details = false;
             UI_Inventory = false;
-            UI_Blacksmith = false;
             UI_SelectEvent = false;
             UI_Tab = false;
 
@@ -382,13 +373,11 @@ namespace TeamSuneat
 
                 LogTags.Stage => Stage,
                 LogTags.Stage_Monster => Stage_Monster,
-                LogTags.Stage_Reward => Stage_Reward,
 
                 LogTags.Stat => Stat,
                 LogTags.State => State,
                 LogTags.String => String,
                 LogTags.Tile => Tile,
-                LogTags.Collision => Collision,
                 LogTags.Timeline => Timeline,
                 LogTags.PositionGroup => PositionGroup,
 
@@ -398,7 +387,6 @@ namespace TeamSuneat
                 LogTags.UI_Popup => UI_Popup,
                 LogTags.UI_Details => UI_Details,
                 LogTags.UI_Inventory => UI_Inventory,
-                LogTags.UI_Blacksmith => UI_Blacksmith,
                 LogTags.UI_SelectEvent => UI_SelectEvent,
                 LogTags.UI_Tab => UI_Tab,
 
@@ -476,13 +464,11 @@ namespace TeamSuneat
                 case LogTags.Setting: { Setting = true; } break;
                 case LogTags.Skill: { Skill = true; } break;
                 case LogTags.Stage: { Stage = true; } break;
-                case LogTags.Stage_Monster: { Stage_Monster = true; } break;
-                case LogTags.Stage_Reward: { Stage_Reward = true; } break;
+                case LogTags.Stage_Monster: { Stage_Monster = true; } break;                
                 case LogTags.Stat: { Stat = true; } break;
                 case LogTags.State: { State = true; } break;
                 case LogTags.String: { String = true; } break;
-                case LogTags.Tile: { Tile = true; } break;
-                case LogTags.Collision: { Collision = true; } break;
+                case LogTags.Tile: { Tile = true; } break;                
                 case LogTags.Timeline: { Timeline = true; } break;
                 case LogTags.PositionGroup: { PositionGroup = true; } break;
                 case LogTags.UI: { UI = true; } break;
@@ -490,8 +476,7 @@ namespace TeamSuneat
                 case LogTags.UI_Gauge: { UI_Gauge = true; } break;
                 case LogTags.UI_Popup: { UI_Popup = true; } break;
                 case LogTags.UI_Details: { UI_Details = true; } break;
-                case LogTags.UI_Inventory: { UI_Inventory = true; } break;
-                case LogTags.UI_Blacksmith: { UI_Blacksmith = true; } break;
+                case LogTags.UI_Inventory: { UI_Inventory = true; } break;                
                 case LogTags.UI_SelectEvent: { UI_SelectEvent = true; } break;
                 case LogTags.UI_Tab: { UI_Tab = true; } break;
                 case LogTags.Vital: { Vital = true; } break;
@@ -571,14 +556,12 @@ namespace TeamSuneat
 
                 case LogTags.Stage: { Stage = false; } break;
                 case LogTags.Stage_Monster: { Stage_Monster = false; } break;
-                case LogTags.Stage_Reward: { Stage_Reward = false; } break;
 
                 case LogTags.Stat: { Stat = false; } break;
                 case LogTags.State: { State = false; } break;
                 case LogTags.String: { String = false; } break;
 
                 case LogTags.Tile: { Tile = false; } break;
-                case LogTags.Collision: { Collision = false; } break;
                 case LogTags.Timeline: { Timeline = false; } break;
                 case LogTags.PositionGroup: { PositionGroup = false; } break;
 
@@ -588,7 +571,6 @@ namespace TeamSuneat
                 case LogTags.UI_Popup: { UI_Popup = false; } break;
                 case LogTags.UI_Details: { UI_Details = false; } break;
                 case LogTags.UI_Inventory: { UI_Inventory = false; } break;
-                case LogTags.UI_Blacksmith: { UI_Blacksmith = false; } break;
                 case LogTags.UI_SelectEvent: { UI_SelectEvent = false; } break;
                 case LogTags.UI_Tab: { UI_Tab = false; } break;
 

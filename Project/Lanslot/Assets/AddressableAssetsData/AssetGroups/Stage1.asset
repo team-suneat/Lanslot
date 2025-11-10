@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Stage1
+  m_EditorClassIdentifier: 
+  m_GroupName: Stage1
+  m_GUID: d0e7fbd0ef4941940b45ee4142728c8c
+  m_SerializeEntries:
+  - m_GUID: 001e52f4079b702488243ada6d8fa9af
+    m_Address: Assets/Addressables/Prefab/Monster/BattleWraith.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage1
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 14f43b0aef23b8b44a18ffb79dd0f75e
+    m_Address: Assets/Addressables/Prefab/Monster/AshenFootman.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage1
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 187c2f14eb8868a49ad991a72b0d53ed
+    m_Address: Assets/Addressables/Prefab/Monster/FallenBannerman.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage1
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 22d4ffad2f5d631449048e795298023f
+    m_Address: Assets/Addressables/Prefab/Monster/WarDroneRemains.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage1
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4543ebcdf87bd244f99b994267642bd6
+    m_Address: Assets/Addressables/Prefab/Monster/EmberEatingBird.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage1
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6fc72422b74592544936cf8dcdcf5163
+    m_Address: Assets/Addressables/Prefab/Monster/BlackArcher.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage1
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 916adec426006d240866b7b379999c03
+    m_Address: Assets/Addressables/Prefab/Monster/ScorchedSpearman.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage1
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b0207ce5f103dd24a92a9b1234cf7bb8
+    m_Address: Assets/Addressables/Prefab/Monster/LegionHeart.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage1
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cc608e5a77d37834b822930aac2aa09d
+    m_Address: Assets/Addressables/Prefab/Stage/Stage1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage1
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f74841ee880532c4688d50cb1160bc6d
+    m_Address: Assets/Addressables/Prefab/Monster/SmokeFiend.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage1
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fb438e359b6846f409c2c357f1ed228a
+    m_Address: Assets/Addressables/Prefab/Monster/AshWolf.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage1
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 0bfdb79b140772546ac483b0ad9449ba, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 255da68e751f26c4aa3bab9b32192393, type: 2}
+    - {fileID: 11400000, guid: 23c97d0518a57ae449a6e962792faef1, type: 2}

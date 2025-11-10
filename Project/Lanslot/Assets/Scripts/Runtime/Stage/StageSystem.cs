@@ -5,12 +5,12 @@ namespace TeamSuneat
 {
     public class StageSystem : XBehaviour
     {
-        private const float DEFAULT_TILE_SIZE = 1.0f;
-
         public StageNames Name;
         public string NameString;
 
-        public BattlefieldManager BattlefieldManager { get; private set; }
+        [SerializeField] private BattlefieldTileGroup _battlefieldTileGroup;
+
+        public BattlefieldTileGroup BattlefieldTileGroup => _battlefieldTileGroup;
         public StageData CurrentStageData { get; private set; }
         public int CurrentWaveNumber { get; private set; }
 
@@ -47,10 +47,16 @@ namespace TeamSuneat
                 return;
             }
 
-            // BattlefieldManager 생성 및 초기화
-            BattlefieldManager = new BattlefieldManager();
+            // BattlefieldTileGroup 검증
+            if (_battlefieldTileGroup == null)
+            {
+                Log.Error(LogTags.Stage, "BattlefieldTileGroup 컴포넌트가 할당되지 않았습니다.");
+                return;
+            }
+
+            // BattlefieldTileGroup 초기화
             Vector3 originPosition = transform.position;
-            BattlefieldManager.Initialize(CurrentStageData.Width, originPosition, DEFAULT_TILE_SIZE);
+            _battlefieldTileGroup.Initialize(CurrentStageData.Width, originPosition);
 
             // 1~10웨이브 초기 세팅
             SetupInitialWaves(Name);
@@ -60,7 +66,7 @@ namespace TeamSuneat
 
         public void StartStage()
         {
-            if (BattlefieldManager == null)
+            if (BattlefieldTileGroup == null)
             {
                 Log.Warning(LogTags.Stage, "전장이 초기화되지 않았습니다.");
                 return;
@@ -72,8 +78,7 @@ namespace TeamSuneat
 
         public void CleanupStage()
         {
-            BattlefieldManager?.Clear();
-            BattlefieldManager = null;
+            _battlefieldTileGroup?.Clear();
 
             CurrentStageData = null;
             CurrentWaveNumber = 0;
@@ -114,18 +119,40 @@ namespace TeamSuneat
         /// </summary>
         private void SetupInitialWaves(StageNames stageName)
         {
-            for (int row = 0; row < BattlefieldManager.HEIGHT; row++)
+            if (_battlefieldTileGroup == null)
+            {
+                return;
+            }
+
+            WaveData waveData = null;
+            for (int row = 0; row < _battlefieldTileGroup.Height; row++)
             {
                 int waveNumber = GetWaveNumberFromRow(row);
-                WaveData waveData = JsonDataManager.GetWaveDataByNumber(stageName, waveNumber);
-
-                if (waveData != null)
+                WaveData tempWaveData = JsonDataManager.GetWaveDataByNumber(stageName, waveNumber);
+                if (tempWaveData != null)
                 {
+                    waveData = tempWaveData;
                     Log.Info(LogTags.Stage, "웨이브 데이터 연결: Row {0} → Wave {1}", row, waveNumber);
                 }
-                else
+
+                int monsterCount = waveData.GetMonsterCount();
+                if (monsterCount <= 0) continue;
+
+                Deck<int> deck = new Deck<int>();
+                for (int column = 0; column < _battlefieldTileGroup.Width; column++)
                 {
-                    Log.Warning(LogTags.Stage, "웨이브 데이터를 찾을 수 없습니다: Row {0}, Wave {1}", row, waveNumber);
+                    deck.Add(column);
+                }
+                deck.Shuffle();
+
+                for (int i = 0; i < monsterCount; i++)
+                {
+                    int column = deck.Get(i);
+                    CharacterNames characterName = waveData.GetRandomMonster();
+
+                    BattlefieldTile tile = _battlefieldTileGroup.GetTile(row, column);
+                    MonsterCharacter monster = ResourcesManager.SpawnPrefab<MonsterCharacter>(characterName.ToString(), tile.transform);                    
+                    _battlefieldTileGroup.SetTileOccupied(row, column, monster);
                 }
             }
         }

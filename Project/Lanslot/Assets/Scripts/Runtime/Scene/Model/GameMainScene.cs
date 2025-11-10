@@ -1,4 +1,5 @@
 using TeamSuneat.Data;
+using UnityEngine;
 
 namespace TeamSuneat
 {
@@ -141,6 +142,9 @@ namespace TeamSuneat
                     Log.Error(LogTags.Stage, "스테이지 데이터를 찾을 수 없습니다: {0}", currentStageName);
                     return;
                 }
+
+                // 어드레서블 리소스 로드 (스테이지별)
+                _ = await ResourcesManager.LoadResourcesByLabelAsync<GameObject>(currentStageName.ToString());
 
                 // StageSystem 프리팹 인스턴스화
                 CreateStageSystem(currentStageName);

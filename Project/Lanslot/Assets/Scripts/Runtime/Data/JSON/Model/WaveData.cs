@@ -10,7 +10,6 @@ namespace TeamSuneat.Data
         public int SpawnColumn;
         public int MinMonsterCount;
         public int MaxMonsterCount;
-        public float EliteSpawnChance;
         public CharacterNames Monster1;
         public float Monster1Chance;
         public CharacterNames Monster2;
@@ -22,9 +21,11 @@ namespace TeamSuneat.Data
 
         public bool IsNormalWave => WaveType == WaveTypes.Normal;
 
-        /// <summary>
-        /// 가중치 기반으로 몬스터를 랜덤 선택합니다.
-        /// </summary>
+        public int GetMonsterCount()
+        {
+            return RandomEx.Range(MinMonsterCount, MaxMonsterCount);
+        }
+
         public CharacterNames GetRandomMonster()
         {
             // 유효한 몬스터와 확률을 수집

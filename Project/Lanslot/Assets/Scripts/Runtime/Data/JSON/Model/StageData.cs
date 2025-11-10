@@ -8,8 +8,8 @@ namespace TeamSuneat.Data
     {
         public StageNames Name;
         public string DisplayName;
-        public BuildTypes[] SupportedBuildTypes;        
         public int Width;
+        public BuildTypes[] SupportedBuildTypes;        
 
         public bool IsBlock
         {

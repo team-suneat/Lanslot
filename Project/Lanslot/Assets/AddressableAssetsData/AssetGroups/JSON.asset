@@ -57,6 +57,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - JSON
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 689d90bc9219f9b4aa9bf2fbad46abeb
+    m_Address: Assets/Addressables/JSON/Wave.json
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - JSON
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6e589a6b46db1154cbc3c2541e03b648
+    m_Address: Assets/Addressables/JSON/Stage.json
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - JSON
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 829e3a92ae41f0144b1d42ffe1a990c8
     m_Address: Assets/Addressables/JSON/Stat.json
     m_ReadOnly: 0

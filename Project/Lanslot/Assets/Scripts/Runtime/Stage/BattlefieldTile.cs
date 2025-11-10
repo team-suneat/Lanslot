@@ -1,24 +1,25 @@
-using UnityEngine;
-
 namespace TeamSuneat
 {
     /// <summary>
-    /// 전장의 타일 정보를 나타내는 클래스
+    /// 전장의 타일 GameObject를 나타내는 컴포넌트
+    /// BattlefieldTile와 기존 BattlefieldTile 데이터 클래스를 통합한 클래스입니다.
     /// </summary>
-    [System.Serializable]
-    public class BattlefieldTile
+    public class BattlefieldTile : XBehaviour
     {
-        public int Row;
-        public int Column;
-        public Vector3 WorldPosition;
-        public bool IsOccupied;
-        public MonsterCharacter CurrentMonster;
+        public int Row { get; private set; }
+        public int Column { get; private set; }
+        public int Index { get; private set; }
+        public bool IsOccupied { get; private set; }
+        public MonsterCharacter CurrentMonster { get; private set; }
 
-        public BattlefieldTile(int row, int column, Vector3 worldPosition)
+        /// <summary>
+        /// 타일을 초기화합니다.
+        /// </summary>
+        public void Initialize(int row, int column, int index)
         {
             Row = row;
             Column = column;
-            WorldPosition = worldPosition;
+            Index = index;
             IsOccupied = false;
             CurrentMonster = null;
         }
@@ -39,6 +40,8 @@ namespace TeamSuneat
         {
             CurrentMonster = monster;
             IsOccupied = monster != null;
+
         }
+
     }
 }
