@@ -176,12 +176,10 @@ namespace TeamSuneat.UserInterface
         /// </summary>
         private void OnAnimationComplete()
         {
-            SetState(SlotState.Stopped);
-
-            // 아이템 이름 설정
+            SetState(SlotState.Stopped);                       
             SetItemNameText();
-
             OnSlotStopped?.Invoke(this);
+
         }
 
         /// <summary>

@@ -9,7 +9,6 @@ namespace TeamSuneat
         protected override void OnStart()
         {
             base.OnStart();
-
             StartXCoroutine(InitializeForDev());
         }
 

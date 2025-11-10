@@ -8,11 +8,16 @@ namespace TeamSuneat
         public StageNames Name;
         public string NameString;
 
-        [SerializeField] private BattlefieldTileGroup _battlefieldTileGroup;
+        [SerializeField]
+        private BattlefieldTileGroup _battlefieldTileGroup;
+        private StageData _currentStageData;
+        private int _currentWaveNumber;
 
-        public BattlefieldTileGroup BattlefieldTileGroup => _battlefieldTileGroup;
-        public StageData CurrentStageData { get; private set; }
-        public int CurrentWaveNumber { get; private set; }
+        public override void AutoGetComponents()
+        {
+            base.AutoGetComponents();
+            _battlefieldTileGroup = GetComponentInChildren<BattlefieldTileGroup>();
+        }
 
         public override void AutoSetting()
         {
@@ -33,17 +38,17 @@ namespace TeamSuneat
         public void Initialize()
         {
             // StageData 로드
-            CurrentStageData = JsonDataManager.FindStageDataClone(Name);
-            if (CurrentStageData == null)
+            _currentStageData = JsonDataManager.FindStageDataClone(Name);
+            if (_currentStageData == null)
             {
                 Log.Error(LogTags.Stage, "스테이지 데이터를 찾을 수 없습니다: {0}", Name);
                 return;
             }
 
             // Width 홀수 검증
-            if (CurrentStageData.Width % 2 == 0)
+            if (_currentStageData.Width % 2 == 0)
             {
-                Log.Error(LogTags.Stage, "스테이지 Width는 홀수여야 합니다: {0}", CurrentStageData.Width);
+                Log.Error(LogTags.Stage, "스테이지 Width는 홀수여야 합니다: {0}", _currentStageData.Width);
                 return;
             }
 
@@ -56,32 +61,32 @@ namespace TeamSuneat
 
             // BattlefieldTileGroup 초기화
             Vector3 originPosition = transform.position;
-            _battlefieldTileGroup.Initialize(CurrentStageData.Width, originPosition);
+            _battlefieldTileGroup.Initialize(_currentStageData.Width, originPosition);
 
             // 1~10웨이브 초기 세팅
             SetupInitialWaves(Name);
 
-            Log.Info(LogTags.Stage, "스테이지 초기화 완료: {0}, Width={1}", Name, CurrentStageData.Width);
+            Log.Info(LogTags.Stage, "스테이지 초기화 완료: {0}, Width={1}", Name, _currentStageData.Width);
         }
 
         public void StartStage()
         {
-            if (BattlefieldTileGroup == null)
+            if (_battlefieldTileGroup == null)
             {
                 Log.Warning(LogTags.Stage, "전장이 초기화되지 않았습니다.");
                 return;
             }
 
-            CurrentWaveNumber = 1;
-            Log.Info(LogTags.Stage, "스테이지 시작: Wave {0}", CurrentWaveNumber);
+            _currentWaveNumber = 1;
+            Log.Info(LogTags.Stage, "스테이지 시작: Wave {0}", _currentWaveNumber);
         }
 
         public void CleanupStage()
         {
             _battlefieldTileGroup?.Clear();
 
-            CurrentStageData = null;
-            CurrentWaveNumber = 0;
+            _currentStageData = null;
+            _currentWaveNumber = 0;
         }
 
         /// <summary>
@@ -105,13 +110,13 @@ namespace TeamSuneat
         /// </summary>
         public WaveData GetWaveDataForRow(int row)
         {
-            if (CurrentStageData == null)
+            if (_currentStageData == null)
             {
                 return null;
             }
 
             int waveNumber = GetWaveNumberFromRow(row);
-            return JsonDataManager.GetWaveDataByNumber(CurrentStageData.Name, waveNumber);
+            return JsonDataManager.GetWaveDataByNumber(_currentStageData.Name, waveNumber);
         }
 
         /// <summary>
@@ -136,9 +141,12 @@ namespace TeamSuneat
                 }
 
                 int monsterCount = waveData.GetMonsterCount();
-                if (monsterCount <= 0) continue;
+                if (monsterCount <= 0)
+                {
+                    continue;
+                }
 
-                Deck<int> deck = new Deck<int>();
+                Deck<int> deck = new();
                 for (int column = 0; column < _battlefieldTileGroup.Width; column++)
                 {
                     deck.Add(column);
@@ -149,12 +157,16 @@ namespace TeamSuneat
                 {
                     int column = deck.Get(i);
                     CharacterNames characterName = waveData.GetRandomMonster();
-
-                    BattlefieldTile tile = _battlefieldTileGroup.GetTile(row, column);
-                    MonsterCharacter monster = ResourcesManager.SpawnPrefab<MonsterCharacter>(characterName.ToString(), tile.transform);                    
-                    _battlefieldTileGroup.SetTileOccupied(row, column, monster);
+                    SpawnMonster(row, column, characterName);
                 }
             }
+        }
+
+        private void SpawnMonster(int row, int column, CharacterNames characterName)
+        {
+            BattlefieldTile tile = _battlefieldTileGroup.GetTile(row, column);
+            MonsterCharacter monster = ResourcesManager.SpawnMonsterCharacter(characterName, tile.transform);
+            _battlefieldTileGroup.SetTileOccupied(row, column, monster);
         }
     }
 }

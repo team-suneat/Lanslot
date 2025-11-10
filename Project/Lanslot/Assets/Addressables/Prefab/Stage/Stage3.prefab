@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 3
   NameString: Stage3
+  _battlefieldTileGroup: {fileID: 0}
 --- !u!1 &6842436347468343936
 GameObject:
   m_ObjectHideFlags: 0

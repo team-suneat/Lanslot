@@ -45,25 +45,6 @@ namespace TeamSuneat
 
         // ───────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
-        [Tooltip("방어막으로부터 앞쪽 방향의 공격을 막는지 검사합니다.")]
-        [FoldoutGroup("#Character/Shield")] public bool GuardForward;
-
-        public enum GuardTypes
-        {
-            None,
-            Forward,
-            Backward,
-            All,
-        }
-
-        [FoldoutGroup("#Character/Shield")] public GuardTypes GuardType;
-        [FoldoutGroup("#Character/Shield")] public Collider2D ShieldCollider;
-        [FoldoutGroup("#Character/Shield")] public GameObject VFXGuard;
-        [FoldoutGroup("#Character/Shield")] public Vector3 VFXGuardOffset;
-        [FoldoutGroup("#Character/Shield")] public Vector2 VFXGuardRandomArea;
-
-        // ───────────────────────────────────────────────────────────────────────────────────────────────────────────────
-
         [FoldoutGroup("#Character/Model")]
         [Tooltip("이 옵션은 일반 게임오브젝트와 달리 캐릭터가 SpriteRenderer가 캐릭터가 아닌 다른 게임오브젝트에 있는 경우 이를 자식으로 설정합니다. " +
             "그래서 캐릭터 캐릭터 전체를 회전시키고 아래로 떨어뜨립니다. 이는 3D 모델 캐릭터를 만들기 위함입니다. " +

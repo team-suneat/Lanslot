@@ -53,12 +53,17 @@ namespace TeamSuneat.UserInterface
 
             Initialize();
             SetupEvents();
+
+            if (TurnManager.Instance != null)
+            {
+                TurnManager.Instance.OnPlayerTurnStart.AddListener(StartSpin);
+            }
         }
 
         private void Initialize()
         {
             LoadAvailables();
-            SetupSlots();
+            RegisterStopSlotsEvent();
 
             if (_actionButton != null)
             {
@@ -66,14 +71,19 @@ namespace TeamSuneat.UserInterface
             }
 
             UpdateUI();
-            StartSpin();
         }
 
-        private void SetupSlots()
+        private void RegisterStopSlotsEvent()
         {
-            for (int i = 0; i < _items.Length; i++)
+            if (_items.IsValid())
             {
-                _items[i].OnSlotStopped += OnSlotStopped;
+                for (int i = 0; i < _items.Length; i++)
+                {
+                    if (_items[i] != null)
+                    {
+                        _items[i].OnSlotStopped += OnSlotStopped;
+                    }
+                }
             }
         }
 

@@ -212,6 +212,9 @@
         Stage_Monster,
         Tile,
 
+        /// <summary> 턴 관리 </summary>
+        Turn,
+
         #endregion Stage
 
         #region String

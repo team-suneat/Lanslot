@@ -20,6 +20,7 @@ namespace TeamSuneat
         protected override void OnEnterScene()
         {
             RegisterGlobalEvent();
+            TurnManager.Instance.Initialize();
             LoadStage();
         }
 
@@ -70,6 +71,8 @@ namespace TeamSuneat
 
             // DropObjectManager.Instance.Clear();
             VFXManager.ClearNull();
+
+            TurnManager.Instance.Reset();
 
             GameApp.Instance.SaveGameData();
             base.CleanupCurrentScene();
@@ -169,10 +172,19 @@ namespace TeamSuneat
         private void CreateStageSystem(StageNames stageName)
         {
             _currentStageSystem = ResourcesManager.SpawnStage(stageName, transform);
-            _currentStageSystem.Initialize();
-            _currentStageSystem.StartStage();
+            if (_currentStageSystem != null)
+            {
+                _currentStageSystem.Initialize();
+                _currentStageSystem.StartStage();
 
-            Log.Info(LogTags.Stage, "스테이지 시스템 생성 완료: {0}", stageName.ToLogString());
+                Log.Info(LogTags.Stage, "스테이지 시스템 생성 완료: {0}", stageName.ToLogString());
+
+                TurnManager.Instance.StartPlayerTurn();
+            }
+            else
+            {
+                Log.Error($"{stageName.ToLogString()} 스테이지를 생성할 수 없습니다. 플레이어 턴이 시작되지 않습니다.");
+            }
         }
 
         #endregion Stage Loading

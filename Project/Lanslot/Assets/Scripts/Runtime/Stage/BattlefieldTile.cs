@@ -40,8 +40,6 @@ namespace TeamSuneat
         {
             CurrentMonster = monster;
             IsOccupied = monster != null;
-
         }
-
     }
 }

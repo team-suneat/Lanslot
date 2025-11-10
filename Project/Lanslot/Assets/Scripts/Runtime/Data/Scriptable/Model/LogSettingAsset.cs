@@ -79,6 +79,7 @@ namespace TeamSuneat
         [FoldoutGroup("[지역]")][SuffixLabel("스테이지")] public bool Stage;
         [FoldoutGroup("[지역]")][SuffixLabel("스테이지 몬스터")] public bool Stage_Monster;
         [FoldoutGroup("[지역]")][SuffixLabel("타일")] public bool Tile;
+        [FoldoutGroup("[지역]")][SuffixLabel("턴 관리")] public bool Turn;
 
         [FoldoutGroup("[글로벌]")][SuffixLabel("글로벌 이벤트")] public bool Global;
         [FoldoutGroup("[글로벌]")][SuffixLabel("스트링 텍스트")] public bool String;
@@ -178,6 +179,7 @@ namespace TeamSuneat
 
             Stage = true;
             Stage_Monster = true;
+            Turn = true;
 
             Difficulty = true;
 
@@ -272,6 +274,7 @@ namespace TeamSuneat
 
             Stage = false;
             Stage_Monster = false;
+            Turn = false;
 
             Stat = false;
             State = false;
@@ -373,6 +376,7 @@ namespace TeamSuneat
 
                 LogTags.Stage => Stage,
                 LogTags.Stage_Monster => Stage_Monster,
+                LogTags.Turn => Turn,
 
                 LogTags.Stat => Stat,
                 LogTags.State => State,
@@ -464,7 +468,8 @@ namespace TeamSuneat
                 case LogTags.Setting: { Setting = true; } break;
                 case LogTags.Skill: { Skill = true; } break;
                 case LogTags.Stage: { Stage = true; } break;
-                case LogTags.Stage_Monster: { Stage_Monster = true; } break;                
+                case LogTags.Stage_Monster: { Stage_Monster = true; } break;
+                case LogTags.Turn: { Turn = true; } break;
                 case LogTags.Stat: { Stat = true; } break;
                 case LogTags.State: { State = true; } break;
                 case LogTags.String: { String = true; } break;
@@ -556,6 +561,7 @@ namespace TeamSuneat
 
                 case LogTags.Stage: { Stage = false; } break;
                 case LogTags.Stage_Monster: { Stage_Monster = false; } break;
+                case LogTags.Turn: { Turn = false; } break;
 
                 case LogTags.Stat: { Stat = false; } break;
                 case LogTags.State: { State = false; } break;

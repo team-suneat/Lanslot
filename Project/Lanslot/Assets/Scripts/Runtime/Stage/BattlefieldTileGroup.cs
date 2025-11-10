@@ -1,4 +1,3 @@
-using TeamSuneat.Data;
 using UnityEngine;
 
 namespace TeamSuneat
@@ -172,7 +171,7 @@ namespace TeamSuneat
                     // 타일 활성화 및 위치 설정
                     tile.gameObject.SetActive(true);
                     tile.transform.position = worldPosition;
-                    tile.Initialize(row, column, index);                    
+                    tile.Initialize(row, column, index);
                     _tiles[index] = tile;
                 }
             }

@@ -201,7 +201,7 @@ Transform:
   m_GameObject: {fileID: 286853076}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1618,10 +1618,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2236748836408219183, guid: 9498523db39befb4c96897204223d7bc, type: 3}
-      propertyPath: m_BlockingMask.m_Bits
-      value: 55
-      objectReference: {fileID: 0}
     - target: {fileID: 2518712501212351953, guid: 9498523db39befb4c96897204223d7bc, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1762,10 +1758,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4415133241832534049, guid: 9498523db39befb4c96897204223d7bc, type: 3}
-      propertyPath: m_BlockingMask.m_Bits
-      value: 55
-      objectReference: {fileID: 0}
     - target: {fileID: 4543146144447007203, guid: 9498523db39befb4c96897204223d7bc, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1813,10 +1805,6 @@ PrefabInstance:
     - target: {fileID: 4892453328175264268, guid: 9498523db39befb4c96897204223d7bc, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4894444529675474208, guid: 9498523db39befb4c96897204223d7bc, type: 3}
-      propertyPath: m_BlockingMask.m_Bits
-      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 5283306090616654772, guid: 9498523db39befb4c96897204223d7bc, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2038,10 +2026,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7391029186454017635, guid: 9498523db39befb4c96897204223d7bc, type: 3}
-      propertyPath: m_BlockingMask.m_Bits
-      value: 55
-      objectReference: {fileID: 0}
     - target: {fileID: 7751358337377329784, guid: 9498523db39befb4c96897204223d7bc, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2122,10 +2106,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8679425374705149214, guid: 9498523db39befb4c96897204223d7bc, type: 3}
-      propertyPath: m_BlockingMask.m_Bits
-      value: 55
-      objectReference: {fileID: 0}
     - target: {fileID: 8698807675431808701, guid: 9498523db39befb4c96897204223d7bc, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2141,10 +2121,6 @@ PrefabInstance:
     - target: {fileID: 8698807675431808701, guid: 9498523db39befb4c96897204223d7bc, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8701724325144838769, guid: 9498523db39befb4c96897204223d7bc, type: 3}
-      propertyPath: m_BlockingMask.m_Bits
-      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 9012957010449568557, guid: 9498523db39befb4c96897204223d7bc, type: 3}
       propertyPath: m_AnchorMax.y
