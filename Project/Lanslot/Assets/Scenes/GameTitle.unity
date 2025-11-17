@@ -1187,7 +1187,7 @@ GameObject:
   - component: {fileID: 1190085703}
   - component: {fileID: 1190085702}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Exit Button Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1234,8 +1234,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: EXIT
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 81aade047f0298a47ac579dc9e4f8823, type: 2}
-  m_sharedMaterial: {fileID: -4283981859748225356, guid: 81aade047f0298a47ac579dc9e4f8823, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3e41d50bd12c35b478ffd0828949c13f, type: 2}
+  m_sharedMaterial: {fileID: 6911550201042835066, guid: 3e41d50bd12c35b478ffd0828949c13f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1323,7 +1323,7 @@ GameObject:
   - component: {fileID: 1273436668}
   - component: {fileID: 1273436667}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Game Start Button Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1370,8 +1370,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: GAME START
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 81aade047f0298a47ac579dc9e4f8823, type: 2}
-  m_sharedMaterial: {fileID: -4283981859748225356, guid: 81aade047f0298a47ac579dc9e4f8823, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3e41d50bd12c35b478ffd0828949c13f, type: 2}
+  m_sharedMaterial: {fileID: 6911550201042835066, guid: 3e41d50bd12c35b478ffd0828949c13f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2236,8 +2236,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: LANSLOT
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 81aade047f0298a47ac579dc9e4f8823, type: 2}
-  m_sharedMaterial: {fileID: -4283981859748225356, guid: 81aade047f0298a47ac579dc9e4f8823, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 823a5c81b438c764b9a1d0ebd36b55f0, type: 2}
+  m_sharedMaterial: {fileID: -1335593152100662510, guid: 823a5c81b438c764b9a1d0ebd36b55f0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

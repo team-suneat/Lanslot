@@ -15,8 +15,6 @@ namespace TeamSuneat.UserInterface
         public GameFontTypes FontType;
         public string FontTypeString;
         public TextMeshProUGUI TextPro;
-        public bool SizeToTextLenthX;
-        public bool SizeToTextLenthY;
         public int CustomAddtionalFontSize;
 
         [Title("#UI Localized Text", "Language")]
@@ -26,9 +24,13 @@ namespace TeamSuneat.UserInterface
 
         public float CustomFontSize { get; set; }
 
-        private float _defaultFontSize;
+        [SerializeField]
+        private UILocalizedTextFontController _fontController;
         private string _content;
         private string _spriteContent;
+
+        [SerializeField]
+        private UILocalizedTextSizeController _sizeController;
 
         public Color DefaultTextColor { get; private set; }
 
@@ -41,6 +43,7 @@ namespace TeamSuneat.UserInterface
             base.AutoGetComponents();
 
             AssignTextComponents();
+            AssignFontController();
         }
 
         private void AssignTextComponents()
@@ -77,93 +80,16 @@ namespace TeamSuneat.UserInterface
             }
         }
 
-        /// <summary>
-        /// 현재 설정된 FontAsset에서 TextPro의 폰트 크기에 가장 가까운 타입으로 FontType을 설정합니다.
-        /// </summary>
-        private void SetClosestFontTypeByCurrentFontSize(LanguageNames languageName)
-        {
-            if (TextPro == null)
-            {
-                return;
-            }
-
-            if (FontType is GameFontTypes.Difficulty or GameFontTypes.Number or GameFontTypes.Content_DialogueTitle)
-            {
-                return;
-            }
-
-            float currentFontSize = TextPro.fontSize;
-            FontAsset fontAsset = ScriptableDataManager.Instance.FindFont(languageName);
-            if (fontAsset == null)
-            {
-                return;
-            }
-
-            GameFontTypes closestType = GameFontTypes.None;
-            float minDiff = float.MaxValue;
-
-            GameFontTypes[] matchTypes = new GameFontTypes[]
-            {
-                GameFontTypes.Title,
-                GameFontTypes.Title_GrayShadow,
-                GameFontTypes.Content_DefaultSize,
-                GameFontTypes.Content_DefaultSize_GrayShadow,
-                GameFontTypes.Content_LargeSize,
-                GameFontTypes.Content_SmallSize,
-                GameFontTypes.Content_XSmallSize
-            };
-            for (int i = 0; i < matchTypes.Length; i++)
-            {
-                GameFontTypes type = matchTypes[i];
-                FontAsset.FontAssetData? dataNullable = fontAsset.GetFontAssetData(type);
-                if (dataNullable == null)
-                {
-                    continue;
-                }
-
-                FontAsset.FontAssetData data = dataNullable.Value;
-                float compareSize = data.FontSize;
-                float diff = Mathf.Abs(currentFontSize - compareSize);
-                if (diff < minDiff)
-                {
-                    minDiff = diff;
-                    closestType = type;
-                }
-            }
-
-            if (closestType != GameFontTypes.None)
-            {
-                GameFontTypes prevType = FontType;
-
-                if (prevType == GameFontTypes.Title_GrayShadow && closestType == GameFontTypes.Title)
-                {
-                    closestType = GameFontTypes.Title_GrayShadow;
-                }
-                else if (prevType == GameFontTypes.Content_DefaultSize_GrayShadow && closestType == GameFontTypes.Content_DefaultSize)
-                {
-                    closestType = GameFontTypes.Content_DefaultSize_GrayShadow;
-                }
-
-                FontType = closestType;
-                FontTypeString = closestType.ToString();
-                if (prevType != closestType)
-                {
-                    Log.Info(LogTags.Font, $"[UILocalizedText] FontType이 자동으로 변경: {prevType} → {closestType} (현재 폰트 크기: {currentFontSize})");
-                }
-            }
-        }
-
-        //
-
         protected void Awake()
         {
             AssignTextComponents();
+            AssignFontController();
 
             if (TextPro != null)
             {
                 DefaultTextColor = TextPro.color;
-                _defaultFontSize = TextPro.fontSize;
                 _content = TextPro.text;
+                FontController?.InitializeDefaultFontSize(TextPro.fontSize);
             }
         }
 
@@ -333,53 +259,12 @@ namespace TeamSuneat.UserInterface
 
         public void SetDefaultFontSize(float fontSize)
         {
-            _defaultFontSize = fontSize;
-            RefreshFontSize();
+            FontController?.SetDefaultFontSize(fontSize);
         }
 
         private void RefreshFontSize()
         {
-            LanguageNames languageName = GameSetting.Instance.Language.Name;
-            FontAsset fontData = ScriptableDataManager.Instance.FindFont(languageName);
-            RefreshFontSize(languageName, fontData);
-        }
-
-        private void RefreshFontSize(LanguageNames languageName, FontAsset fontData)
-        {
-            if (TextPro == null)
-            {
-                return;
-            }
-
-            if (fontData != null)
-            {
-                FontAsset.FontAssetData? fontAssetData = fontData.GetFontAssetData(FontType);
-                if (fontAssetData != null)
-                {
-                    float fontSize;
-                    if (CustomFontSize > 0)
-                    {
-                        fontSize = CustomFontSize;
-                    }
-                    else
-                    {
-                        fontSize = fontAssetData.Value.FontSize + CustomAddtionalFontSize;
-                    }
-
-                    if (TextPro.fontSize != fontSize)
-                    {
-                        TextPro.enableAutoSizing = false;
-                        TextPro.fontSize = fontSize;
-
-                        Log.Info(LogTags.Font, "폰트 타입({0})에 맞는 폰트 크기를 적용합니다: {1} + {2} = {3}, {4}",
-                            FontType, fontAssetData.Value.FontSize, CustomAddtionalFontSize, TextPro.fontSize, this.GetHierarchyPath());
-                    }
-                }
-            }
-            else if (_defaultFontSize > 0)
-            {
-                TextPro.fontSize = _defaultFontSize + CustomAddtionalFontSize;
-            }
+            FontController?.RefreshFontSize();
         }
 
         public void SetAlignment(TextAlignmentOptions alignment)
@@ -470,33 +355,7 @@ namespace TeamSuneat.UserInterface
 
         private void RefreshFont(LanguageNames languageName)
         {
-            if (FontType == GameFontTypes.None) { return; }
-            if (UseCustomLanguage)
-            {
-                languageName = CustomLanguage;
-            }
-
-            FontAsset fontData = ScriptableDataManager.Instance.FindFont(languageName);
-            if (fontData == null)
-            {
-                return;
-            }
-
-            TMP_FontAsset fontAsset = fontData.FindFont(FontType);
-            if (fontAsset == null)
-            {
-                return;
-            }
-
-            if (TextPro != null)
-            {
-                TextPro.font = fontAsset;
-                if (fontData.FindItalic(FontType))
-                {
-                    TextPro.fontStyle = FontStyles.Italic;
-                }
-                RefreshFontSize(languageName, fontData);
-            }
+            FontController?.RefreshFont(languageName);
         }
 
         #endregion 언어변환 및 폰트 설정
@@ -517,39 +376,30 @@ namespace TeamSuneat.UserInterface
 
         private void RefreshTextRectSize()
         {
-            if (SizeToTextLenthX)
+            UILocalizedTextSizeController controller = SizeController;
+            if (controller == null)
             {
-                RefreshTextRectSizeByTextWidth();
-            }
-            if (SizeToTextLenthY)
-            {
-                RefreshTextRectSizeByTextHeight();
-            }
-        }
-
-        private void RefreshTextRectSizeByTextHeight()
-        {
-            if (TextPro == null || TextPro.font == null)
-            {
-                Log.Warning(LogTags.Font, $"[UILocalizedText] TextPro 또는 font가 null입니다. ({this.GetHierarchyName()})");
                 return;
             }
-            TextPro.rectTransform.sizeDelta = new Vector2(TextPro.rectTransform.sizeDelta.x, TextPro.preferredHeight);
+
+            controller.Refresh(TextPro);
         }
 
-        private void RefreshTextRectSizeByTextWidth()
+        private UILocalizedTextSizeController SizeController => _sizeController ??= GetComponent<UILocalizedTextSizeController>();
+
+        private UILocalizedTextFontController FontController => _fontController ??= GetComponent<UILocalizedTextFontController>();
+
+        private void AssignFontController()
         {
-            if (TextPro == null || TextPro.font == null)
+            if (_fontController == null)
             {
-                Log.Warning(LogTags.Font, $"[UILocalizedText] TextPro 또는 font가 null입니다. ({this.GetHierarchyName()})");
-                return;
+                _fontController = GetComponent<UILocalizedTextFontController>();
             }
-            TextPro.rectTransform.sizeDelta = new Vector2(TextPro.preferredWidth, TextPro.rectTransform.sizeDelta.y);
         }
 
         #endregion 크기 조정
 
-        #region 밑줄처리
+        #region 밑줄 처리
 
         public void SetUnderline(bool isActive)
         {

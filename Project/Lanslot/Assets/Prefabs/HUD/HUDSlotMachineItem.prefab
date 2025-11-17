@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7584136921493022695}
   - component: {fileID: 2917247427447651012}
   - component: {fileID: 2324399077689930163}
+  - component: {fileID: 944878971687028716}
   m_Layer: 5
   m_Name: ItemName Text
   m_TagString: Untagged
@@ -33,10 +34,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2669001479261379787}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7584136921493022695
 CanvasRenderer:
@@ -60,7 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -68,8 +69,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC544\uC774\uD15C \uC774\uB984"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 81aade047f0298a47ac579dc9e4f8823, type: 2}
-  m_sharedMaterial: {fileID: -4283981859748225356, guid: 81aade047f0298a47ac579dc9e4f8823, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3e41d50bd12c35b478ffd0828949c13f, type: 2}
+  m_sharedMaterial: {fileID: 6911550201042835066, guid: 3e41d50bd12c35b478ffd0828949c13f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -93,8 +94,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -153,11 +154,24 @@ MonoBehaviour:
   FontType: 3
   FontTypeString: Content_DefaultSize
   TextPro: {fileID: 2917247427447651012}
-  SizeToTextLenthX: 0
-  SizeToTextLenthY: 0
   CustomAddtionalFontSize: 0
   UseCustomLanguage: 0
   CustomLanguage: 0
+  _fontController: {fileID: 944878971687028716}
+  _sizeController: {fileID: 0}
+--- !u!114 &944878971687028716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200559775341951041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eccfc68bb4423ae43a4045c96cbb849f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _localizedText: {fileID: 2324399077689930163}
 --- !u!1 &1580880916860998443
 GameObject:
   m_ObjectHideFlags: 0
