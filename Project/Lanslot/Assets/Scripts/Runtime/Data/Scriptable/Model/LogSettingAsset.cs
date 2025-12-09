@@ -15,6 +15,7 @@ namespace TeamSuneat
         [SuffixLabel("애널리틱스")] public bool Analytics;
 
         [FoldoutGroup("[캐릭터]")][SuffixLabel("캐릭터")] public bool Character;
+        [FoldoutGroup("[캐릭터]")][SuffixLabel("플레이어 캐릭터")] public bool Player;
         [FoldoutGroup("[캐릭터]")][SuffixLabel("몬스터 캐릭터")] public bool Monster;
         [FoldoutGroup("[캐릭터]")][SuffixLabel("엘리트 캐릭터")] public bool Elite;
         [FoldoutGroup("[캐릭터]")][SuffixLabel("보스캐릭터")] public bool Boss;
@@ -133,6 +134,7 @@ namespace TeamSuneat
 
             Camera = true;
             Character = true;
+            Player = true;
             Monster = true;
             Elite = true;
             Boss = true;
@@ -225,6 +227,7 @@ namespace TeamSuneat
 
             Camera = false;
             Character = false;
+            Player = false;
             Monster = false;
             Elite = false;
             Boss = false;
@@ -328,6 +331,7 @@ namespace TeamSuneat
 
                 LogTags.Camera => Camera,
                 LogTags.Character => Character,
+                LogTags.Player => Player,
                 LogTags.Monster => Monster,
                 LogTags.Elite => Elite,
                 LogTags.Boss => Boss,
@@ -424,6 +428,7 @@ namespace TeamSuneat
 
                 case LogTags.Camera: { Camera = true; } break;
                 case LogTags.Character: { Character = true; } break;
+                case LogTags.Player: { Player = true; } break;
                 case LogTags.Monster: { Monster = true; } break;
                 case LogTags.Elite: { Elite = true; } break;
                 case LogTags.Boss: { Boss = true; } break;
@@ -512,6 +517,7 @@ namespace TeamSuneat
 
                 case LogTags.Camera: { Camera = false; } break;
                 case LogTags.Character: { Character = false; } break;
+                case LogTags.Player: { Player = false; } break;
                 case LogTags.Monster: { Monster = false; } break;
                 case LogTags.Elite: { Elite = false; } break;
                 case LogTags.Boss: { Boss = false; } break;

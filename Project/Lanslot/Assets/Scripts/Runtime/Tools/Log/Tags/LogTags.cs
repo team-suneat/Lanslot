@@ -11,6 +11,9 @@
         /// <summary> 캐릭터 </summary>
         Character,
 
+        /// <summary> 플레이어 캐릭터 </summary>
+        Player,
+
         /// <summary> 몬스터 캐릭터 </summary>
         Monster,
 
