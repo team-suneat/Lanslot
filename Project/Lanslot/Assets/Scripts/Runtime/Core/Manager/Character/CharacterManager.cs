@@ -211,24 +211,6 @@ namespace TeamSuneat
             return null;
         }
 
-        public Character FindMonster(Collider2D collider)
-        {
-            if (Monsters.IsValid())
-            {
-                for (int i = 0; i < Monsters.Count; i++)
-                {
-                    if (Monsters[i] == null)
-                    {
-                        continue;
-                    }
-
-                    return Monsters[i];
-                }
-            }
-
-            return null;
-        }
-
         public Character FindNearestMonster(Vector3 originPosition)
         {
             if (Monsters.IsValid())
@@ -246,7 +228,7 @@ namespace TeamSuneat
                         continue;
                     }
 
-                    monsterPosition = monsterCharacter.MyVital.GetNearestColliderPosition(originPosition);
+                    monsterPosition = monsterCharacter.transform.position;
                     distance = Vector3.Distance(originPosition, monsterPosition);
 
                     if (distance < distanceMin)
@@ -273,7 +255,7 @@ namespace TeamSuneat
 
                 for (int i = 0; i < Monsters.Count; i++)
                 {
-                    monsterPosition = Monsters[i].MyVital.GetNearestColliderPosition(originPosition);
+                    monsterPosition = Monsters[i].transform.position;
                     distance = Vector3.Distance(originPosition, monsterPosition);
 
                     if (distance < distanceMin)

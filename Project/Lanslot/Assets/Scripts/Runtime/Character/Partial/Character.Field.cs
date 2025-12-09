@@ -80,16 +80,6 @@ namespace TeamSuneat
 
         // ───────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
-        [FoldoutGroup("#Character/Collider")]
-        [LabelText("사망 시 충돌체 크기 변경")]
-        public bool IsChangeColliderSizeOnDeath;
-
-        [FoldoutGroup("#Character/Collider")]
-        [EnableIf("IsChangeColliderSizeOnDeath")]
-        public Vector2 ColliderSizeOnDeath;
-
-        // ───────────────────────────────────────────────────────────────────────────────────────────────────────────────
-
         protected Vector3 _raycastOrigin;
         protected RaycastHit2D _raycastHit2D;
 

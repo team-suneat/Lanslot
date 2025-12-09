@@ -139,19 +139,6 @@ namespace TeamSuneat
             _stats.Clear();
         }
 
-        /// <summary>
-        /// 모든 스탯을 새로고침합니다.
-        /// </summary>
-        public void RefreshAll()
-        {
-            foreach (CharacterStat stat in _stats.Values)
-            {
-                stat.MarkDirty();
-            }
-        }
-
-        //
-
         public void OnLevelUp()
         {
             _logHandler.LogLevelUp();

@@ -1,14 +1,18 @@
 ﻿using System.Collections;
 using TeamSuneat.Data;
+using TeamSuneat.Data.Game;
 using UnityEngine;
 
 namespace TeamSuneat
 {
     public class PlayerCharacter : Character
     {
+        public override LogTags LogTag => LogTags.Player;
+
         protected override void OnStart()
         {
             base.OnStart();
+
             StartXCoroutine(InitializeForDev());
         }
 
@@ -26,11 +30,17 @@ namespace TeamSuneat
 
         public override void Initialize()
         {
-            SetupLevel();
+            VProfile profileInfo = GameApp.GetSelectedProfile();
+            if (profileInfo != null)
+            {
+                Name = profileInfo.Character.SelectedCharacterName;
 
-            ProfileInfo.Character.Unlock(Name);
+                SetupLevel();
 
-            base.Initialize();
+                ProfileInfo.Character.Unlock(Name);
+
+                base.Initialize();
+            }
         }
 
         public override void BattleReady()
@@ -129,6 +139,7 @@ namespace TeamSuneat
 
         private void ApplyBaseStats(PlayerCharacterData data)
         {
+            if (!data.IsValid()) return;
             for (int i = 0; i < data.BaseStats.Length; i++)
             {
                 StatNames baseStatName = data.BaseStats[i];
@@ -142,6 +153,7 @@ namespace TeamSuneat
 
         private void ApplyGrowthStats(PlayerCharacterData data)
         {
+            if (!data.IsValid()) return;
             for (int i = 0; i < data.GrowStats.Length; i++)
             {
                 StatNames baseStatName = data.GrowStats[i];

@@ -1,6 +1,4 @@
-﻿using TeamSuneat.Data;
-
-namespace TeamSuneat
+﻿namespace TeamSuneat
 {
     public partial class Character
     {
@@ -8,7 +6,7 @@ namespace TeamSuneat
         {
             if (Log.LevelProgress)
             {
-                Log.Progress(LogTags.Character, StringGetter.ConcatStringWithComma(Name.ToLogString(), content));
+                Log.Progress(LogTag, StringGetter.ConcatStringWithComma(Name.ToLogString(), content));
             }
         }
 
@@ -17,7 +15,7 @@ namespace TeamSuneat
             if (Log.LevelProgress)
             {
                 string content = string.Format(format, args);
-                Log.Progress(LogTags.Character, StringGetter.ConcatStringWithComma(Name.ToLogString(), content));
+                Log.Progress(LogTag, StringGetter.ConcatStringWithComma(Name.ToLogString(), content));
             }
         }
 
@@ -25,7 +23,7 @@ namespace TeamSuneat
         {
             if (Log.LevelInfo)
             {
-                Log.Info(LogTags.Character, StringGetter.ConcatStringWithComma(Name.ToLogString(), content));
+                Log.Info(LogTag, StringGetter.ConcatStringWithComma(Name.ToLogString(), content));
             }
         }
 
@@ -34,7 +32,7 @@ namespace TeamSuneat
             if (Log.LevelProgress)
             {
                 string content = string.Format(format, args);
-                Log.Progress(LogTags.Character, StringGetter.ConcatStringWithComma(Name.ToLogString(), content));
+                Log.Progress(LogTag, StringGetter.ConcatStringWithComma(Name.ToLogString(), content));
             }
         }
 
@@ -42,7 +40,7 @@ namespace TeamSuneat
         {
             if (Log.LevelWarning)
             {
-                Log.Warning(LogTags.Character, StringGetter.ConcatStringWithComma(Name.ToLogString(), content));
+                Log.Warning(LogTag, StringGetter.ConcatStringWithComma(Name.ToLogString(), content));
             }
         }
 
@@ -51,7 +49,7 @@ namespace TeamSuneat
             if (Log.LevelProgress)
             {
                 string content = string.Format(format, args);
-                Log.Progress(LogTags.Character, StringGetter.ConcatStringWithComma(Name.ToLogString(), content));
+                Log.Progress(LogTag, StringGetter.ConcatStringWithComma(Name.ToLogString(), content));
             }
         }
 
@@ -59,7 +57,7 @@ namespace TeamSuneat
         {
             if (Log.LevelError)
             {
-                Log.Error(LogTags.Character, StringGetter.ConcatStringWithComma(Name.ToLogString(), content));
+                Log.Error(LogTag, StringGetter.ConcatStringWithComma(Name.ToLogString(), content));
             }
         }
 
@@ -68,7 +66,7 @@ namespace TeamSuneat
             if (Log.LevelProgress)
             {
                 string content = string.Format(format, args);
-                Log.Progress(LogTags.Character, StringGetter.ConcatStringWithComma(Name.ToLogString(), content));
+                Log.Progress(LogTag, StringGetter.ConcatStringWithComma(Name.ToLogString(), content));
             }
         }
     }

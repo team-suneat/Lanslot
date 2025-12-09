@@ -106,7 +106,7 @@ namespace TeamSuneat
         /// <summary> StatData에 맞게 값을 포맷팅합니다. </summary>
         private static float FormatStatValue(float value, StatData statData)
         {
-            if (statData.Mod is StatModType.PercentAdd or StatModType.PercentMult)
+            if (statData.Mod is StatModType.PercentAdd or StatModType.PercentMulti)
             {
                 return MathF.Abs(MathF.Round(value * 100, statData.Digit));
             }

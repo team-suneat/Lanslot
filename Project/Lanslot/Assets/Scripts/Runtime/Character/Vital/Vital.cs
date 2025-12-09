@@ -8,13 +8,13 @@ namespace TeamSuneat
         protected override void OnStart()
         {
             base.OnStart();
-            Life.RegisterOnDeathEvent(OnDeath);
+            Life?.RegisterOnDeathEvent(OnDeath);
         }
 
         protected override void OnRelease()
         {
             base.OnRelease();
-            Life.UnregisterOnDeathEvent(OnDeath);
+            Life?.UnregisterOnDeathEvent(OnDeath);
         }
 
         public virtual void OnBattleReady()
@@ -37,7 +37,6 @@ namespace TeamSuneat
             Generate();
             RegisterVital();
             StartRegenerate();
-            ActivateColliders();
         }
 
         public void RegisterVital()
@@ -95,10 +94,6 @@ namespace TeamSuneat
                 Life.UseZero();
                 return true;
             }
-            else if (CheckAllGuardColliders())
-            {
-                return true;
-            }
 
             return false;
         }
@@ -146,13 +141,10 @@ namespace TeamSuneat
                         Shield.SpawnShieldFloatyText(reduceDamageValue);
                         damageResult.DamageValue -= reduceDamageValue;
 
-                        if (!CheckOnlyUseShieldColliderIndexes(damageResult.TargetVitalColliderIndex))
+                        if (damageResult.DamageValue > 0)
                         {
-                            if (damageResult.DamageValue > 0)
-                            {
-                                Life.TakeDamage(damageResult, damageResult.Attacker);
-                                SendGlobalEventOfDamaged(damageResult);
-                            }
+                            Life.TakeDamage(damageResult, damageResult.Attacker);
+                            SendGlobalEventOfDamaged(damageResult);
                         }
 
                         if (CurrentLife > 0)
@@ -169,19 +161,16 @@ namespace TeamSuneat
             }
             else if (damageResult.DamageValue > 0)
             {
-                if (!CheckOnlyUseShieldColliderIndexes(damageResult.TargetVitalColliderIndex))
+                Life.TakeDamage(damageResult, damageResult.Attacker);
+                SendGlobalEventOfDamaged(damageResult);
+
+                if (CurrentLife > 0)
                 {
-                    Life.TakeDamage(damageResult, damageResult.Attacker);
-                    SendGlobalEventOfDamaged(damageResult);
-
-                    if (CurrentLife > 0)
-                    {
-                        DamageBuffOnHit(damageResult);
-                        DamageHitmarkOnHit(damageResult);
-                    }
-
-                    return true;
+                    DamageBuffOnHit(damageResult);
+                    DamageHitmarkOnHit(damageResult);
                 }
+
+                return true;
             }
             else
             {
@@ -232,13 +221,6 @@ namespace TeamSuneat
                 LogDamageOnBuff(damageResult.HitmarkName, damageResult.BuffAssetOnHit.Name);
                 return;
             }
-            if (damageResult.TargetVitalColliderIndex >= 0)
-            {
-                if (ContainsGuardIndex(damageResult.TargetVitalColliderIndex))
-                {
-                    return;
-                }
-            }
 
             Owner.Buff.Add(damageResult.BuffAssetOnHit, damageResult.HitmarkLevel, damageResult.Attacker, damageResult.DamagePosition);
         }
@@ -254,14 +236,6 @@ namespace TeamSuneat
             {
                 LogEvasionAttack(damageResult.HitmarkName, damageResult.HitmarkAssetOnHit.Name);
                 return;
-            }
-
-            if (damageResult.TargetVitalColliderIndex >= 0)
-            {
-                if (ContainsGuardIndex(damageResult.TargetVitalColliderIndex))
-                {
-                    return;
-                }
             }
 
             _ = CoroutineNextTimer(damageResult.Asset.DelayTimeOfAttackOnHit, () => { ApplyAttackOnHit(damageResult); });
@@ -339,7 +313,6 @@ namespace TeamSuneat
         protected virtual void OnDeath(DamageResult damageResult)
         {
             DieEvent?.Invoke();
-            DeactivateColliders();
         }
 
         public void Heal(int value)

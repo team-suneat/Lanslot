@@ -15,6 +15,8 @@ namespace TeamSuneat
 
         public override Transform Target => null;
 
+        public override LogTags LogTag => LogTags.Monster;
+
         public override void AutoGetComponents()
         {
             base.AutoGetComponents();
@@ -25,6 +27,11 @@ namespace TeamSuneat
         protected override void OnStart()
         {
             base.OnStart();
+
+            if (AutoSetupOnStart)
+            {
+                Initialize();
+            }
         }
 
         public override void Initialize()

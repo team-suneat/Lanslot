@@ -82,7 +82,7 @@ namespace TeamSuneat
 
             if (modifier.Value.IsZero())
             {
-                Log.Warning(LogTags.Stat, "능력치의 값이 0일 때, 능력치를 추가하지 않습니다: {0}({1})", statData.Name, statData.Name.ToLogString());
+                Log.Progress(LogTags.Stat, "능력치의 값이 0일 때, 능력치를 추가하지 않습니다: {0}({1})", statData.Name, statData.Name.ToLogString());
                 return;
             }
 
@@ -90,9 +90,8 @@ namespace TeamSuneat
 
             if (!_stats.ContainsKey(statName))
             {
-                CharacterStat characterStat = new(statName, statData.DefaultValue);
+                CharacterStat characterStat = new(statName, modifier.Value);
                 characterStat.AddModifier(modifier);
-
                 _stats.Add(characterStat.Name, characterStat);
             }
             else

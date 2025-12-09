@@ -28,7 +28,7 @@ namespace TeamSuneat
                 if (_isDirty)
                 {
                     _totalValue = CalculateFinalValue();
-                    _isDirty = false;
+                    SetDirtyState(false, "값 재계산 완료");
                 }
                 return _totalValue;
             }
@@ -45,7 +45,7 @@ namespace TeamSuneat
                     switch (_statModifiers[0].Type)
                     {
                         case StatModType.PercentAdd:
-                        case StatModType.PercentMult:
+                        case StatModType.PercentMulti:
                             return ValueStringEx.GetPercentString(Value, true);
                     }
                 }
@@ -71,16 +71,33 @@ namespace TeamSuneat
 
         #region Modifier
 
-        public void MarkDirty()
+        private void SetDirtyState(bool isDirty, string reason)
         {
-            _isDirty = true;
+            if (_isDirty == isDirty)
+            {
+                return;
+            }
+
+            _isDirty = isDirty;
+
+            if (Log.LevelInfo)
+            {
+                string stateText = isDirty ? "갱신 필요" : "최신 상태";
+                string reasonText = string.IsNullOrEmpty(reason) ? "사유 미기재" : reason;
+                Log.Info(LogTags.Stat, "{0} 능력치 캐시 상태 변경: {1} (사유: {2})", Name.ToLogString(), stateText, reasonText);
+            }
+        }
+
+        public void MarkDirty(string reason = "외부 요청")
+        {
+            SetDirtyState(true, reason);
         }
 
         public void AddModifier(StatModifier modifier)
         {
             _statModifiers.Add(modifier);
             _statModifiers.Sort(CompareModifierOrder);
-            MarkDirty();
+            MarkDirty("수정자 추가");
         }
 
         public bool RemoveModifier(StatModifier modifier)
@@ -89,7 +106,7 @@ namespace TeamSuneat
             {
                 if (_statModifiers.Remove(modifier))
                 {
-                    MarkDirty();
+                    MarkDirty("수정자 제거");
                     return true;
                 }
             }
@@ -104,7 +121,7 @@ namespace TeamSuneat
         public void ClearModifiers()
         {
             _statModifiers.Clear();
-            MarkDirty();
+            MarkDirty("수정자 전체 초기화");
         }
 
         //───────────────────────────────────────────────────────────────────────────────────────
@@ -327,7 +344,7 @@ namespace TeamSuneat
                         }
                         break;
 
-                    case StatModType.PercentMult:
+                    case StatModType.PercentMulti:
                         {
                             finalValue *= 1 + mod.Value;
                         }

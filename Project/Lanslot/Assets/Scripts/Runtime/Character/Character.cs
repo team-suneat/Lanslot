@@ -64,12 +64,6 @@ namespace TeamSuneat
         protected override void OnStart()
         {
             base.OnStart();
-
-            if (AutoSetupOnStart)
-            {
-                Initialize();
-            }
-
             RegisterVitalEvents();
         }
 
@@ -177,7 +171,6 @@ namespace TeamSuneat
             }
 
             UpdateAnimators();
-            
 
             Passive?.LogicUpdate();
         }
@@ -192,7 +185,9 @@ namespace TeamSuneat
             PhysicsProcessAbilities();
         }
 
-        #endregion Update       
+        #endregion Update
+
+
 
         protected virtual void RefreshGameLayer()
         {

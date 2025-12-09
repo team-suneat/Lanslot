@@ -89,5 +89,7 @@ namespace TeamSuneat
         }
 
         public VProfile ProfileInfo => GameApp.GetSelectedProfile();
+
+        public virtual LogTags LogTag => LogTags.Character;
     }
 }
