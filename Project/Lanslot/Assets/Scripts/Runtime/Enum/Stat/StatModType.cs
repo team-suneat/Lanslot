@@ -11,7 +11,7 @@ namespace TeamSuneat
         PercentAdd,
 
         /// <summary> %를 곱합니다. </summary>
-        PercentMult,
+        PercentMulti,
 
         /// <summary> 0 또는 1로 사용 여부를 설정합니다. </summary>
         Use,

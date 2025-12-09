@@ -32,7 +32,7 @@ namespace TeamSuneat
             switch (Type)
             {
                 case StatModType.PercentAdd:
-                case StatModType.PercentMult:
+                case StatModType.PercentMulti:
                     {
                         if (isRemove)
                         {

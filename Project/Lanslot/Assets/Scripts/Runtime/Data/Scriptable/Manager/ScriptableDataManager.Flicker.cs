@@ -15,7 +15,7 @@ namespace TeamSuneat.Data
         public FlickerAsset GetFlickerAsset(RendererFlickerNames flickerName)
         {
             int key = BitConvert.Enum32ToInt(flickerName);
-            return _flickers.TryGetValue(key, out var asset) ? asset : null;
+            return _flickerAssets.TryGetValue(key, out var asset) ? asset : null;
         }
 
         #endregion Flicker Get Methods
@@ -32,9 +32,9 @@ namespace TeamSuneat.Data
 
         private FlickerAsset FindFlicker(int TID)
         {
-            if (_flickers.ContainsKey(TID))
+            if (_flickerAssets.ContainsKey(TID))
             {
-                return _flickers[TID];
+                return _flickerAssets[TID];
             }
 
             return null;
@@ -62,15 +62,15 @@ namespace TeamSuneat.Data
                 {
                     Log.Warning(LogTags.ScriptableData, "{0}, 플리커 아이디가 설정되어있지 않습니다. {1}", asset.name, filePath);
                 }
-                else if (_flickers.ContainsKey(asset.TID))
+                else if (_flickerAssets.ContainsKey(asset.TID))
                 {
                     Log.Warning(LogTags.ScriptableData, "같은 TID로 중복 Flicker가 로드 되고 있습니다. TID: {0}, 기존: {1}, 새로운 이름: {2}",
-                         asset.TID, _flickers[asset.TID].name, asset.name);
+                         asset.TID, _flickerAssets[asset.TID].name, asset.name);
                 }
                 else
                 {
                     Log.Progress("스크립터블 데이터를 읽어왔습니다. Path: {0}", filePath);
-                    _flickers[asset.TID] = asset;
+                    _flickerAssets[asset.TID] = asset;
                 }
 
                 return true;
@@ -90,9 +90,9 @@ namespace TeamSuneat.Data
         /// <summary>
         /// 모든 플리커 에셋을 리프레시합니다.
         /// </summary>
-        public void RefreshAllFlickers()
+        public void RefreshAllFlicker()
         {
-            foreach (KeyValuePair<int, FlickerAsset> item in _flickers) { Refresh(item.Value); }
+            foreach (KeyValuePair<int, FlickerAsset> item in _flickerAssets) { Refresh(item.Value); }
         }
 
         private void Refresh(FlickerAsset flickerAsset)

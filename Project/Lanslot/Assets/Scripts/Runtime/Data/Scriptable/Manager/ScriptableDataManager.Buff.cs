@@ -15,7 +15,7 @@ namespace TeamSuneat.Data
         public BuffAsset GetBuffAsset(BuffNames buffName)
         {
             int key = BitConvert.Enum32ToInt(buffName);
-            return _buffs.TryGetValue(key, out var asset) ? asset : null;
+            return _buffAssets.TryGetValue(key, out var asset) ? asset : null;
         }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace TeamSuneat.Data
         public BuffStateEffectAsset GetBuffStateEffectAsset(StateEffects stateEffect)
         {
             int key = BitConvert.Enum32ToInt(stateEffect);
-            return _buffStateEffects.TryGetValue(key, out var asset) ? asset : null;
+            return _stateEffectAssets.TryGetValue(key, out var asset) ? asset : null;
         }
 
         #endregion Buff Get Methods
@@ -41,9 +41,9 @@ namespace TeamSuneat.Data
 
         private BuffAsset FindBuff(int tid)
         {
-            if (_buffs.ContainsKey(tid))
+            if (_buffAssets.ContainsKey(tid))
             {
-                return _buffs[tid];
+                return _buffAssets[tid];
             }
 
             return null;
@@ -59,9 +59,9 @@ namespace TeamSuneat.Data
 
         private BuffStateEffectAsset FindBuffStateEffect(int tid)
         {
-            if (_buffStateEffects.ContainsKey(tid))
+            if (_stateEffectAssets.ContainsKey(tid))
             {
-                return _buffStateEffects[tid];
+                return _stateEffectAssets[tid];
             }
 
             return null;
@@ -92,9 +92,9 @@ namespace TeamSuneat.Data
 
         public BuffAssetData FindBuffClone(int buffTID)
         {
-            if (_buffs.ContainsKey(buffTID))
+            if (_buffAssets.ContainsKey(buffTID))
             {
-                return _buffs[buffTID].Clone();
+                return _buffAssets[buffTID].Clone();
             }
             else
             {
@@ -123,9 +123,9 @@ namespace TeamSuneat.Data
 
         public BuffStateEffectAssetData FindBuffStateEffectClone(int buffStateEffectTID)
         {
-            if (_buffStateEffects.ContainsKey(buffStateEffectTID))
+            if (_stateEffectAssets.ContainsKey(buffStateEffectTID))
             {
-                return _buffStateEffects[buffStateEffectTID].Clone();
+                return _stateEffectAssets[buffStateEffectTID].Clone();
             }
             else
             {
@@ -154,15 +154,15 @@ namespace TeamSuneat.Data
                 {
                     Log.Warning(LogTags.ScriptableData, "{0}, 버프 아이디가 설정되어있지 않습니다. {1}", asset.name, filePath);
                 }
-                else if (_buffs.ContainsKey(asset.TID))
+                else if (_buffAssets.ContainsKey(asset.TID))
                 {
                     Log.Warning(LogTags.ScriptableData, "같은 TID로 중복 버프가 로드 되고 있습니다. TID: {0}, 기존: {1}, 새로운 이름: {2}",
-                         asset.TID, _buffs[asset.TID].name, asset.name);
+                         asset.TID, _buffAssets[asset.TID].name, asset.name);
                 }
                 else
                 {
                     Log.Progress("스크립터블 데이터를 읽어왔습니다. Path: {0}", filePath);
-                    _buffs[asset.TID] = asset;
+                    _buffAssets[asset.TID] = asset;
                 }
 
                 return true;
@@ -192,15 +192,15 @@ namespace TeamSuneat.Data
                 {
                     Log.Warning(LogTags.ScriptableData, "{0}, 버프상태이펙트 아이디가 설정되어있지 않습니다. {1}", asset.name, filePath);
                 }
-                else if (_buffStateEffects.ContainsKey(asset.TID))
+                else if (_stateEffectAssets.ContainsKey(asset.TID))
                 {
                     Log.Warning(LogTags.ScriptableData, "같은 TID로 중복 버프상태이펙트가 로드 되고 있습니다. TID: {0}, 기존: {1}, 새로운 이름: {2}",
-                         asset.TID, _buffStateEffects[asset.TID].name, asset.name);
+                         asset.TID, _stateEffectAssets[asset.TID].name, asset.name);
                 }
                 else
                 {
                     Log.Progress("스크립터블 데이터를 읽어왔습니다. Path: {0}", filePath);
-                    _buffStateEffects[asset.TID] = asset;
+                    _stateEffectAssets[asset.TID] = asset;
                 }
 
                 return true;
@@ -222,8 +222,8 @@ namespace TeamSuneat.Data
         /// </summary>
         public void RefreshAllBuff()
         {
-            foreach (KeyValuePair<int, BuffAsset> item in _buffs) { Refresh(item.Value); }
-            foreach (KeyValuePair<int, BuffStateEffectAsset> item in _buffStateEffects) { Refresh(item.Value); }
+            foreach (KeyValuePair<int, BuffAsset> item in _buffAssets) { Refresh(item.Value); }
+            foreach (KeyValuePair<int, BuffStateEffectAsset> item in _stateEffectAssets) { Refresh(item.Value); }
         }
 
         private void Refresh(BuffAsset buffAsset)
@@ -251,7 +251,7 @@ namespace TeamSuneat.Data
             for (int i = 1; i < keys.Length; i++)
             {
                 tid = BitConvert.Enum32ToInt(keys[i]);
-                if (!_buffs.ContainsKey(tid))
+                if (!_buffAssets.ContainsKey(tid))
                 {
                     Log.Warning(LogTags.ScriptableData, "버프 에셋이 설정되지 않았습니다. {0}({1})", keys[i], keys[i].ToLogString());
                 }

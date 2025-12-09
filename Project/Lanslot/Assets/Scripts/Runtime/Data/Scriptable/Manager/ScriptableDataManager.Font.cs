@@ -15,7 +15,7 @@ namespace TeamSuneat.Data
         public FontAsset GetFontAsset(LanguageNames languageName)
         {
             int key = BitConvert.Enum32ToInt(languageName);
-            return _fonts.TryGetValue(key, out var asset) ? asset : null;
+            return _fontAssets.TryGetValue(key, out var asset) ? asset : null;
         }
 
         #endregion Font Get Methods
@@ -32,9 +32,9 @@ namespace TeamSuneat.Data
 
         public FontAsset FindFont(int tid)
         {
-            if (_fonts.ContainsKey(tid))
+            if (_fontAssets.ContainsKey(tid))
             {
-                return _fonts[tid];
+                return _fontAssets[tid];
             }
 
             return null;
@@ -57,10 +57,10 @@ namespace TeamSuneat.Data
             FontAsset asset = ResourcesManager.LoadResource<FontAsset>(filePath);
             if (asset != null)
             {
-                if (!_fonts.ContainsKey(asset.TID))
+                if (!_fontAssets.ContainsKey(asset.TID))
                 {
                     Log.Progress("스크립터블 데이터를 읽어왔습니다. Path: {0}", filePath);
-                    _fonts[asset.TID] = asset;
+                    _fontAssets[asset.TID] = asset;
                 }
 
                 return true;
@@ -82,7 +82,7 @@ namespace TeamSuneat.Data
         /// </summary>
         public void RefreshAllFonts()
         {
-            foreach (KeyValuePair<int, FontAsset> item in _fonts) { Refresh(item.Value); }
+            foreach (KeyValuePair<int, FontAsset> item in _fontAssets) { Refresh(item.Value); }
         }
 
         private void Refresh(FontAsset fontAsset)

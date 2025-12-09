@@ -19,9 +19,9 @@ namespace TeamSuneat.Data
 
         private HitmarkAsset FindHitmark(int tid)
         {
-            if (_hitmarks.ContainsKey(tid))
+            if (_hitmarkAssets.ContainsKey(tid))
             {
-                return _hitmarks[tid];
+                return _hitmarkAssets[tid];
             }
 
             return null;
@@ -51,9 +51,9 @@ namespace TeamSuneat.Data
 
         public HitmarkAssetData FindHitmarkClone(int hitmarkTID)
         {
-            if (_hitmarks.ContainsKey(hitmarkTID))
+            if (_hitmarkAssets.ContainsKey(hitmarkTID))
             {
-                return _hitmarks[hitmarkTID].CreateDataClone();
+                return _hitmarkAssets[hitmarkTID].CreateDataClone();
             }
 
 #if UNITY_EDITOR
@@ -85,15 +85,15 @@ namespace TeamSuneat.Data
                 {
                     Log.Warning(LogTags.ScriptableData, "{0}, 히트마크 아이디가 설정되어있지 않습니다. {1}", asset.name, filePath);
                 }
-                else if (_hitmarks.ContainsKey(asset.TID))
+                else if (_hitmarkAssets.ContainsKey(asset.TID))
                 {
                     Log.Warning(LogTags.ScriptableData, "같은 TID로 중복 Hitmark가 로드 되고 있습니다. TID: {0}, 기존: {1}, 새로운 이름: {2}",
-                         asset.TID, _hitmarks[asset.TID].name, asset.name);
+                         asset.TID, _hitmarkAssets[asset.TID].name, asset.name);
                 }
                 else
                 {
                     Log.Progress("스크립터블 데이터를 읽어왔습니다. Path: {0}", filePath);
-                    _hitmarks[asset.TID] = asset;
+                    _hitmarkAssets[asset.TID] = asset;
                 }
 
                 return true;
@@ -113,9 +113,9 @@ namespace TeamSuneat.Data
         /// <summary>
         /// 모든 히트마크 에셋을 리프레시합니다.
         /// </summary>
-        public void RefreshAllHitmarks()
+        public void RefreshAllHitmark()
         {
-            foreach (KeyValuePair<int, HitmarkAsset> item in _hitmarks) { Refresh(item.Value); }
+            foreach (KeyValuePair<int, HitmarkAsset> item in _hitmarkAssets) { Refresh(item.Value); }
         }
 
         private void Refresh(HitmarkAsset hitmarkAsset)
@@ -138,7 +138,7 @@ namespace TeamSuneat.Data
             for (int i = 1; i < keys.Length; i++)
             {
                 tid = BitConvert.Enum32ToInt(keys[i]);
-                if (!_hitmarks.ContainsKey(tid))
+                if (!_hitmarkAssets.ContainsKey(tid))
                 {
                     Log.Warning(LogTags.ScriptableData, "히트마크 에셋이 설정되지 않았습니다. {0}({1})", keys[i], keys[i].ToLogString());
                 }

@@ -20,7 +20,7 @@ namespace TeamSuneat.Data
 
         private SoundAsset FindSound(int tid)
         {
-            return _sounds.ContainsKey(tid) ? _sounds[tid] : null;
+            return _soundAssets.ContainsKey(tid) ? _soundAssets[tid] : null;
         }
 
         #endregion Sound Find Methods
@@ -44,15 +44,15 @@ namespace TeamSuneat.Data
                 {
                     Log.Warning(LogTags.ScriptableData, "{0}, 사운드 아이디가 설정되어있지 않습니다. {1}", asset.name, filePath);
                 }
-                else if (_sounds.ContainsKey(asset.TID))
+                else if (_soundAssets.ContainsKey(asset.TID))
                 {
                     Log.Warning(LogTags.ScriptableData, "같은 TID로 중복 Sound가 로드 되고 있습니다. TID: {0}, 기존: {1}, 새로운 이름: {2}",
-                         asset.Name, _sounds[asset.TID].name, asset.name);
+                         asset.Name, _soundAssets[asset.TID].name, asset.name);
                 }
                 else
                 {
                     Log.Progress("스크립터블 데이터를 읽어왔습니다. Path: {0}", filePath);
-                    _sounds[asset.TID] = asset;
+                    _soundAssets[asset.TID] = asset;
                 }
 
                 return true;
@@ -74,7 +74,7 @@ namespace TeamSuneat.Data
         /// </summary>
         public void RefreshAllSounds()
         {
-            foreach (KeyValuePair<int, SoundAsset> item in _sounds) { Refresh(item.Value); }
+            foreach (KeyValuePair<int, SoundAsset> item in _soundAssets) { Refresh(item.Value); }
         }
 
         private void Refresh(SoundAsset soundAsset)

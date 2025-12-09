@@ -24,7 +24,7 @@ namespace TeamSuneat
                 switch (statData.Mod)
                 {
                     case StatModType.PercentAdd:
-                    case StatModType.PercentMult:
+                    case StatModType.PercentMulti:
                         {
                             return true;
                         }

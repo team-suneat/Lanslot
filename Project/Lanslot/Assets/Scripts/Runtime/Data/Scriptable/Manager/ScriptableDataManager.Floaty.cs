@@ -15,7 +15,7 @@ namespace TeamSuneat.Data
         public FloatyAsset GetFloatyAsset(UIFloatyMoveNames floatyName)
         {
             int key = BitConvert.Enum32ToInt(floatyName);
-            return _floatys.TryGetValue(key, out var asset) ? asset : null;
+            return _floatyAssets.TryGetValue(key, out var asset) ? asset : null;
         }
 
         #endregion Floaty Get Methods
@@ -32,9 +32,9 @@ namespace TeamSuneat.Data
 
         private FloatyAsset FindFloaty(int TID)
         {
-            if (_floatys.ContainsKey(TID))
+            if (_floatyAssets.ContainsKey(TID))
             {
-                return _floatys[TID];
+                return _floatyAssets[TID];
             }
 
             return null;
@@ -62,15 +62,15 @@ namespace TeamSuneat.Data
                 {
                     Log.Warning(LogTags.ScriptableData, "{0}, 플로티 아이디가 설정되어있지 않습니다. {1}", asset.name, filePath);
                 }
-                else if (_floatys.ContainsKey(asset.TID))
+                else if (_floatyAssets.ContainsKey(asset.TID))
                 {
                     Log.Warning(LogTags.ScriptableData, "같은 TID로 중복 Floaty가 로드 되고 있습니다. TID: {0}, 기존: {1}, 새로운 이름: {2}",
-                         asset.TID, _floatys[asset.TID].name, asset.name);
+                         asset.TID, _floatyAssets[asset.TID].name, asset.name);
                 }
                 else
                 {
                     Log.Progress("스크립터블 데이터를 읽어왔습니다. Path: {0}", filePath);
-                    _floatys[asset.TID] = asset;
+                    _floatyAssets[asset.TID] = asset;
                 }
 
                 return true;
@@ -90,9 +90,9 @@ namespace TeamSuneat.Data
         /// <summary>
         /// 모든 플로티 에셋을 리프레시합니다.
         /// </summary>
-        public void RefreshAllFloatys()
+        public void RefreshAllFloaty()
         {
-            foreach (KeyValuePair<int, FloatyAsset> item in _floatys) { Refresh(item.Value); }
+            foreach (KeyValuePair<int, FloatyAsset> item in _floatyAssets) { Refresh(item.Value); }
         }
 
         private void Refresh(FloatyAsset floatyAsset)

@@ -10,14 +10,14 @@ namespace TeamSuneat.Data
         {
             if (_logSetting == default) { return false; }
             else if (_gameDefine == default) { return false; }
-            else if (!_buffs.IsValid()) { return false; }
-            else if (!_buffStateEffects.IsValid()) { return false; }
-            else if (!_passives.IsValid()) { return false; }
-            else if (!_hitmarks.IsValid()) { return false; }
-            else if (!_fonts.IsValid()) { return false; }
-            else if (!_floatys.IsValid()) { return false; }
-            else if (!_flickers.IsValid()) { return false; }
-            else if (!_sounds.IsValid()) { return false; }
+            else if (!_buffAssets.IsValid()) { return false; }
+            else if (!_stateEffectAssets.IsValid()) { return false; }
+            else if (!_passiveAssets.IsValid()) { return false; }
+            else if (!_hitmarkAssets.IsValid()) { return false; }
+            else if (!_fontAssets.IsValid()) { return false; }
+            else if (!_floatyAssets.IsValid()) { return false; }
+            else if (!_flickerAssets.IsValid()) { return false; }
+            else if (!_soundAssets.IsValid()) { return false; }
 
             return true;
         }
@@ -28,7 +28,7 @@ namespace TeamSuneat.Data
             _logSetting?.OnLoadData();
 
             // 사운드 OnLoadData() 메서드 호출
-            foreach (KeyValuePair<int, SoundAsset> asset in _sounds)
+            foreach (KeyValuePair<int, SoundAsset> asset in _soundAssets)
             {
             }
         }
@@ -119,65 +119,65 @@ namespace TeamSuneat.Data
                         break;
 
                     case BuffAsset buff:
-                        if (!_buffs.ContainsKey(buff.TID))
+                        if (!_buffAssets.ContainsKey(buff.TID))
                         {
-                            _buffs[buff.TID] = buff;
+                            _buffAssets[buff.TID] = buff;
                             count++;
                         }
                         break;
 
                     case BuffStateEffectAsset buffStateEffect:
-                        if (!_buffStateEffects.ContainsKey(buffStateEffect.TID))
+                        if (!_stateEffectAssets.ContainsKey(buffStateEffect.TID))
                         {
-                            _buffStateEffects[buffStateEffect.TID] = buffStateEffect;
+                            _stateEffectAssets[buffStateEffect.TID] = buffStateEffect;
                             count++;
                         }
                         break;
 
                     case PassiveAsset passive:
-                        if (!_passives.ContainsKey(passive.TID))
+                        if (!_passiveAssets.ContainsKey(passive.TID))
                         {
-                            _passives[passive.TID] = passive;
+                            _passiveAssets[passive.TID] = passive;
                             count++;
                         }
                         break;
 
                     case HitmarkAsset hitmark:
-                        if (!_hitmarks.ContainsKey(hitmark.TID))
+                        if (!_hitmarkAssets.ContainsKey(hitmark.TID))
                         {
-                            _hitmarks[hitmark.TID] = hitmark;
+                            _hitmarkAssets[hitmark.TID] = hitmark;
                             count++;
                         }
                         break;
 
                     case FontAsset font:
-                        if (!_fonts.ContainsKey(font.TID))
+                        if (!_fontAssets.ContainsKey(font.TID))
                         {
-                            _fonts[font.TID] = font;
+                            _fontAssets[font.TID] = font;
                             count++;
                         }
                         break;
 
                     case FloatyAsset floaty:
-                        if (!_floatys.ContainsKey(floaty.TID))
+                        if (!_floatyAssets.ContainsKey(floaty.TID))
                         {
-                            _floatys[floaty.TID] = floaty;
+                            _floatyAssets[floaty.TID] = floaty;
                             count++;
                         }
                         break;
 
                     case FlickerAsset flicker:
-                        if (!_flickers.ContainsKey(flicker.TID))
+                        if (!_flickerAssets.ContainsKey(flicker.TID))
                         {
-                            _flickers[flicker.TID] = flicker;
+                            _flickerAssets[flicker.TID] = flicker;
                             count++;
                         }
                         break;
 
                     case SoundAsset sound:
-                        if (!_sounds.ContainsKey(sound.TID))
+                        if (!_soundAssets.ContainsKey(sound.TID))
                         {
-                            _sounds[sound.TID] = sound;
+                            _soundAssets[sound.TID] = sound;
                             count++;
                         }
                         break;

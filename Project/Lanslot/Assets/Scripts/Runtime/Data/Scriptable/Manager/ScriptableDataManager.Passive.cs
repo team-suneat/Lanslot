@@ -15,7 +15,7 @@ namespace TeamSuneat.Data
         public PassiveAsset GetPassiveAsset(PassiveNames passiveName)
         {
             int key = BitConvert.Enum32ToInt(passiveName);
-            return _passives.TryGetValue(key, out var asset) ? asset : null;
+            return _passiveAssets.TryGetValue(key, out var asset) ? asset : null;
         }
 
         #endregion Passive Get Methods
@@ -32,9 +32,9 @@ namespace TeamSuneat.Data
 
         private PassiveAsset FindPassive(int tid)
         {
-            if (_passives.ContainsKey(tid))
+            if (_passiveAssets.ContainsKey(tid))
             {
-                return _passives[tid];
+                return _passiveAssets[tid];
             }
 
             return null;
@@ -52,9 +52,9 @@ namespace TeamSuneat.Data
             if (passiveName != PassiveNames.None)
             {
                 int passiveTID = BitConvert.Enum32ToInt(passiveName);
-                if (_passives.ContainsKey(passiveTID))
+                if (_passiveAssets.ContainsKey(passiveTID))
                 {
-                    return _passives[passiveTID].TriggerSettings;
+                    return _passiveAssets[passiveTID].TriggerSettings;
                 }
                 else
                 {
@@ -73,9 +73,9 @@ namespace TeamSuneat.Data
             if (passiveName != PassiveNames.None)
             {
                 int passiveTID = BitConvert.Enum32ToInt(passiveName);
-                if (_passives.ContainsKey(passiveTID))
+                if (_passiveAssets.ContainsKey(passiveTID))
                 {
-                    return _passives[passiveTID].ConditionSettings;
+                    return _passiveAssets[passiveTID].ConditionSettings;
                 }
                 else
                 {
@@ -94,9 +94,9 @@ namespace TeamSuneat.Data
             if (passiveName != PassiveNames.None)
             {
                 int passiveTID = BitConvert.Enum32ToInt(passiveName);
-                if (_passives.ContainsKey(passiveTID))
+                if (_passiveAssets.ContainsKey(passiveTID))
                 {
-                    return _passives[passiveTID].EffectSettings;
+                    return _passiveAssets[passiveTID].EffectSettings;
                 }
                 else
                 {
@@ -128,15 +128,15 @@ namespace TeamSuneat.Data
                 {
                     Log.Warning(LogTags.ScriptableData, "{0}, 패시브 아이디가 설정되어있지 않습니다. {1}", asset.name, filePath);
                 }
-                else if (_passives.ContainsKey(asset.TID))
+                else if (_passiveAssets.ContainsKey(asset.TID))
                 {
                     Log.Warning(LogTags.ScriptableData, "같은 TID로 중복 패시브가 로드 되고 있습니다. TID: {0}, 기존: {1}, 새로운 이름: {2}",
-                         asset.TID, _passives[asset.TID].name, asset.name);
+                         asset.TID, _passiveAssets[asset.TID].name, asset.name);
                 }
                 else
                 {
                     Log.Progress("스크립터블 데이터를 읽어왔습니다. Path: {0}", filePath);
-                    _passives[asset.TID] = asset;
+                    _passiveAssets[asset.TID] = asset;
                 }
 
                 return true;
@@ -158,7 +158,7 @@ namespace TeamSuneat.Data
         /// </summary>
         public void RefreshAllPassive()
         {
-            foreach (KeyValuePair<int, PassiveAsset> item in _passives) { Refresh(item.Value); }
+            foreach (KeyValuePair<int, PassiveAsset> item in _passiveAssets) { Refresh(item.Value); }
         }
 
         private void Refresh(PassiveAsset passiveAsset)
@@ -181,7 +181,7 @@ namespace TeamSuneat.Data
             for (int i = 1; i < keys.Length; i++)
             {
                 tid = BitConvert.Enum32ToInt(keys[i]);
-                if (!_passives.ContainsKey(tid))
+                if (!_passiveAssets.ContainsKey(tid))
                 {
                     Log.Warning(LogTags.ScriptableData, "패시브 에셋이 설정되지 않았습니다. {0}({1})", keys[i], keys[i].ToLogString());
                 }
@@ -197,7 +197,7 @@ namespace TeamSuneat.Data
 #if UNITY_EDITOR
 
             Dictionary<PassiveTriggers, int> _triggerUseCount = new();
-            foreach (PassiveAsset asset in _passives.Values)
+            foreach (PassiveAsset asset in _passiveAssets.Values)
             {
                 if (asset.TriggerSettings == null)
                 {
