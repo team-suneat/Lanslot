@@ -62,7 +62,7 @@ namespace TeamSuneat.UserInterface
 
         private void Initialize()
         {
-            LoadAvailables();
+            LoadAvailableItems();
             RegisterStopSlotsEvent();
 
             if (_actionButton != null)
@@ -228,7 +228,7 @@ namespace TeamSuneat.UserInterface
             }
         }
 
-        public void LoadAvailables()
+        public void LoadAvailableItems()
         {
             List<ItemNames> itemNames = CollectAvailableNames();
             (List<Sprite> loadedSprites, List<ItemNames> validItemNames) = LoadSpritesFromItemNames(itemNames);

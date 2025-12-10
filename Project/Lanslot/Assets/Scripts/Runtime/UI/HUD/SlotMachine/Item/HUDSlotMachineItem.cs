@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using TeamSuneat.Data;
 using UnityEngine;
 
 namespace TeamSuneat.UserInterface
@@ -12,6 +13,7 @@ namespace TeamSuneat.UserInterface
         [FoldoutGroup("#Component")][SerializeField] private HUDSlotMachineItemLock _lock;
         [FoldoutGroup("#Component")][SerializeField] private HUDSlotMachineItemAnimator _animator;
         [FoldoutGroup("#Component")][SerializeField] private UILocalizedText _itemNameText;
+        [FoldoutGroup("#Component")][SerializeField] private SlotMachineEffectHandler _slotMachineHandler;
 
         private SlotState _currentState = SlotState.None;
         private ItemNames _currentItemName = ItemNames.None;
@@ -35,6 +37,8 @@ namespace TeamSuneat.UserInterface
             _lock ??= GetComponentInChildren<HUDSlotMachineItemLock>();
             _animator ??= GetComponent<HUDSlotMachineItemAnimator>();
             _itemNameText ??= this.FindComponent<UILocalizedText>("ItemName Text");
+            _slotMachineHandler ??= CharacterManager.Instance != null ? CharacterManager.Instance.Player?.GetComponent<SlotMachineEffectHandler>() : null;
+            _slotMachineHandler ??= FindFirstObjectByType<SlotMachineEffectHandler>();
         }
 
         protected override void OnStart()
@@ -176,6 +180,7 @@ namespace TeamSuneat.UserInterface
         /// </summary>
         private void OnAnimationComplete()
         {
+            ApplyItemEffect();
             SetState(SlotState.Stopped);                       
             SetItemNameText();
             OnSlotStopped?.Invoke(this);
@@ -313,6 +318,31 @@ namespace TeamSuneat.UserInterface
             {
                 _itemNameText.ResetText();
             }
+        }
+
+        /// <summary>
+        /// 슬롯 결과를 핸들러에 전달합니다.
+        /// </summary>
+        private void ApplyItemEffect()
+        {
+            if (_currentItemName == ItemNames.None)
+            {
+                return;
+            }
+
+            if (_slotMachineHandler == null)
+            {
+                _slotMachineHandler = CharacterManager.Instance != null ? CharacterManager.Instance.Player?.GetComponent<SlotMachineEffectHandler>() : null;
+                _slotMachineHandler ??= FindFirstObjectByType<SlotMachineEffectHandler>();
+            }
+
+            if (_slotMachineHandler == null)
+            {
+                Log.Warning(LogTags.UI_SlotMachine, "슬롯머신 효과 핸들러를 찾을 수 없습니다.");
+                return;
+            }
+
+            _slotMachineHandler.ApplySlotResult(_currentItemName);
         }
     }
 }
