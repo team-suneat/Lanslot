@@ -26,5 +26,24 @@ namespace TeamSuneat.Data
         public void OnLoadData()
         {
         }
+
+        public float GetStatValue(GradeNames gradeName)
+        {
+            switch (gradeName)
+            {
+                case GradeNames.Common:
+                    return CommonStatValue;
+                case GradeNames.Uncommon:
+                    return UncommonStatValue;
+                case GradeNames.Rare:
+                    return RareStatValue;
+                case GradeNames.Epic:
+                    return EpicStatValue;
+                case GradeNames.Legendary:
+                    return LegendaryStatValue;    
+                default:
+                    return BaseStatValue;
+            }
+        }
     }
 }

@@ -60,9 +60,6 @@ namespace TeamSuneat
         /// <summary> 히트마크 레벨 </summary>
         public int HitmarkLevel;
 
-        /// <summary> 피해 에셋 데이터 </summary>
-        public DamageAssetData Asset;
-
         //───────────────────────────────────────────────────────────────────────────────────────────────────
 
         public Vector3 AttackPosition
@@ -114,6 +111,8 @@ namespace TeamSuneat
         }
 
         // 에셋 데이터 (AssetData)
+
+        public HitmarkAssetData Asset;
 
         public HitmarkNames HitmarkName
         {

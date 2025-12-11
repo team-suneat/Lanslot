@@ -33,7 +33,7 @@ namespace TeamSuneat.UserInterface
         {
             base.RegisterGlobalEvent();
 
-            GlobalEvent.Register(GlobalEventType.PLAYER_CHARACTER_BATTLE_READY, OnPlayerCharacterSpawned);
+            GlobalEvent.Register(GlobalEventType.PLAYER_CHARACTER_BATTLE_READY, OnPlayerCharacterBattleReady);
             GlobalEvent<int>.Register(GlobalEventType.GAME_DATA_CHARACTER_LEVEL_CHANGED, OnPlayerCharacterLevelChanged);
             GlobalEvent.Register(GlobalEventType.PLAYER_CHARACTER_DESPAWNED, OnPlayerCharacterDespawned);
         }
@@ -42,7 +42,7 @@ namespace TeamSuneat.UserInterface
         {
             base.UnregisterGlobalEvent();
 
-            GlobalEvent.Unregister(GlobalEventType.PLAYER_CHARACTER_BATTLE_READY, OnPlayerCharacterSpawned);
+            GlobalEvent.Unregister(GlobalEventType.PLAYER_CHARACTER_BATTLE_READY, OnPlayerCharacterBattleReady);
             GlobalEvent<int>.Unregister(GlobalEventType.GAME_DATA_CHARACTER_LEVEL_CHANGED, OnPlayerCharacterLevelChanged);
             GlobalEvent.Unregister(GlobalEventType.PLAYER_CHARACTER_DESPAWNED, OnPlayerCharacterDespawned);
         }
@@ -51,7 +51,7 @@ namespace TeamSuneat.UserInterface
 
         #region 이벤트 핸들러
 
-        private void OnPlayerCharacterSpawned()
+        private void OnPlayerCharacterBattleReady()
         {
             _playerCharacter = CharacterManager.Instance.Player;
             if (_playerCharacter != null)

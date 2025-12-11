@@ -23,22 +23,12 @@ namespace TeamSuneat
     {
         public static RendererFlickerNames ConvertToFlicker(this DamageTypes damageType)
         {
-            if (damageType == DamageTypes.BleedOverTime)
+            if (damageType == DamageTypes.DamageOverTime)
             {
                 return RendererFlickerNames.Bleeding;
             }
-            else if (damageType == DamageTypes.FireOverTime)
-            {
-                return RendererFlickerNames.Burning;
-            }
-            else if (damageType == DamageTypes.PoisonOverTime)
-            {
-                return RendererFlickerNames.Poisoning;
-            }
-            else
-            {
-                return RendererFlickerNames.Damage;
-            }
+
+            return RendererFlickerNames.Damage;
         }
     }
 }

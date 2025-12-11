@@ -5,15 +5,15 @@ namespace TeamSuneat
 {
     public static partial class SpriteEx
     {
-        // 기본 상수들
+        // 아이콘 스트링 포맷
         private const string CHARACTER_ICON_FORMAT = "ui_character_icon_";
         private const string PASSIVE_ICON_FORMAT = "ui_passive_icon_";
         private const string ITEM_ICON_FORMAT = "ui_item_icon_";
         private const string CURRENCY_ICON_FORMAT = "ui_currency_icon_";
 
+        // 아틀라스 이름
         private const string CHARACTER_ATLAS_NAME = "atlas_character";
         private const string ITEM_ATLAS_NAME = "atlas_item";
-
 
         // 공통 StringBuilder 인스턴스
         private static readonly StringBuilder _stringBuilder = new();

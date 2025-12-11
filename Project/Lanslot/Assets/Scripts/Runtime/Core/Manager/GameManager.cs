@@ -9,6 +9,7 @@ namespace TeamSuneat
     public class GameManager : MonoBehaviour
     {
         public bool IsBattleActive { get; internal set; }
+        public StageSystem CurrentStageSystem { get; set; }
 
         private void Awake()
         {

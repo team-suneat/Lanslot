@@ -97,26 +97,7 @@ namespace TeamSuneat.UserInterface
                         return UIFloatyMoveNames.Thorns;
                     }
 
-                case DamageTypes.BleedOverTime:
-                    {
-                        return UIFloatyMoveNames.Bleeding;
-                    }
-                case DamageTypes.FireOverTime:
-                    {
-                        return UIFloatyMoveNames.Burning;
-                    }
-                case DamageTypes.PoisonOverTime:
-                    {
-                        return UIFloatyMoveNames.Poisoning;
-                    }
-
-                case DamageTypes.Magical:
-                case DamageTypes.Fire:
-                case DamageTypes.Cold:
-                case DamageTypes.Lightning:
-                case DamageTypes.Poison:
-                case DamageTypes.Darkness:
-                case DamageTypes.Holy:
+                case DamageTypes.DamageOverTime:
                     {
                         if (damageResult.DamageValue == float.MaxValue)
                         {
@@ -124,11 +105,11 @@ namespace TeamSuneat.UserInterface
                         }
                         else if (damageResult.IsCritical)
                         {
-                            return UIFloatyMoveNames.MagicalCritical;
+                            return UIFloatyMoveNames.Bleeding;
                         }
                         else
                         {
-                            return UIFloatyMoveNames.Magical;
+                            return UIFloatyMoveNames.Bleeding;
                         }
                     }
 
@@ -191,7 +172,7 @@ namespace TeamSuneat.UserInterface
             Asset = ScriptableDataManager.Instance.FindFloaty(moveType);
             if (!Asset.IsValid())
             {
-                Log.Error("Float 에셋을 찾을 수 없습니다: {0}", moveType);
+                Log.Warning("Float 에셋을 찾을 수 없습니다: {0}", moveType);
                 return;
             }
 

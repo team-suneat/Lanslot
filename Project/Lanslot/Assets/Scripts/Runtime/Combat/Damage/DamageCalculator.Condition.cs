@@ -5,7 +5,7 @@ namespace TeamSuneat
 {
     public partial class DamageCalculator
     {
-        private bool TryCheatDamage(DamageAssetData damageAsset, ref DamageResult damageResult)
+        private bool TryCheatDamage(HitmarkAssetData damageAsset, ref DamageResult damageResult)
         {
             if (Attacker == null)
             {

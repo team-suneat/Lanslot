@@ -45,34 +45,10 @@ namespace TeamSuneat
                 case DamageTypes.Physical:
                     return GameColors.Physical;
 
-                case DamageTypes.Magical:
-                    return GameColors.Magical;
+                case DamageTypes.Thorns:
+                    return GameColors.Thorns;
 
-                case DamageTypes.Fire:
-                case DamageTypes.FireOverTime:
-                    return GameColors.Fire;
-
-                case DamageTypes.Cold:
-                case DamageTypes.ColdOverTime:
-                    return GameColors.Cold;
-
-                case DamageTypes.Lightning:
-                case DamageTypes.LightningOverTime:
-                    return GameColors.Lightning;
-
-                case DamageTypes.Poison:
-                case DamageTypes.PoisonOverTime:
-                    return GameColors.Poison;
-
-                case DamageTypes.Holy:
-                case DamageTypes.HolyOverTime:
-                    return GameColors.Holy;
-
-                case DamageTypes.Darkness:
-                case DamageTypes.DarknessOverTime:
-                    return GameColors.Darkness;
-
-                case DamageTypes.BleedOverTime:
+                case DamageTypes.DamageOverTime:
                     return GameColors.Bleed;
 
                 default:

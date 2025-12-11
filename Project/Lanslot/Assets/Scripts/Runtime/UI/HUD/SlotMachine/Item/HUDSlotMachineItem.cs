@@ -1,30 +1,22 @@
 using Sirenix.OdinInspector;
-using TeamSuneat.Data;
 using UnityEngine;
 
 namespace TeamSuneat.UserInterface
 {
-    /// <summary>
-    /// 개별 슬롯 UI 컴포넌트
-    /// </summary>
     public class HUDSlotMachineItem : XBehaviour
     {
         [FoldoutGroup("#Component")][SerializeField] private HUDSlotMachineItemScroller _scroller;
         [FoldoutGroup("#Component")][SerializeField] private HUDSlotMachineItemLock _lock;
         [FoldoutGroup("#Component")][SerializeField] private HUDSlotMachineItemAnimator _animator;
         [FoldoutGroup("#Component")][SerializeField] private UILocalizedText _itemNameText;
-        [FoldoutGroup("#Component")][SerializeField] private SlotMachineEffectHandler _slotMachineHandler;
 
-        private SlotState _currentState = SlotState.None;
-        private ItemNames _currentItemName = ItemNames.None;
-        private Sprite _currentSprite;
-
+        private SlotMachineEffectHandler _slotMachineHandler;
         private Sprite[] _shuffledSprites;
         private ItemNames[] _shuffledItemNames;
 
-        public SlotState CurrentState => _currentState;
-        public Sprite CurrentSprite => _currentSprite;
-        public ItemNames CurrentItemName => _currentItemName;
+        public SlotState CurrentState { get; private set; } = SlotState.None;
+        public Sprite CurrentSprite { get; private set; }
+        public ItemNames CurrentItemName { get; private set; } = ItemNames.None;
         public bool IsLocked => _lock != null && _lock.IsLocked;
 
         public System.Action<HUDSlotMachineItem> OnSlotStopped;
@@ -37,8 +29,6 @@ namespace TeamSuneat.UserInterface
             _lock ??= GetComponentInChildren<HUDSlotMachineItemLock>();
             _animator ??= GetComponent<HUDSlotMachineItemAnimator>();
             _itemNameText ??= this.FindComponent<UILocalizedText>("ItemName Text");
-            _slotMachineHandler ??= CharacterManager.Instance != null ? CharacterManager.Instance.Player?.GetComponent<SlotMachineEffectHandler>() : null;
-            _slotMachineHandler ??= FindFirstObjectByType<SlotMachineEffectHandler>();
         }
 
         protected override void OnStart()
@@ -62,14 +52,11 @@ namespace TeamSuneat.UserInterface
             LogicUpdate();
         }
 
-        /// <summary>
-        /// 슬롯 스핀 시작
-        /// </summary>
         public void StartSpin(Sprite[] sprites, ItemNames[] itemNames)
         {
-            if (_currentState != SlotState.Idle)
+            if (CurrentState != SlotState.Idle)
             {
-                Log.Warning(LogTags.UI_SlotMachine, "슬롯 스핀을 시작할 수 없습니다. 현재 상태: {0}", _currentState);
+                Log.Warning(LogTags.UI_SlotMachine, "슬롯 스핀을 시작할 수 없습니다. 현재 상태: {0}", CurrentState);
                 return;
             }
 
@@ -87,8 +74,8 @@ namespace TeamSuneat.UserInterface
             }
 
             // Deck을 사용한 배열 섞기
-            Deck<Sprite> spriteDeck = new Deck<Sprite>();
-            Deck<ItemNames> itemNameDeck = new Deck<ItemNames>();
+            Deck<Sprite> spriteDeck = new();
+            Deck<ItemNames> itemNameDeck = new();
 
             // 중복 허용 설정 (같은 아이템이 여러 번 나올 수 있음)
             spriteDeck.AllowDuplicateValues = true;
@@ -124,14 +111,11 @@ namespace TeamSuneat.UserInterface
             SetState(SlotState.Spinning);
         }
 
-        /// <summary>
-        /// 슬롯 스핀 중지
-        /// </summary>
         public void StopSpin()
         {
-            if (_currentState != SlotState.Spinning)
+            if (CurrentState != SlotState.Spinning)
             {
-                Log.Warning(LogTags.UI_SlotMachine, "슬롯 스핀을 중지할 수 없습니다. 현재 상태: {0}", _currentState);
+                Log.Warning(LogTags.UI_SlotMachine, "슬롯 스핀을 중지할 수 없습니다. 현재 상태: {0}", CurrentState);
                 return;
             }
 
@@ -160,8 +144,8 @@ namespace TeamSuneat.UserInterface
                 return;
             }
 
-            _currentSprite = targetSprite;
-            _currentItemName = itemName;
+            CurrentSprite = targetSprite;
+            CurrentItemName = itemName;
             SetState(SlotState.Stopping);
 
             // 애니메이션 시작
@@ -175,42 +159,35 @@ namespace TeamSuneat.UserInterface
             }
         }
 
-        /// <summary>
-        /// 애니메이션 완료 콜백
-        /// </summary>
         private void OnAnimationComplete()
         {
-            ApplyItemEffect();
-            SetState(SlotState.Stopped);                       
-            SetItemNameText();
-            OnSlotStopped?.Invoke(this);
+            SetState(SlotState.Stopped);
 
+            SetItemNameText();
+
+            ApplyItemEffect();
+
+            OnSlotStopped?.Invoke(this);
         }
 
-        /// <summary>
-        /// 로직 업데이트
-        /// </summary>
         public void LogicUpdate()
         {
             // Spinning 또는 Stopping 상태일 때 스크롤링 계속 유지
             // Stopping 상태에서도 아이템 순환이 계속되어 자연스러운 정지 애니메이션 보장
-            if ((_currentState == SlotState.Spinning || _currentState == SlotState.Stopping) && _scroller != null)
+            if ((CurrentState == SlotState.Spinning || CurrentState == SlotState.Stopping) && _scroller != null)
             {
                 _scroller.UpdateScrolling();
             }
         }
 
-        /// <summary>
-        /// 상태 설정
-        /// </summary>
         private void SetState(SlotState newState)
         {
-            _currentState = newState;
+            CurrentState = newState;
 
             // 스크롤 상태에 따라 스크롤러 제어
             if (_scroller != null)
             {
-                if (newState == SlotState.Spinning || newState == SlotState.Stopping)
+                if (newState is SlotState.Spinning or SlotState.Stopping)
                 {
                     // UpdateScrolling은 LogicUpdate에서 호출됨
                     // Stopping 상태에서도 스크롤링을 계속 유지하여 아이템 순환 보장
@@ -222,9 +199,6 @@ namespace TeamSuneat.UserInterface
             }
         }
 
-        /// <summary>
-        /// 슬롯 잠금
-        /// </summary>
         public void LockSlot()
         {
             if (_lock != null)
@@ -233,9 +207,6 @@ namespace TeamSuneat.UserInterface
             }
         }
 
-        /// <summary>
-        /// 슬롯 해금
-        /// </summary>
         public void UnlockSlot()
         {
             if (_lock != null)
@@ -244,9 +215,6 @@ namespace TeamSuneat.UserInterface
             }
         }
 
-        /// <summary>
-        /// 잠금 상태 토글
-        /// </summary>
         public void ToggleLock()
         {
             if (_lock != null)
@@ -255,9 +223,6 @@ namespace TeamSuneat.UserInterface
             }
         }
 
-        /// <summary>
-        /// 슬롯 리셋
-        /// </summary>
         public void ResetSlot()
         {
             // 애니메이션 중지
@@ -267,8 +232,8 @@ namespace TeamSuneat.UserInterface
             }
 
             SetState(SlotState.Idle);
-            _currentSprite = null;
-            _currentItemName = ItemNames.None;
+            CurrentSprite = null;
+            CurrentItemName = ItemNames.None;
 
             // 섞인 배열 초기화
             _shuffledSprites = null;
@@ -289,9 +254,6 @@ namespace TeamSuneat.UserInterface
             }
         }
 
-        /// <summary>
-        /// 아이템 이름 텍스트 설정
-        /// </summary>
         private void SetItemNameText()
         {
             if (_itemNameText == null)
@@ -299,50 +261,58 @@ namespace TeamSuneat.UserInterface
                 return;
             }
 
-            if (_currentItemName == ItemNames.None)
+            if (CurrentItemName == ItemNames.None)
             {
                 ResetItemNameText();
                 return;
             }
 
-            string itemNameString = _currentItemName.GetLocalizedString();
+            string itemNameString = CurrentItemName.GetLocalizedString();
             _itemNameText.SetText(itemNameString);
+
+            Log.Info(LogTags.UI_SlotMachine, "아이템 이름 텍스트 설정: {0}", itemNameString);
         }
 
-        /// <summary>
-        /// 아이템 이름 텍스트 초기화
-        /// </summary>
         private void ResetItemNameText()
         {
             if (_itemNameText != null)
             {
                 _itemNameText.ResetText();
+
+                Log.Info(LogTags.UI_SlotMachine, "아이템 이름 텍스트 초기화");
             }
         }
 
-        /// <summary>
-        /// 슬롯 결과를 핸들러에 전달합니다.
-        /// </summary>
         private void ApplyItemEffect()
         {
-            if (_currentItemName == ItemNames.None)
+            if (CurrentItemName == ItemNames.None)
             {
                 return;
             }
 
+            if (TryLoadSlotMachineHandler())
+            {
+                _slotMachineHandler.ApplySlotResult(CurrentItemName);
+            }
+        }
+
+        private bool TryLoadSlotMachineHandler()
+        {
             if (_slotMachineHandler == null)
             {
-                _slotMachineHandler = CharacterManager.Instance != null ? CharacterManager.Instance.Player?.GetComponent<SlotMachineEffectHandler>() : null;
-                _slotMachineHandler ??= FindFirstObjectByType<SlotMachineEffectHandler>();
+                if (CharacterManager.Instance != null)
+                {
+                    _slotMachineHandler = CharacterManager.Instance.Player?.GetComponent<SlotMachineEffectHandler>();
+                }
             }
 
             if (_slotMachineHandler == null)
             {
                 Log.Warning(LogTags.UI_SlotMachine, "슬롯머신 효과 핸들러를 찾을 수 없습니다.");
-                return;
+                return false;
             }
 
-            _slotMachineHandler.ApplySlotResult(_currentItemName);
+            return true;
         }
     }
 }

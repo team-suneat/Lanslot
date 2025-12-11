@@ -1,17 +1,15 @@
-﻿using System.Collections.Generic;
-using TeamSuneat.Data;
+﻿using TeamSuneat.Data;
 using UnityEngine;
 
 namespace TeamSuneat
 {
     public partial class CharacterAnimator : XBehaviour, IAnimatorStateMachine
     {
-        [SerializeField] protected Character _ownerCharacter;
-        [SerializeField] private Animator _animator;
-        public string PlayingSkillAnimationName { get; internal set; }
-        public bool IsDamaging { get; internal set; }
+        [SerializeField]
+        protected Character _ownerCharacter;
 
-        //
+        [SerializeField]
+        private Animator _animator;
 
         public virtual void OnAnimatorStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
@@ -19,6 +17,10 @@ namespace TeamSuneat
 
         public virtual void OnAnimatorStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            if (stateInfo.IsName("Death"))
+            {
+                _ownerCharacter.Despawn();
+            }
         }
 
         //
@@ -27,26 +29,28 @@ namespace TeamSuneat
         {
             base.AutoGetComponents();
 
-            _animator = GetComponent<Animator>();
             _ownerCharacter = this.FindFirstParentComponent<Character>();
+            _animator = GetComponent<Animator>();
         }
 
         private void Awake()
         {
+            _ownerCharacter = this.FindFirstParentComponent<Character>();
             _animator ??= GetComponent<Animator>();
         }
+
+        //
 
         internal void Initialize()
         {
             InitializeAnimatorParameters();
         }
 
-        internal bool CheckPlayingSkillAnimation()
+        internal void PlaySpawnAnimation()
         {
-            return false;
         }
 
-        internal bool PlayDamageAnimation(DamageAssetData asset)
+        internal bool PlayDamageAnimation(HitmarkAssetData asset)
         {
             return false;
         }
@@ -56,9 +60,7 @@ namespace TeamSuneat
             _animator.UpdateAnimatorTrigger(ANIMATOR_DEATH_PARAMETER_ID, AnimatorParameters);
         }
 
-        internal void PlaySpawnAnimation()
-        {
-        }
+        //
 
         internal void SetAttackSpeed(float attackSpeed)
         {
@@ -71,6 +73,8 @@ namespace TeamSuneat
         internal void SetDamageTypeParamter(bool isPowerfulAttack)
         {
         }
+
+        //
 
         internal void StopAttacking()
         {

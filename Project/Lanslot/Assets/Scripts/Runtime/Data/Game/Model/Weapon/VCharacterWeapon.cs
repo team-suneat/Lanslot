@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TeamSuneat.Data.Game
 {
@@ -7,34 +8,88 @@ namespace TeamSuneat.Data.Game
     {
         public Dictionary<string, VWeapon> Weapons = new();
         public List<string> UnlockedWeapons = new();
+        public List<string> SlotWeaponNameStrings = new();
+        public int UnlockedSlotCount;
+
+        [NonSerialized]
+        private readonly Dictionary<ItemNames, VWeapon> _weaponMap = new();
+
+        [NonSerialized]
+        private readonly List<ItemNames> _slotWeaponNames = new();
+
+        public IReadOnlyList<ItemNames> SlotWeaponNames => _slotWeaponNames;
 
         public List<ItemNames> GetWeaponNames()
         {
-            List<ItemNames> itemNames = new();
-            ItemNames itemName = ItemNames.None;
-            foreach (KeyValuePair<string, VWeapon> kvp in Weapons)
+            return new List<ItemNames>(_slotWeaponNames);
+        }
+
+        public List<VWeapon> GetWeapons()
+        {
+            List<VWeapon> weapons = new();
+            foreach (ItemNames weaponName in _slotWeaponNames)
             {
-                if (EnumEx.ConvertTo(ref itemName, kvp.Key))
+                if (_weaponMap.TryGetValue(weaponName, out VWeapon weapon))
                 {
-                    itemNames.Add(itemName);
+                    weapons.Add(weapon);
                 }
             }
-            return itemNames;
+
+            return weapons;
         }
+
+        //
 
         public void OnLoadGameData()
         {
+            _weaponMap.Clear();
+
+            ItemNames itemName = ItemNames.None;
             foreach (KeyValuePair<string, VWeapon> kvp in Weapons)
             {
                 VWeapon weapon = kvp.Value;
                 weapon.OnLoadGameData();
+
+                if (!EnumEx.ConvertTo(ref itemName, kvp.Key))
+                {
+                    Log.Error(LogTags.GameData_Weapon, "무기 키를 ItemNames로 변환하지 못했습니다: {0}", kvp.Key);
+                    continue;
+                }
+
+                weapon.Name = itemName;
+                _weaponMap[itemName] = weapon;
             }
+
+            _slotWeaponNames.Clear();
+            foreach (string slotName in SlotWeaponNameStrings)
+            {
+                if (!EnumEx.ConvertTo(ref itemName, slotName))
+                {
+                    Log.Error(LogTags.GameData_Weapon, "무기 슬롯 이름을 ItemNames로 변환하지 못했습니다: {0}", slotName);
+                    continue;
+                }
+
+                if (_slotWeaponNames.Count >= UnlockedSlotCount)
+                {
+                    break;
+                }
+
+                if (_weaponMap.ContainsKey(itemName))
+                {
+                    _slotWeaponNames.Add(itemName);
+                }
+            }
+
+            SyncSlotWeaponNameStrings();
         }
 
         public void ClearIngameData()
         {
             Log.Info(LogTags.GameData_Weapon, "인게임 무기를 초기화합니다. 인게임 무기의 수: {0}개", Weapons.Count);
             Weapons.Clear();
+            SlotWeaponNameStrings.Clear();
+            _slotWeaponNames.Clear();
+            _weaponMap.Clear();
         }
 
         //
@@ -61,15 +116,39 @@ namespace TeamSuneat.Data.Game
             return Weapons.ContainsKey(weaponName.ToString());
         }
 
+        public VWeapon FindWeapon(ItemNames weaponName)
+        {
+            if (_weaponMap.TryGetValue(weaponName, out VWeapon weapon))
+            {
+                return weapon;
+            }
+
+            Log.Warning(LogTags.GameData_Weapon, "무기를 찾을 수 없습니다: {0}", weaponName.ToLogString());
+            return null;
+        }
+
         public void AddWeapon(ItemNames weaponName)
         {
+            if (_slotWeaponNames.Count >= UnlockedSlotCount)
+            {
+                Log.Warning(LogTags.GameData_Weapon, "무기 슬롯이 가득 찼습니다. 현재/최대: {0}/{1}", _slotWeaponNames.Count, UnlockedSlotCount);
+                return;
+            }
+
             string key = weaponName.ToString();
-            if (!Weapons.ContainsKey(key))
+            if (!_weaponMap.ContainsKey(weaponName))
             {
                 VWeapon newWeapon = new(weaponName);
-                Weapons.Add(key, newWeapon);
+                Weapons[key] = newWeapon;
+                _weaponMap[weaponName] = newWeapon;
 
                 Log.Info(LogTags.GameData_Weapon, "인게임 무기를 등록합니다: {0}", weaponName.ToLogString());
+            }
+
+            if (!_slotWeaponNames.Contains(weaponName))
+            {
+                _slotWeaponNames.Add(weaponName);
+                SlotWeaponNameStrings.Add(key);
             }
         }
 
@@ -77,10 +156,9 @@ namespace TeamSuneat.Data.Game
         {
             AddWeapon(weaponName);
 
-            if (gradeName != GradeNames.None && statName != StatNames.None)
+            if (gradeName != GradeNames.None && statName != StatNames.None && _weaponMap.TryGetValue(weaponName, out VWeapon weapon))
             {
-                string key = weaponName.ToString();
-                Weapons[key].AddGrade(gradeName, statName);
+                weapon.AddGrade(gradeName, statName);
             }
             else
             {
@@ -91,9 +169,13 @@ namespace TeamSuneat.Data.Game
         public void RemoveWeapon(ItemNames weaponName)
         {
             string key = weaponName.ToString();
-            if (Weapons.ContainsKey(key))
+            if (_weaponMap.ContainsKey(weaponName))
             {
                 _ = Weapons.Remove(key);
+                _ = _weaponMap.Remove(weaponName);
+                _ = _slotWeaponNames.Remove(weaponName);
+                _ = SlotWeaponNameStrings.Remove(key);
+
                 Log.Info(LogTags.GameData_Weapon, "인게임 무기를 등록해제합니다: {0}", weaponName.ToLogString());
             }
         }
@@ -104,16 +186,31 @@ namespace TeamSuneat.Data.Game
         {
             VCharacterWeapon defaultWeapons = new();
 
+            // 기본 캐릭터의 무기 해금
             defaultWeapons.Unlock(ItemNames.WarriorSword);
             defaultWeapons.Unlock(ItemNames.ExecutionerDagger);
-            defaultWeapons.Unlock(ItemNames.CrimsonAxe);
+            defaultWeapons.Unlock(ItemNames.LightningSpear);
+
+            // 기본 무기 해금
             defaultWeapons.Unlock(ItemNames.PaladinShield);
             defaultWeapons.Unlock(ItemNames.CoinPurse);
             defaultWeapons.Unlock(ItemNames.GemPurse);
             defaultWeapons.Unlock(ItemNames.Stone);
             defaultWeapons.Unlock(ItemNames.Shovel);
 
+            // 최초 슬롯 해금
+            defaultWeapons.UnlockedSlotCount = GameDefine.WEAPON_SLOT_DEFAULT_UNLOCK_COUNT;
+
             return defaultWeapons;
+        }
+
+        private void SyncSlotWeaponNameStrings()
+        {
+            SlotWeaponNameStrings.Clear();
+            for (int i = 0; i < _slotWeaponNames.Count; i++)
+            {
+                SlotWeaponNameStrings.Add(_slotWeaponNames[i].ToString());
+            }
         }
     }
 }

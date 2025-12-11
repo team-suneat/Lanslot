@@ -84,6 +84,7 @@ namespace TeamSuneat
         public int Level { get; private set; } = 1;
         public int Stack { get; set; }
         public int Tick { get; set; }
+        public float? WeaponDamageOverride { get; set; }
 
         //─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -92,11 +93,6 @@ namespace TeamSuneat
             if (!HitmarkAssetData.IsValid())
             {
                 LogErrorHitmarkNotSet();
-                return false;
-            }
-            if (!HitmarkAssetData.Damage.IsValid())
-            {
-                LogErrorDamageAssetDataNotSet();
                 return false;
             }
 
@@ -113,7 +109,7 @@ namespace TeamSuneat
             ResetDamageResults();
             _ = DetermineImmuneCC(HitmarkAssetData.IsCrowdControl);
 
-            DamageAssetData damageAsset = HitmarkAssetData.Damage;
+            HitmarkAssetData damageAsset = HitmarkAssetData;
             DamageResult damageResult = CreateDamageResult(damageAsset);
 
             RefreshReferenceValue(damageAsset);
@@ -125,6 +121,7 @@ namespace TeamSuneat
             }
 
             DamageResults.Add(damageResult);
+            WeaponDamageOverride = null;
         }
 
         public void ExecuteWithoutCritical()
@@ -136,14 +133,15 @@ namespace TeamSuneat
 
             ResetDamageResults();
 
-            DamageAssetData damageAsset = HitmarkAssetData.Damage;
+            HitmarkAssetData damageAsset = HitmarkAssetData;
             DamageResult damageResult = CreateDamageResult(damageAsset);
             RefreshReferenceValue(damageAsset);
             ComputeByType(damageAsset, ref damageResult);
             DamageResults.Add(damageResult);
+            WeaponDamageOverride = null;
         }
 
-        private DamageResult CreateDamageResult(DamageAssetData damageAsset)
+        private DamageResult CreateDamageResult(HitmarkAssetData damageAsset)
         {
             return new DamageResult
             {
@@ -158,7 +156,7 @@ namespace TeamSuneat
             };
         }
 
-        private bool TryReceiveDamageOnlyOne(DamageAssetData damageAsset, ref DamageResult damageResult)
+        private bool TryReceiveDamageOnlyOne(HitmarkAssetData damageAsset, ref DamageResult damageResult)
         {
             return false;
         }
@@ -226,30 +224,25 @@ namespace TeamSuneat
                 return;
             }
 
-            if (!HitmarkAssetData.Damage.IsValid())
+            if (HitmarkAssetData.BuffOnHit != BuffNames.None)
             {
-                return;
-            }
-
-            if (HitmarkAssetData.Damage.BuffOnHit != BuffNames.None)
-            {
-                Log.Warning("{0} 공격의 목표와 공격자와 동일합니다. 공격 적중시 버프({1})가 잘못 적용될 수 있습니다.", HitmarkAssetData.Name, HitmarkAssetData.Damage.BuffOnHit);
+                Log.Warning("{0} 공격의 목표와 공격자와 동일합니다. 공격 적중시 버프({1})가 잘못 적용될 수 있습니다.", HitmarkAssetData.Name, HitmarkAssetData.BuffOnHit);
             }
         }
 
-        public void SetResourceCostRefrenceValue(int manaCost)
+        public void SetResourceCostReferenceValue(int manaCost)
         {
             ManaCostReferenceValue = manaCost;
             LogProgressManaCostReferenceValue(ManaCostReferenceValue.ToSelectString(0));
         }
 
-        public void SetDamageRefrenceValue(int damageValue)
+        public void SetDamageReferenceValue(int damageValue)
         {
             DamageReferenceValue = damageValue;
             LogProgressDamageReferenceValue(DamageReferenceValue.ToSelectString(0));
         }
 
-        public void SetCooldownRefrenceValue(float cooldownTime)
+        public void SetCooldownReferenceValue(float cooldownTime)
         {
             CooldownReferenceValue = cooldownTime;
             LogProgressCooldownReferenceValue(CooldownReferenceValue.ToSelectString(0));
@@ -293,7 +286,7 @@ namespace TeamSuneat
             }
         }
 
-        private void LogHealingOrResourceRestoration(DamageAssetData damageAsset, float fixedValue, float referenceValue, float magnification, float result)
+        private void LogHealingOrResourceRestoration(HitmarkAssetData damageAsset, float fixedValue, float referenceValue, float magnification, float result)
         {
             if (Log.LevelInfo)
             {
@@ -337,13 +330,6 @@ namespace TeamSuneat
             }
         }
 
-        private void LogErrorDamageAssetDataNotSet()
-        {
-            if (Log.LevelError)
-            {
-                LogError("설정된 히트마크의 DamageAssetData가 없습니다.");
-            }
-        }
 
         private void LogProgressResetDamageResults()
         {
@@ -417,23 +403,6 @@ namespace TeamSuneat
             }
         }
 
-        private void LogProgressDecrescenceRate(float decrescenceRate, int hitCountAtTime)
-        {
-            if (Log.LevelProgress)
-            {
-                LogProgress("피해 점감 배율을 설정합니다. {0}, 횟수: {1}",
-                    ValueStringEx.GetPercentString(decrescenceRate, true),
-                    hitCountAtTime.ToSelectString(hitCountAtTime > 1));
-            }
-        }
-
-        private void LogProgressResourceRecoveryOnHitRestricted()
-        {
-            if (Log.LevelProgress)
-            {
-                LogProgress("적중 시 자원 회복이 제한되어 있습니다.");
-            }
-        }
 
         private void LogInfoCriticalAppliedByCheat()
         {
@@ -448,16 +417,6 @@ namespace TeamSuneat
             if (Log.LevelInfo)
             {
                 LogInfo("치트를 통해 치명타를 적용하지 않습니다.");
-            }
-        }
-
-        private void LogMaxCriticalChanceExceeded(float resultCriticalChance, float maxCriticalChance)
-        {
-            if (Log.LevelInfo)
-            {
-                LogInfo("최대 치명타 확률을 초과했습니다. 결과: {0}, 최대: {1}",
-                    ValueStringEx.GetPercentString(resultCriticalChance, 0),
-                    ValueStringEx.GetPercentString(maxCriticalChance, GameColors.Value));
             }
         }
 
@@ -490,62 +449,6 @@ namespace TeamSuneat
                 LogInfo("처형이 적용되었습니다. 목표 생명력 비율: {0}, 처형 조건: {1}",
                     ValueStringEx.GetPercentString(targetLifeRate, 0),
                     ValueStringEx.GetPercentString(executionConditionalTargetLifeRate, 0));
-            }
-        }
-
-        private void LogProgressFrostSlash(float additionalChance)
-        {
-            if (Log.LevelProgress)
-            {
-                LogProgress("서리 베기 추가 확률을 적용합니다. {0}", ValueStringEx.GetPercentString(additionalChance, 0));
-            }
-        }
-
-        private void LogProgressFranticWirlwind(float additionalChance)
-        {
-            if (Log.LevelProgress)
-            {
-                LogProgress("광분 회오리 추가 확률을 적용합니다. {0}", ValueStringEx.GetPercentString(additionalChance, 0));
-            }
-        }
-
-        private void LogProgressCruelStrike(float chanceOnCurrentResource)
-        {
-            if (Log.LevelProgress)
-            {
-                LogProgress("잔인한 일격 추가 확률을 적용합니다. {0}", ValueStringEx.GetPercentString(chanceOnCurrentResource, 0));
-            }
-        }
-
-        private void LogProgressSpinRend(float statValue)
-        {
-            if (Log.LevelProgress)
-            {
-                LogProgress("회전 베기 추가 확률을 적용합니다. {0}", ValueStringEx.GetPercentString(statValue, 0));
-            }
-        }
-
-        private void LogProgressCoreSkill(float additionalChance)
-        {
-            if (Log.LevelProgress)
-            {
-                LogProgress("핵심 기술 추가 확률을 적용합니다. {0}", ValueStringEx.GetPercentString(additionalChance, 0));
-            }
-        }
-
-        private void LogProgressCoreSkillToBleedingEnemies(float additionalChance)
-        {
-            if (Log.LevelProgress)
-            {
-                LogProgress("핵심 기술(출혈 적) 추가 확률을 적용합니다. {0}", ValueStringEx.GetPercentString(additionalChance, 0));
-            }
-        }
-
-        private void LogProgressPowerSkill(float additionalChance)
-        {
-            if (Log.LevelProgress)
-            {
-                LogProgress("파워 기술 추가 확률을 적용합니다. {0}", ValueStringEx.GetPercentString(additionalChance, 0));
             }
         }
 

@@ -9,8 +9,6 @@ namespace TeamSuneat.Data.Game
         public ItemNames Name;
         public string NameString;
 
-        public int Level;
-
         public VPotion()
         { }
 
@@ -18,18 +16,11 @@ namespace TeamSuneat.Data.Game
         {
             Name = potionName;
             NameString = potionName.ToString();
-            Level = 1;
         }
 
         public void OnLoadGameData()
         {
-            _ = EnumEx.ConvertTo(ref Name, NameString);
-        }
-
-        public void LevelUp()
-        {
-            Level++;
+            EnumEx.ConvertTo(ref Name, NameString);
         }
     }
 }
-

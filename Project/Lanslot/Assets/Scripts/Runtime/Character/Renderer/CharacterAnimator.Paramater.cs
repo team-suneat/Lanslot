@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace TeamSuneat
 {
-    public partial class CharacterAnimator 
+    public partial class CharacterAnimator
     {
         protected int _damageTriggerIndex;
         protected int _damageTypeIndex;
@@ -107,6 +107,8 @@ namespace TeamSuneat
             _animator.AddAnimatorParameterIfExists(ANIMATOR_BOSS_PHASE_PARAMETER_NAME, out ANIMATOR_BOSS_PHASE_PARAMETER_ID, AnimatorControllerParameterType.Float, AnimatorParameters);
             _animator.AddAnimatorParameterIfExists(ANIMATOR_DAMAGE_TYPE_PARAMETER_NAME, out ANIMATOR_DAMAGE_TYPE_PARAMETER_ID, AnimatorControllerParameterType.Float, AnimatorParameters);
             _animator.AddAnimatorParameterIfExists(ANIMATOR_WEAPON_TYPE_PARAMETER_NAME, out ANIMATOR_WEAPON_TYPE_PARAMETER_ID, AnimatorControllerParameterType.Float, AnimatorParameters);
+
+            Log.Info(LogTags.Animation, "캐릭터 애니메이터의 파라메터를 초기화합니다. {0}, Parameters Count: {1}", this.GetHierarchyPath(), AnimatorParameters.Count);
         }
     }
 }

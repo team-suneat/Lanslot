@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30c016f6e8505494b983c3b3a0c5f082, type: 3}
+  m_Name: Hitmark_FlameMace
+  m_EditorClassIdentifier: 
+  NameString: FlameMace
+  Data:
+    IsChangingAsset: 0
+    Name: 5
+    AttackTargetType: 2
+    IsCrowdControl: 0
+    AttackRange: 0
+    Hitmark: 5
+    DamageType: 1
+    IgnoreEvasion: 0
+    IsRequireShieldForOverwhelm: 0
+    IsPowerfulAttack: 0
+    IsReverseDamageDirection: 0
+    NotPlayDamageAnimation: 0
+    DamageAnimationPriority: 0
+    ApplyToSelf: 0
+    ApplyMultiplierToSelf: 0
+    ExecutionConditionalTargetLifeRate: 0
+    MinDamageValue: 1
+    FixedDamage: 0
+    FixedDamageByLevel: 0
+    UseWeaponDamage: 1
+    LinkedDamageType: 0
+    LinkedStateEffect: 0
+    LinkedHitmarkMagnification: 0
+    LinkedValueMagnificationByLevel: 0
+    LinkedValueMagnificationByStack: 0
+    NameOnHit: 0
+    BuffOnHit: 0
+    DelayTimeOfAttackOnHit: 0
+    ApplyOnHitEventIfNoDamage: 0
+    CanApplyToSelf: 0
+    DamageTypeString: Physical
+    LinkedDamageTypeString: None
+    LinkedStateEffectString: None
+    NameOnHitString: None
+    BuffOnHitString: None
+    UseWeaponDamageString: True
+    HitCountAtTime: 0
+    UseDeactivateOnHit: 0
+    DeactivateHitCount: 0
+    DecrescenceType: 0
+    DecrescenceRate: 0
+    ApplyDecrescenceFromFirst: 0
+    StopAttackAnimationOnResourceLack: 0
+    UseResourceOnActivate: 0
+    UseResourceOnApply: 0
+    UseResourceOnAttack: 0
+    UseResourceOnAttackSuccessed: 0
+    UseResourceOnAttackFailed: 0
+    UseResourceOnDeactive: 0
+    UseResourceValue: 0
+    RestoreResourceValue: 0
+    ResourceConsumeType: 0
+    ForceResourceConsume: 0
+    IgnoreDeathByConsume: 0
+    ConsumeDealyTime: 0
+    AttackTargetTypeString: TargetOfOwner
+    DecrescenceTypeString: None
+    ResourceConsumeTypeString: None

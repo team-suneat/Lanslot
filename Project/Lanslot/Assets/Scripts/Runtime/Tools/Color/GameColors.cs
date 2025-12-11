@@ -1,5 +1,4 @@
-﻿using TeamSuneat;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace TeamSuneat
 {
@@ -174,6 +173,8 @@ namespace TeamSuneat
 
         public static Color Physical => new Color32(255, 165, 0, 255); // Orange
 
+        public static Color Thorns => Red;
+
         public static Color Magical => new Color32(106, 90, 205, 255); // SlateBlue
 
         // (Elements)
@@ -228,8 +229,8 @@ namespace TeamSuneat
         public static Color EquipmentCategory => new Color32(0, 70, 131, 255);
         public static Color Stat => ReunoYellow;
         public static Color Buff => Aquamarine;
-        public static Color Character => Violet;        
-        public static Color Hitmark => Brown;        
+        public static Color Character => Violet;
+        public static Color Hitmark => Brown;
         public static Color Item => SkyBlue;
         public static Color Item2 => SteelBlue;
         public static Color Passive => YellowGreen;

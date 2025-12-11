@@ -138,7 +138,7 @@ namespace TeamSuneat.Data
                             Name = hitmarkNames[i]
                         };
                         asset.NameString = hitmarkNames[i].ToString();
-                        asset.Data.Damage = new()
+                        asset.Data = new()
                         {
                             Hitmark = hitmarkNames[i],
                         };

@@ -22,9 +22,13 @@ namespace TeamSuneat
 
         // Vital
 
-        public float CurrentLife => MyVital.CurrentLife;
+        public int CurrentLife => MyVital.CurrentLife;
 
-        public float MaxLife => MyVital.MaxLife;
+        public int MaxLife => MyVital.MaxLife;
+
+        public int CurrentShield => MyVital.CurrentShield;
+
+        public int MaxShield => MyVital.MaxShield;
 
         public bool IsAlive => MyVital != null && MyVital.IsAlive;
 
@@ -68,8 +72,6 @@ namespace TeamSuneat
         public HashSet<int> AnimatorParameters { get; set; } = new HashSet<int>();
 
         public Vector3 DamageDirection { get; protected set; }
-
-     
 
         //
 

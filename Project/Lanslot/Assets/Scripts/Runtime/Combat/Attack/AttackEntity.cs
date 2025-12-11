@@ -91,11 +91,6 @@ namespace TeamSuneat
                 Log.Error("공격 독립체의 히트마크 에셋이 설정되지 않았습니다. {0}, {1}", Name.ToLogString(), this.GetHierarchyPath());
                 return;
             }
-
-            if (!AssetData.Damage.IsValid())
-            {
-                Log.Error("공격 독립체의 데미지 에셋이 설정되지 않았습니다. {0}, {1}", Name.ToLogString(), this.GetHierarchyPath());
-            }
         }
 
         public virtual void OnBattleReady()
@@ -136,6 +131,11 @@ namespace TeamSuneat
         public virtual void SetTarget(Vital targetVital)
         {
             TargetVital = targetVital;
+        }
+
+        public void SetWeaponDamageOverride(float? weaponDamage)
+        {
+            _damageInfo.WeaponDamageOverride = weaponDamage;
         }
 
         public virtual Vital GetTargetVital()

@@ -7,7 +7,6 @@ namespace TeamSuneat.Data
     {
         public ItemNames Name;
         public string DisplayName;
-
         public int AttackRange;
         public int AttackRow;
         public int AttackColumn;
@@ -15,6 +14,7 @@ namespace TeamSuneat.Data
 
         public PassiveNames Passive;
         public HitmarkNames Hitmark;
+        public int Damage;
         public CurrencyNames RewardCurrency;
 
         public BuildTypes[] SupportedBuildTypes;

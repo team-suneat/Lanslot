@@ -1,11 +1,12 @@
 using System.Linq;
+using TeamSuneat.Data;
 using UnityEngine;
 
 namespace TeamSuneat
 {
     public partial class DamageCalculator
     {
-        private float CalculateDamageAmplification(DamageAssetData damageAssetData, DamageResult damageResult)
+        private float CalculateDamageAmplification(HitmarkAssetData damageAssetData, DamageResult damageResult)
         {
             float damageAmplification = 1f;
             float criticalDamageMultiplier = GetCriticalDamageMultiplier(damageResult);

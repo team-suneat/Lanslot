@@ -39,11 +39,15 @@ namespace TeamSuneat
                 Log.Warning($"Name {name}: MultiHitCount 파싱 실패: {multiHitCountStr}");
                 return false;
             }
-
-            // 선택: Passive / Hitmark / Reward
+            if (!row.TryGetValue("Damage", out string damageStr) || !GoogleSheetValueParsers.TryParseInt(damageStr, out int damage))
+            {
+                Log.Warning($"Name {name}: Damage 파싱 실패: {damageStr}");
+                return false;
+            }
+            
             row.TryGetValue("Passive", out string passiveStr);
             row.TryGetValue("Hitmark", out string hitmarkStr);
-            row.TryGetValue("Reward", out string rewardStr);
+            row.TryGetValue("RewardCurrency", out string rewardStr);
 
             // 선택: SupportedBuildTypes
             BuildTypes[] builds;
@@ -70,6 +74,7 @@ namespace TeamSuneat
                 AttackRow = attackRow,
                 AttackColumn = attackColumn,
                 MultiHitCount = multiHitCount,
+                Damage = damage,
             };
 
             // enum 파싱 (실패 시 기본값 유지)

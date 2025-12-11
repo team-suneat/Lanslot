@@ -13,6 +13,8 @@ namespace TeamSuneat
         private StageData _currentStageData;
         private int _currentWaveNumber;
 
+        public BattlefieldTileGroup BattlefieldTileGroup => _battlefieldTileGroup;
+
         public override void AutoGetComponents()
         {
             base.AutoGetComponents();
@@ -65,6 +67,11 @@ namespace TeamSuneat
 
             // 1~10웨이브 초기 세팅
             SetupInitialWaves(Name);
+
+            if (GameApp.Instance != null && GameApp.Instance.gameManager != null)
+            {
+                GameApp.Instance.gameManager.CurrentStageSystem = this;
+            }
 
             Log.Info(LogTags.Stage, "스테이지 초기화 완료: {0}, Width={1}", Name, _currentStageData.Width);
         }
@@ -166,7 +173,11 @@ namespace TeamSuneat
         {
             BattlefieldTile tile = _battlefieldTileGroup.GetTile(row, column);
             MonsterCharacter monster = ResourcesManager.SpawnMonsterCharacter(characterName, tile.transform);
-            _battlefieldTileGroup.SetTileOccupied(row, column, monster);
+            if (monster != null)
+            {
+                monster.Initialize();
+                _battlefieldTileGroup.SetTileOccupied(row, column, monster);
+            }
         }
     }
 }

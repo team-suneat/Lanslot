@@ -1,20 +1,15 @@
 using System.Collections.Generic;
-using Sirenix.OdinInspector;
 using TeamSuneat.Data;
+using TeamSuneat.Data.Game;
 using UnityEngine;
 
 namespace TeamSuneat
 {
-    /// <summary>
-    /// 슬롯머신 무기 효과 적용 어빌리티
-    /// </summary>
     public class PlayerWeaponAbility : CharacterAbility
     {
-        [FoldoutGroup("#Component")][SerializeField] private PlayerCharacter _playerCharacter;
-        [FoldoutGroup("#Component")][SerializeField] private StageSystem _stageSystem;
-        [FoldoutGroup("#Component")][SerializeField] private BattlefieldTileGroup _tileGroup;
-
-        private readonly List<MonsterCharacter> _targetBuffer = new();
+        private StageSystem _stageSystem;
+        private BattlefieldTileGroup _tileGroup;
+        private List<MonsterCharacter> _targetBuffer = new();
 
         public override void Initialization()
         {
@@ -22,9 +17,6 @@ namespace TeamSuneat
             EnsureReferences();
         }
 
-        /// <summary>
-        /// 슬롯 결과 무기 아이템을 적용합니다.
-        /// </summary>
         public void Apply(ItemNames itemName)
         {
             if (itemName == ItemNames.None)
@@ -34,7 +26,7 @@ namespace TeamSuneat
 
             EnsureReferences();
 
-            if (_playerCharacter == null)
+            if (Owner == null)
             {
                 Log.Warning(LogTags.UI_SlotMachine, "플레이어 캐릭터를 찾을 수 없습니다.");
                 return;
@@ -53,9 +45,15 @@ namespace TeamSuneat
                 return;
             }
 
+            if (weaponData.RewardCurrency != CurrencyNames.None)
+            {
+                ApplyRewardCurrency(weaponData);
+                return;
+            }
+
             if (weaponData.AttackRange <= 0)
             {
-                ApplyWeaponEffectToCharacter(_playerCharacter, weaponData);
+                ApplyWeaponEffectToCharacter(Owner, weaponData);
                 return;
             }
 
@@ -85,9 +83,39 @@ namespace TeamSuneat
 
         private void EnsureReferences()
         {
-            _playerCharacter ??= Owner as PlayerCharacter;
             _stageSystem ??= GameApp.Instance != null && GameApp.Instance.gameManager != null ? GameApp.Instance.gameManager.CurrentStageSystem : null;
             _tileGroup ??= _stageSystem != null ? _stageSystem.BattlefieldTileGroup : null;
+        }
+
+        private void ApplyRewardCurrency(WeaponData weaponData)
+        {
+            if (weaponData.RewardCurrency == CurrencyNames.None)
+            {
+                return;
+            }
+
+            VWeapon weaponInfo = ProfileInfo.Weapon.FindWeapon(weaponData.Name);
+            if (weaponInfo == null)
+            {
+                Log.Warning(LogTags.Weapon, "무기를 찾을 수 없습니다: {0}", weaponData.Name);
+                return;
+            }
+
+            int amount = weaponData.Damage;
+            int additionalAmount = 0;
+
+            switch (weaponData.RewardCurrency)
+            {
+                case CurrencyNames.Gold:
+                    additionalAmount = Owner.Stat.FindValueOrDefaultToInt(StatNames.InstantGold);
+                    break;
+
+                case CurrencyNames.Gem:
+                    additionalAmount = Owner.Stat.FindValueOrDefaultToInt(StatNames.InstantGem);
+                    break;
+            }
+
+            ProfileInfo.Currency.Add(weaponData.RewardCurrency, amount + additionalAmount);
         }
 
         private void ApplyWeaponEffectToCharacter(Character targetCharacter, WeaponData weaponData)
@@ -97,28 +125,16 @@ namespace TeamSuneat
                 return;
             }
 
-            float baseDamage = _playerCharacter.Stat != null ? _playerCharacter.Stat.FindValueOrDefault(StatNames.Damage) : 0f;
-            if (baseDamage <= 0f)
-            {
-                baseDamage = 1f;
-            }
-
             int hitCount = Mathf.Max(1, weaponData.MultiHitCount);
+
+            Log.Info(LogTags.Weapon, "무기 효과 적용: 대상={0}, HitCount={1}", targetCharacter.Name.ToLogString(), hitCount.ToSelectString());
+
+            Owner.SetTarget(targetCharacter);
+            float? weaponDamageOverride = weaponData.Damage;
             for (int i = 0; i < hitCount; i++)
             {
-                DamageResult damageResult = new()
-                {
-                    DamageValue = baseDamage,
-                    Attacker = _playerCharacter,
-                    TargetVital = targetCharacter.MyVital,
-                    HitmarkLevel = 1
-                };
-
-                _ = targetCharacter.MyVital.TakeDamage(damageResult);
+                Owner.Attack.Activate(weaponData.Hitmark, weaponDamageOverride);
             }
-
-            Log.Info(LogTags.UI_SlotMachine, "무기 효과 적용: 대상={0}, HitCount={1}, Damage={2}", targetCharacter.name, hitCount, baseDamage);
         }
     }
 }
-

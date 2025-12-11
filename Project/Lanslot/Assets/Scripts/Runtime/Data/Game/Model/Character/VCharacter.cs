@@ -111,7 +111,7 @@ namespace TeamSuneat.Data.Game
             // 기본 캐릭터들 추가
             defaultCharacter.Unlock(CharacterNames.IronWarden);
             defaultCharacter.Unlock(CharacterNames.ShadowAssassin);
-            defaultCharacter.Unlock(CharacterNames.BloodRaven);
+            defaultCharacter.Unlock(CharacterNames.ThunderSeer);
 
             return defaultCharacter;
         }

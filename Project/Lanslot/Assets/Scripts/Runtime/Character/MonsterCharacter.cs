@@ -8,10 +8,8 @@ namespace TeamSuneat
     public class MonsterCharacter : Character
     {
         [FoldoutGroup("#Character/Component/Monster")]
+        [ChildGameObjectsOnly]
         [SerializeField] private DropObjectSpawner _dropObjectSpawner;
-
-        [FoldoutGroup("#Character/Component/Monster")]
-        [SerializeField] private TextMeshPro _nameText;
 
         public override Transform Target => null;
 
@@ -20,8 +18,8 @@ namespace TeamSuneat
         public override void AutoGetComponents()
         {
             base.AutoGetComponents();
+
             _dropObjectSpawner = GetComponentInChildren<DropObjectSpawner>();
-            _nameText = GetComponentInChildren<TextMeshPro>();
         }
 
         protected override void OnStart()
@@ -36,11 +34,6 @@ namespace TeamSuneat
 
         public override void Initialize()
         {
-            if (_nameText != null)
-            {
-                _nameText.SetText(Name.GetLocalizedString());
-            }
-
             SetupLevel();
 
             base.Initialize();
@@ -93,7 +86,9 @@ namespace TeamSuneat
         {
             base.OnDeath(damageResult);
 
-            _ = _dropObjectSpawner.SpawnDropEXP(position);
+            _dropObjectSpawner?.SpawnDropEXP(position);
+            
+            CharacterAnimator?.PlayDeathAnimation();
         }
     }
 }

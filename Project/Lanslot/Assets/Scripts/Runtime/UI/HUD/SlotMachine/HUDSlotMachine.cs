@@ -54,10 +54,7 @@ namespace TeamSuneat.UserInterface
             Initialize();
             SetupEvents();
 
-            if (TurnManager.Instance != null)
-            {
-                TurnManager.Instance.OnPlayerTurnStart.AddListener(StartSpin);
-            }
+            TurnManager.Instance?.OnPlayerTurnStart.AddListener(StartSpin);
         }
 
         private void Initialize()
@@ -278,7 +275,8 @@ namespace TeamSuneat.UserInterface
                 {
                     for (int i = 0; i < weaponName.Count; i++)
                     {
-                        itemDeck.Add(weaponName[i]);
+                        ItemNames name = weaponName[i];
+                        itemDeck.Add(name);
                         weaponCount++;
                     }
                 }

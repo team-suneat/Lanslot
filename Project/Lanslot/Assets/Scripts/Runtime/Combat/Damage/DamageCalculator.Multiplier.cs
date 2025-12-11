@@ -33,34 +33,6 @@ namespace TeamSuneat
             return damageMultiplier;
         }
 
-        // 마법 피해량 배율 (Magic Damage Multiplier)
-        private float CalculateMagicDamageMultiplier(DamageResult damageResult, int hitmarkLevel, int stack)
-        {
-#if UNITY_EDITOR
-            int index = _stringBuilder.Length;
-#endif
-
-            float damageMultiplier = 0f;
-            float damageMultiplierFromDamageType = CalculateDamageMultiplierByDamageType(damageResult.Asset.DamageType);
-
-            damageMultiplier += damageMultiplierFromDamageType;
-
-            if (stack > 1)
-            {
-                damageMultiplier += stack - 1;
-                AddStackMultiplier(stack - 1);
-            }
-
-#if UNITY_EDITOR
-            string content = GenerateContent(index, damageMultiplierFromDamageType, "마법 피해량 배율을 계산합니다. [능력치 마법 피해량 배율: ", "Calculates the Magic Damage Multiplier. [Stat Magic Damage Multiplier: ");
-            _stringBuilder.Insert(index, content);
-            _stringBuilder.AppendFormat("] => {0}", ValueStringEx.GetPercentString(damageMultiplier, 1));
-            _stringBuilder.AppendLine();
-#endif
-
-            return damageMultiplier;
-        }
-
         // 가시 피해량 배율 (Physical Damage Multiplier)
         private float CalculateThornsDamageMultiplier(DamageResult damageResult, int hitmarkLevel, int stack)
         {

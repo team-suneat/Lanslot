@@ -276,7 +276,7 @@ namespace TeamSuneat
         {
             DamageCalculator damageInfoOnHit = CreateDamageInfoOnHit(damageResult);
             Vital targetVital = GetTargetVitalInResult(damageResult, damageInfoOnHit);
-            damageInfoOnHit.SetDamageRefrenceValue(damageResult.DamageValueToInt);
+            damageInfoOnHit.SetDamageReferenceValue(damageResult.DamageValueToInt);
             damageInfoOnHit.Execute();
 
             for (int i = 0; i < damageInfoOnHit.DamageResults.Count; i++)

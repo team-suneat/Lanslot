@@ -22,10 +22,18 @@ namespace TeamSuneat
                 int randomConstant = RandomEx.Range(0, 1000);
                 _ = Animator.UpdateAnimatorInteger(_randomConstantAnimationParameter, randomConstant, AnimatorParameters);
             }
+            else
+            {
+                Log.Warning(LogTags.Animation, $"캐릭터의 애니메이터를 찾을 수 없습니다: {this.GetHierarchyName()}");
+            }
 
             if (CharacterAnimator != null)
             {
                 CharacterAnimator.Initialize();
+            }
+            else
+            {
+                Log.Warning(LogTags.Animation, $"캐릭터 애니메이터를 찾을 수 없습니다: {this.GetHierarchyName()}");
             }
         }
 
@@ -70,6 +78,10 @@ namespace TeamSuneat
             {
                 InitializeAnimatorParameters();
             }
+            else
+            {
+                Log.Warning(LogTags.Animation, $"캐릭터의 애니메이터를 찾을 수 없습니다: {this.GetHierarchyName()}");
+            }
         }
 
         public virtual void AssignAnimator()
@@ -77,6 +89,10 @@ namespace TeamSuneat
             if (Animator != null)
             {
                 InitializeAnimatorParameters();
+            }
+            else
+            {
+                Log.Warning(LogTags.Animation, $"캐릭터의 애니메이터를 찾을 수 없습니다: {this.GetHierarchyName()}");
             }
         }
 

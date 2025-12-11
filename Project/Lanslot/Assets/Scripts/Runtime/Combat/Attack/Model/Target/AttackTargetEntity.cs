@@ -7,6 +7,13 @@ namespace TeamSuneat
             SetGameObjectName(Name.ToString());
         }
 
+        public override void Activate()
+        {
+            base.Activate();
+
+            Execute();
+        }
+
         public override void Execute()
         {
             base.Execute();

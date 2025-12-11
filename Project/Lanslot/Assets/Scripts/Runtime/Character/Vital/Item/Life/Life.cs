@@ -488,22 +488,8 @@ namespace TeamSuneat
                 moveType = UIFloatyText.ConvertToName(damageResult, vitalResourceType);
                 content = damageResult.DamageValueToInt.ToString();
             }
-            if (damageResult.TargetVitalCollider != null)
-            {
-                _ = SpawnFloatyText(content, damageResult.TargetVitalCollider.transform, moveType);
-            }
-            else
-            {
-                Collider2D vitalCollider = Vital.GetNotGuardCollider();
-                if (vitalCollider != null)
-                {
-                    _ = SpawnFloatyText(content, vitalCollider.transform, moveType);
-                }
-                else if (Vital.Owner != null)
-                {
-                    _ = SpawnFloatyText(content, DamageTextPoint, moveType);
-                }
-            }
+
+            SpawnFloatyText(content, DamageTextPoint, moveType);
         }
 
         #endregion Floaty Text
@@ -516,37 +502,7 @@ namespace TeamSuneat
                     _ = AudioManager.Instance.PlaySFXOneShotScaled(SoundNames.Damage_Physical, position);
                     break;
 
-                case DamageTypes.Fire:
-                case DamageTypes.FireOverTime:
-                    _ = AudioManager.Instance.PlaySFXOneShotScaled(SoundNames.Damage_Fire, position);
-                    break;
-
-                case DamageTypes.Cold:
-                case DamageTypes.ColdOverTime:
-                    _ = AudioManager.Instance.PlaySFXOneShotScaled(SoundNames.Damage_Cold, position);
-                    break;
-
-                case DamageTypes.Lightning:
-                case DamageTypes.LightningOverTime:
-                    _ = AudioManager.Instance.PlaySFXOneShotScaled(SoundNames.Damage_Lightning, position);
-                    break;
-
-                case DamageTypes.Poison:
-                case DamageTypes.PoisonOverTime:
-                    _ = AudioManager.Instance.PlaySFXOneShotScaled(SoundNames.Damage_Poison, position);
-                    break;
-
-                case DamageTypes.Darkness:
-                case DamageTypes.DarknessOverTime:
-                    _ = AudioManager.Instance.PlaySFXOneShotScaled(SoundNames.Damage_Darkness, position);
-                    break;
-
-                case DamageTypes.Holy:
-                case DamageTypes.HolyOverTime:
-                    _ = AudioManager.Instance.PlaySFXOneShotScaled(SoundNames.Damage_Holy, position);
-                    break;
-
-                case DamageTypes.BleedOverTime:
+                case DamageTypes.DamageOverTime:
                     _ = AudioManager.Instance.PlaySFXOneShotScaled(SoundNames.Damage_Blood, position);
                     break;
             }
@@ -833,35 +789,11 @@ namespace TeamSuneat
                     DamagePhysicalFeedbacks?.PlayFeedbacks(damagePosition, 0);
                     break;
 
-                case DamageTypes.Magical:
-                    DamageMagicalFeedbacks?.PlayFeedbacks(damagePosition, 0);
+                case DamageTypes.Thorns:
+                    DamagePhysicalFeedbacks?.PlayFeedbacks(damagePosition, 0);
                     break;
 
-                case DamageTypes.Fire:
-                    DamageFireFeedbacks?.PlayFeedbacks(damagePosition, 0);
-                    break;
-
-                case DamageTypes.Cold:
-                    DamageColdFeedbacks?.PlayFeedbacks(damagePosition, 0);
-                    break;
-
-                case DamageTypes.Lightning:
-                    DamageLightningFeedbacks?.PlayFeedbacks(damagePosition, 0);
-                    break;
-
-                case DamageTypes.Poison:
-                    DamagePoisonFeedbacks?.PlayFeedbacks(damagePosition, 0);
-                    break;
-
-                case DamageTypes.Darkness:
-                    DamageDarknessFeedbacks?.PlayFeedbacks(damagePosition, 0);
-                    break;
-
-                case DamageTypes.Holy:
-                    DamageHolyFeedbacks?.PlayFeedbacks(damagePosition, 0);
-                    break;
-
-                case DamageTypes.BleedOverTime:
+                case DamageTypes.DamageOverTime:
                     DamageBloodFeedbacks?.PlayFeedbacks(damagePosition, 0);
                     break;
             }
@@ -879,11 +811,6 @@ namespace TeamSuneat
                 else
                 {
                     DamageOverTimeFeedbacks?.PlayFeedbacks(position, parameter);
-                }
-
-                if (damageResult.DamageType == DamageTypes.BleedOverTime)
-                {
-                    DamageBloodFeedbacks?.PlayFeedbacks(damagePosition, 0);
                 }
             }
         }
@@ -937,45 +864,7 @@ namespace TeamSuneat
         {
             switch (damageResult.DamageType)
             {
-                case DamageTypes.Fire:
-                case DamageTypes.FireOverTime:
-                    _ = VFXManager.Spawn("fx_damage_fire", damagePosition, true);
-                    break;
-
-                case DamageTypes.Cold:
-                case DamageTypes.ColdOverTime:
-                    _ = VFXManager.Spawn("fx_damage_cold", damagePosition, true);
-                    break;
-
-                case DamageTypes.Lightning:
-                case DamageTypes.LightningOverTime:
-                    if (damageResult.TargetCharacter != null && damageResult.TargetCharacter.IsPlayer)
-                    {
-                        _ = VFXManager.Spawn("fx_damage_lightning_player", damagePosition, true);
-                    }
-                    else
-                    {
-                        _ = VFXManager.Spawn("fx_damage_lightning", damagePosition, true);
-                    }
-
-                    break;
-
-                case DamageTypes.Poison:
-                case DamageTypes.PoisonOverTime:
-                    _ = VFXManager.Spawn("fx_damage_poison", damagePosition, true);
-                    break;
-
-                case DamageTypes.Darkness:
-                case DamageTypes.DarknessOverTime:
-                    _ = VFXManager.Spawn("fx_damage_darkness", damagePosition, true);
-                    break;
-
-                case DamageTypes.Holy:
-                case DamageTypes.HolyOverTime:
-                    _ = VFXManager.Spawn("fx_damage_holy", damagePosition, true);
-                    break;
-
-                case DamageTypes.BleedOverTime:
+                case DamageTypes.DamageOverTime:
                     _ = VFXManager.Spawn("fx_damage_blood", damagePosition, true);
                     break;
             }

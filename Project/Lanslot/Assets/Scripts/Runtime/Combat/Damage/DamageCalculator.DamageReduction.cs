@@ -40,44 +40,6 @@ namespace TeamSuneat
             return damageReduction;
         }
 
-        private float CalculateMagicDamageReduction(DamageResult damageResult)
-        {
-#if UNITY_EDITOR
-            int index = _stringBuilder.Length;
-#endif
-            GameDefineAssetData defineAssetData = ScriptableDataManager.Instance.GetGameDefine().Data;
-
-            float damageReduction = 1f;
-
-            // 1. 공통 + 마법 피해 감소율 합산 처리
-            float commonRate = 1f - CalculateDamageReduction(damageResult); // 예: 0.3 ▶ 30% 감소
-            float magicRate = 0f;
-            float baseReductionRate = commonRate + magicRate;
-
-            float baseMultiplier = 1f - baseReductionRate;
-            damageReduction *= baseMultiplier;
-
-            AddLogMagicDamageReduction(baseReductionRate);
-
-            // 피해 증폭 (쇠퇴율) 적용
-            if (!DecrescenceRate.IsZero())
-            {
-                float decrescenceMultiplier = 1 + DecrescenceRate;
-                damageReduction *= decrescenceMultiplier;
-                AddLogDamageDecrescenceRate(decrescenceMultiplier);
-            }
-
-#if UNITY_EDITOR
-            // 최종 피해 계수 로그
-            if (!damageReduction.Compare(1))
-            {
-                LogTotalMagicDamageReduction(index, damageReduction);
-            }
-#endif
-
-            return damageReduction;
-        }
-
         private float CalculateDamageReduction(DamageResult damageResult)
         {
             float damageReduction = 0f;
@@ -141,50 +103,6 @@ namespace TeamSuneat
         }
 
         //
-
-        private void AddLogMaxMagicDamageReduction(float reduction, float maxReduction)
-        {
-            if (Log.LevelInfo)
-            {
-#if UNITY_EDITOR
-                string content = string.Format("{0} ▶ {1}(능력치에 의한 마법 피해 감소 최대값 적용)",
-                    ValueStringEx.GetPercentString(reduction, 0),
-                    ValueStringEx.GetPercentString(maxReduction, 0));
-
-                _stringBuilder.Append(content);
-
-#endif
-            }
-        }
-
-        private void AddLogMagicDamageReduction(float reduction)
-        {
-            if (Log.LevelInfo)
-            {
-#if UNITY_EDITOR
-                _stringBuilder.Append(string.Format("{0}(능력치에 의한 마법 피해 감소)", ValueStringEx.GetPercentString(reduction, 0)));
-#endif
-            }
-        }
-
-        private void AddLogMagicDamageReductionByResistance(float reduction)
-        {
-            if (Log.LevelInfo)
-            {
-#if UNITY_EDITOR
-                _stringBuilder.Append(string.Format(" * {0}(저항력을 통한 마법 피해 감소)", ValueStringEx.GetPercentString(reduction, 0)));
-
-#endif
-            }
-        }
-
-        private void LogTotalMagicDamageReduction(int index, float result)
-        {
-#if UNITY_EDITOR
-            _stringBuilder.Insert(index, "최종 마법 피해 감소량을 계산합니다. [");
-            _stringBuilder.AppendLine($"] => {ValueStringEx.GetPercentString(-1 + result, 0)}");
-#endif
-        }
 
         //
 

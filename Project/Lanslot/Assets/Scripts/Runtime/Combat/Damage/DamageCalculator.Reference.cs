@@ -1,8 +1,10 @@
-﻿namespace TeamSuneat
+﻿using TeamSuneat.Data;
+
+namespace TeamSuneat
 {
     public partial class DamageCalculator
     {
-        public void RefreshReferenceValue(DamageAssetData damageAsset)
+        public void RefreshReferenceValue(HitmarkAssetData damageAsset)
         {
             switch (damageAsset.LinkedDamageType)
             {

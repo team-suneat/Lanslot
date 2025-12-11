@@ -102,20 +102,7 @@ namespace TeamSuneat.Setting
                 return 0;
             }
 
-            float damage = 0;
-            damage += _damagePerSeconds[key].FindValue(DamageTypes.Magical);
-            damage += _damagePerSeconds[key].FindValue(DamageTypes.Fire);
-            damage += _damagePerSeconds[key].FindValue(DamageTypes.Cold);
-            damage += _damagePerSeconds[key].FindValue(DamageTypes.Lightning);
-            damage += _damagePerSeconds[key].FindValue(DamageTypes.Poison);
-            damage += _damagePerSeconds[key].FindValue(DamageTypes.Darkness);
-            damage += _damagePerSeconds[key].FindValue(DamageTypes.Holy);
-            damage += _damagePerSeconds[key].FindValue(DamageTypes.FireOverTime);
-            damage += _damagePerSeconds[key].FindValue(DamageTypes.ColdOverTime);
-            damage += _damagePerSeconds[key].FindValue(DamageTypes.LightningOverTime);
-            damage += _damagePerSeconds[key].FindValue(DamageTypes.PoisonOverTime);
-            damage += _damagePerSeconds[key].FindValue(DamageTypes.DarknessOverTime);
-            damage += _damagePerSeconds[key].FindValue(DamageTypes.HolyOverTime);
+            float damage = _damagePerSeconds[key].FindValue(DamageTypes.DamageOverTime);
 
             if (damage.IsZero())
             {

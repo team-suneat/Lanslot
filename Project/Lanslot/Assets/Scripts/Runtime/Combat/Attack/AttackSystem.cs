@@ -91,12 +91,12 @@ namespace TeamSuneat
 
         //───────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
-        public void Activate(string hitmarkNameString)
+        public void Activate(string hitmarkNameString, float? weaponDamageOverride = null)
         {
             HitmarkNames hitmarkName = DataConverter.ToEnum<HitmarkNames>(hitmarkNameString);
             if (hitmarkName != HitmarkNames.None)
             {
-                Activate(hitmarkName);
+                Activate(hitmarkName, weaponDamageOverride);
             }
             else
             {
@@ -104,7 +104,7 @@ namespace TeamSuneat
             }
         }
 
-        public void Activate(HitmarkNames hitmarkName)
+        public void Activate(HitmarkNames hitmarkName, float? weaponDamageOverride = null)
         {
             if (!ValidateHitmarkName(hitmarkName))
             {
@@ -114,6 +114,7 @@ namespace TeamSuneat
             AttackEntity entity = _registry.Find(hitmarkName);
             if (entity != null)
             {
+                entity.SetWeaponDamageOverride(weaponDamageOverride);
                 entity.Activate();
             }
             else

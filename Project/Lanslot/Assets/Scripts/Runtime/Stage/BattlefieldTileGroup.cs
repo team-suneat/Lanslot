@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace TeamSuneat
@@ -365,6 +366,85 @@ namespace TeamSuneat
             _tiles = null;
             Width = 0;
             _centerColumn = 0;
+        }
+
+        /// <summary>
+        /// 하단부터 지정한 줄 범위에서 가장 가까운 줄의 몬스터를 무작위 선택합니다.
+        /// </summary>
+        public bool TryFindPrimaryMonsterInRange(int maxRangeRows, out MonsterCharacter target, out int targetRow, out int targetColumn)
+        {
+            target = null;
+            targetRow = -1;
+            targetColumn = -1;
+
+            if (_tiles == null)
+            {
+                return false;
+            }
+
+            int maxRow = Mathf.Min(HEIGHT - 1, maxRangeRows - 1);
+            for (int row = 0; row <= maxRow; row++)
+            {
+                List<(MonsterCharacter monster, int column)> rowMonsters = new();
+                for (int column = 0; column < Width; column++)
+                {
+                    BattlefieldTile tile = GetTile(row, column);
+                    if (tile == null || tile.CurrentMonster == null || !tile.CurrentMonster.IsAlive)
+                    {
+                        continue;
+                    }
+
+                    rowMonsters.Add((tile.CurrentMonster, column));
+                }
+
+                if (!rowMonsters.IsValid())
+                {
+                    continue;
+                }
+
+                int randomIndex = Random.Range(0, rowMonsters.Count);
+                target = rowMonsters[randomIndex].monster;
+                targetRow = row;
+                targetColumn = rowMonsters[randomIndex].column;
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 중심 타일을 기준으로 AttackRow/AttackColumn 직사각 범위 내 몬스터를 수집합니다.
+        /// </summary>
+        public void CollectMonstersInBox(int centerRow, int centerColumn, int attackRow, int attackColumn, List<MonsterCharacter> buffer)
+        {
+            buffer.Clear();
+
+            if (_tiles == null)
+            {
+                return;
+            }
+
+            int minRow = Mathf.Max(0, centerRow - attackRow);
+            int maxRow = Mathf.Min(HEIGHT - 1, centerRow + attackRow);
+            int minColumn = Mathf.Max(0, centerColumn - attackColumn);
+            int maxColumn = Mathf.Min(Width - 1, centerColumn + attackColumn);
+
+            for (int row = minRow; row <= maxRow; row++)
+            {
+                for (int column = minColumn; column <= maxColumn; column++)
+                {
+                    BattlefieldTile tile = GetTile(row, column);
+                    if (tile == null || tile.CurrentMonster == null || !tile.CurrentMonster.IsAlive)
+                    {
+                        continue;
+                    }
+
+                    if (!buffer.Contains(tile.CurrentMonster))
+                    {
+                        buffer.Add(tile.CurrentMonster);
+                    }
+                }
+            }
         }
     }
 }

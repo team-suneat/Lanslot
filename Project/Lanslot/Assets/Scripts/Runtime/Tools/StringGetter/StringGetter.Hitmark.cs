@@ -67,7 +67,7 @@ namespace TeamSuneat
                     string replacement = string.Empty;
                     if (fieldNameString.Contains("Damages"))
                     {
-                        DamageAssetData[] datas = (DamageAssetData[])fieldObject;
+                        HitmarkAssetData[] datas = (HitmarkAssetData[])fieldObject;
                         if (datas != null && datas.Length > fieldsIndex)
                         {
                             replacement = GetDamageValues(datas[fieldsIndex], fieldName2String, level, isShowNextLevel);
@@ -126,14 +126,14 @@ namespace TeamSuneat
                         continue;
                     }
 
-                    FieldInfo fieldInfo = typeof(DamageAssetData).GetField(fieldName);
+                FieldInfo fieldInfo = typeof(HitmarkAssetData).GetField(fieldName);
                     if (fieldInfo == null)
                     {
                         continue;
                     }
 
-                    DamageAssetData damage = assetData.Damage;
-                    object fieldObject = fieldInfo.GetValue(damage);
+                HitmarkAssetData damage = assetData;
+                object fieldObject = fieldInfo.GetValue(damage);
                     string replacement;
 
                     if (fieldInfo.FieldType == typeof(float))
@@ -270,14 +270,14 @@ namespace TeamSuneat
 
         //
 
-        private static string GetDamageValues(DamageAssetData damageAssetData, string fieldName, int level, bool isShowNextLevel)
+        private static string GetDamageValues(HitmarkAssetData damageAssetData, string fieldName, int level, bool isShowNextLevel)
         {
-            FieldInfo fieldInfo = typeof(DamageAssetData).GetField(fieldName);
-            FieldInfo fieldInfoByLevel = typeof(DamageAssetData).GetField(fieldName + "ByLevel");
+            FieldInfo fieldInfo = typeof(HitmarkAssetData).GetField(fieldName);
+            FieldInfo fieldInfoByLevel = typeof(HitmarkAssetData).GetField(fieldName + "ByLevel");
 
             if (fieldInfo == null)
             {
-                Log.Error("DamageAssetData에서 필드({0})를 찾을 수 없습니다.", fieldName);
+                Log.Error("HitmarkAssetData에서 필드({0})를 찾을 수 없습니다.", fieldName);
                 return string.Empty;
             }
 

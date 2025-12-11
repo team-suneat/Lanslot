@@ -365,7 +365,7 @@ namespace TeamSuneat
             return true;
         }
 
-        public static bool Compare(this DamageAssetData[] values1, DamageAssetData[] values2)
+        public static bool Compare(this HitmarkAssetData[] values1, HitmarkAssetData[] values2)
         {
             if (values1 != null && values2 == null)
             {
@@ -382,7 +382,7 @@ namespace TeamSuneat
 
             for (int i = 0; i < values1.Length; i++)
             {
-                if (!values1[i].Compare(values2[i]))
+                if (!values1[i].CompareDamage(values2[i]))
                 {
                     return false;
                 }

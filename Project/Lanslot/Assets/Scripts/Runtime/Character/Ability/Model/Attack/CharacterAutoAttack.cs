@@ -74,11 +74,6 @@ namespace TeamSuneat
             if (basicAttackHitmark != HitmarkNames.None)
             {
                 _hitmarkAssetData = ScriptableDataManager.Instance.FindHitmarkClone(basicAttackHitmark);
-                if (_hitmarkAssetData.IsValid() && _hitmarkAssetData.AttackRange > 0)
-                {
-                    _attackRange = _hitmarkAssetData.AttackRange;
-                    LogInfo("HitmarkAssetData에서 공격 범위를 설정했습니다. {0}", _attackRange);
-                }
             }
         }
 

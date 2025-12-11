@@ -15,6 +15,18 @@ MonoBehaviour:
   m_GroupName: Scriptable
   m_GUID: 9c8a3fb1d489a2043a3b1d63467b7d70
   m_SerializeEntries:
+  - m_GUID: 59942d356d1738942869e402c07ce169
+    m_Address: Assets/Addressables/Scriptable/Hitmark/Hitmark_FlameMace.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scriptable
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5b8467c3c25f7264b97b68e4fa2c43b6
+    m_Address: Assets/Addressables/Scriptable/Hitmark/Hitmark_Shovel.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scriptable
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5ce62921ee649b740a79d267065c5be7
     m_Address: Assets/Addressables/Scriptable/Flicker_Dash.asset
     m_ReadOnly: 0
@@ -29,6 +41,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7517224cbbcd5f542a9945d3b5c1cd57
     m_Address: Assets/Addressables/Scriptable/LogSetting.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scriptable
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7d49111f13b6b764494153c98856f46a
+    m_Address: Assets/Addressables/Scriptable/Hitmark/Hitmark_PaladinShield.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Scriptable
@@ -51,8 +69,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - Scriptable
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c0fb7ad719c70da43b0ec0f28df82f4b
+    m_Address: Assets/Addressables/Scriptable/Hitmark/Hitmark_WarriorSword.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scriptable
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c1fa8cce5a610cb46a1289d35432806a
     m_Address: Assets/Addressables/Scriptable/Flicker_Damage.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scriptable
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d001a1d224ea2734e987ddfb9057038e
+    m_Address: Assets/Addressables/Scriptable/Hitmark/Hitmark_Stone.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Scriptable
@@ -63,8 +93,32 @@ MonoBehaviour:
     m_SerializedLabels:
     - Scriptable
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e76dee3bfc696ab49b5e3e4d77eb3dda
+    m_Address: Assets/Addressables/Scriptable/Hitmark/Hitmark_CrimsonAxe.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scriptable
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f51bf8d86da26c34dbe9c80795357e16
+    m_Address: Assets/Addressables/Scriptable/Hitmark/Hitmark_ExecutionerDagger.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scriptable
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f8e89ddd967dbd94386820034bee2ff4
     m_Address: Assets/Addressables/Scriptable/GameDefine.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scriptable
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fa7f99659ff2a5e4087666bd2507a2a3
+    m_Address: Assets/Addressables/Scriptable/Hitmark/Hitmark_LightningSpear.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scriptable
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe49f18e534dccf4e958597f6e8c2923
+    m_Address: Assets/Addressables/Scriptable/Hitmark/Hitmark_Pineapple.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Scriptable
