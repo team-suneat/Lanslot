@@ -81,7 +81,7 @@
         public const int CHARACTER_MAX_LEVEL = 99;
 
         public const int WEAPON_SLOT_DEFAULT_UNLOCK_COUNT = 3;
-        public const int POTION_SLOT_DEFAULT_UNLOCK_COUNT = 4;
+        public const int POTION_SLOT_DEFAULT_UNLOCK_COUNT = 2;
 
         public const bool USE_PLAYER_DAMAGE_HIT_STOP = true; // 플레이어 피격시 프레임 멈춤 기능 사용
 
