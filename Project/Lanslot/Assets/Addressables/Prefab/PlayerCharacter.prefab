@@ -562,7 +562,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 0
   NameString: 
-  AutoSetupOnStart: 0
   FixedTargetCharacterCamp: 0
   CharacterAnimator: {fileID: 0}
   CharacterRenderer: {fileID: 0}
@@ -572,6 +571,7 @@ MonoBehaviour:
   Passive: {fileID: 2597834081065772159}
   Stat: {fileID: 5893601626093087844}
   MyVital: {fileID: 3017183376075220233}
+  Abilities: []
   ShieldPoint: {fileID: 0}
   WarningTextPoint: {fileID: 0}
   MinimapPoint: {fileID: 0}
@@ -590,7 +590,6 @@ MonoBehaviour:
   ConditionState:
     PreviousStateString: 
     CurrentStateString: 
-  _characterAbilities: []
 --- !u!114 &7848600961118883522
 MonoBehaviour:
   m_ObjectHideFlags: 0

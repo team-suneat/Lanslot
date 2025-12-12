@@ -1,4 +1,5 @@
-﻿using TeamSuneat.Data;
+﻿using System.Collections;
+using TeamSuneat.Data;
 using UnityEngine;
 
 namespace TeamSuneat
@@ -10,6 +11,10 @@ namespace TeamSuneat
 
         [SerializeField]
         private BattlefieldTileGroup _battlefieldTileGroup;
+
+        [SerializeField]
+        [Tooltip("몬스터 개별 생성 간격(초)")]
+        private float _monsterSpawnInterval = 0.1f;
         private StageData _currentStageData;
         private int _currentWaveNumber;
 
@@ -65,13 +70,17 @@ namespace TeamSuneat
             Vector3 originPosition = transform.position;
             _battlefieldTileGroup.Initialize(_currentStageData.Width, originPosition);
 
+            SpawnStageTitleNotice();
+
             // 1~10웨이브 초기 세팅
-            SetupInitialWaves(Name);
+            StartCoroutine(SetupInitialWavesCoroutine(Name));
 
             if (GameApp.Instance != null && GameApp.Instance.gameManager != null)
             {
                 GameApp.Instance.gameManager.CurrentStageSystem = this;
             }
+
+            SpawnPlayerCharacter();
 
             Log.Info(LogTags.Stage, "스테이지 초기화 완료: {0}, Width={1}", Name, _currentStageData.Width);
         }
@@ -129,15 +138,19 @@ namespace TeamSuneat
         /// <summary>
         /// 1~10웨이브를 초기 세팅합니다.
         /// </summary>
-        private void SetupInitialWaves(StageNames stageName)
+        private IEnumerator SetupInitialWavesCoroutine(StageNames stageName)
         {
             if (_battlefieldTileGroup == null)
             {
-                return;
+                yield break;
             }
 
             WaveData waveData = null;
-            for (int row = 0; row < _battlefieldTileGroup.Height; row++)
+            float interval = Mathf.Max(0f, _monsterSpawnInterval);
+            WaitForSeconds wait = interval > 0f ? new WaitForSeconds(interval) : null;
+
+            int startRow = Mathf.Min(2, _battlefieldTileGroup.Height - 1);
+            for (int row = startRow; row < _battlefieldTileGroup.Height; row++)
             {
                 int waveNumber = GetWaveNumberFromRow(row);
                 WaveData tempWaveData = JsonDataManager.GetWaveDataByNumber(stageName, waveNumber);
@@ -165,19 +178,68 @@ namespace TeamSuneat
                     int column = deck.Get(i);
                     CharacterNames characterName = waveData.GetRandomMonster();
                     SpawnMonster(row, column, characterName);
+
+                    if (wait != null)
+                    {
+                        yield return wait;
+                    }
                 }
             }
+        }
+
+        private void SpawnPlayerCharacter()
+        {
+            PlayerCharacter cachedPlayer = CharacterManager.Instance.Player;
+            if (cachedPlayer != null)
+            {
+                Log.Info(LogTags.CharacterSpawn, "이미 플레이어 캐릭터가 존재하여 새로 생성하지 않습니다.");
+                return;
+            }
+
+            Vector3 spawnPosition = transform.position;
+            PlayerCharacter player = ResourcesManager.SpawnPlayerCharacter(spawnPosition, transform);
+            if (player == null)
+            {
+                Log.Error(LogTags.CharacterSpawn, "플레이어 캐릭터 프리팹 스폰에 실패했습니다.");
+                return;
+            }
+
+            player.transform.localPosition = Vector3.zero;
+            player.transform.localRotation = Quaternion.identity;
+            player.transform.localScale = Vector3.one;
+
+            if (player.CharacterRenderer != null)
+            {
+                player.CharacterRenderer.gameObject.SetActive(false);
+            }
+
+            if (player.CharacterModel != null)
+            {
+                player.CharacterModel.SetActive(false);
+            }
+
+            Log.Info(LogTags.CharacterSpawn, "플레이어 캐릭터를 생성했습니다. 위치: {0}", spawnPosition);
         }
 
         private void SpawnMonster(int row, int column, CharacterNames characterName)
         {
             BattlefieldTile tile = _battlefieldTileGroup.GetTile(row, column);
+            if (tile == null)
+            {
+                Log.Warning(LogTags.Stage, "({0}, {1}) 타일을 찾을 수 없습니다.", row, column);
+                return;
+            }
             MonsterCharacter monster = ResourcesManager.SpawnMonsterCharacter(characterName, tile.transform);
             if (monster != null)
             {
                 monster.Initialize();
                 _battlefieldTileGroup.SetTileOccupied(row, column, monster);
             }
+        }
+
+        private void SpawnStageTitleNotice()
+        {
+            _ = ResourcesManager.SpawnStageTitleNotice(Name);
         }
     }
 }

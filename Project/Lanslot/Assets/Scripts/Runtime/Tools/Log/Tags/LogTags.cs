@@ -101,6 +101,9 @@
         /// <summary> 게임 데이터 </summary>
         GameData,
 
+        /// <summary> 게임 데이터 : 캐릭터 </summary>
+        GameData_Character,
+
         /// <summary> 게임 데이터 : 전투 자원 </summary>
         GameData_BattleResource,
 

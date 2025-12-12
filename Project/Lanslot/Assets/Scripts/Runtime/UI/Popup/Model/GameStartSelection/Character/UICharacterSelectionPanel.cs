@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using TeamSuneat;
 using TeamSuneat.Data;
 using TeamSuneat.Data.Game;
 using UnityEngine;
@@ -68,8 +69,8 @@ namespace TeamSuneat.UserInterface
                 {
                     PlayerCharacterData charData = _characterList[i];
                     bool isSelected = i == _currentSelectedIndex;
-                    // 소지하지 않은 캐릭터는 잠금 처리
-                    bool isLocked = !profileInfo.Character.Contains(charData.Name);
+                    // 구매되지 않은 캐릭터는 잠금 처리
+                    bool isLocked = !profileInfo.Character.IsPurchased(charData.Name);
                     _characterCells[i].Setup(charData.Name, i, isSelected, isLocked);
                     _characterCells[i].RegisterClickEvent(OnSelectCharacter);
                     _characterCells[i].SetActive(true);
@@ -97,6 +98,19 @@ namespace TeamSuneat.UserInterface
 
         private void OnSelectCharacter(int index)
         {
+            if (!_characterList.IsValid(index))
+            {
+                return;
+            }
+
+            VProfile profileInfo = GameApp.GetSelectedProfile();
+            CharacterNames targetName = _characterList[index].Name;
+            if (!profileInfo.Character.IsPurchased(targetName))
+            {
+                Log.Info(LogTags.Character, "[UI] 구매되지 않은 캐릭터는 선택할 수 없습니다. {0}", targetName.ToLogString());
+                return;
+            }
+
             _currentSelectedIndex = index;
 
             UpdateCharacterInfoPanel(index);

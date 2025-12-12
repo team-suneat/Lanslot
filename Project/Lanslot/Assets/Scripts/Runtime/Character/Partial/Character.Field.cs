@@ -7,8 +7,7 @@ namespace TeamSuneat
     public partial class Character
     {
         [FoldoutGroup("#Character")] public CharacterNames Name;
-        [FoldoutGroup("#Character")] public string NameString;
-        [FoldoutGroup("#Character")] public bool AutoSetupOnStart;
+        [FoldoutGroup("#Character")] public string NameString;        
         [FoldoutGroup("#Character")] public bool FixedTargetCharacterCamp;
 
         // ───────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -16,13 +15,12 @@ namespace TeamSuneat
         [FoldoutGroup("#Character/Component")][ChildGameObjectsOnly] public CharacterAnimator CharacterAnimator;
         [FoldoutGroup("#Character/Component")][ChildGameObjectsOnly] public CharacterRenderer CharacterRenderer;
         [FoldoutGroup("#Character/Component")][ChildGameObjectsOnly] public Animator Animator;
-
         [FoldoutGroup("#Character/Component")][ChildGameObjectsOnly] public AttackSystem Attack;
         [FoldoutGroup("#Character/Component")][ChildGameObjectsOnly] public BuffSystem Buff;
-
         [FoldoutGroup("#Character/Component")][ChildGameObjectsOnly] public PassiveSystem Passive;
         [FoldoutGroup("#Character/Component")][ChildGameObjectsOnly] public StatSystem Stat;
         [FoldoutGroup("#Character/Component")][ChildGameObjectsOnly] public Vital MyVital;
+        [FoldoutGroup("#Character/Component")][ChildGameObjectsOnly] public CharacterAbility[] Abilities;
 
         // ───────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -105,8 +103,5 @@ namespace TeamSuneat
 
         protected float _animatorRandomNumber;
         protected CharacterConditions _conditionStateBeforeFreeze;
-
-        [FoldoutGroup("#Character/Component")]
-        [SerializeField] protected CharacterAbility[] _characterAbilities;
     }
 }

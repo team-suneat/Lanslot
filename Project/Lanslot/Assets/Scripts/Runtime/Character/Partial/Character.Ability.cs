@@ -2,23 +2,15 @@ namespace TeamSuneat
 {
     public partial class Character
     {
-        private void AutoGetAbilities()
-        {
-            if (_characterAbilities == null || _characterAbilities.Length == 0)
-            {
-                _characterAbilities = GetComponents<CharacterAbility>();
-            }
-        }
-
         private void InitializeAbilities()
         {
             LogInfo("캐릭터의 어빌리티를 초기화합니다.");
 
-            if (_characterAbilities.IsValid())
+            if (Abilities.IsValid())
             {
-                for (int i = 0; i < _characterAbilities.Length; i++)
+                for (int i = 0; i < Abilities.Length; i++)
                 {
-                    _characterAbilities[i].Initialization();
+                    Abilities[i].Initialization();
                 }
             }
             else
@@ -29,11 +21,11 @@ namespace TeamSuneat
 
         public void ResetAbilities()
         {
-            if (_characterAbilities.IsValid())
+            if (Abilities.IsValid())
             {
-                for (int i = 0; i < _characterAbilities.Length; i++)
+                for (int i = 0; i < Abilities.Length; i++)
                 {
-                    _characterAbilities[i].ResetAbility();
+                    Abilities[i].ResetAbility();
                 }
             }
             else
@@ -44,16 +36,16 @@ namespace TeamSuneat
 
         protected virtual void EarlyProcessAbilities()
         {
-            if (_characterAbilities.IsValid())
+            if (Abilities.IsValid())
             {
-                for (int i = 0; i < _characterAbilities.Length; i++)
+                for (int i = 0; i < Abilities.Length; i++)
                 {
-                    if (_characterAbilities[i] == null) { continue; }
-                    if (_characterAbilities[i].enabled)
+                    if (Abilities[i] == null) { continue; }
+                    if (Abilities[i].enabled)
                     {
-                        if (_characterAbilities[i].AbilityInitialized)
+                        if (Abilities[i].AbilityInitialized)
                         {
-                            _characterAbilities[i].EarlyProcessAbility();
+                            Abilities[i].EarlyProcessAbility();
                         }
                     }
                 }
@@ -62,26 +54,26 @@ namespace TeamSuneat
 
         protected virtual void ProcessAbilities()
         {
-            if (_characterAbilities != null)
+            if (Abilities != null)
             {
-                for (int i = 0; i < _characterAbilities.Length; i++)
+                for (int i = 0; i < Abilities.Length; i++)
                 {
-                    if (_characterAbilities[i] == null)
+                    if (Abilities[i] == null)
                     {
                         continue;
                     }
 
-                    if (!_characterAbilities[i].enabled)
+                    if (!Abilities[i].enabled)
                     {
                         continue;
                     }
 
-                    if (!_characterAbilities[i].AbilityInitialized)
+                    if (!Abilities[i].AbilityInitialized)
                     {
                         continue;
                     }
 
-                    _characterAbilities[i].ProcessAbility();
+                    Abilities[i].ProcessAbility();
                 }
             }
 
@@ -93,63 +85,63 @@ namespace TeamSuneat
 
         protected virtual void LateProcessAbilities()
         {
-            if (_characterAbilities != null)
+            if (Abilities != null)
             {
-                for (int i = 0; i < _characterAbilities.Length; i++)
+                for (int i = 0; i < Abilities.Length; i++)
                 {
-                    if (_characterAbilities[i] == null)
+                    if (Abilities[i] == null)
                     {
                         continue;
                     }
 
-                    if (!_characterAbilities[i].enabled)
+                    if (!Abilities[i].enabled)
                     {
                         continue;
                     }
 
-                    if (!_characterAbilities[i].AbilityInitialized)
+                    if (!Abilities[i].AbilityInitialized)
                     {
                         continue;
                     }
 
-                    _characterAbilities[i].LateProcessAbility();
+                    Abilities[i].LateProcessAbility();
                 }
             }
         }
 
         protected virtual void PhysicsProcessAbilities()
         {
-            if (_characterAbilities != null)
+            if (Abilities != null)
             {
-                for (int i = 0; i < _characterAbilities.Length; i++)
+                for (int i = 0; i < Abilities.Length; i++)
                 {
-                    if (_characterAbilities[i] == null)
+                    if (Abilities[i] == null)
                     {
                         continue;
                     }
 
-                    if (!_characterAbilities[i].enabled)
+                    if (!Abilities[i].enabled)
                     {
                         continue;
                     }
 
-                    if (!_characterAbilities[i].AbilityInitialized)
+                    if (!Abilities[i].AbilityInitialized)
                     {
                         continue;
                     }
 
-                    _characterAbilities[i].PhysicsProcessAbility();
+                    Abilities[i].PhysicsProcessAbility();
                 }
             }
         }
 
         public T FindAbility<T>() where T : CharacterAbility
         {
-            if (_characterAbilities.IsValid())
+            if (Abilities.IsValid())
             {
-                for (int i = 0; i < _characterAbilities.Length; i++)
+                for (int i = 0; i < Abilities.Length; i++)
                 {
-                    if (_characterAbilities[i] is T characterAbility)
+                    if (Abilities[i] is T characterAbility)
                     {
                         return characterAbility;
                     }

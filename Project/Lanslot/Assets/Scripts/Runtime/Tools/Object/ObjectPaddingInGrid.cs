@@ -32,6 +32,13 @@ namespace TeamSuneat
             items = this.GetComponentsInOnlyChildren<Transform>();
         }
 
+        public override void AutoSetting()
+        {
+            base.AutoSetting();
+
+            AlignGrid();
+        }
+        
         public void AlignGrid()
         {
             if (items == null || items.Length == 0)

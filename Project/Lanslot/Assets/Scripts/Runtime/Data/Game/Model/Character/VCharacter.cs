@@ -33,6 +33,18 @@ namespace TeamSuneat.Data.Game
             return UnlockedCharacters.ContainsKey(key);
         }
 
+        public bool IsUnlocked(CharacterNames characterName)
+        {
+            VCharacterInfo characterInfo = GetCharacterInfo(characterName);
+            return characterInfo != null && characterInfo.IsUnlocked();
+        }
+
+        public bool IsPurchased(CharacterNames characterName)
+        {
+            VCharacterInfo characterInfo = GetCharacterInfo(characterName);
+            return characterInfo != null && characterInfo.IsPurchased();
+        }
+
         public VCharacterInfo GetCharacterInfo(CharacterNames characterName)
         {
             string key = characterName.ToString();
@@ -42,59 +54,67 @@ namespace TeamSuneat.Data.Game
 
         public void Unlock(CharacterNames characterName)
         {
-            string key = characterName.ToString();
-            if (!UnlockedCharacters.ContainsKey(key))
+            VCharacterInfo characterInfo = GetOrCreateCharacterInfo(characterName);
+            if (characterInfo.State == CharacterState.Locked)
             {
-                VCharacterInfo characterInfo = new VCharacterInfo(characterName);
-                UnlockedCharacters.Add(key, characterInfo);
-                Log.Info(LogTags.GameData, "{0} 캐릭터를 추가합니다. 캐릭터 수: {1}", characterName.ToLogString(), UnlockedCharacters.Count);
+                characterInfo.SetState(CharacterState.Unlocked);
+                Log.Info(LogTags.GameData_Character, "{0} 캐릭터를 추가합니다. 캐릭터 수: {1}", characterName.ToLogString(), UnlockedCharacters.Count);
                 GlobalEvent<int>.Send(GlobalEventType.PLAYER_CHARACTER_ADDED, UnlockedCharacters.Count);
             }
         }
 
+        public bool Purchase(CharacterNames characterName)
+        {
+            VCharacterInfo characterInfo = GetOrCreateCharacterInfo(characterName);
+            if (!characterInfo.IsUnlocked())
+            {
+                Log.Info(LogTags.GameData_Character, $"해금되지 않은 캐릭터는 구매할 수 없습니다. {characterName}");
+                return false;
+            }
+
+            if (characterInfo.IsPurchased())
+            {
+                return false;
+            }
+
+            characterInfo.SetState(CharacterState.Purchased);
+            Log.Info(LogTags.GameData_Character, $"캐릭터를 구매합니다. {characterName}");
+            return true;
+        }
+
         public void Select(CharacterNames characterName)
         {
-            if (Contains(characterName))
+            VCharacterInfo characterInfo = GetCharacterInfo(characterName);
+            if (characterInfo != null && characterInfo.IsPurchased())
             {
                 SelectedCharacterString = characterName.ToString();
                 SelectedCharacterName = characterName;
-                Log.Info(LogTags.GameData, $"[Character] 캐릭터를 선택합니다. {characterName}");
+                Log.Info(LogTags.GameData_Character, $"캐릭터를 선택합니다. {characterName}");
             }
             else
             {
-                Log.Info(LogTags.GameData, $"[Character] 해금되지 않은 캐릭터를 선택할 수 없습니다. {characterName}");
+                Log.Info(LogTags.GameData_Character, $"해금되지 않은 캐릭터를 선택할 수 없습니다. {characterName}");
             }
         }
 
-        /// <summary>
-        /// 특정 캐릭터의 랭크 경험치를 추가합니다.
-        /// </summary>
-        /// <param name="characterName">캐릭터 이름</param>
-        /// <param name="experience">추가할 경험치</param>
-        /// <returns>증가한 랭크 수 (캐릭터가 없거나 해금되지 않은 경우 0)</returns>
         public int AddRankExperience(CharacterNames characterName, int experience)
         {
             VCharacterInfo characterInfo = GetCharacterInfo(characterName);
             if (characterInfo == null)
             {
-                Log.Warning(LogTags.GameData, "[Character] {0} 캐릭터를 찾을 수 없습니다.", characterName.ToLogString());
+                Log.Warning(LogTags.GameData_Character, "{0} 캐릭터를 찾을 수 없습니다.", characterName.ToLogString());
                 return 0;
             }
 
             return characterInfo.AddRankExperience(experience);
         }
 
-        /// <summary>
-        /// 특정 캐릭터의 플레이 횟수를 증가시킵니다.
-        /// </summary>
-        /// <param name="characterName">캐릭터 이름</param>
-        /// <param name="count">증가시킬 횟수 (기본값: 1)</param>
         public void AddPlayCount(CharacterNames characterName, int count = 1)
         {
             VCharacterInfo characterInfo = GetCharacterInfo(characterName);
             if (characterInfo == null)
             {
-                Log.Warning(LogTags.GameData, "[Character] {0} 캐릭터를 찾을 수 없습니다.", characterName.ToLogString());
+                Log.Warning(LogTags.GameData_Character, "{0} 캐릭터를 찾을 수 없습니다.", characterName.ToLogString());
                 return;
             }
 
@@ -108,12 +128,28 @@ namespace TeamSuneat.Data.Game
                 UnlockedCharacters = new Dictionary<string, VCharacterInfo>()
             };
 
-            // 기본 캐릭터들 추가
-            defaultCharacter.Unlock(CharacterNames.IronWarden);
-            defaultCharacter.Unlock(CharacterNames.ShadowAssassin);
-            defaultCharacter.Unlock(CharacterNames.ThunderSeer);
+            for (int i = 0; i < GameDefine.DEFAULT_UNLOCKED_CHARACTERS.Length; i++)
+            {
+                CharacterNames characterName = GameDefine.DEFAULT_UNLOCKED_CHARACTERS[i];
+                defaultCharacter.Unlock(characterName);
+                defaultCharacter.Purchase(characterName);
+            }
+
+            defaultCharacter.Unlock(CharacterNames.BloodRaven);
 
             return defaultCharacter;
+        }
+
+        private VCharacterInfo GetOrCreateCharacterInfo(CharacterNames characterName)
+        {
+            string key = characterName.ToString();
+            if (!UnlockedCharacters.TryGetValue(key, out VCharacterInfo characterInfo))
+            {
+                characterInfo = new VCharacterInfo(characterName);
+                UnlockedCharacters.Add(key, characterInfo);
+            }
+
+            return characterInfo;
         }
     }
 }

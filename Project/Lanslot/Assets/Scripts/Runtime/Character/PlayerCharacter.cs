@@ -8,26 +8,7 @@ namespace TeamSuneat
     public class PlayerCharacter : Character
     {
         public override LogTags LogTag => LogTags.Player;
-
-        protected override void OnStart()
-        {
-            base.OnStart();
-
-            StartXCoroutine(InitializeForDev());
-        }
-
-        private IEnumerator InitializeForDev()
-        {
-            yield return new WaitUntil(() =>
-            {
-                if (GameApp.Instance == null) return false;
-                if (GameApp.Instance.data == null) return false;
-                return true;
-            });
-
-            Initialize();
-        }
-
+     
         public override void Initialize()
         {
             VProfile profileInfo = GameApp.GetSelectedProfile();

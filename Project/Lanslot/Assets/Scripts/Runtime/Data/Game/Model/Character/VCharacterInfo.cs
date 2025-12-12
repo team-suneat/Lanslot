@@ -3,9 +3,6 @@ using TeamSuneat.Data;
 
 namespace TeamSuneat.Data.Game
 {
-    /// <summary>
-    /// 캐릭터 정보를 저장하는 클래스 (이름, 랭크, 랭크 경험치, 플레이 횟수)
-    /// </summary>
     [System.Serializable]
     public class VCharacterInfo
     {
@@ -13,29 +10,46 @@ namespace TeamSuneat.Data.Game
         public CharacterNames CharacterName;
         public string CharacterNameString;
 
+        [NonSerialized]
+        public CharacterState State;
+        public string StateString;
+
         public int Rank;
         public int RankExperience;
         public int PlayCount;
 
         public VCharacterInfo()
         {
-            Rank = 1;
-            RankExperience = 0;
-            PlayCount = 0;
+            InitializeDefaults();
         }
 
         public VCharacterInfo(CharacterNames characterName)
         {
             CharacterName = characterName;
             CharacterNameString = characterName.ToString();
-            Rank = 1;
-            RankExperience = 0;
-            PlayCount = 0;
+            InitializeDefaults();
         }
 
         public void OnLoadGameData()
         {
             _ = EnumEx.ConvertTo(ref CharacterName, CharacterNameString);
+            _ = EnumEx.ConvertTo(ref State, StateString);
+        }
+
+        public bool IsUnlocked()
+        {
+            return State == CharacterState.Unlocked || State == CharacterState.Purchased;
+        }
+
+        public bool IsPurchased()
+        {
+            return State == CharacterState.Purchased;
+        }
+
+        public void SetState(CharacterState nextState)
+        {
+            State = nextState;
+            StateString = nextState.ToString();
         }
 
         /// <summary>
@@ -71,7 +85,7 @@ namespace TeamSuneat.Data.Game
                     Rank++;
                     addedRank++;
 
-                    Log.Info(LogTags.GameData, "[Character] {0} 캐릭터의 랭크가 올랐습니다. 랭크: {1}, 남은 경험치: {2}", 
+                    Log.Info(LogTags.GameData_Character, "{0} 캐릭터의 랭크가 올랐습니다. 랭크: {1}, 남은 경험치: {2}", 
                         CharacterName.ToLogString(), Rank, RankExperience);
                 }
                 else
@@ -83,7 +97,7 @@ namespace TeamSuneat.Data.Game
 
             if (addedRank > 0)
             {
-                Log.Info(LogTags.GameData, "[Character] {0} 캐릭터가 {1} 랭크 상승했습니다. 현재 랭크: {2}", 
+                Log.Info(LogTags.GameData_Character, "{0} 캐릭터가 {1} 랭크 상승했습니다. 현재 랭크: {2}", 
                     CharacterName.ToLogString(), addedRank, Rank);
             }
 
@@ -102,9 +116,17 @@ namespace TeamSuneat.Data.Game
             }
 
             PlayCount += count;
-            Log.Info(LogTags.GameData, "[Character] {0} 캐릭터의 플레이 횟수가 증가했습니다. 현재 플레이 횟수: {1}", 
+            Log.Info(LogTags.GameData_Character, "{0} 캐릭터의 플레이 횟수가 증가했습니다. 현재 플레이 횟수: {1}", 
                 CharacterName.ToLogString(), PlayCount);
+        }
+
+        private void InitializeDefaults()
+        {
+            State = CharacterState.Locked;
+            StateString = CharacterState.Locked.ToString();
+            Rank = 1;
+            RankExperience = 0;
+            PlayCount = 0;
         }
     }
 }
-

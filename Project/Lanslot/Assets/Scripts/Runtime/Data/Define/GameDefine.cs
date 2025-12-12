@@ -41,11 +41,6 @@
             }
         }
 
-        public static int MAX_TREASURE_CLASS { get; internal set; }
-        public static AreaNames FIRST_BATTLE_AREA_NAME { get; internal set; }
-        public static AreaNames LAST_BATTLE_AREA_NAME { get; internal set; }
-        public static int ITEM_LEVEL_RANGE_MIN_VALUE { get; internal set; }
-
         public const bool USE_ES3 = false;
         public const bool USE_AES_EDITOR = true;
 
@@ -62,8 +57,6 @@
 
         #region UI 설정
 
-        public const float DEFAULT_FADE_IN_UI = 0.3f;
-        public const float DEFAULT_FADE_IN_START_DELAY = 0.1f;
         public const float INPUT_WAIT_TIME = 0.3f;
 
         #endregion UI 설정
@@ -79,9 +72,19 @@
         #region 게임플레이 설정
 
         public const int CHARACTER_MAX_LEVEL = 99;
-
-        public const int WEAPON_SLOT_DEFAULT_UNLOCK_COUNT = 3;
-        public const int POTION_SLOT_DEFAULT_UNLOCK_COUNT = 2;
+        public const int WEAPON_SLOT_DEFAULT_UNLOCK_COUNT = 3; // 초기 무기 슬롯 개수
+        public const int POTION_SLOT_DEFAULT_UNLOCK_COUNT = 2; // 초기 포션 슬롯 개수
+        
+        public static readonly CharacterNames[] DEFAULT_UNLOCKED_CHARACTERS = 
+        { 
+            CharacterNames.IronWarden, CharacterNames.ShadowAssassin, CharacterNames.ThunderSeer
+        };
+        
+        public static readonly ItemNames[] DEFAULT_UNLOCKED_WEAPONS = 
+        {
+            ItemNames.WarriorSword, ItemNames.ExecutionerDagger, ItemNames.LightningSpear,
+            ItemNames.PaladinShield, ItemNames.CoinPurse, ItemNames.GemPurse, ItemNames.Stone, ItemNames.Shovel 
+        };
 
         public const bool USE_PLAYER_DAMAGE_HIT_STOP = true; // 플레이어 피격시 프레임 멈춤 기능 사용
 

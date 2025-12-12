@@ -16,6 +16,20 @@ namespace TeamSuneat
             return monster;
         }
 
+        internal static PlayerCharacter SpawnPlayerCharacter(Vector3 spawnPosition, Transform parent)
+        {
+            PlayerCharacter player = SpawnPrefab<PlayerCharacter>("PlayerCharacter", parent);
+            if (player != null)
+            {
+                player.transform.localPosition = Vector3.zero;
+                player.transform.localRotation = Quaternion.identity;
+                player.transform.localScale = Vector3.one;
+                player.transform.position = spawnPosition;
+            }
+
+            return player;
+        }
+
         internal static DropEXP SpawnDropExp(Vector3 spawnPosition)
         {
             return SpawnPrefab<DropEXP>("DropEXP", spawnPosition);

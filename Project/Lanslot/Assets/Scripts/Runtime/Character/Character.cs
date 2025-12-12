@@ -6,11 +6,6 @@ namespace TeamSuneat
 {
     public partial class Character : XBehaviour, IPoolable
     {
-        protected void Awake()
-        {
-            AutoGetAbilities();
-        }
-
         protected override void OnRelease()
         {
             base.OnRelease();

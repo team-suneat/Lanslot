@@ -18,7 +18,7 @@ namespace TeamSuneat
             Stat = GetComponentInChildren<StatSystem>();
             MyVital = GetComponentInChildren<Vital>();
 
-            _characterAbilities = GetComponents<CharacterAbility>();
+            Abilities = GetComponents<CharacterAbility>();
             CharacterModel = this.FindGameObject("Model");
         }
 

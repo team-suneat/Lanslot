@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceLocations;
 
 namespace TeamSuneat
 {
@@ -12,16 +14,16 @@ namespace TeamSuneat
 
         #region 리소스 불러오기
 
-        public T LoadResource<T>(string key) where T : UnityEngine.Object
+        public T LoadResource<T>(string assetGuid) where T : UnityEngine.Object
         {
-            if (string.IsNullOrEmpty(key))
+            if (string.IsNullOrEmpty(assetGuid))
             {
                 Log.Warning("리소스 키가 비어 있습니다.");
                 return null;
             }
 
             // 이미 캐시된 리소스가 있는지 확인
-            if (_resourcesCache.TryGetValue(key, out object cachedResource))
+            if (_resourcesCache.TryGetValue(assetGuid, out object cachedResource))
             {
                 return cachedResource as T;
             }
@@ -29,43 +31,55 @@ namespace TeamSuneat
             return null;
         }
 
-        public async Task<T> LoadResourceAsync<T>(string path) where T : UnityEngine.Object
+        public async Task<T> LoadResourceAsync<T>(string assetGuidOrKey) where T : UnityEngine.Object
         {
-            if (string.IsNullOrEmpty(path))
+            if (string.IsNullOrEmpty(assetGuidOrKey))
             {
                 Log.Warning("리소스 키가 비어 있습니다.");
                 return null;
             }
 
-            // 이미 캐시된 리소스가 있는지 확인
-            if (_resourcesCache.TryGetValue(path, out object cachedResource))
-            {
-                return cachedResource as T;
-            }
+            AsyncOperationHandle<IList<IResourceLocation>> locationsHandle = Addressables.LoadResourceLocationsAsync(assetGuidOrKey, typeof(T));
 
             try
             {
-                // 비동기 불러오기 시작
-                AsyncOperationHandle<T> asyncOperation = Addressables.LoadAssetAsync<T>(path);
-                _asyncOperationHandles[path] = asyncOperation;
+                IList<IResourceLocation> locations = await locationsHandle.Task;
+                if (locations == null || locations.Count == 0)
+                {
+                    Log.Warning(LogTags.Resource, "Addressable 리소스 위치를 찾을 수 없습니다: {0}", assetGuidOrKey);
+                    return null;
+                }
+
+                IResourceLocation location = locations[0];
+                string cacheKey = location.PrimaryKey;
+
+                if (_resourcesCache.TryGetValue(cacheKey, out object cachedResource))
+                {
+                    return cachedResource as T;
+                }
+
+                AsyncOperationHandle<T> asyncOperation = Addressables.LoadAssetAsync<T>(location);
+                _asyncOperationHandles[cacheKey] = asyncOperation;
 
                 T resource = await asyncOperation.Task;
                 if (resource != null)
                 {
-                    Log.Info(LogTags.Resource, "비동기로 불러온 AssetReference 리소스를 캐시합니다: {0}", path);
-                    _resourcesCache[path] = resource;
+                    Log.Info(LogTags.Resource, "AssetGUID를 키로 리소스를 캐시합니다: {0}", cacheKey);
+                    _resourcesCache[cacheKey] = resource;
                     return resource;
                 }
-                else
-                {
-                    Log.Error("Addressable 리소스 불러오기 실패: {0}", path);
-                    return null;
-                }
+
+                Log.Error("Addressable 리소스 불러오기 실패: {0}", cacheKey);
+                return null;
             }
             catch (System.Exception ex)
             {
-                Log.Error("Addressable 리소스 불러오기 중 오류 발생: {0}, 오류: {1}", path, ex.Message);
+                Log.Error("Addressable 리소스 불러오기 중 오류 발생: {0}, 오류: {1}", assetGuidOrKey, ex.Message);
                 return null;
+            }
+            finally
+            {
+                Addressables.Release(locationsHandle);
             }
         }
 
@@ -124,16 +138,7 @@ namespace TeamSuneat
                 if (assets != null && assets.Count > 0)
                 {
                     Log.Info(LogTags.Resource, "{0} 라벨로 {1} 타입의 리소스를 {2}개 불러왔습니다.", label, typeof(T), assets.Count);
-                    for (int i = 0; i < assets.Count; i++)
-                    {
-                        T asset = assets[i];
-                        string path = PathManager.FindPathByType<T>(asset.name);
-                        if (!string.IsNullOrEmpty(path))
-                        {
-                            _resourcesCache.Add(path, asset);
-                            Log.Progress(LogTags.Resource, "불러온 {0} 리소스를 캐시합니다. Path: {1}", asset.name, path);
-                        }
-                    }
+                    await CacheResourcesByLocations(label, assets);
                     return assets;
                 }
                 else
@@ -202,6 +207,54 @@ namespace TeamSuneat
         public bool IsResourceLoaded(string key)
         {
             return _resourcesCache.ContainsKey(key);
+        }
+
+        public bool IsResourceLoaded(AssetReference assetReference)
+        {
+            if (assetReference == null)
+            {
+                return false;
+            }
+
+            return IsResourceLoaded(assetReference.AssetGUID);
+        }
+
+        private async Task CacheResourcesByLocations<T>(string label, IList<T> assets) where T : UnityEngine.Object
+        {
+            AsyncOperationHandle<IList<IResourceLocation>> locationsHandle = Addressables.LoadResourceLocationsAsync(label, typeof(T));
+
+            try
+            {
+                IList<IResourceLocation> locations = await locationsHandle.Task;
+                if (locations == null || locations.Count == 0)
+                {
+                    Log.Warning(LogTags.Resource, "{0} 라벨로 리소스 위치를 찾을 수 없습니다.", label);
+                    return;
+                }
+
+                int count = Mathf.Min(assets.Count, locations.Count);
+                for (int i = 0; i < count; i++)
+                {
+                    string cacheKey = locations[i].PrimaryKey;
+                    T asset = assets[i];
+
+                    if (_resourcesCache.ContainsKey(cacheKey))
+                    {
+                        continue;
+                    }
+
+                    _resourcesCache.Add(cacheKey, asset);
+                    Log.Progress(LogTags.Resource, "{0} 라벨로 불러온 리소스를 AssetGUID로 캐시합니다. Key: {1}, Asset: {2}", label, cacheKey, asset.name);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Log.Error(LogTags.Resource, "{0} 라벨 리소스 캐싱 중 오류 발생: {1}", label, ex.Message);
+            }
+            finally
+            {
+                Addressables.Release(locationsHandle);
+            }
         }
 
         #endregion 유틸리티

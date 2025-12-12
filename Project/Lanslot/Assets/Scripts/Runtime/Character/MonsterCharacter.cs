@@ -1,6 +1,5 @@
 ﻿using Sirenix.OdinInspector;
 using TeamSuneat.Data;
-using TMPro;
 using UnityEngine;
 
 namespace TeamSuneat
@@ -20,16 +19,6 @@ namespace TeamSuneat
             base.AutoGetComponents();
 
             _dropObjectSpawner = GetComponentInChildren<DropObjectSpawner>();
-        }
-
-        protected override void OnStart()
-        {
-            base.OnStart();
-
-            if (AutoSetupOnStart)
-            {
-                Initialize();
-            }
         }
 
         public override void Initialize()
@@ -87,7 +76,7 @@ namespace TeamSuneat
             base.OnDeath(damageResult);
 
             _dropObjectSpawner?.SpawnDropEXP(position);
-            
+
             CharacterAnimator?.PlayDeathAnimation();
         }
     }

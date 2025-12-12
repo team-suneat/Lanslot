@@ -147,6 +147,64 @@ namespace TeamSuneat
 
         #endregion Floaty Text
 
+        #region Notice
+
+        public static UIStageTitleNotice SpawnStageTitleNotice(StageNames stageName)
+        {
+            if (GameSetting.Instance.Play.HideUserInterface)
+            {
+                return null;
+            }
+
+            CanvasOrder canvasOrder = UIManager.Instance?.GetCanvas(CanvasOrderNames.Notice);
+            if (canvasOrder == null)
+            {
+                return null;
+            }
+
+            GameObject spawnedObject = SpawnPrefab("UIStageTitleNotice", canvasOrder.transform);
+            if (spawnedObject == null)
+            {
+                return null;
+            }
+
+            spawnedObject.ResetLocalTransform();
+
+            UIStageTitleNotice notice = spawnedObject.GetComponent<UIStageTitleNotice>();
+            notice?.Show(stageName);
+
+            return notice;
+        }
+
+        public static UIStageTitleNotice SpawnStageTitleNotice(string content)
+        {
+            if (GameSetting.Instance.Play.HideUserInterface)
+            {
+                return null;
+            }
+
+            CanvasOrder canvasOrder = UIManager.Instance?.GetCanvas(CanvasOrderNames.Notice);
+            if (canvasOrder == null)
+            {
+                return null;
+            }
+
+            GameObject spawnedObject = SpawnPrefab("UIStageTitleNotice", canvasOrder.transform);
+            if (spawnedObject == null)
+            {
+                return null;
+            }
+
+            spawnedObject.ResetLocalTransform();
+
+            UIStageTitleNotice notice = spawnedObject.GetComponent<UIStageTitleNotice>();
+            notice?.Show(content);
+
+            return notice;
+        }
+
+        #endregion Notice
+
         public static UIGauge SpawnGauge(Vital vital)
         {
             if (GameSetting.Instance.Play.HideUserInterface)

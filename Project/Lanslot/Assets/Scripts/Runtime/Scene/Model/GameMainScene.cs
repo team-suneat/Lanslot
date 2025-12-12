@@ -94,20 +94,8 @@ namespace TeamSuneat
             if (DetermineChangeScene("GameMain"))
             {
                 GameApp.Instance.gameManager.ResetStage();
-
-                // if (_stageSpawnHandler == null)
-                // {
+                
                 ChangeScene("GameMain");
-                //    return;
-                // }
-
-                // CleanupCurrentScene();
-                // StartXCoroutine(ProcessChangingStage(profileInfo.Stage.CurrentStageName));
-
-                /*
-                 * 동일 Area인 경우 ChangeStage, 다른 Area인 경우 ChangeScene을 호출합니다.
-                 * 핸들러가 생성된 스테이지 중에 현재 스테이지가 있는지 확인합니다.
-                 */
             }
         }
 
@@ -147,7 +135,7 @@ namespace TeamSuneat
                 }
 
                 // 어드레서블 리소스 로드 (스테이지별)
-                _ = await ResourcesManager.LoadResourcesByLabelAsync<GameObject>(currentStageName.ToString());
+                await ResourcesManager.LoadResourcesByLabelAsync<GameObject>(currentStageName.ToString());
 
                 // StageSystem 프리팹 인스턴스화
                 CreateStageSystem(currentStageName);

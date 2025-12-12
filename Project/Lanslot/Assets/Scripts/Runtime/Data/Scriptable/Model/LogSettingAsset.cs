@@ -1,4 +1,4 @@
-﻿using Sirenix.OdinInspector;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 #if UNITY_EDITOR
@@ -63,6 +63,7 @@ namespace TeamSuneat
         [FoldoutGroup("[데이터]")][SuffixLabel("경로")] public bool Path;
 
         [FoldoutGroup("[세이브 데이터]")][SuffixLabel("게임 데이터")] public bool GameData;
+        [FoldoutGroup("[세이브 데이터]")][SuffixLabel("게임 데이터 - 캐릭터")] public bool GameData_Character;
         [FoldoutGroup("[세이브 데이터]")][SuffixLabel("게임 데이터 - 기술")] public bool GameData_Skill;
         [FoldoutGroup("[세이브 데이터]")][SuffixLabel("게임 데이터 - 무기")] public bool GameData_Weapon;
 
@@ -148,6 +149,7 @@ namespace TeamSuneat
             GamePref = true;
 
             GameData = true;
+            GameData_Character = true;
             Quest = true;
             QuestCondition = true;
             Tutorial = true;
@@ -241,6 +243,7 @@ namespace TeamSuneat
             GamePref = false;
 
             GameData = false;
+            GameData_Character = false;
             Quest = false;
             QuestCondition = false;
             Tutorial = false;
@@ -347,6 +350,7 @@ namespace TeamSuneat
                 LogTags.GamePref => GamePref,
 
                 LogTags.GameData => GameData,
+                LogTags.GameData_Character => GameData_Character,
                 LogTags.Quest => Quest,
                 LogTags.QuestCondition => QuestCondition,
                 LogTags.Tutorial => Tutorial,
@@ -445,6 +449,7 @@ namespace TeamSuneat
                 case LogTags.GamePref: { GamePref = true; } break;
 
                 case LogTags.GameData: { GameData = true; } break;
+                case LogTags.GameData_Character: { GameData_Character = true; } break;
                 case LogTags.Quest: { Quest = true; } break;
                 case LogTags.QuestCondition: { QuestCondition = true; } break;
                 case LogTags.Tutorial: { Tutorial = true; } break;
@@ -533,6 +538,7 @@ namespace TeamSuneat
                 case LogTags.GamePref: { GamePref = false; } break;
 
                 case LogTags.GameData: { GameData = false; } break;
+                case LogTags.GameData_Character: { GameData_Character = false; } break;
                 case LogTags.Quest: { Quest = false; } break;
                 case LogTags.QuestCondition: { QuestCondition = false; } break;
                 case LogTags.Tutorial: { Tutorial = false; } break;

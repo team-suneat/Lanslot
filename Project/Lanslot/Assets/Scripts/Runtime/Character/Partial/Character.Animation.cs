@@ -48,11 +48,11 @@ namespace TeamSuneat
 
                 _ = Animator.UpdateAnimatorFloat(_randomAnimationParameter, _animatorRandomNumber, AnimatorParameters);
 
-                for (int i = 0; i < _characterAbilities.Length; i++)
+                for (int i = 0; i < Abilities.Length; i++)
                 {
-                    if (_characterAbilities[i].enabled && _characterAbilities[i].AbilityInitialized)
+                    if (Abilities[i].enabled && Abilities[i].AbilityInitialized)
                     {
-                        _characterAbilities[i].UpdateAnimator();
+                        Abilities[i].UpdateAnimator();
                     }
                 }
             }

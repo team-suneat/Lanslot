@@ -186,17 +186,11 @@ namespace TeamSuneat.Data.Game
         {
             VCharacterWeapon defaultWeapons = new();
 
-            // 기본 캐릭터의 무기 해금
-            defaultWeapons.Unlock(ItemNames.WarriorSword);
-            defaultWeapons.Unlock(ItemNames.ExecutionerDagger);
-            defaultWeapons.Unlock(ItemNames.LightningSpear);
-
-            // 기본 무기 해금
-            defaultWeapons.Unlock(ItemNames.PaladinShield);
-            defaultWeapons.Unlock(ItemNames.CoinPurse);
-            defaultWeapons.Unlock(ItemNames.GemPurse);
-            defaultWeapons.Unlock(ItemNames.Stone);
-            defaultWeapons.Unlock(ItemNames.Shovel);
+            for (int i = 0; i < GameDefine.DEFAULT_UNLOCKED_WEAPONS.Length; i++)
+            {
+                ItemNames weaponName = GameDefine.DEFAULT_UNLOCKED_WEAPONS[i];
+                defaultWeapons.Unlock(weaponName);
+            }
 
             // 최초 슬롯 해금
             defaultWeapons.UnlockedSlotCount = GameDefine.WEAPON_SLOT_DEFAULT_UNLOCK_COUNT;
