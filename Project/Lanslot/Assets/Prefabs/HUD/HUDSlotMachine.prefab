@@ -165,6 +165,7 @@ MonoBehaviour:
   BlockColorChangeOnMouseOver: 0
   UseUnderlineOnMouseOver: 0
   AutoSelectFrameNormal: 0
+  EffectType: 2
 --- !u!1 &1831265910106796006
 GameObject:
   m_ObjectHideFlags: 0

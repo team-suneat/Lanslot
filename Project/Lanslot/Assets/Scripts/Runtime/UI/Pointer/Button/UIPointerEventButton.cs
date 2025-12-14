@@ -39,6 +39,10 @@ namespace TeamSuneat.UserInterface
 
         [FoldoutGroup("#이벤트 버튼/Toggle")] public bool AutoSelectFrameNormal;
 
+        [FoldoutGroup("#이벤트 버튼/Effect")]
+        [SuffixLabel("버튼 상태에 따른 효과 타입을 설정합니다.")]
+        public ButtonStateEffectType EffectType = ButtonStateEffectType.Sprite;
+
         private const SoundNames SOUND_POINTER_ENTER = SoundNames.UI_Sound_Move_Button;
         private const SoundNames SOUND_POIUNTER_CLICK = SoundNames.UI_Sound_Click_Button;
 
@@ -48,6 +52,7 @@ namespace TeamSuneat.UserInterface
         private Tweener LockTweener { get; set; }
         private UnityAction _clickLeftEvent;
         private Coroutine _clickCoroutine;
+        private IButtonStateEffect _stateEffect;
 
         public override void AutoSetting()
         {
@@ -74,6 +79,12 @@ namespace TeamSuneat.UserInterface
         {
             base.Awake();
             InitializeComponents();
+            InitializeStateEffect();
+        }
+
+        private void InitializeStateEffect()
+        {
+            _stateEffect = ButtonStateEffectFactory.Create(EffectType);
         }
 
         protected override void OnStart()
@@ -515,49 +526,14 @@ namespace TeamSuneat.UserInterface
 
         private void SetButtonIconSpriteByState(ToggleButtonStates state)
         {
-            if (ButtonIcon != null)
+            ApplyEffect(state);
+        }
+
+        private void ApplyEffect(ToggleButtonStates state)
+        {
+            if (_stateEffect != null && ButtonIcon != null)
             {
-                switch (state)
-                {
-                    case ToggleButtonStates.Lock:
-                        if (LockSprite != null)
-                        {
-                            ButtonIcon.SetSprite(LockSprite, UseNativeSpriteSize);
-                        }
-                        break;
-
-                    case ToggleButtonStates.Select:
-                        if (SelectSprite != null)
-                        {
-                            ButtonIcon.SetSprite(SelectSprite, UseNativeSpriteSize);
-                        }
-                        break;
-
-                    case ToggleButtonStates.MouseOver:
-                        if (MouseOverSprite != null)
-                        {
-                            ButtonIcon.SetSprite(MouseOverSprite, UseNativeSpriteSize);
-                        }
-                        break;
-
-                    case ToggleButtonStates.Click:
-                        if (ClickSprite != null)
-                        {
-                            ButtonIcon.SetSprite(ClickSprite, UseNativeSpriteSize);
-                        }
-                        break;
-
-                    case ToggleButtonStates.Unselect:
-                    case ToggleButtonStates.Unlock:
-                    case ToggleButtonStates.Enter:
-                    case ToggleButtonStates.Exit:
-                    default:
-                        if (NormalSprite != null)
-                        {
-                            ButtonIcon.SetSprite(NormalSprite, UseNativeSpriteSize);
-                        }
-                        break;
-                }
+                _stateEffect.Apply(ButtonIcon, state, this);
             }
         }
 

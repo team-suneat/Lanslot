@@ -28,7 +28,7 @@ namespace TeamSuneat.UserInterface
         {
             base.AutoGetComponents();
 
-            _actionButton ??= GetComponent<UIPointerEventButton>();
+            _actionButton ??= GetComponentInChildren<UIPointerEventButton>();
             _buttonText ??= GetComponentInChildren<UILocalizedText>();
         }
 
