@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4690496306606371982}
   - component: {fileID: 3248090434935072996}
   m_Layer: 0
-  m_Name: BattlefieldTile (62)
+  m_Name: BattlefieldTile (63)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 4690496306606371982}
 --- !u!1 &40073267148929442
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,7 +113,7 @@ GameObject:
   - component: {fileID: 4392715510135720686}
   - component: {fileID: 6402192896384762012}
   m_Layer: 0
-  m_Name: BattlefieldTile (58)
+  m_Name: BattlefieldTile (59)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -156,7 +157,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -200,6 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 4392715510135720686}
 --- !u!1 &112914877589546988
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +214,7 @@ GameObject:
   - component: {fileID: 1004059405030989667}
   - component: {fileID: 3015416253902203551}
   m_Layer: 0
-  m_Name: BattlefieldTile (55)
+  m_Name: BattlefieldTile (56)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -256,7 +258,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -300,6 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 1004059405030989667}
 --- !u!1 &113082127356561224
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,7 +315,7 @@ GameObject:
   - component: {fileID: 1418223808407928048}
   - component: {fileID: 2098580952780578380}
   m_Layer: 0
-  m_Name: BattlefieldTile (98)
+  m_Name: BattlefieldTile (99)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -356,7 +359,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -400,6 +403,108 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 1418223808407928048}
+--- !u!1 &234399918846482811
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7724381179351937876}
+  - component: {fileID: 6175133458918462117}
+  - component: {fileID: 2028143212881940418}
+  m_Layer: 0
+  m_Name: BattlefieldTile (103)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7724381179351937876
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234399918846482811}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6, y: 18, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3245307635685494028}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &6175133458918462117
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234399918846482811}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: f5410dc7e1bec094e93fbed45780dbb2, type: 3}
+  m_Color: {r: 0.98039216, g: 0.98039216, b: 0.972549, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 1
+  m_Size: {x: 2, y: 2}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &2028143212881940418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234399918846482811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 6175133458918462117}
 --- !u!1 &249449678711006355
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,7 +517,7 @@ GameObject:
   - component: {fileID: 6657492593357278750}
   - component: {fileID: 2462163785736934703}
   m_Layer: 0
-  m_Name: BattlefieldTile (50)
+  m_Name: BattlefieldTile (51)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -456,7 +561,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -500,6 +605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 6657492593357278750}
 --- !u!1 &413257586744485690
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,7 +634,7 @@ Transform:
   m_GameObject: {fileID: 413257586744485690}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -9.8, y: -1.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -631,6 +737,17 @@ Transform:
   - {fileID: 7960865588031199371}
   - {fileID: 3376831213005734624}
   - {fileID: 7325690737504258564}
+  - {fileID: 2718266925314437055}
+  - {fileID: 1833775250441823813}
+  - {fileID: 5888297899182051194}
+  - {fileID: 7724381179351937876}
+  - {fileID: 664238610349968132}
+  - {fileID: 6332907652992726870}
+  - {fileID: 1933049261806501358}
+  - {fileID: 8650524887030755162}
+  - {fileID: 18638533609593419}
+  - {fileID: 8625681848014886035}
+  - {fileID: 275039788615927250}
   m_Father: {fileID: 3155011809748006944}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &868881788499312493
@@ -751,6 +868,17 @@ MonoBehaviour:
   - {fileID: 7960865588031199371}
   - {fileID: 3376831213005734624}
   - {fileID: 7325690737504258564}
+  - {fileID: 2718266925314437055}
+  - {fileID: 1833775250441823813}
+  - {fileID: 5888297899182051194}
+  - {fileID: 7724381179351937876}
+  - {fileID: 664238610349968132}
+  - {fileID: 6332907652992726870}
+  - {fileID: 1933049261806501358}
+  - {fileID: 8650524887030755162}
+  - {fileID: 18638533609593419}
+  - {fileID: 8625681848014886035}
+  - {fileID: 275039788615927250}
 --- !u!114 &7932174971360893890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -764,7 +892,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectName: BattlefieldTile
-  IsIndexFromZero: 1
+  IsIndexFromZero: 0
 --- !u!114 &6006456466650189956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -877,6 +1005,17 @@ MonoBehaviour:
   - {fileID: 3106728350830164561}
   - {fileID: 7070375387946100181}
   - {fileID: 2098580952780578380}
+  - {fileID: 8373363687219905094}
+  - {fileID: 5280177641189502005}
+  - {fileID: 4135729299299762347}
+  - {fileID: 2028143212881940418}
+  - {fileID: 7078459937176912103}
+  - {fileID: 3162467753138734279}
+  - {fileID: 803293315371283012}
+  - {fileID: 6289045696907204144}
+  - {fileID: 3840924068292255159}
+  - {fileID: 5407457384443097833}
+  - {fileID: 1993361892384566566}
   <TileSize>k__BackingField: 2
 --- !u!1 &517774253131469057
 GameObject:
@@ -890,7 +1029,7 @@ GameObject:
   - component: {fileID: 8571773937466781629}
   - component: {fileID: 2703087253556824921}
   m_Layer: 0
-  m_Name: BattlefieldTile (76)
+  m_Name: BattlefieldTile (77)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -934,7 +1073,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -978,6 +1117,108 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 8571773937466781629}
+--- !u!1 &608147211974142917
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1833775250441823813}
+  - component: {fileID: 7788374269909307814}
+  - component: {fileID: 5280177641189502005}
+  m_Layer: 0
+  m_Name: BattlefieldTile (101)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1833775250441823813
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608147211974142917}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2, y: 18, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3245307635685494028}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &7788374269909307814
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608147211974142917}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: f5410dc7e1bec094e93fbed45780dbb2, type: 3}
+  m_Color: {r: 0.98039216, g: 0.98039216, b: 0.972549, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 1
+  m_Size: {x: 2, y: 2}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &5280177641189502005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608147211974142917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 7788374269909307814}
 --- !u!1 &741544125091090832
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,7 +1231,7 @@ GameObject:
   - component: {fileID: 7983628246028373583}
   - component: {fileID: 2168897268165164508}
   m_Layer: 0
-  m_Name: BattlefieldTile (30)
+  m_Name: BattlefieldTile (31)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1034,7 +1275,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1078,6 +1319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 7983628246028373583}
 --- !u!1 &839801109957467528
 GameObject:
   m_ObjectHideFlags: 0
@@ -1090,7 +1332,7 @@ GameObject:
   - component: {fileID: 3893622688611103840}
   - component: {fileID: 5591135366520777030}
   m_Layer: 0
-  m_Name: BattlefieldTile (67)
+  m_Name: BattlefieldTile (68)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1134,7 +1376,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1178,6 +1420,108 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 3893622688611103840}
+--- !u!1 &878558288015512986
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5888297899182051194}
+  - component: {fileID: 7132398273545197744}
+  - component: {fileID: 4135729299299762347}
+  m_Layer: 0
+  m_Name: BattlefieldTile (102)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5888297899182051194
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878558288015512986}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4, y: 18, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3245307635685494028}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &7132398273545197744
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878558288015512986}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: f5410dc7e1bec094e93fbed45780dbb2, type: 3}
+  m_Color: {r: 0.98039216, g: 0.98039216, b: 0.972549, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 1
+  m_Size: {x: 2, y: 2}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &4135729299299762347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878558288015512986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 7132398273545197744}
 --- !u!1 &1023487735152283022
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,7 +1534,7 @@ GameObject:
   - component: {fileID: 4755081385566818335}
   - component: {fileID: 1642962366896287350}
   m_Layer: 0
-  m_Name: BattlefieldTile (45)
+  m_Name: BattlefieldTile (46)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1234,7 +1578,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1278,6 +1622,108 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 4755081385566818335}
+--- !u!1 &1289374767679707469
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 275039788615927250}
+  - component: {fileID: 3810664076026837481}
+  - component: {fileID: 1993361892384566566}
+  m_Layer: 0
+  m_Name: BattlefieldTile (110)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &275039788615927250
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289374767679707469}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 20, y: 18, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3245307635685494028}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &3810664076026837481
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289374767679707469}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: f5410dc7e1bec094e93fbed45780dbb2, type: 3}
+  m_Color: {r: 0.98039216, g: 0.98039216, b: 0.972549, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 1
+  m_Size: {x: 2, y: 2}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &1993361892384566566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289374767679707469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 3810664076026837481}
 --- !u!1 &1409752945825388049
 GameObject:
   m_ObjectHideFlags: 0
@@ -1290,7 +1736,7 @@ GameObject:
   - component: {fileID: 7055678454497904409}
   - component: {fileID: 7000983478194256139}
   m_Layer: 0
-  m_Name: BattlefieldTile (42)
+  m_Name: BattlefieldTile (43)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1334,7 +1780,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1378,6 +1824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 7055678454497904409}
 --- !u!1 &1541383642034510165
 GameObject:
   m_ObjectHideFlags: 0
@@ -1390,7 +1837,7 @@ GameObject:
   - component: {fileID: 3484895611495132023}
   - component: {fileID: 2754080316846950835}
   m_Layer: 0
-  m_Name: BattlefieldTile (44)
+  m_Name: BattlefieldTile (45)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1434,7 +1881,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1478,6 +1925,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 3484895611495132023}
 --- !u!1 &1737109688039719083
 GameObject:
   m_ObjectHideFlags: 0
@@ -1490,7 +1938,7 @@ GameObject:
   - component: {fileID: 1155793822660773097}
   - component: {fileID: 5714653624000482462}
   m_Layer: 0
-  m_Name: BattlefieldTile (38)
+  m_Name: BattlefieldTile (39)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1534,7 +1982,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1578,6 +2026,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 1155793822660773097}
 --- !u!1 &1840733814758739944
 GameObject:
   m_ObjectHideFlags: 0
@@ -1590,7 +2039,7 @@ GameObject:
   - component: {fileID: 4736607100055902495}
   - component: {fileID: 8714677960332372591}
   m_Layer: 0
-  m_Name: BattlefieldTile (80)
+  m_Name: BattlefieldTile (81)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1634,7 +2083,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1678,6 +2127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 4736607100055902495}
 --- !u!1 &1844459188407776265
 GameObject:
   m_ObjectHideFlags: 0
@@ -1690,7 +2140,7 @@ GameObject:
   - component: {fileID: 159796027846666647}
   - component: {fileID: 6398260510568089466}
   m_Layer: 0
-  m_Name: BattlefieldTile (52)
+  m_Name: BattlefieldTile (53)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1734,7 +2184,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1778,6 +2228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 159796027846666647}
 --- !u!1 &1862730153958156516
 GameObject:
   m_ObjectHideFlags: 0
@@ -1790,7 +2241,7 @@ GameObject:
   - component: {fileID: 9034509106604266474}
   - component: {fileID: 5519853332584119496}
   m_Layer: 0
-  m_Name: BattlefieldTile (17)
+  m_Name: BattlefieldTile (18)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1834,7 +2285,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1878,6 +2329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 9034509106604266474}
 --- !u!1 &2005008248275197923
 GameObject:
   m_ObjectHideFlags: 0
@@ -1890,7 +2342,7 @@ GameObject:
   - component: {fileID: 7818467544551970938}
   - component: {fileID: 3701859921716770832}
   m_Layer: 0
-  m_Name: BattlefieldTile (24)
+  m_Name: BattlefieldTile (25)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1934,7 +2386,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1978,6 +2430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 7818467544551970938}
 --- !u!1 &2020209659796209133
 GameObject:
   m_ObjectHideFlags: 0
@@ -1990,7 +2443,7 @@ GameObject:
   - component: {fileID: 3902924574914753093}
   - component: {fileID: 5479265982572103759}
   m_Layer: 0
-  m_Name: BattlefieldTile (57)
+  m_Name: BattlefieldTile (58)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2034,7 +2487,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2078,6 +2531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 3902924574914753093}
 --- !u!1 &2374225131008413249
 GameObject:
   m_ObjectHideFlags: 0
@@ -2090,7 +2544,7 @@ GameObject:
   - component: {fileID: 3075542173014535069}
   - component: {fileID: 1579640052254940276}
   m_Layer: 0
-  m_Name: BattlefieldTile (25)
+  m_Name: BattlefieldTile (26)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2134,7 +2588,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2178,6 +2632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 3075542173014535069}
 --- !u!1 &2405667921133583405
 GameObject:
   m_ObjectHideFlags: 0
@@ -2190,7 +2645,7 @@ GameObject:
   - component: {fileID: 8076026086186929556}
   - component: {fileID: 1645802805184291986}
   m_Layer: 0
-  m_Name: BattlefieldTile (23)
+  m_Name: BattlefieldTile (24)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2234,7 +2689,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2278,6 +2733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 8076026086186929556}
 --- !u!1 &2473893904324270098
 GameObject:
   m_ObjectHideFlags: 0
@@ -2290,7 +2746,7 @@ GameObject:
   - component: {fileID: 1296228837359270759}
   - component: {fileID: 5001550813134871599}
   m_Layer: 0
-  m_Name: BattlefieldTile (81)
+  m_Name: BattlefieldTile (82)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2334,7 +2790,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2378,6 +2834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 1296228837359270759}
 --- !u!1 &2731885292480662403
 GameObject:
   m_ObjectHideFlags: 0
@@ -2390,7 +2847,7 @@ GameObject:
   - component: {fileID: 7258048723822078811}
   - component: {fileID: 9142666274721590643}
   m_Layer: 0
-  m_Name: BattlefieldTile (47)
+  m_Name: BattlefieldTile (48)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2434,7 +2891,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2478,6 +2935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 7258048723822078811}
 --- !u!1 &2821094003449169240
 GameObject:
   m_ObjectHideFlags: 0
@@ -2490,7 +2948,7 @@ GameObject:
   - component: {fileID: 8226344916295629381}
   - component: {fileID: 5759924010664992440}
   m_Layer: 0
-  m_Name: BattlefieldTile (6)
+  m_Name: BattlefieldTile (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2534,7 +2992,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2578,6 +3036,108 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 8226344916295629381}
+--- !u!1 &3194707657626861189
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8625681848014886035}
+  - component: {fileID: 2534815533014130234}
+  - component: {fileID: 5407457384443097833}
+  m_Layer: 0
+  m_Name: BattlefieldTile (109)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8625681848014886035
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3194707657626861189}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 18, y: 18, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3245307635685494028}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &2534815533014130234
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3194707657626861189}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: f5410dc7e1bec094e93fbed45780dbb2, type: 3}
+  m_Color: {r: 0.98039216, g: 0.98039216, b: 0.972549, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 1
+  m_Size: {x: 2, y: 2}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &5407457384443097833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3194707657626861189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 2534815533014130234}
 --- !u!1 &3211211042481428349
 GameObject:
   m_ObjectHideFlags: 0
@@ -2590,7 +3150,7 @@ GameObject:
   - component: {fileID: 6639014010988065239}
   - component: {fileID: 3686566045658895849}
   m_Layer: 0
-  m_Name: BattlefieldTile (61)
+  m_Name: BattlefieldTile (62)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2634,7 +3194,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2678,6 +3238,108 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 6639014010988065239}
+--- !u!1 &3364917122320225549
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 18638533609593419}
+  - component: {fileID: 8959291416306208809}
+  - component: {fileID: 3840924068292255159}
+  m_Layer: 0
+  m_Name: BattlefieldTile (108)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &18638533609593419
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3364917122320225549}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 16, y: 18, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3245307635685494028}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &8959291416306208809
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3364917122320225549}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: f5410dc7e1bec094e93fbed45780dbb2, type: 3}
+  m_Color: {r: 0.98039216, g: 0.98039216, b: 0.972549, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 1
+  m_Size: {x: 2, y: 2}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &3840924068292255159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3364917122320225549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 8959291416306208809}
 --- !u!1 &3731745042220677957
 GameObject:
   m_ObjectHideFlags: 0
@@ -2690,7 +3352,7 @@ GameObject:
   - component: {fileID: 5247354962711755397}
   - component: {fileID: 6025567581053468346}
   m_Layer: 0
-  m_Name: BattlefieldTile (56)
+  m_Name: BattlefieldTile (57)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2734,7 +3396,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2778,6 +3440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 5247354962711755397}
 --- !u!1 &3753657048321948349
 GameObject:
   m_ObjectHideFlags: 0
@@ -2790,7 +3453,7 @@ GameObject:
   - component: {fileID: 4154701046419650572}
   - component: {fileID: 3837635566217282841}
   m_Layer: 0
-  m_Name: BattlefieldTile (75)
+  m_Name: BattlefieldTile (76)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2834,7 +3497,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2878,6 +3541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 4154701046419650572}
 --- !u!1 &4012259312814398375
 GameObject:
   m_ObjectHideFlags: 0
@@ -2890,7 +3554,7 @@ GameObject:
   - component: {fileID: 8761825592459181635}
   - component: {fileID: 6803874272972680799}
   m_Layer: 0
-  m_Name: BattlefieldTile (94)
+  m_Name: BattlefieldTile (95)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2934,7 +3598,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2978,6 +3642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 8761825592459181635}
 --- !u!1 &4124975399797145514
 GameObject:
   m_ObjectHideFlags: 0
@@ -2990,7 +3655,7 @@ GameObject:
   - component: {fileID: 1943073939217288424}
   - component: {fileID: 8814018464666271086}
   m_Layer: 0
-  m_Name: BattlefieldTile (1)
+  m_Name: BattlefieldTile (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3034,7 +3699,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3078,6 +3743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 1943073939217288424}
 --- !u!1 &4164619269989238137
 GameObject:
   m_ObjectHideFlags: 0
@@ -3090,7 +3756,7 @@ GameObject:
   - component: {fileID: 8528829228564832257}
   - component: {fileID: 1444459466490563588}
   m_Layer: 0
-  m_Name: BattlefieldTile (18)
+  m_Name: BattlefieldTile (19)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3134,7 +3800,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3178,6 +3844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 8528829228564832257}
 --- !u!1 &4215361384142090039
 GameObject:
   m_ObjectHideFlags: 0
@@ -3190,7 +3857,7 @@ GameObject:
   - component: {fileID: 2890985090397740092}
   - component: {fileID: 9150280077282353935}
   m_Layer: 0
-  m_Name: BattlefieldTile (83)
+  m_Name: BattlefieldTile (84)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3234,7 +3901,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3278,6 +3945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 2890985090397740092}
 --- !u!1 &4271263402301765299
 GameObject:
   m_ObjectHideFlags: 0
@@ -3290,7 +3958,7 @@ GameObject:
   - component: {fileID: 1784411852371745701}
   - component: {fileID: 8119327669877507385}
   m_Layer: 0
-  m_Name: BattlefieldTile (33)
+  m_Name: BattlefieldTile (34)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3334,7 +4002,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3378,6 +4046,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 1784411852371745701}
 --- !u!1 &4271997028429283316
 GameObject:
   m_ObjectHideFlags: 0
@@ -3390,7 +4059,7 @@ GameObject:
   - component: {fileID: 5896415048156193135}
   - component: {fileID: 8908694688896078688}
   m_Layer: 0
-  m_Name: BattlefieldTile (12)
+  m_Name: BattlefieldTile (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3434,7 +4103,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3478,6 +4147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 5896415048156193135}
 --- !u!1 &4407973768172006014
 GameObject:
   m_ObjectHideFlags: 0
@@ -3490,7 +4160,7 @@ GameObject:
   - component: {fileID: 4102219237873184208}
   - component: {fileID: 3106728350830164561}
   m_Layer: 0
-  m_Name: BattlefieldTile (96)
+  m_Name: BattlefieldTile (97)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3534,7 +4204,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3578,6 +4248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 4102219237873184208}
 --- !u!1 &4426480133250500596
 GameObject:
   m_ObjectHideFlags: 0
@@ -3590,7 +4261,7 @@ GameObject:
   - component: {fileID: 181807850246084869}
   - component: {fileID: 7101452129061340980}
   m_Layer: 0
-  m_Name: BattlefieldTile (32)
+  m_Name: BattlefieldTile (33)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3634,7 +4305,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3678,6 +4349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 181807850246084869}
 --- !u!1 &4435531049797111169
 GameObject:
   m_ObjectHideFlags: 0
@@ -3690,7 +4362,7 @@ GameObject:
   - component: {fileID: 1437383391300220974}
   - component: {fileID: 4353892461115497799}
   m_Layer: 0
-  m_Name: BattlefieldTile (37)
+  m_Name: BattlefieldTile (38)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3734,7 +4406,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3778,6 +4450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 1437383391300220974}
 --- !u!1 &4457993363342594046
 GameObject:
   m_ObjectHideFlags: 0
@@ -3790,7 +4463,7 @@ GameObject:
   - component: {fileID: 162621895596222985}
   - component: {fileID: 7080920289162931590}
   m_Layer: 0
-  m_Name: BattlefieldTile (16)
+  m_Name: BattlefieldTile (17)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3834,7 +4507,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3878,6 +4551,108 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 162621895596222985}
+--- !u!1 &4503098923984424174
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6332907652992726870}
+  - component: {fileID: 4904020243954798206}
+  - component: {fileID: 3162467753138734279}
+  m_Layer: 0
+  m_Name: BattlefieldTile (105)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6332907652992726870
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4503098923984424174}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10, y: 18, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3245307635685494028}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &4904020243954798206
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4503098923984424174}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: f5410dc7e1bec094e93fbed45780dbb2, type: 3}
+  m_Color: {r: 0.98039216, g: 0.98039216, b: 0.972549, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 1
+  m_Size: {x: 2, y: 2}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &3162467753138734279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4503098923984424174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 4904020243954798206}
 --- !u!1 &4673849317576046579
 GameObject:
   m_ObjectHideFlags: 0
@@ -3890,7 +4665,7 @@ GameObject:
   - component: {fileID: 850816075204605907}
   - component: {fileID: 8447485094103292757}
   m_Layer: 0
-  m_Name: BattlefieldTile (85)
+  m_Name: BattlefieldTile (86)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3934,7 +4709,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3978,6 +4753,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 850816075204605907}
 --- !u!1 &4869558390557929530
 GameObject:
   m_ObjectHideFlags: 0
@@ -3990,7 +4766,7 @@ GameObject:
   - component: {fileID: 817276853002540551}
   - component: {fileID: 7911669031300796720}
   m_Layer: 0
-  m_Name: BattlefieldTile (8)
+  m_Name: BattlefieldTile (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4034,7 +4810,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4078,6 +4854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 817276853002540551}
 --- !u!1 &4919754184574260581
 GameObject:
   m_ObjectHideFlags: 0
@@ -4090,7 +4867,7 @@ GameObject:
   - component: {fileID: 5684778913499083145}
   - component: {fileID: 5234625185777010972}
   m_Layer: 0
-  m_Name: BattlefieldTile (5)
+  m_Name: BattlefieldTile (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4134,7 +4911,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4178,6 +4955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 5684778913499083145}
 --- !u!1 &5021779003705266874
 GameObject:
   m_ObjectHideFlags: 0
@@ -4190,7 +4968,7 @@ GameObject:
   - component: {fileID: 1603267231116753074}
   - component: {fileID: 6637415728316649753}
   m_Layer: 0
-  m_Name: BattlefieldTile (19)
+  m_Name: BattlefieldTile (20)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4234,7 +5012,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4278,6 +5056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 1603267231116753074}
 --- !u!1 &5037565980440105173
 GameObject:
   m_ObjectHideFlags: 0
@@ -4290,7 +5069,7 @@ GameObject:
   - component: {fileID: 7410963324873346263}
   - component: {fileID: 8233226971294134192}
   m_Layer: 0
-  m_Name: BattlefieldTile (31)
+  m_Name: BattlefieldTile (32)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4334,7 +5113,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4378,6 +5157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 7410963324873346263}
 --- !u!1 &5042033436668240595
 GameObject:
   m_ObjectHideFlags: 0
@@ -4390,7 +5170,7 @@ GameObject:
   - component: {fileID: 1894473577738791438}
   - component: {fileID: 3524948997807843322}
   m_Layer: 0
-  m_Name: BattlefieldTile (26)
+  m_Name: BattlefieldTile (27)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4434,7 +5214,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4478,6 +5258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 1894473577738791438}
 --- !u!1 &5118827729222724613
 GameObject:
   m_ObjectHideFlags: 0
@@ -4490,7 +5271,7 @@ GameObject:
   - component: {fileID: 520787542044228644}
   - component: {fileID: 2933713941364515730}
   m_Layer: 0
-  m_Name: BattlefieldTile (43)
+  m_Name: BattlefieldTile (44)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4534,7 +5315,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4578,6 +5359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 520787542044228644}
 --- !u!1 &5149967675248989765
 GameObject:
   m_ObjectHideFlags: 0
@@ -4590,7 +5372,7 @@ GameObject:
   - component: {fileID: 2075566858789670701}
   - component: {fileID: 2697400242540915910}
   m_Layer: 0
-  m_Name: BattlefieldTile (77)
+  m_Name: BattlefieldTile (78)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4634,7 +5416,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4678,6 +5460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 2075566858789670701}
 --- !u!1 &5167754897385231679
 GameObject:
   m_ObjectHideFlags: 0
@@ -4690,7 +5473,7 @@ GameObject:
   - component: {fileID: 4871419407763103749}
   - component: {fileID: 5196893994148189993}
   m_Layer: 0
-  m_Name: BattlefieldTile (36)
+  m_Name: BattlefieldTile (37)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4734,7 +5517,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4778,6 +5561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 4871419407763103749}
 --- !u!1 &5255063641812059424
 GameObject:
   m_ObjectHideFlags: 0
@@ -4790,7 +5574,7 @@ GameObject:
   - component: {fileID: 2106019355342159280}
   - component: {fileID: 7427834235084706514}
   m_Layer: 0
-  m_Name: BattlefieldTile (46)
+  m_Name: BattlefieldTile (47)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4834,7 +5618,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4878,6 +5662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 2106019355342159280}
 --- !u!1 &5294652110161684825
 GameObject:
   m_ObjectHideFlags: 0
@@ -4890,7 +5675,7 @@ GameObject:
   - component: {fileID: 4655934692815824324}
   - component: {fileID: 8695283509573651687}
   m_Layer: 0
-  m_Name: BattlefieldTile (86)
+  m_Name: BattlefieldTile (87)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4934,7 +5719,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4978,6 +5763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 4655934692815824324}
 --- !u!1 &5304071819258933985
 GameObject:
   m_ObjectHideFlags: 0
@@ -4990,7 +5776,7 @@ GameObject:
   - component: {fileID: 1879414707422182817}
   - component: {fileID: 4785827470216317220}
   m_Layer: 0
-  m_Name: BattlefieldTile (39)
+  m_Name: BattlefieldTile (40)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5034,7 +5820,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5078,6 +5864,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 1879414707422182817}
 --- !u!1 &5334633747588232055
 GameObject:
   m_ObjectHideFlags: 0
@@ -5090,7 +5877,7 @@ GameObject:
   - component: {fileID: 4174305203519309110}
   - component: {fileID: 1479892939239768445}
   m_Layer: 0
-  m_Name: BattlefieldTile (70)
+  m_Name: BattlefieldTile (71)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5134,7 +5921,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5178,6 +5965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 4174305203519309110}
 --- !u!1 &5381356568642846078
 GameObject:
   m_ObjectHideFlags: 0
@@ -5190,7 +5978,7 @@ GameObject:
   - component: {fileID: 8714072627622893708}
   - component: {fileID: 7793968584798804782}
   m_Layer: 0
-  m_Name: BattlefieldTile (11)
+  m_Name: BattlefieldTile (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5234,7 +6022,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5278,6 +6066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 8714072627622893708}
 --- !u!1 &5403571708612464107
 GameObject:
   m_ObjectHideFlags: 0
@@ -5290,7 +6079,7 @@ GameObject:
   - component: {fileID: 2191180872874850391}
   - component: {fileID: 8595470356316196850}
   m_Layer: 0
-  m_Name: BattlefieldTile (69)
+  m_Name: BattlefieldTile (70)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5334,7 +6123,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5378,6 +6167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 2191180872874850391}
 --- !u!1 &5451784807204540761
 GameObject:
   m_ObjectHideFlags: 0
@@ -5390,7 +6180,7 @@ GameObject:
   - component: {fileID: 8010673292114850511}
   - component: {fileID: 2962535930251939480}
   m_Layer: 0
-  m_Name: BattlefieldTile (90)
+  m_Name: BattlefieldTile (91)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5434,7 +6224,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5478,6 +6268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 8010673292114850511}
 --- !u!1 &5588890224071501363
 GameObject:
   m_ObjectHideFlags: 0
@@ -5490,7 +6281,7 @@ GameObject:
   - component: {fileID: 8117342599270708943}
   - component: {fileID: 4056964211696342777}
   m_Layer: 0
-  m_Name: BattlefieldTile (21)
+  m_Name: BattlefieldTile (22)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5534,7 +6325,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5578,6 +6369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 8117342599270708943}
 --- !u!1 &5613125615943730460
 GameObject:
   m_ObjectHideFlags: 0
@@ -5590,7 +6382,7 @@ GameObject:
   - component: {fileID: 4967063183474384898}
   - component: {fileID: 2377324028715510605}
   m_Layer: 0
-  m_Name: BattlefieldTile (73)
+  m_Name: BattlefieldTile (74)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5634,7 +6426,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5678,6 +6470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 4967063183474384898}
 --- !u!1 &5683926585149914756
 GameObject:
   m_ObjectHideFlags: 0
@@ -5690,7 +6483,7 @@ GameObject:
   - component: {fileID: 5227980127465727473}
   - component: {fileID: 4978452026721729148}
   m_Layer: 0
-  m_Name: BattlefieldTile (91)
+  m_Name: BattlefieldTile (92)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5734,7 +6527,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5778,6 +6571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 5227980127465727473}
 --- !u!1 &5736800426973761008
 GameObject:
   m_ObjectHideFlags: 0
@@ -5790,7 +6584,7 @@ GameObject:
   - component: {fileID: 449689891183261864}
   - component: {fileID: 7310742986266748670}
   m_Layer: 0
-  m_Name: BattlefieldTile (27)
+  m_Name: BattlefieldTile (28)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5834,7 +6628,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5878,6 +6672,108 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 449689891183261864}
+--- !u!1 &5758725928972508869
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1933049261806501358}
+  - component: {fileID: 4640752044479637338}
+  - component: {fileID: 803293315371283012}
+  m_Layer: 0
+  m_Name: BattlefieldTile (106)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1933049261806501358
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5758725928972508869}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12, y: 18, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3245307635685494028}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &4640752044479637338
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5758725928972508869}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: f5410dc7e1bec094e93fbed45780dbb2, type: 3}
+  m_Color: {r: 0.98039216, g: 0.98039216, b: 0.972549, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 1
+  m_Size: {x: 2, y: 2}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &803293315371283012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5758725928972508869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 4640752044479637338}
 --- !u!1 &5762098788720382761
 GameObject:
   m_ObjectHideFlags: 0
@@ -5890,7 +6786,7 @@ GameObject:
   - component: {fileID: 5769913691226403486}
   - component: {fileID: 5935291133378164}
   m_Layer: 0
-  m_Name: BattlefieldTile (53)
+  m_Name: BattlefieldTile (54)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5934,7 +6830,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5978,6 +6874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 5769913691226403486}
 --- !u!1 &5803523230175370020
 GameObject:
   m_ObjectHideFlags: 0
@@ -5990,7 +6887,7 @@ GameObject:
   - component: {fileID: 3735378788865510354}
   - component: {fileID: 5091194659011658091}
   m_Layer: 0
-  m_Name: BattlefieldTile (59)
+  m_Name: BattlefieldTile (60)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6034,7 +6931,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6078,6 +6975,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 3735378788865510354}
 --- !u!1 &5884421938224931196
 GameObject:
   m_ObjectHideFlags: 0
@@ -6090,7 +6988,7 @@ GameObject:
   - component: {fileID: 5365665377327089224}
   - component: {fileID: 6906182154387447567}
   m_Layer: 0
-  m_Name: BattlefieldTile (20)
+  m_Name: BattlefieldTile (21)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6134,7 +7032,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6178,6 +7076,108 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 5365665377327089224}
+--- !u!1 &6026010291638425591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8650524887030755162}
+  - component: {fileID: 3625679657277399714}
+  - component: {fileID: 6289045696907204144}
+  m_Layer: 0
+  m_Name: BattlefieldTile (107)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8650524887030755162
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6026010291638425591}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14, y: 18, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3245307635685494028}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &3625679657277399714
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6026010291638425591}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: f5410dc7e1bec094e93fbed45780dbb2, type: 3}
+  m_Color: {r: 0.98039216, g: 0.98039216, b: 0.972549, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 1
+  m_Size: {x: 2, y: 2}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &6289045696907204144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6026010291638425591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 3625679657277399714}
 --- !u!1 &6127149135284952217
 GameObject:
   m_ObjectHideFlags: 0
@@ -6190,7 +7190,7 @@ GameObject:
   - component: {fileID: 7953279701292110854}
   - component: {fileID: 6640083771137684608}
   m_Layer: 0
-  m_Name: BattlefieldTile (68)
+  m_Name: BattlefieldTile (69)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6234,7 +7234,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6278,6 +7278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 7953279701292110854}
 --- !u!1 &6299264807495853878
 GameObject:
   m_ObjectHideFlags: 0
@@ -6290,7 +7291,7 @@ GameObject:
   - component: {fileID: 7702244220795966834}
   - component: {fileID: 1204137289533928959}
   m_Layer: 0
-  m_Name: BattlefieldTile (14)
+  m_Name: BattlefieldTile (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6334,7 +7335,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6378,6 +7379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 7702244220795966834}
 --- !u!1 &6309379540355848467
 GameObject:
   m_ObjectHideFlags: 0
@@ -6390,7 +7392,7 @@ GameObject:
   - component: {fileID: 4823047524663803620}
   - component: {fileID: 2805753981503904893}
   m_Layer: 0
-  m_Name: BattlefieldTile (35)
+  m_Name: BattlefieldTile (36)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6434,7 +7436,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6478,6 +7480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 4823047524663803620}
 --- !u!1 &6387098329143623850
 GameObject:
   m_ObjectHideFlags: 0
@@ -6490,7 +7493,7 @@ GameObject:
   - component: {fileID: 3713272279860099645}
   - component: {fileID: 998237729254306990}
   m_Layer: 0
-  m_Name: BattlefieldTile (9)
+  m_Name: BattlefieldTile (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6534,7 +7537,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6578,6 +7581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 3713272279860099645}
 --- !u!1 &6477520058585429671
 GameObject:
   m_ObjectHideFlags: 0
@@ -6590,7 +7594,7 @@ GameObject:
   - component: {fileID: 3771125406410466352}
   - component: {fileID: 2843648463453762398}
   m_Layer: 0
-  m_Name: BattlefieldTile (66)
+  m_Name: BattlefieldTile (67)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6634,7 +7638,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6678,6 +7682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 3771125406410466352}
 --- !u!1 &6530854299559767868
 GameObject:
   m_ObjectHideFlags: 0
@@ -6690,7 +7695,7 @@ GameObject:
   - component: {fileID: 3469896592861543398}
   - component: {fileID: 3822389768060927389}
   m_Layer: 0
-  m_Name: BattlefieldTile (78)
+  m_Name: BattlefieldTile (79)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6734,7 +7739,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6778,6 +7783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 3469896592861543398}
 --- !u!1 &6660358935566349721
 GameObject:
   m_ObjectHideFlags: 0
@@ -6790,7 +7796,7 @@ GameObject:
   - component: {fileID: 8908452586485102525}
   - component: {fileID: 7070375387946100181}
   m_Layer: 0
-  m_Name: BattlefieldTile (97)
+  m_Name: BattlefieldTile (98)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6834,7 +7840,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6878,6 +7884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 8908452586485102525}
 --- !u!1 &6717262654172047111
 GameObject:
   m_ObjectHideFlags: 0
@@ -6890,7 +7897,7 @@ GameObject:
   - component: {fileID: 3865017325082808683}
   - component: {fileID: 7780135303314893280}
   m_Layer: 0
-  m_Name: BattlefieldTile (72)
+  m_Name: BattlefieldTile (73)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6934,7 +7941,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6978,6 +7985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 3865017325082808683}
 --- !u!1 &6753844942616619077
 GameObject:
   m_ObjectHideFlags: 0
@@ -6990,7 +7998,7 @@ GameObject:
   - component: {fileID: 1517520335317891856}
   - component: {fileID: 9163225665726443204}
   m_Layer: 0
-  m_Name: BattlefieldTile (71)
+  m_Name: BattlefieldTile (72)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7034,7 +8042,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7078,6 +8086,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 1517520335317891856}
 --- !u!1 &6813057955170668069
 GameObject:
   m_ObjectHideFlags: 0
@@ -7090,7 +8099,7 @@ GameObject:
   - component: {fileID: 513497694430023753}
   - component: {fileID: 9066632000239875954}
   m_Layer: 0
-  m_Name: BattlefieldTile (48)
+  m_Name: BattlefieldTile (49)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7134,7 +8143,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7178,6 +8187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 513497694430023753}
 --- !u!1 &6853642424538151725
 GameObject:
   m_ObjectHideFlags: 0
@@ -7190,7 +8200,7 @@ GameObject:
   - component: {fileID: 8261243297178711464}
   - component: {fileID: 431393075261881774}
   m_Layer: 0
-  m_Name: BattlefieldTile (15)
+  m_Name: BattlefieldTile (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7234,7 +8244,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7278,6 +8288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 8261243297178711464}
 --- !u!1 &6864381422568842016
 GameObject:
   m_ObjectHideFlags: 0
@@ -7290,7 +8301,7 @@ GameObject:
   - component: {fileID: 4706737057771488195}
   - component: {fileID: 912305988663704098}
   m_Layer: 0
-  m_Name: BattlefieldTile (84)
+  m_Name: BattlefieldTile (85)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7334,7 +8345,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7378,6 +8389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 4706737057771488195}
 --- !u!1 &6978411654010081271
 GameObject:
   m_ObjectHideFlags: 0
@@ -7390,7 +8402,7 @@ GameObject:
   - component: {fileID: 4662574927324720359}
   - component: {fileID: 1817567180713985026}
   m_Layer: 0
-  m_Name: BattlefieldTile (87)
+  m_Name: BattlefieldTile (88)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7434,7 +8446,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7478,6 +8490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 4662574927324720359}
 --- !u!1 &7043593290056266476
 GameObject:
   m_ObjectHideFlags: 0
@@ -7490,7 +8503,7 @@ GameObject:
   - component: {fileID: 7579088246311906497}
   - component: {fileID: 3126265500024191541}
   m_Layer: 0
-  m_Name: BattlefieldTile (54)
+  m_Name: BattlefieldTile (55)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7534,7 +8547,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7578,6 +8591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 7579088246311906497}
 --- !u!1 &7071616062788918297
 GameObject:
   m_ObjectHideFlags: 0
@@ -7590,7 +8604,7 @@ GameObject:
   - component: {fileID: 8641330450003049650}
   - component: {fileID: 1326233354115782043}
   m_Layer: 0
-  m_Name: BattlefieldTile (63)
+  m_Name: BattlefieldTile (64)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7634,7 +8648,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7678,6 +8692,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 8641330450003049650}
 --- !u!1 &7092910959294946249
 GameObject:
   m_ObjectHideFlags: 0
@@ -7690,7 +8705,7 @@ GameObject:
   - component: {fileID: 2629265126224289702}
   - component: {fileID: 4877386950483146685}
   m_Layer: 0
-  m_Name: BattlefieldTile (89)
+  m_Name: BattlefieldTile (90)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7734,7 +8749,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7778,6 +8793,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 2629265126224289702}
 --- !u!1 &7106471730470472117
 GameObject:
   m_ObjectHideFlags: 0
@@ -7790,7 +8806,7 @@ GameObject:
   - component: {fileID: 5993882118656112182}
   - component: {fileID: 8833432488151850139}
   m_Layer: 0
-  m_Name: BattlefieldTile (4)
+  m_Name: BattlefieldTile (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7834,7 +8850,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7878,6 +8894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 5993882118656112182}
 --- !u!1 &7196927713857453453
 GameObject:
   m_ObjectHideFlags: 0
@@ -7890,7 +8907,7 @@ GameObject:
   - component: {fileID: 2023668652774103728}
   - component: {fileID: 3938956637484654612}
   m_Layer: 0
-  m_Name: BattlefieldTile (29)
+  m_Name: BattlefieldTile (30)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7934,7 +8951,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7978,6 +8995,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 2023668652774103728}
 --- !u!1 &7395719057975059017
 GameObject:
   m_ObjectHideFlags: 0
@@ -7990,7 +9008,7 @@ GameObject:
   - component: {fileID: 2251901246173251339}
   - component: {fileID: 3763143361922974972}
   m_Layer: 0
-  m_Name: BattlefieldTile (49)
+  m_Name: BattlefieldTile (50)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8034,7 +9052,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8078,6 +9096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 2251901246173251339}
 --- !u!1 &7474725475343322345
 GameObject:
   m_ObjectHideFlags: 0
@@ -8090,7 +9109,7 @@ GameObject:
   - component: {fileID: 9101615818369136121}
   - component: {fileID: 4886035366061988879}
   m_Layer: 0
-  m_Name: BattlefieldTile (93)
+  m_Name: BattlefieldTile (94)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8134,7 +9153,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8178,6 +9197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 9101615818369136121}
 --- !u!1 &7658512760772363079
 GameObject:
   m_ObjectHideFlags: 0
@@ -8190,7 +9210,7 @@ GameObject:
   - component: {fileID: 3585199263483476728}
   - component: {fileID: 393467825552159372}
   m_Layer: 0
-  m_Name: BattlefieldTile (60)
+  m_Name: BattlefieldTile (61)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8234,7 +9254,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8278,6 +9298,108 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 3585199263483476728}
+--- !u!1 &7737116500110722626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 664238610349968132}
+  - component: {fileID: 2691871649702115903}
+  - component: {fileID: 7078459937176912103}
+  m_Layer: 0
+  m_Name: BattlefieldTile (104)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &664238610349968132
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7737116500110722626}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8, y: 18, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3245307635685494028}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &2691871649702115903
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7737116500110722626}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: f5410dc7e1bec094e93fbed45780dbb2, type: 3}
+  m_Color: {r: 0.98039216, g: 0.98039216, b: 0.972549, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 1
+  m_Size: {x: 2, y: 2}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &7078459937176912103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7737116500110722626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 2691871649702115903}
 --- !u!1 &7771192415393542090
 GameObject:
   m_ObjectHideFlags: 0
@@ -8290,7 +9412,7 @@ GameObject:
   - component: {fileID: 8018148005500833468}
   - component: {fileID: 2980267813979902134}
   m_Layer: 0
-  m_Name: BattlefieldTile (95)
+  m_Name: BattlefieldTile (96)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8334,7 +9456,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8378,6 +9500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 8018148005500833468}
 --- !u!1 &7825737799053418911
 GameObject:
   m_ObjectHideFlags: 0
@@ -8390,7 +9513,7 @@ GameObject:
   - component: {fileID: 5727122330373845699}
   - component: {fileID: 942602153003053590}
   m_Layer: 0
-  m_Name: BattlefieldTile (92)
+  m_Name: BattlefieldTile (93)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8434,7 +9557,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8478,6 +9601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 5727122330373845699}
 --- !u!1 &7891871630798648571
 GameObject:
   m_ObjectHideFlags: 0
@@ -8490,7 +9614,7 @@ GameObject:
   - component: {fileID: 4829891914823210540}
   - component: {fileID: 5080588430962640582}
   m_Layer: 0
-  m_Name: BattlefieldTile (2)
+  m_Name: BattlefieldTile (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8534,7 +9658,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8578,6 +9702,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 4829891914823210540}
 --- !u!1 &7945128030044286407
 GameObject:
   m_ObjectHideFlags: 0
@@ -8590,7 +9715,7 @@ GameObject:
   - component: {fileID: 5646682973128390630}
   - component: {fileID: 1007084457449336234}
   m_Layer: 0
-  m_Name: BattlefieldTile (34)
+  m_Name: BattlefieldTile (35)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8634,7 +9759,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8678,6 +9803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 5646682973128390630}
 --- !u!1 &7959998557981091753
 GameObject:
   m_ObjectHideFlags: 0
@@ -8690,7 +9816,7 @@ GameObject:
   - component: {fileID: 3945990852982749272}
   - component: {fileID: 7041779912974413501}
   m_Layer: 0
-  m_Name: BattlefieldTile (82)
+  m_Name: BattlefieldTile (83)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8734,7 +9860,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8778,6 +9904,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 3945990852982749272}
 --- !u!1 &8016452205331730104
 GameObject:
   m_ObjectHideFlags: 0
@@ -8790,7 +9917,7 @@ GameObject:
   - component: {fileID: 3821730071623389015}
   - component: {fileID: 6312445326978123611}
   m_Layer: 0
-  m_Name: BattlefieldTile (64)
+  m_Name: BattlefieldTile (65)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8834,7 +9961,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8878,6 +10005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 3821730071623389015}
 --- !u!1 &8114688670016999357
 GameObject:
   m_ObjectHideFlags: 0
@@ -8939,7 +10067,7 @@ GameObject:
   - component: {fileID: 8167638677768069764}
   - component: {fileID: 74585680385587994}
   m_Layer: 0
-  m_Name: BattlefieldTile (7)
+  m_Name: BattlefieldTile (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8983,7 +10111,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9027,6 +10155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 8167638677768069764}
 --- !u!1 &8256406276490077948
 GameObject:
   m_ObjectHideFlags: 0
@@ -9039,7 +10168,7 @@ GameObject:
   - component: {fileID: 161414738202590116}
   - component: {fileID: 2789888743798057436}
   m_Layer: 0
-  m_Name: BattlefieldTile (79)
+  m_Name: BattlefieldTile (80)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9083,7 +10212,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9127,6 +10256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 161414738202590116}
 --- !u!1 &8394796376664769986
 GameObject:
   m_ObjectHideFlags: 0
@@ -9139,7 +10269,7 @@ GameObject:
   - component: {fileID: 4586318102246726432}
   - component: {fileID: 6258950543722933739}
   m_Layer: 0
-  m_Name: BattlefieldTile (22)
+  m_Name: BattlefieldTile (23)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9183,7 +10313,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9227,6 +10357,108 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 4586318102246726432}
+--- !u!1 &8576122855378215923
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2718266925314437055}
+  - component: {fileID: 813603491463010417}
+  - component: {fileID: 8373363687219905094}
+  m_Layer: 0
+  m_Name: BattlefieldTile (100)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2718266925314437055
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8576122855378215923}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 18, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3245307635685494028}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &813603491463010417
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8576122855378215923}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: f5410dc7e1bec094e93fbed45780dbb2, type: 3}
+  m_Color: {r: 0.98039216, g: 0.98039216, b: 0.972549, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 1
+  m_Size: {x: 2, y: 2}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &8373363687219905094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8576122855378215923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 813603491463010417}
 --- !u!1 &8599122434209382482
 GameObject:
   m_ObjectHideFlags: 0
@@ -9239,7 +10471,7 @@ GameObject:
   - component: {fileID: 6900072669081032242}
   - component: {fileID: 3698670704093471895}
   m_Layer: 0
-  m_Name: BattlefieldTile (88)
+  m_Name: BattlefieldTile (89)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9283,7 +10515,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9327,6 +10559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 6900072669081032242}
 --- !u!1 &8621452797974682146
 GameObject:
   m_ObjectHideFlags: 0
@@ -9339,7 +10572,7 @@ GameObject:
   - component: {fileID: 5266732855825659818}
   - component: {fileID: 8394335614916167724}
   m_Layer: 0
-  m_Name: BattlefieldTile (74)
+  m_Name: BattlefieldTile (75)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9383,7 +10616,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9427,6 +10660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 5266732855825659818}
 --- !u!1 &8640708846604723832
 GameObject:
   m_ObjectHideFlags: 0
@@ -9439,7 +10673,7 @@ GameObject:
   - component: {fileID: 4716867060499284777}
   - component: {fileID: 5006927208356971390}
   m_Layer: 0
-  m_Name: BattlefieldTile (10)
+  m_Name: BattlefieldTile (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9483,7 +10717,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9527,6 +10761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 4716867060499284777}
 --- !u!1 &8640737043746642329
 GameObject:
   m_ObjectHideFlags: 0
@@ -9539,7 +10774,7 @@ GameObject:
   - component: {fileID: 1918787636993669868}
   - component: {fileID: 8952151223940980048}
   m_Layer: 0
-  m_Name: BattlefieldTile (41)
+  m_Name: BattlefieldTile (42)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9583,7 +10818,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9627,6 +10862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 1918787636993669868}
 --- !u!1 &8870140635178652348
 GameObject:
   m_ObjectHideFlags: 0
@@ -9639,7 +10875,7 @@ GameObject:
   - component: {fileID: 5281249453474250434}
   - component: {fileID: 5356171368643557245}
   m_Layer: 0
-  m_Name: BattlefieldTile (13)
+  m_Name: BattlefieldTile (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9683,7 +10919,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9727,6 +10963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 5281249453474250434}
 --- !u!1 &8931068845676928789
 GameObject:
   m_ObjectHideFlags: 0
@@ -9739,7 +10976,7 @@ GameObject:
   - component: {fileID: 8287160724897073287}
   - component: {fileID: 7957838350103037330}
   m_Layer: 0
-  m_Name: BattlefieldTile (65)
+  m_Name: BattlefieldTile (66)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9783,7 +11020,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9827,6 +11064,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 8287160724897073287}
 --- !u!1 &8936898167576490396
 GameObject:
   m_ObjectHideFlags: 0
@@ -9839,7 +11077,7 @@ GameObject:
   - component: {fileID: 5975898989203915560}
   - component: {fileID: 440483772687769491}
   m_Layer: 0
-  m_Name: BattlefieldTile (40)
+  m_Name: BattlefieldTile (41)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9883,7 +11121,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9927,6 +11165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 5975898989203915560}
 --- !u!1 &9095129337673424422
 GameObject:
   m_ObjectHideFlags: 0
@@ -9939,7 +11178,7 @@ GameObject:
   - component: {fileID: 8708675876297309314}
   - component: {fileID: 627404846549229301}
   m_Layer: 0
-  m_Name: BattlefieldTile (28)
+  m_Name: BattlefieldTile (29)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9983,7 +11222,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10027,6 +11266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 8708675876297309314}
 --- !u!1 &9108146128267454793
 GameObject:
   m_ObjectHideFlags: 0
@@ -10039,7 +11279,7 @@ GameObject:
   - component: {fileID: 5422665534034453714}
   - component: {fileID: 1577883055219494557}
   m_Layer: 0
-  m_Name: BattlefieldTile (51)
+  m_Name: BattlefieldTile (52)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10083,7 +11323,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10127,6 +11367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 5422665534034453714}
 --- !u!1 &9128767266698222250
 GameObject:
   m_ObjectHideFlags: 0
@@ -10139,7 +11380,7 @@ GameObject:
   - component: {fileID: 337628476147688186}
   - component: {fileID: 1628255447067955663}
   m_Layer: 0
-  m_Name: BattlefieldTile (0)
+  m_Name: BattlefieldTile (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10183,7 +11424,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10227,6 +11468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 337628476147688186}
 --- !u!1 &9172135429542715808
 GameObject:
   m_ObjectHideFlags: 0
@@ -10239,7 +11481,7 @@ GameObject:
   - component: {fileID: 2843205135603571566}
   - component: {fileID: 4433005289727720134}
   m_Layer: 0
-  m_Name: BattlefieldTile (3)
+  m_Name: BattlefieldTile (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10283,7 +11525,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e39b8ba5709020049a70ad2a2bcefdef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10327,3 +11569,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e05ecc390be45be320266d9dbd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 2843205135603571566}

@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System.Collections;
 using System.Collections.Generic;
 using TeamSuneat.Data.Game;
 using UnityEngine;
@@ -18,6 +19,7 @@ namespace TeamSuneat.UserInterface
         [FoldoutGroup("#Settings")][SerializeField] private int _slotCount = 6;
         [FoldoutGroup("#Settings")][SerializeField] private float _spinDuration = 2f;
         [FoldoutGroup("#Settings")][SerializeField] private float _stopDelay = 0.5f;
+        [FoldoutGroup("#Settings")][SerializeField] private float _effectApplyDelay = 0.3f;
         private Sprite[] _availableSprites;
         private ItemNames[] _availableItemNames;
 
@@ -27,6 +29,7 @@ namespace TeamSuneat.UserInterface
         private int _stoppedSlotCount = 0;
         private int _currentStopIndex = 0;
         private Sprite[] _currentResults;
+        private Coroutine _applyEffectsCoroutine;
 
         public SlotMachineState CurrentState { get; private set; } = SlotMachineState.None;
         public bool CanSpin => CurrentState == SlotMachineState.None;
@@ -55,6 +58,14 @@ namespace TeamSuneat.UserInterface
             SetupEvents();
 
             TurnManager.Instance?.OnPlayerTurnStart.AddListener(StartSpin);
+        }
+
+        protected override void OnRelease()
+        {
+            base.OnRelease();
+
+            // 코루틴 정리
+            StopApplyEffectsCoroutine();
         }
 
         private void Initialize()
@@ -99,6 +110,9 @@ namespace TeamSuneat.UserInterface
                 Log.Warning(LogTags.UI_SlotMachine, "슬롯머신을 시작할 수 없습니다. 현재 상태: {0}", CurrentState);
                 return;
             }
+
+            // 이전 코루틴이 실행 중이면 중단
+            StopApplyEffectsCoroutine();
 
             SetState(SlotMachineState.Spinning);
             _stoppedSlotCount = 0;
@@ -170,6 +184,46 @@ namespace TeamSuneat.UserInterface
                 OnSlotMachineCompleted?.Invoke(_currentResults);
                 SetState(SlotMachineState.Result);
                 UpdateUI();
+
+                // 모든 슬롯이 멈춘 후 순차적으로 효과 적용
+                _applyEffectsCoroutine = StartCoroutine(ApplyEffectsSequentially());
+            }
+        }
+
+        private IEnumerator ApplyEffectsSequentially()
+        {
+            Log.Info(LogTags.UI_SlotMachine, "슬롯 효과 순차 적용 시작");
+
+            for (int i = 0; i < _items.Length; i++)
+            {
+                // 코루틴이 중단되었는지 확인
+                if (_items == null || _items[i] == null)
+                {
+                    Log.Warning(LogTags.UI_SlotMachine, "슬롯 아이템이 null입니다. 효과 적용 중단.");
+                    break;
+                }
+
+                _items[i].ApplyItemEffect();
+                Log.Info(LogTags.UI_SlotMachine, "슬롯 {0}/{1} 효과 적용 완료", i + 1, _items.Length);
+
+                // 마지막 슬롯이 아니면 딜레이
+                if (i < _items.Length - 1)
+                {
+                    yield return new WaitForSeconds(_effectApplyDelay);
+                }
+            }
+
+            Log.Info(LogTags.UI_SlotMachine, "모든 슬롯 효과 적용 완료");
+            _applyEffectsCoroutine = null;
+        }
+
+        private void StopApplyEffectsCoroutine()
+        {
+            if (_applyEffectsCoroutine != null)
+            {
+                StopCoroutine(_applyEffectsCoroutine);
+                _applyEffectsCoroutine = null;
+                Log.Info(LogTags.UI_SlotMachine, "효과 적용 코루틴 중단");
             }
         }
 

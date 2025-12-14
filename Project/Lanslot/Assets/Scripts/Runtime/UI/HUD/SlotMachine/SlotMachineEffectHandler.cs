@@ -21,10 +21,11 @@ namespace TeamSuneat.UserInterface
             _potionAbility ??= GetComponent<PlayerPotionAbility>();
         }
 
-        public void ApplySlotResult(ItemNames itemName)
+        public void ApplySlotResult(ItemNames itemName, System.Action onCompleted = null)
         {
             if (itemName == ItemNames.None)
             {
+                onCompleted?.Invoke();
                 return;
             }
 
@@ -33,6 +34,7 @@ namespace TeamSuneat.UserInterface
             if (_playerCharacter == null)
             {
                 Log.Warning(LogTags.UI_SlotMachine, "플레이어 캐릭터를 찾을 수 없습니다.");
+                onCompleted?.Invoke();
                 return;
             }
 
@@ -42,24 +44,28 @@ namespace TeamSuneat.UserInterface
                 if (_potionAbility == null)
                 {
                     Log.Warning(LogTags.UI_SlotMachine, "포션 어빌리티가 존재하지 않습니다.");
+                    onCompleted?.Invoke();
                     return;
                 }
 
                 _potionAbility.Apply(itemName);
+                onCompleted?.Invoke();
             }
             else if (itemId >= 1001)
             {
                 if (_weaponAbility == null)
                 {
                     Log.Warning(LogTags.UI_SlotMachine, "무기 어빌리티가 존재하지 않습니다.");
+                    onCompleted?.Invoke();
                     return;
                 }
 
-                _weaponAbility.Apply(itemName);
+                _weaponAbility.Apply(itemName, onCompleted);
             }
             else
             {
                 Log.Warning(LogTags.UI_SlotMachine, "지원하지 않는 아이템입니다: {0}", itemName);
+                onCompleted?.Invoke();
             }
         }
 

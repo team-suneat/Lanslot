@@ -1,20 +1,28 @@
+using System.Collections;
+using UnityEngine;
+
 namespace TeamSuneat
 {
-    /// <summary>
-    /// 전장의 타일 GameObject를 나타내는 컴포넌트
-    /// BattlefieldTile와 기존 BattlefieldTile 데이터 클래스를 통합한 클래스입니다.
-    /// </summary>
     public class BattlefieldTile : XBehaviour
     {
-        public int Row { get; private set; }
-        public int Column { get; private set; }
-        public int Index { get; private set; }
-        public bool IsOccupied { get; private set; }
-        public MonsterCharacter CurrentMonster { get; private set; }
+        public int Row { get; private set; } // 타일의 행 위치
+        public int Column { get; private set; } // 타일의 열 위치
+        public int Index { get; private set; } // 타일의 인덱스
+        public bool IsOccupied { get; private set; } // 타일이 몬스터로 차지되었는지 여부
+        public MonsterCharacter CurrentMonster { get; private set; } // 타일에 있는 몬스터
 
-        /// <summary>
-        /// 타일을 초기화합니다.
-        /// </summary>
+        [SerializeField]
+        private SpriteRenderer _renderer;
+
+        private Coroutine _flashCoroutine;
+
+        public override void AutoGetComponents()
+        {
+            base.AutoGetComponents();
+
+            _renderer = GetComponent<SpriteRenderer>();
+        }
+
         public void Initialize(int row, int column, int index)
         {
             Row = row;
@@ -22,24 +30,59 @@ namespace TeamSuneat
             Index = index;
             IsOccupied = false;
             CurrentMonster = null;
+
+            Log.Info(LogTags.Stage, "타일 초기화: ({0}, {1}, {2})", row, column, index);
         }
 
-        /// <summary>
-        /// 타일을 비웁니다.
-        /// </summary>
         public void Clear()
         {
             IsOccupied = false;
             CurrentMonster = null;
+            StopFlash();
         }
 
-        /// <summary>
-        /// 타일에 몬스터를 배치합니다.
-        /// </summary>
         public void SetMonster(MonsterCharacter monster)
         {
             CurrentMonster = monster;
             IsOccupied = monster != null;
+        }
+
+        public void Flash(float duration = 0.3f)
+        {
+            if (_renderer == null)
+            {
+                return;
+            }
+
+            StopFlash();
+            _flashCoroutine = StartCoroutine(FlashCoroutine(duration));
+        }
+
+        private void StopFlash()
+        {
+            if (_flashCoroutine != null)
+            {
+                StopCoroutine(_flashCoroutine);
+                _flashCoroutine = null;
+            }
+
+            if (_renderer != null)
+            {
+                _renderer.SetHitEffect(false);
+            }
+        }
+
+        private IEnumerator FlashCoroutine(float duration)
+        {
+            if (_renderer == null)
+            {
+                yield break;
+            }
+
+            _renderer.SetHitEffect(true);
+            yield return new WaitForSeconds(duration);
+            _renderer.SetHitEffect(false);
+            _flashCoroutine = null;
         }
     }
 }

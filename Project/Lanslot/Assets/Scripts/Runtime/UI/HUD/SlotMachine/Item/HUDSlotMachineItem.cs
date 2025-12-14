@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace TeamSuneat.UserInterface
 {
@@ -9,6 +10,7 @@ namespace TeamSuneat.UserInterface
         [FoldoutGroup("#Component")][SerializeField] private HUDSlotMachineItemLock _lock;
         [FoldoutGroup("#Component")][SerializeField] private HUDSlotMachineItemAnimator _animator;
         [FoldoutGroup("#Component")][SerializeField] private UILocalizedText _itemNameText;
+        [FoldoutGroup("#Component")][SerializeField] private Image _selectedImage;
 
         private SlotMachineEffectHandler _slotMachineHandler;
         private Sprite[] _shuffledSprites;
@@ -29,6 +31,7 @@ namespace TeamSuneat.UserInterface
             _lock ??= GetComponentInChildren<HUDSlotMachineItemLock>();
             _animator ??= GetComponent<HUDSlotMachineItemAnimator>();
             _itemNameText ??= this.FindComponent<UILocalizedText>("ItemName Text");
+            _selectedImage ??= this.FindComponent<Image>("Selected Image");
         }
 
         protected override void OnStart()
@@ -43,6 +46,9 @@ namespace TeamSuneat.UserInterface
 
             // 아이템 이름 텍스트 초기화
             ResetItemNameText();
+
+            // 선택 이미지 초기화
+            SetSelectedImageActive(false);
 
             SetState(SlotState.Idle);
         }
@@ -165,7 +171,8 @@ namespace TeamSuneat.UserInterface
 
             SetItemNameText();
 
-            ApplyItemEffect();
+            // 효과 적용은 모든 슬롯이 멈춘 후에 순차적으로 적용됨
+            // ApplyItemEffect();
 
             OnSlotStopped?.Invoke(this);
         }
@@ -242,6 +249,9 @@ namespace TeamSuneat.UserInterface
             // 아이템 이름 텍스트 초기화
             ResetItemNameText();
 
+            // 선택 이미지 비활성화
+            SetSelectedImageActive(false);
+
             // 각 컴포넌트 리셋
             if (_scroller != null)
             {
@@ -283,16 +293,39 @@ namespace TeamSuneat.UserInterface
             }
         }
 
-        private void ApplyItemEffect()
+        public void ApplyItemEffect()
         {
             if (CurrentItemName == ItemNames.None)
             {
                 return;
             }
 
+            // 선택 이미지 활성화
+            SetSelectedImageActive(true);
+
             if (TryLoadSlotMachineHandler())
             {
-                _slotMachineHandler.ApplySlotResult(CurrentItemName);
+                _slotMachineHandler.ApplySlotResult(CurrentItemName, OnEffectCompleted);
+            }
+            else
+            {
+                // 핸들러를 찾을 수 없으면 즉시 비활성화
+                OnEffectCompleted();
+            }
+        }
+
+        private void OnEffectCompleted()
+        {
+            // 선택 이미지 비활성화
+            SetSelectedImageActive(false);
+        }
+
+        private void SetSelectedImageActive(bool active)
+        {
+            if (_selectedImage != null)
+            {
+                _selectedImage.SetActive(active);
+                Log.Progress(LogTags.UI_SlotMachine, "선택 이미지 활성화 여부 설정: {0}", active.ToBoolString());
             }
         }
 

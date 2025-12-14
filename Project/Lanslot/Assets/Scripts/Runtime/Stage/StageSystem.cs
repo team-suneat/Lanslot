@@ -12,9 +12,11 @@ namespace TeamSuneat
         [SerializeField]
         private BattlefieldTileGroup _battlefieldTileGroup;
 
+
         [SerializeField]
         [Tooltip("몬스터 개별 생성 간격(초)")]
         private float _monsterSpawnInterval = 0.1f;
+
         private StageData _currentStageData;
         private int _currentWaveNumber;
 
@@ -72,7 +74,8 @@ namespace TeamSuneat
 
             SpawnStageTitleNotice();
 
-            // 1~10웨이브 초기 세팅
+            Log.Progress(LogTags.Stage, "1~10웨이브 초기 세팅을 시작합니다.");
+
             StartCoroutine(SetupInitialWavesCoroutine(Name));
 
             if (GameApp.Instance != null && GameApp.Instance.gameManager != null)
@@ -207,16 +210,7 @@ namespace TeamSuneat
             player.transform.localPosition = Vector3.zero;
             player.transform.localRotation = Quaternion.identity;
             player.transform.localScale = Vector3.one;
-
-            if (player.CharacterRenderer != null)
-            {
-                player.CharacterRenderer.gameObject.SetActive(false);
-            }
-
-            if (player.CharacterModel != null)
-            {
-                player.CharacterModel.SetActive(false);
-            }
+            player.Initialize();
 
             Log.Info(LogTags.CharacterSpawn, "플레이어 캐릭터를 생성했습니다. 위치: {0}", spawnPosition);
         }
@@ -239,7 +233,7 @@ namespace TeamSuneat
 
         private void SpawnStageTitleNotice()
         {
-            _ = ResourcesManager.SpawnStageTitleNotice(Name);
+            ResourcesManager.SpawnStageTitleNotice(Name);
         }
     }
 }

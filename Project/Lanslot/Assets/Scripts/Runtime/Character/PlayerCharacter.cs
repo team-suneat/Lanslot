@@ -8,7 +8,7 @@ namespace TeamSuneat
     public class PlayerCharacter : Character
     {
         public override LogTags LogTag => LogTags.Player;
-     
+
         public override void Initialize()
         {
             VProfile profileInfo = GameApp.GetSelectedProfile();

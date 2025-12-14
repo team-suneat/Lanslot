@@ -94,7 +94,7 @@ namespace TeamSuneat
             if (DetermineChangeScene("GameMain"))
             {
                 GameApp.Instance.gameManager.ResetStage();
-                
+
                 ChangeScene("GameMain");
             }
         }
@@ -163,6 +163,9 @@ namespace TeamSuneat
             if (_currentStageSystem != null)
             {
                 _currentStageSystem.Initialize();
+
+                Log.Info(LogTags.Stage, "스테이지 시스템 초기화 완료: {0}", stageName.ToLogString());
+
                 _currentStageSystem.StartStage();
 
                 Log.Info(LogTags.Stage, "스테이지 시스템 생성 완료: {0}", stageName.ToLogString());

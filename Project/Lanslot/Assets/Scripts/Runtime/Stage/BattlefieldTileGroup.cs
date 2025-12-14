@@ -1,3 +1,4 @@
+using Codice.Client.Common.GameUI;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,10 +12,11 @@ namespace TeamSuneat
     public class BattlefieldTileGroup : XBehaviour
     {
         public const int HEIGHT = 10;
-        private const int MAX_WIDTH = 10;
+        private const int MAX_WIDTH = 11;
 
         [SerializeField]
         private BattlefieldTile[] _allTiles; // 미리 생성된 모든 타일 (최대 100개)
+
         private BattlefieldTile[] _tiles; // 현재 활성화된 타일만 참조
         private int _centerColumn;
         private bool _isInitialized;
@@ -115,6 +117,12 @@ namespace TeamSuneat
                     int allTilesIndex = (row * MAX_WIDTH) + column; // _allTiles 배열 인덱스 (MAX_WIDTH 기준)
                     Vector3 worldPosition = GetTileWorldPosition(row, column);
 
+                    if (_allTiles.Length <= allTilesIndex)
+                    {
+                        Log.Warning(LogTags.Stage, "해당 인덱스에 타일을 설정할 수 없습니다: {0}", allTilesIndex);
+                        continue;
+                    }
+
                     // 미리 생성된 타일 재사용
                     BattlefieldTile tile = _allTiles[allTilesIndex];
                     if (tile == null)
@@ -127,6 +135,7 @@ namespace TeamSuneat
                     tile.gameObject.SetActive(true);
                     tile.transform.position = worldPosition;
                     tile.Initialize(row, column, index);
+
                     _tiles[index] = tile;
                 }
             }
@@ -173,6 +182,7 @@ namespace TeamSuneat
                     tile.gameObject.SetActive(true);
                     tile.transform.position = worldPosition;
                     tile.Initialize(row, column, index);
+
                     _tiles[index] = tile;
                 }
             }
