@@ -24,7 +24,7 @@ namespace TeamSuneat
         /// <summary>게임이 종료되었는지 여부</summary>
         public bool IsGameEnded { get; private set; } = false;
 
-        [UnityEngine.SerializeField] private float _monsterAdvanceDelay = 0.3f;
+        [UnityEngine.SerializeField] private float _monsterAdvanceDelay = 0.1f;
         private UnityEngine.Coroutine _monsterAdvanceCoroutine;
 
         #endregion Public Properties
@@ -299,25 +299,26 @@ namespace TeamSuneat
         /// <returns>게임 오버 여부</returns>
         private bool CheckGameOver()
         {
-            PlayerCharacter player = CharacterManager.Instance?.Player;
-
-            if (player == null)
+            CharacterManager characterManager = CharacterManager.Instance;
+            if (characterManager == null)
             {
                 return false;
             }
 
-            // 플레이어가 사망했는지 확인
-            if (!player.IsAlive)
-            {
-                IsGameEnded = true;
-                CurrentState = TurnState.GameEnd;
+            PlayerCharacter player = characterManager.Player;
+            bool isPlayerMissingOrDead = player == null || !player.IsAlive;
 
-                Log.Info(LogTags.Turn, "게임 오버: 플레이어 사망");
-                OnGameOver?.Invoke();
-                return true;
+            if (!isPlayerMissingOrDead)
+            {
+                return false;
             }
 
-            return false;
+            IsGameEnded = true;
+            CurrentState = TurnState.GameEnd;
+
+            Log.Info(LogTags.Turn, "게임 오버: 플레이어 부재 또는 사망");
+            OnGameOver?.Invoke();
+            return true;
         }
 
         /// <summary>
@@ -389,11 +390,28 @@ namespace TeamSuneat
             for (int i = 0; i < moveOrder.Count; i++)
             {
                 MonsterCharacter monster = moveOrder[i].monster;
-                MonsterAdvanceAbility advanceAbility = monster.AdvanceAbility ?? monster.GetComponent<MonsterAdvanceAbility>();
+                MonsterAttackAbility attackAbility = monster.FindAbility<MonsterAttackAbility>();
+                MonsterAdvanceAbility advanceAbility = monster.FindAbility<MonsterAdvanceAbility>();
+
+                if (attackAbility != null && !attackAbility.AbilityInitialized)
+                {
+                    attackAbility.Initialization();
+                }
 
                 if (advanceAbility != null && !advanceAbility.AbilityInitialized)
                 {
                     advanceAbility.Initialization();
+                }
+
+                bool attacked = attackAbility != null && attackAbility.TryAttackPlayerOnBottomRow();
+                if (attacked)
+                {
+                    if (_monsterAdvanceDelay > 0f && i < moveOrder.Count - 1)
+                    {
+                        yield return new UnityEngine.WaitForSeconds(_monsterAdvanceDelay);
+                    }
+
+                    continue;
                 }
 
                 if (advanceAbility != null)
@@ -459,11 +477,23 @@ namespace TeamSuneat
             for (int i = 0; i < moveOrder.Count; i++)
             {
                 MonsterCharacter monster = moveOrder[i].monster;
-                MonsterAdvanceAbility advanceAbility = monster.AdvanceAbility ?? monster.GetComponent<MonsterAdvanceAbility>();
+                MonsterAttackAbility attackAbility = monster.FindAbility<MonsterAttackAbility>();
+                MonsterAdvanceAbility advanceAbility = monster.FindAbility<MonsterAdvanceAbility>();
+
+                if (attackAbility != null && !attackAbility.AbilityInitialized)
+                {
+                    attackAbility.Initialization();
+                }
 
                 if (advanceAbility != null && !advanceAbility.AbilityInitialized)
                 {
                     advanceAbility.Initialization();
+                }
+
+                bool attacked = attackAbility != null && attackAbility.TryAttackPlayerOnBottomRow();
+                if (attacked)
+                {
+                    continue;
                 }
 
                 advanceAbility?.TryAdvanceImmediate();

@@ -154,6 +154,7 @@ namespace TeamSuneat
 
             CharacterManager.Instance.UnregisterPlayer(this);
             GameApp.Instance.data.ClearIngameData();
+            TurnManager.Instance.Reset();
 
             CoroutineNextTimer(1f, SendGlobalEventForMoveToTitle);
         }

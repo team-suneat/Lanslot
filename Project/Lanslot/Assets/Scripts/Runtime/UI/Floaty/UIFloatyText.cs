@@ -348,7 +348,12 @@ namespace TeamSuneat.UserInterface
             {
                 ResetTextPosition();
 
-                if (Asset.Type == UIFloatyMoveTypes.Velocity)
+                if (Asset == null)
+                {
+                    Log.Warning("UIFloatyText의 Asset을 찾을 수 없습니다.");
+                    return;
+                }
+                else if (Asset.Type == UIFloatyMoveTypes.Velocity)
                 {
                     StartVelocityMove(GetVelocity(), Asset.Duration);
                 }

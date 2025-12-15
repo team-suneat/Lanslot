@@ -97,7 +97,7 @@ namespace TeamSuneat
 
         [FoldoutGroup("#Feedback")] public GameFeedbacks DeathFeedbacks;
         [FoldoutGroup("#Feedback")] public GameFeedbacks KilledFeedbacks;
-        [FoldoutGroup("#Feedback")] public GameFeedbacks SuisideFeedbacks;
+        [FoldoutGroup("#Feedback")] public GameFeedbacks SuicideFeedbacks;
 
         #endregion Feedbacks
 
@@ -445,7 +445,7 @@ namespace TeamSuneat
             }
 
             Vital.Owner.CharacterAnimator.SetDamageTriggerIndex(damageResult.TargetVitalColliderIndex);
-            Vital.Owner.CharacterAnimator.SetDamageTypeParamter(damageResult.Asset.IsPowerfulAttack);
+            Vital.Owner.CharacterAnimator.SetDamageTypeParameter(damageResult.Asset.IsPowerfulAttack);
 
             return Vital.Owner.CharacterAnimator.PlayDamageAnimation(damageResult.Asset);
         }
@@ -576,7 +576,7 @@ namespace TeamSuneat
             Vital.Life.ResetTemporarilyInvulnerable(this);
 
             PlayDeathFeedback();
-            PlaySuisideFeedbacks();
+            PlaySuicideFeedbacks();
 
             if (Vital.Owner != null)
             {
@@ -677,11 +677,11 @@ namespace TeamSuneat
 
             if (Vital.Owner.IsPlayer)
             {
-                _ = GlobalEvent<int, int>.Send(GlobalEventType.PLAYER_CHARACTER_HEALD, Current, Max);
+                _ = GlobalEvent<int, int>.Send(GlobalEventType.PLAYER_CHARACTER_HEAL, Current, Max);
             }
             else
             {
-                _ = GlobalEvent<int, int>.Send(GlobalEventType.MONSTER_CHARACTER_HEALD, Current, Max);
+                _ = GlobalEvent<int, int>.Send(GlobalEventType.MONSTER_CHARACTER_HEAL, Current, Max);
             }
         }
 
@@ -723,7 +723,7 @@ namespace TeamSuneat
             BlockDamageFeedbacks = feedbackParent.FindComponent<GameFeedbacks>("BlockDamage");
             DeathFeedbacks = feedbackParent.FindComponent<GameFeedbacks>("Death");
             KilledFeedbacks = feedbackParent.FindComponent<GameFeedbacks>("Killed");
-            SuisideFeedbacks = feedbackParent.FindComponent<GameFeedbacks>("Suiside");
+            SuicideFeedbacks = feedbackParent.FindComponent<GameFeedbacks>("Suicide");
         }
 
         private Transform GetParentTransform()
@@ -776,9 +776,9 @@ namespace TeamSuneat
             KilledFeedbacks?.PlayFeedbacks();
         }
 
-        private void PlaySuisideFeedbacks()
+        private void PlaySuicideFeedbacks()
         {
-            SuisideFeedbacks?.PlayFeedbacks();
+            SuicideFeedbacks?.PlayFeedbacks();
         }
 
         private void PlayElementDamageFeedbacks(DamageResult damageResult, Vector3 damagePosition)

@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Owner: {fileID: 8181266712122750050}
-  Name: 5
+  Name: 1005
   NameString: FlameMace
   AttackStartFeedback: {fileID: 0}
   AttackUsedFeedback: {fileID: 0}
@@ -304,7 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Owner: {fileID: 8181266712122750050}
-  Name: 9
+  Name: 1009
   NameString: Shovel
   AttackStartFeedback: {fileID: 0}
   AttackUsedFeedback: {fileID: 0}
@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Owner: {fileID: 8181266712122750050}
-  Name: 6
+  Name: 1006
   NameString: Pineapple
   AttackStartFeedback: {fileID: 0}
   AttackUsedFeedback: {fileID: 0}
@@ -496,7 +496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Owner: {fileID: 8181266712122750050}
-  Name: 1
+  Name: 1001
   NameString: WarriorSword
   AttackStartFeedback: {fileID: 0}
   AttackUsedFeedback: {fileID: 0}
@@ -696,7 +696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Owner: {fileID: 8181266712122750050}
-  Name: 7
+  Name: 1007
   NameString: PaladinShield
   AttackStartFeedback: {fileID: 0}
   AttackUsedFeedback: {fileID: 0}
@@ -752,7 +752,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Owner: {fileID: 8181266712122750050}
-  Name: 3
+  Name: 1003
   NameString: CrimsonAxe
   AttackStartFeedback: {fileID: 0}
   AttackUsedFeedback: {fileID: 0}
@@ -808,7 +808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Owner: {fileID: 8181266712122750050}
-  Name: 4
+  Name: 1004
   NameString: LightningSpear
   AttackStartFeedback: {fileID: 0}
   AttackUsedFeedback: {fileID: 0}
@@ -900,7 +900,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Owner: {fileID: 8181266712122750050}
-  Name: 8
+  Name: 1008
   NameString: Stone
   AttackStartFeedback: {fileID: 0}
   AttackUsedFeedback: {fileID: 0}
@@ -956,7 +956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Owner: {fileID: 8181266712122750050}
-  Name: 2
+  Name: 1002
   NameString: ExecutionerDagger
   AttackStartFeedback: {fileID: 0}
   AttackUsedFeedback: {fileID: 0}

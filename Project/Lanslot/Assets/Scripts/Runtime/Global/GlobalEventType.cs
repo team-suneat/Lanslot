@@ -51,7 +51,7 @@ namespace TeamSuneat
         PLAYER_CHARACTER_DEATH_DEFIANCE,
 
         ///<summary> 플레이어 캐릭터가 생명력이 회복되었습니다.</summary>
-        PLAYER_CHARACTER_HEALD,
+        PLAYER_CHARACTER_HEAL,
 
         ///<summary> 플레이어 캐릭터가 생명력이 변경되었습니다 </summary>
         PLAYER_CHARACTER_REFRESH_LIFE,
@@ -170,7 +170,7 @@ namespace TeamSuneat
         BOSS_CHARACTER_DAMAGED,
 
         ///<summary> 몬스터 캐릭터가 생명력을 회복하였습니다. </summary>
-        MONSTER_CHARACTER_HEALD,
+        MONSTER_CHARACTER_HEAL,
 
         ///<summary> 몬스터 캐릭터가 생명력이 변경되었습니다 </summary>
         MONSTER_CHARACTER_REFRESH_LIFE,

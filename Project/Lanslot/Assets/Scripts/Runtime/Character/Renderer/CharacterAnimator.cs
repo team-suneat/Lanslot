@@ -70,7 +70,7 @@ namespace TeamSuneat
         {
         }
 
-        internal void SetDamageTypeParamter(bool isPowerfulAttack)
+        internal void SetDamageTypeParameter(bool isPowerfulAttack)
         {
         }
 

@@ -9,10 +9,6 @@ namespace TeamSuneat
         [FoldoutGroup("#Character/Component/Monster")]
         [ChildGameObjectsOnly]
         [SerializeField] private DropObjectSpawner _dropObjectSpawner;
-        private MonsterAdvanceAbility _advanceAbility;
-
-        public MonsterAdvanceAbility AdvanceAbility => _advanceAbility;
-
         public override Transform Target => null;
 
         public override LogTags LogTag => LogTags.Monster;
@@ -29,8 +25,6 @@ namespace TeamSuneat
             SetupLevel();
 
             base.Initialize();
-
-            EnsureAdvanceAbility();
 
             PlaySpawnAnimation();
             CharacterManager.Instance.Register(this);
@@ -71,6 +65,7 @@ namespace TeamSuneat
             {
                 Stat.AddWithSourceInfo(StatNames.Health, data.Health, this, NameString, "CharacterBase");
                 Stat.AddWithSourceInfo(StatNames.Damage, data.Damage, this, NameString, "CharacterBase");
+                Stat.AddWithSourceInfo(StatNames.AttackRange, data.AttackRange, this, NameString, "CharacterBase");
             }
         }
 
@@ -80,19 +75,32 @@ namespace TeamSuneat
         {
             base.OnDeath(damageResult);
 
+            ClearTileOccupancy();
+
             _dropObjectSpawner?.SpawnDropEXP(position);
 
             CharacterAnimator?.PlayDeathAnimation();
         }
 
-        private void EnsureAdvanceAbility()
+        public override void OnDespawn()
         {
-            _advanceAbility ??= GetComponent<MonsterAdvanceAbility>();
-            _advanceAbility ??= gameObject.AddComponent<MonsterAdvanceAbility>();
+            ClearTileOccupancy();
+            base.OnDespawn();
+        }
 
-            if (_advanceAbility != null && !_advanceAbility.AbilityInitialized)
+        private void ClearTileOccupancy()
+        {
+            StageSystem stageSystem = GameApp.Instance != null && GameApp.Instance.gameManager != null ? GameApp.Instance.gameManager.CurrentStageSystem : null;
+            BattlefieldTileGroup tileGroup = stageSystem != null ? stageSystem.BattlefieldTileGroup : null;
+
+            if (tileGroup == null)
             {
-                _advanceAbility.Initialization();
+                return;
+            }
+
+            if (tileGroup.TryFindMonster(this, out int row, out int column))
+            {
+                tileGroup.ClearTile(row, column);
             }
         }
     }

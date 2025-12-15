@@ -86,19 +86,19 @@ namespace TeamSuneat
 
         #region Flip
 
-        public static void SetFlipX(this SpriteRenderer renderer, bool isFilp)
+        public static void SetFlipX(this SpriteRenderer renderer, bool isFlip)
         {
             if (renderer != null)
             {
-                renderer.flipX = isFilp;
+                renderer.flipX = isFlip;
             }
         }
 
-        public static void SetFlipY(this SpriteRenderer renderer, bool isFilp)
+        public static void SetFlipY(this SpriteRenderer renderer, bool isFlip)
         {
             if (renderer != null)
             {
-                renderer.flipY = isFilp;
+                renderer.flipY = isFlip;
             }
         }
 

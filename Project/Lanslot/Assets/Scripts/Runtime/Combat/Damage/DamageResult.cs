@@ -120,7 +120,7 @@ namespace TeamSuneat
             {
                 if (Asset != null)
                 {
-                    return Asset.Hitmark;
+                    return Asset.Name;
                 }
 
                 return HitmarkNames.None;

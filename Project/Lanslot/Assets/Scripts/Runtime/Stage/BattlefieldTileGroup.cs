@@ -340,6 +340,16 @@ namespace TeamSuneat
             return tile != null && tile.IsOccupied;
         }
 
+        public bool IsBottomRow(int row)
+        {
+            return row == 0;
+        }
+
+        public int GetBottomRowIndex()
+        {
+            return 0;
+        }
+
         /// <summary>
         /// 타일을 점유 상태로 설정합니다.
         /// </summary>

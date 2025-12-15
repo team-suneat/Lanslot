@@ -18,15 +18,21 @@ namespace TeamSuneat
             // 선택: 표시 이름
             row.TryGetValue("DisplayName", out string displayName);
 
-            if (!row.TryGetValue("Health", out string maxHPString) || !GoogleSheetValueParsers.TryParseFloat(maxHPString, out float maxHP))
+            if (!row.TryGetValue("Health", out string maxHPString) || !GoogleSheetValueParsers.TryParseInt(maxHPString, out int maxHP))
             {
                 Log.Warning($"Name {name}: Health 파싱 실패: {maxHPString}");
                 return false;
             }
 
-            if (!row.TryGetValue("Damage", out string damageString) || !GoogleSheetValueParsers.TryParseFloat(damageString, out float damage))
+            if (!row.TryGetValue("Damage", out string damageString) || !GoogleSheetValueParsers.TryParseInt(damageString, out int damage))
             {
                 Log.Warning($"Name {name}: Damage 파싱 실패: {damageString}");
+                return false;
+            }
+
+            if (!row.TryGetValue("AttackRange", out string attackRangeString) || !GoogleSheetValueParsers.TryParseInt(attackRangeString, out int attackRange))
+            {
+                Log.Warning($"Name {name}: AttackRange 파싱 실패: {attackRangeString}");
                 return false;
             }
 
@@ -51,6 +57,7 @@ namespace TeamSuneat
                 DisplayName = displayName,
                 Health = maxHP,
                 Damage = damage,
+                AttackRange = attackRange,
                 SupportedBuildTypes = builds,
             };
 

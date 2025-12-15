@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using System;
+using Sirenix.OdinInspector;
 using TeamSuneat.Data;
 using TeamSuneat.Setting;
 using TeamSuneat.UserInterface;
@@ -20,6 +21,8 @@ namespace TeamSuneat
 
         [FoldoutGroup("#VitalResource")]
         public Transform DamageTextPoint;
+
+        public event Action<int, int> OnValueChanged;
 
         public virtual VitalResourceTypes Type => VitalResourceTypes.None;
 
@@ -76,6 +79,7 @@ namespace TeamSuneat
                     }
 
                     LogCurrentValueAdded(Type, value, Current, Max);
+                    NotifyValueChanged();
                     SendGlobalEventOfChange();
                     return true;
                 }
@@ -117,6 +121,7 @@ namespace TeamSuneat
         protected void OnUseCurrencyValue(int value)
         {
             LogResourceUsage(Type, value, Current, Max);
+            NotifyValueChanged();
             SendGlobalEventOfChange();
             SendGlobalEventOfUse(value);
         }
@@ -134,6 +139,9 @@ namespace TeamSuneat
 
         protected void SendGlobalEventOfChange()
         {
+            // HUD 등에서 직접 구독하는 경우도 있으므로 글로벌 이벤트와 별도로 통지
+            NotifyValueChanged();
+
             if (Vital.Owner != null)
             {
                 if (Vital.Owner.IsPlayer)
@@ -249,6 +257,11 @@ namespace TeamSuneat
             {
                 LogInfo("전투자원({0})을 추가합니다. +{1}, {2}/{3}", type, value.ToSelectString(), current, max);
             }
+        }
+
+        private void NotifyValueChanged()
+        {
+            OnValueChanged?.Invoke(Current, Max);
         }
 
         protected void LogMaxValueRefreshed(int current, int max)

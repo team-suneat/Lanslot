@@ -26,12 +26,6 @@ namespace TeamSuneat.Data
 
         [EnableIf("IsChangingAsset")]
         [FoldoutGroup("#피해 정보")]
-        [GUIColor("GetHitmarkColor")]
-        [SuffixLabel("히트마크")]
-        public HitmarkNames Hitmark;
-
-        [EnableIf("IsChangingAsset")]
-        [FoldoutGroup("#피해 정보")]
         [SuffixLabel("피해 종류")]
         [GUIColor("GetDamageTypeColor")]
         public DamageTypes DamageType;
@@ -286,7 +280,6 @@ namespace TeamSuneat.Data
 
         public void Validate()
         {
-            Hitmark = Name;
 
             if (!IsChangingAsset)
             {
@@ -312,7 +305,6 @@ namespace TeamSuneat.Data
         {
             base.Refresh();
 
-            Hitmark = Name;
             AttackTargetTypeString = AttackTargetType.ToString();
             DecrescenceTypeString = DecrescenceType.ToString();
             ResourceConsumeTypeString = ResourceConsumeType.ToString();
@@ -335,7 +327,6 @@ namespace TeamSuneat.Data
             HitmarkAssetData clone = new()
             {
                 Name = Name,
-                Hitmark = Hitmark,
                 AttackTargetType = AttackTargetType,
 
                 IsCrowdControl = IsCrowdControl,
@@ -415,22 +406,22 @@ namespace TeamSuneat.Data
         {
             if (!EnumEx.ConvertTo(ref DamageType, DamageTypeString))
             {
-                Log.Error("HitmarkAssetData의 DamageType을 변환하지 못합니다. Hitmark:{0}, {1}", Hitmark, DamageTypeString);
+                Log.Error("HitmarkAssetData의 DamageType을 변환하지 못합니다. Name:{0}, {1}", Name, DamageTypeString);
             }
             if (!EnumEx.ConvertTo(ref LinkedDamageType, LinkedDamageTypeString))
             {
-                Log.Error("HitmarkAssetData의 LinkedDamageType을 변환하지 못합니다. Hitmark:{0}, {1}", Hitmark, LinkedDamageTypeString);
+                Log.Error("HitmarkAssetData의 LinkedDamageType을 변환하지 못합니다. Name:{0}, {1}", Name, LinkedDamageTypeString);
             }
             if (!EnumEx.ConvertTo(ref LinkedStateEffect, LinkedStateEffectString))
             {
-                Log.Error("HitmarkAssetData의 LinkedStateEffect을 변환하지 못합니다. Hitmark:{0}, {1}", Hitmark, LinkedStateEffectString);
+                Log.Error("HitmarkAssetData의 LinkedStateEffect을 변환하지 못합니다. Name:{0}, {1}", Name, LinkedStateEffectString);
             }
 
             if (!string.IsNullOrWhiteSpace(UseWeaponDamageString))
             {
                 if (!bool.TryParse(UseWeaponDamageString, out bool parsedUseWeaponDamage))
                 {
-                    Log.Error("HitmarkAssetData의 UseWeaponDamage를 변환하지 못합니다. Hitmark:{0}, {1}", Hitmark, UseWeaponDamageString);
+                    Log.Error("HitmarkAssetData의 UseWeaponDamage를 변환하지 못합니다. Name:{0}, {1}", Name, UseWeaponDamageString);
                 }
                 else
                 {
@@ -440,11 +431,11 @@ namespace TeamSuneat.Data
 
             if (!EnumEx.ConvertTo(ref NameOnHit, NameOnHitString))
             {
-                Log.Error("HitmarkAssetData의 NameOnHit을 변환하지 못합니다. Hitmark:{0}, {1}", Hitmark, NameOnHitString);
+                Log.Error("HitmarkAssetData의 NameOnHit을 변환하지 못합니다. Name:{0}, {1}", Name, NameOnHitString);
             }
             if (!EnumEx.ConvertTo(ref BuffOnHit, BuffOnHitString))
             {
-                Log.Error("HitmarkAssetData의 BuffOnHit를 변환하지 못합니다. Hitmark:{0}, {1}", Hitmark, BuffOnHitString);
+                Log.Error("HitmarkAssetData의 BuffOnHit를 변환하지 못합니다. Name:{0}, {1}", Name, BuffOnHitString);
             }
 
             DamageTypeLog();
@@ -486,7 +477,7 @@ namespace TeamSuneat.Data
 #if UNITY_EDITOR
             if (DamageType == DamageTypes.None)
             {
-                Log.Warning("HitmarkAssetData의 DamageType이 올바르지 않을 수 있습니다. Hitmark:{0}, {1}", Hitmark.ToLogString(), DamageType);
+                Log.Warning("HitmarkAssetData의 DamageType이 올바르지 않을 수 있습니다. Name:{0}, {1}", Name.ToLogString(), DamageType);
             }
 #endif
         }
@@ -495,13 +486,13 @@ namespace TeamSuneat.Data
         {
 #if UNITY_EDITOR
             string type = "HitmarkAssetData".ToSelectString();
-            EnumExplorer.LogBuff(type, Hitmark.ToString(), BuffOnHit);
+            EnumExplorer.LogBuff(type, Name.ToString(), BuffOnHit);
 #endif
         }
 
         public bool CompareDamage(HitmarkAssetData another)
         {
-            if (Hitmark != another.Hitmark) { return false; }
+            if (Name != another.Name) { return false; }
             if (DamageType != another.DamageType) { return false; }
             if (IgnoreEvasion != another.IgnoreEvasion) { return false; }
             if (ApplyToSelf != another.ApplyToSelf) { return false; }

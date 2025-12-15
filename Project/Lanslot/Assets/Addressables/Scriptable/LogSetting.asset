@@ -53,6 +53,7 @@ MonoBehaviour:
   Resource: 1
   Path: 1
   GameData: 1
+  GameData_Character: 1
   GameData_Skill: 1
   GameData_Weapon: 1
   Currency: 1
@@ -68,7 +69,7 @@ MonoBehaviour:
   Stage_Monster: 1
   Tile: 1
   Turn: 1
-  Global: 0
+  Global: 1
   String: 1
   Develop: 1
   UI: 1

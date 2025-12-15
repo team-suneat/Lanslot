@@ -58,7 +58,7 @@ namespace TeamSuneat
                 case DamageTypes.DamageOverTime: { HandleComputePhysicalOverTime(damageAsset, ref damageResult); } break;
                 case DamageTypes.Execution: { damageResult.DamageValue = float.MaxValue; } break;
                 default:
-                    Log.Warning("데미지 에셋에서 피해 종류(DamageType) 설정이 올바르지 않을 가능성이 있습니다: {0}, {1}", damageAsset.Hitmark.ToLogString(), damageAsset.DamageType);
+                    Log.Warning("데미지 에셋에서 피해 종류(DamageType) 설정이 올바르지 않을 가능성이 있습니다: {0}, {1}", damageAsset.Name.ToLogString(), damageAsset.DamageType);
                     break;
             }
         }
@@ -403,7 +403,7 @@ namespace TeamSuneat
         {
             if (Log.LevelWarning)
             {
-                Log.Warning("무기 피해를 사용하도록 설정되었지만 주입된 무기 피해가 없습니다. Hitmark:{0}", damageAsset.Hitmark.ToLogString());
+                Log.Warning("무기 피해를 사용하도록 설정되었지만 주입된 무기 피해가 없습니다. Hitmark:{0}", damageAsset.Name.ToLogString());
             }
         }
 

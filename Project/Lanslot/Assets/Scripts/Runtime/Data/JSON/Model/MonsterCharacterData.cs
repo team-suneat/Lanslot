@@ -7,8 +7,9 @@ namespace TeamSuneat.Data
     {
         public CharacterNames Name;
         public string DisplayName;
-        public float Health;
-        public float Damage;
+        public int Health;
+        public int Damage;
+        public int AttackRange;
         public BuildTypes[] SupportedBuildTypes;
 
         public bool IsBlock

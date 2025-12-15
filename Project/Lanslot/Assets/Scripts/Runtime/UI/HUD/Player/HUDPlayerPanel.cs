@@ -39,6 +39,7 @@ namespace TeamSuneat.UserInterface
                 return;
             }
 
+            _healthShieldView?.Bind(playerCharacter);
             SetPortrait(playerCharacter.Name);
             SetHealth(playerCharacter.CurrentLife, playerCharacter.MaxLife);
             SetShield(playerCharacter.CurrentShield, playerCharacter.MaxShield);
