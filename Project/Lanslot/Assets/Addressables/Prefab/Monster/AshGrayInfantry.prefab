@@ -193,6 +193,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7673471702492736139}
   - component: {fileID: 5154307615357651103}
+  - component: {fileID: 3037962947740619573}
   - component: {fileID: 440708289291288276}
   m_Layer: 0
   m_Name: AshGrayInfantry
@@ -245,7 +246,8 @@ MonoBehaviour:
   Passive: {fileID: 1669109655571016092}
   Stat: {fileID: 3726916207568149684}
   MyVital: {fileID: 3717469096041679964}
-  Abilities: []
+  Abilities:
+  - {fileID: 3037962947740619573}
   ShieldPoint: {fileID: 0}
   WarningTextPoint: {fileID: 0}
   MinimapPoint: {fileID: 0}
@@ -265,6 +267,23 @@ MonoBehaviour:
     PreviousStateString: 
     CurrentStateString: 
   _dropObjectSpawner: {fileID: 0}
+--- !u!114 &3037962947740619573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723654045900685464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a4178bcddbeb964bb65275309ea158f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AbilityStartFeedbacks: {fileID: 0}
+  AbilityStopFeedbacks: {fileID: 0}
+  Owner: {fileID: 5154307615357651103}
+  Vital: {fileID: 3717469096041679964}
+  Animator: {fileID: 1338539347564495384}
 --- !u!114 &440708289291288276
 MonoBehaviour:
   m_ObjectHideFlags: 0

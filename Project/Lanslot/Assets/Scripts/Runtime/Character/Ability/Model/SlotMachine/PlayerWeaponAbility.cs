@@ -159,7 +159,7 @@ namespace TeamSuneat
                     BattlefieldTile tile = _tileGroup.GetTile(row, column);
                     if (tile != null)
                     {
-                        tile.Flash(0.3f);
+                        tile.Flash(0.3f, Color.red, 0.1f);
                         _flashTiles.Add(tile);
                     }
                 }
@@ -174,12 +174,12 @@ namespace TeamSuneat
             int maxColumn = Mathf.Min(_tileGroup.Width - 1, centerColumn + attackColumn);
             for (int column = minColumn; column <= maxColumn; column++)
             {
-                BattlefieldTile tile = _tileGroup.GetTile(centerRow, column);
-                if (tile != null)
-                {
-                    tile.Flash(0.3f);
-                    _flashTiles.Add(tile);
-                }
+            BattlefieldTile tile = _tileGroup.GetTile(centerRow, column);
+            if (tile != null)
+            {
+                tile.Flash(0.3f, Color.red, 0.1f);
+                _flashTiles.Add(tile);
+            }
             }
 
             // 세로선 (같은 column, row 범위)
@@ -187,12 +187,12 @@ namespace TeamSuneat
             int maxRow = Mathf.Min(_tileGroup.Height - 1, centerRow + attackRow);
             for (int row = minRow; row <= maxRow; row++)
             {
-                BattlefieldTile tile = _tileGroup.GetTile(row, centerColumn);
-                if (tile != null)
-                {
-                    tile.Flash(0.3f);
-                    _flashTiles.Add(tile);
-                }
+            BattlefieldTile tile = _tileGroup.GetTile(row, centerColumn);
+            if (tile != null)
+            {
+                tile.Flash(0.3f, Color.red, 0.1f);
+                _flashTiles.Add(tile);
+            }
             }
         }
 
@@ -207,12 +207,12 @@ namespace TeamSuneat
                 int column = centerColumn + i;
                 if (_tileGroup.IsValidTile(row, column))
                 {
-                    BattlefieldTile tile = _tileGroup.GetTile(row, column);
-                    if (tile != null)
-                    {
-                        tile.Flash(0.3f);
-                        _flashTiles.Add(tile);
-                    }
+                BattlefieldTile tile = _tileGroup.GetTile(row, column);
+                if (tile != null)
+                {
+                    tile.Flash(0.3f, Color.red, 0.1f);
+                    _flashTiles.Add(tile);
+                }
                 }
             }
 
@@ -223,12 +223,12 @@ namespace TeamSuneat
                 int column = centerColumn - i;
                 if (_tileGroup.IsValidTile(row, column))
                 {
-                    BattlefieldTile tile = _tileGroup.GetTile(row, column);
-                    if (tile != null)
-                    {
-                        tile.Flash(0.3f);
-                        _flashTiles.Add(tile);
-                    }
+                BattlefieldTile tile = _tileGroup.GetTile(row, column);
+                if (tile != null)
+                {
+                    tile.Flash(0.3f, Color.red, 0.1f);
+                    _flashTiles.Add(tile);
+                }
                 }
             }
         }

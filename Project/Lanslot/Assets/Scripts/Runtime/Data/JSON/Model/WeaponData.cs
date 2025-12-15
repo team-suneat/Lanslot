@@ -1,5 +1,4 @@
 using System.Linq;
-using TeamSuneat;
 
 namespace TeamSuneat.Data
 {
@@ -11,7 +10,7 @@ namespace TeamSuneat.Data
         public int AttackRange;
         public int AttackRow;
         public int AttackColumn;
-        public AttackAreaShape AttackAreaShape = AttackAreaShape.Rectangle;
+        public AttackAreaShape AttackAreaShape;
         public int MultiHitCount;
 
         public PassiveNames Passive;

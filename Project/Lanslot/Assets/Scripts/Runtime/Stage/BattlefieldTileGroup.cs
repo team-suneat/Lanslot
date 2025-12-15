@@ -1,4 +1,3 @@
-using Codice.Client.Common.GameUI;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -240,6 +239,32 @@ namespace TeamSuneat
             return _tiles[index];
         }
 
+        public bool TryFindMonster(MonsterCharacter monster, out int row, out int column)
+        {
+            row = -1;
+            column = -1;
+
+            if (monster == null || _tiles == null)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < _tiles.Length; i++)
+            {
+                BattlefieldTile tile = _tiles[i];
+                if (tile == null || tile.CurrentMonster != monster)
+                {
+                    continue;
+                }
+
+                row = GetRow(i);
+                column = GetColumn(i);
+                return true;
+            }
+
+            return false;
+        }
+
         /// <summary>
         /// Row와 Column으로 타일을 조회합니다.
         /// </summary>
@@ -252,6 +277,32 @@ namespace TeamSuneat
 
             int index = GetIndex(row, column);
             return GetTile(index);
+        }
+
+        public bool CanMoveDown(int row, int column, out BattlefieldTile nextTile, out int nextRow, out int nextColumn)
+        {
+            nextTile = null;
+            nextRow = row - 1;
+            nextColumn = column;
+
+            if (_tiles == null || !IsValidTile(row, column))
+            {
+                return false;
+            }
+
+            if (nextRow < 0)
+            {
+                return false;
+            }
+
+            BattlefieldTile candidate = GetTile(nextRow, nextColumn);
+            if (candidate == null || candidate.IsOccupied)
+            {
+                return false;
+            }
+
+            nextTile = candidate;
+            return true;
         }
 
         /// <summary>
@@ -343,6 +394,41 @@ namespace TeamSuneat
             }
 
             worldPosition = GetTileWorldPosition(row, column);
+            return true;
+        }
+
+        public bool MoveMonster(MonsterCharacter monster, int fromRow, int fromColumn, int toRow, int toColumn)
+        {
+            if (monster == null || _tiles == null)
+            {
+                return false;
+            }
+
+            BattlefieldTile fromTile = GetTile(fromRow, fromColumn);
+            BattlefieldTile toTile = GetTile(toRow, toColumn);
+
+            if (fromTile == null || toTile == null)
+            {
+                return false;
+            }
+
+            if (toTile.IsOccupied)
+            {
+                return false;
+            }
+
+            fromTile.SetMonster(null);
+            toTile.SetMonster(monster);
+
+            Transform monsterTransform = monster.transform;
+            if (monsterTransform != null)
+            {
+                monsterTransform.SetParent(toTile.transform);
+                monsterTransform.localPosition = Vector3.zero;
+                monsterTransform.localRotation = Quaternion.identity;
+                monsterTransform.localScale = Vector3.one;
+            }
+
             return true;
         }
 

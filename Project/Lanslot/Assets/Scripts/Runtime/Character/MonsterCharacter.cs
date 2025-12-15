@@ -9,6 +9,9 @@ namespace TeamSuneat
         [FoldoutGroup("#Character/Component/Monster")]
         [ChildGameObjectsOnly]
         [SerializeField] private DropObjectSpawner _dropObjectSpawner;
+        private MonsterAdvanceAbility _advanceAbility;
+
+        public MonsterAdvanceAbility AdvanceAbility => _advanceAbility;
 
         public override Transform Target => null;
 
@@ -26,6 +29,8 @@ namespace TeamSuneat
             SetupLevel();
 
             base.Initialize();
+
+            EnsureAdvanceAbility();
 
             PlaySpawnAnimation();
             CharacterManager.Instance.Register(this);
@@ -78,6 +83,17 @@ namespace TeamSuneat
             _dropObjectSpawner?.SpawnDropEXP(position);
 
             CharacterAnimator?.PlayDeathAnimation();
+        }
+
+        private void EnsureAdvanceAbility()
+        {
+            _advanceAbility ??= GetComponent<MonsterAdvanceAbility>();
+            _advanceAbility ??= gameObject.AddComponent<MonsterAdvanceAbility>();
+
+            if (_advanceAbility != null && !_advanceAbility.AbilityInitialized)
+            {
+                _advanceAbility.Initialization();
+            }
         }
     }
 }

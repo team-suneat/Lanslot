@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using TeamSuneat.UserInterface;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace TeamSuneat
@@ -21,6 +23,9 @@ namespace TeamSuneat
 
         /// <summary>게임이 종료되었는지 여부</summary>
         public bool IsGameEnded { get; private set; } = false;
+
+        [UnityEngine.SerializeField] private float _monsterAdvanceDelay = 0.3f;
+        private UnityEngine.Coroutine _monsterAdvanceCoroutine;
 
         #endregion Public Properties
 
@@ -220,6 +225,21 @@ namespace TeamSuneat
             ResourcesManager.SpawnTurnNotice(TurnNoticeOwner.Monster);
             Log.Info(LogTags.Turn, "몬스터 턴 시작: Turn {0}", CurrentTurnNumber);
             OnMonsterTurnStart?.Invoke();
+
+            if (GameApp.Instance != null && _monsterAdvanceCoroutine != null)
+            {
+                GameApp.Instance.StopCoroutine(_monsterAdvanceCoroutine);
+            }
+
+            if (GameApp.Instance != null)
+            {
+                _monsterAdvanceCoroutine = GameApp.Instance.StartCoroutine(AdvanceMonstersOneStepCoroutine());
+            }
+            else
+            {
+                // GameApp이 없으면 즉시 처리
+                AdvanceMonstersOneStepImmediate();
+            }
         }
 
         /// <summary>
@@ -328,5 +348,150 @@ namespace TeamSuneat
         }
 
         #endregion Game End Conditions
+
+        private System.Collections.IEnumerator AdvanceMonstersOneStepCoroutine()
+        {
+            StageSystem stageSystem = GameApp.Instance != null && GameApp.Instance.gameManager != null ? GameApp.Instance.gameManager.CurrentStageSystem : null;
+            BattlefieldTileGroup tileGroup = stageSystem != null ? stageSystem.BattlefieldTileGroup : null;
+            CharacterManager characterManager = CharacterManager.Instance;
+
+            if (tileGroup == null || characterManager == null || characterManager.Monsters == null)
+            {
+                Log.Warning(LogTags.Turn, "몬스터 전진을 수행할 수 없습니다. StageSystem 또는 CharacterManager를 확인하세요.");
+                _monsterAdvanceCoroutine = null;
+                yield break;
+            }
+
+            List<(MonsterCharacter monster, int row, int column)> moveOrder = new();
+
+            for (int i = 0; i < characterManager.Monsters.Count; i++)
+            {
+                MonsterCharacter monster = characterManager.Monsters[i];
+                if (monster == null || !monster.IsAlive)
+                {
+                    continue;
+                }
+
+                if (!tileGroup.TryFindMonster(monster, out int row, out int column))
+                {
+                    continue;
+                }
+
+                moveOrder.Add((monster, row, column));
+            }
+
+            moveOrder.Sort((a, b) =>
+            {
+                int rowCompare = a.row.CompareTo(b.row);
+                return rowCompare != 0 ? rowCompare : a.column.CompareTo(b.column);
+            });
+
+            for (int i = 0; i < moveOrder.Count; i++)
+            {
+                MonsterCharacter monster = moveOrder[i].monster;
+                MonsterAdvanceAbility advanceAbility = monster.AdvanceAbility ?? monster.GetComponent<MonsterAdvanceAbility>();
+
+                if (advanceAbility != null && !advanceAbility.AbilityInitialized)
+                {
+                    advanceAbility.Initialization();
+                }
+
+                if (advanceAbility != null)
+                {
+                    yield return advanceAbility.AdvanceWithFlashCoroutine();
+                }
+
+                if (_monsterAdvanceDelay > 0f && i < moveOrder.Count - 1)
+                {
+                    yield return new UnityEngine.WaitForSeconds(_monsterAdvanceDelay);
+                }
+            }
+
+            EndMonsterTurn();
+
+            if (IsGameEnded)
+            {
+                _monsterAdvanceCoroutine = null;
+                yield break;
+            }
+
+            StartPlayerTurn();
+            SpawnPlayerTurnNotice();
+            _monsterAdvanceCoroutine = null;
+        }
+
+        private void AdvanceMonstersOneStepImmediate()
+        {
+            StageSystem stageSystem = GameApp.Instance != null && GameApp.Instance.gameManager != null ? GameApp.Instance.gameManager.CurrentStageSystem : null;
+            BattlefieldTileGroup tileGroup = stageSystem != null ? stageSystem.BattlefieldTileGroup : null;
+            CharacterManager characterManager = CharacterManager.Instance;
+
+            if (tileGroup == null || characterManager == null || characterManager.Monsters == null)
+            {
+                Log.Warning(LogTags.Turn, "몬스터 전진을 수행할 수 없습니다. StageSystem 또는 CharacterManager를 확인하세요.");
+                return;
+            }
+
+            List<(MonsterCharacter monster, int row, int column)> moveOrder = new();
+
+            for (int i = 0; i < characterManager.Monsters.Count; i++)
+            {
+                MonsterCharacter monster = characterManager.Monsters[i];
+                if (monster == null || !monster.IsAlive)
+                {
+                    continue;
+                }
+
+                if (!tileGroup.TryFindMonster(monster, out int row, out int column))
+                {
+                    continue;
+                }
+
+                moveOrder.Add((monster, row, column));
+            }
+
+            moveOrder.Sort((a, b) =>
+            {
+                int rowCompare = a.row.CompareTo(b.row);
+                return rowCompare != 0 ? rowCompare : a.column.CompareTo(b.column);
+            });
+
+            for (int i = 0; i < moveOrder.Count; i++)
+            {
+                MonsterCharacter monster = moveOrder[i].monster;
+                MonsterAdvanceAbility advanceAbility = monster.AdvanceAbility ?? monster.GetComponent<MonsterAdvanceAbility>();
+
+                if (advanceAbility != null && !advanceAbility.AbilityInitialized)
+                {
+                    advanceAbility.Initialization();
+                }
+
+                advanceAbility?.TryAdvanceImmediate();
+            }
+
+            EndMonsterTurn();
+
+            if (IsGameEnded)
+            {
+                return;
+            }
+
+            StartPlayerTurn();
+            SpawnPlayerTurnNotice();
+        }
+
+        public void SpawnPlayerTurnNotice()
+        {
+            UITurnNotice turnNotice = ResourcesManager.SpawnTurnNotice(TurnNoticeOwner.Player);
+
+            if (turnNotice == null)
+            {
+                NotifyTurnNoticeCompleted();
+                return;
+            }
+
+            // 턴 알림 완료 시 플레이어 턴 시작 이벤트 호출
+            turnNotice.OnCompleted += NotifyTurnNoticeCompleted;
+        }
     }
 }

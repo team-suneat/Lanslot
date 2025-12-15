@@ -44,7 +44,8 @@ namespace TeamSuneat
                 Log.Warning($"Name {name}: Damage 파싱 실패: {damageStr}");
                 return false;
             }
-            
+
+            row.TryGetValue("AttackAreaShape", out string attackAreaShapeStr);
             row.TryGetValue("Passive", out string passiveStr);
             row.TryGetValue("Hitmark", out string hitmarkStr);
             row.TryGetValue("RewardCurrency", out string rewardStr);
@@ -109,6 +110,17 @@ namespace TeamSuneat
                 else
                 {
                     Log.Warning($"Name {name}: Reward(Currency) enum 파싱 실패('{rewardStr}')");
+                }
+            }
+            if (!string.IsNullOrEmpty(attackAreaShapeStr))
+            {
+                if (GoogleSheetValueParsers.TryParseEnum(attackAreaShapeStr, out AttackAreaShape attackAreaShapeEnum))
+                {
+                    m.AttackAreaShape = attackAreaShapeEnum;
+                }
+                else
+                {
+                    Log.Warning($"Name {name}: AttackAreaShape enum 파싱 실패('{rewardStr}')");
                 }
             }
 

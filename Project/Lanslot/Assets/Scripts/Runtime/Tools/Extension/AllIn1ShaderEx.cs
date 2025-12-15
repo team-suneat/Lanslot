@@ -47,12 +47,10 @@ namespace TeamSuneat
                 if (value)
                 {
                     renderer.material.EnableKeyword("OUTBASE_ON");
-                    Log.Info(LogTags.Renderer, "�������� �ƿ������ Ȱ��ȭ�մϴ�. {0}", renderer.GetHierarchyPath());
                 }
                 else
                 {
                     renderer.material.DisableKeyword("OUTBASE_ON");
-                    Log.Info(LogTags.Renderer, "�������� �ƿ������ ��Ȱ��ȭ�մϴ�. {0}", renderer.GetHierarchyPath());
                 }
             }
         }
@@ -73,7 +71,6 @@ namespace TeamSuneat
             if (renderer != null)
             {
                 renderer.material.SetColor("_OutlineColor", color);
-                Log.Info(LogTags.Renderer, "�������� �ƿ���� ������ �����մϴ�. {0}, {1}", renderer.GetHierarchyPath(), color);
             }
         }
 
@@ -82,7 +79,6 @@ namespace TeamSuneat
             if (renderer != null)
             {
                 renderer.material.SetFloat("_OutlineAlpha", alpha);
-                Log.Info(LogTags.Renderer, "�������� �ƿ���� ������� �����մϴ�. {0}, {1}", renderer.GetHierarchyPath(), alpha);
             }
         }
 
@@ -107,13 +103,11 @@ namespace TeamSuneat
             {
                 if (value)
                 {
-                    renderer.material.EnableKeyword("INNEROUTLINE_ON");
-                    Log.Info(LogTags.Renderer, "�������� �̳� �ƿ������ Ȱ��ȭ�մϴ�. {0}", renderer.GetHierarchyPath());
+                    renderer.material.EnableKeyword("INNEROUTLINE_ON");                    
                 }
                 else
                 {
-                    renderer.material.DisableKeyword("INNEROUTLINE_ON");
-                    Log.Info(LogTags.Renderer, "�������� �̳� �ƿ������ ��Ȱ��ȭ�մϴ�. {0}", renderer.GetHierarchyPath());
+                    renderer.material.DisableKeyword("INNEROUTLINE_ON");                    
                 }
             }
         }
@@ -134,7 +128,6 @@ namespace TeamSuneat
             if (renderer != null)
             {
                 renderer.material.SetColor("_InnerOutlineColor", color);
-                Log.Info(LogTags.Renderer, "�������� �̳� �ƿ���� ������ �����մϴ�. {0}, {1}", renderer.GetHierarchyPath(), color);
             }
         }
 
@@ -142,8 +135,7 @@ namespace TeamSuneat
         {
             if (renderer != null)
             {
-                renderer.material.SetFloat("_InnerOutlineAlpha", alpha);
-                Log.Info(LogTags.Renderer, "�������� �̳� �ƿ���� ������� �����մϴ�. {0}, {1}", renderer.GetHierarchyPath(), alpha);
+                renderer.material.SetFloat("_InnerOutlineAlpha", alpha);                
             }
         }
 
@@ -201,7 +193,7 @@ namespace TeamSuneat
             onCompleted?.Invoke();
         }
 
-        public static IEnumerator FlikerHitEffect(this SpriteRenderer renderer, float interval, float duration, UnityAction onCompleted = null)
+        public static IEnumerator FlickerHitEffect(this SpriteRenderer renderer, float interval, float duration, UnityAction onCompleted = null)
         {
             if (renderer == null)
             {

@@ -114,6 +114,10 @@ namespace TeamSuneat.UserInterface
             // 이전 코루틴이 실행 중이면 중단
             StopApplyEffectsCoroutine();
 
+            // 직전 턴 상태를 초기화 후 스핀
+            ResetAllSlots();
+            UnlockAllSlots();
+
             SetState(SlotMachineState.Spinning);
             _stoppedSlotCount = 0;
             _currentStopIndex = 0;
@@ -214,7 +218,58 @@ namespace TeamSuneat.UserInterface
             }
 
             Log.Info(LogTags.UI_SlotMachine, "모든 슬롯 효과 적용 완료");
+            // 모든 슬롯을 닫아 재입력을 막음
+            LockAllSlots();
+
+            // 다음 턴 진행을 위해 상태 초기화 후 몬스터 턴 시작
+            SetState(SlotMachineState.None);
+            UpdateUI();
+
+            if (TurnManager.Instance != null && TurnManager.Instance.CurrentState == TurnState.PlayerTurn)
+            {
+                TurnManager.Instance.EndPlayerTurn();
+                TurnManager.Instance.StartMonsterTurn();
+            }
             _applyEffectsCoroutine = null;
+        }
+
+        private void LockAllSlots()
+        {
+            if (!_items.IsValid())
+            {
+                return;
+            }
+
+            for (int i = 0; i < _items.Length; i++)
+            {
+                _items[i]?.LockSlot();
+            }
+        }
+
+        private void ResetAllSlots()
+        {
+            if (!_items.IsValid())
+            {
+                return;
+            }
+
+            for (int i = 0; i < _items.Length; i++)
+            {
+                _items[i]?.ResetSlot();
+            }
+        }
+
+        private void UnlockAllSlots()
+        {
+            if (!_items.IsValid())
+            {
+                return;
+            }
+
+            for (int i = 0; i < _items.Length; i++)
+            {
+                _items[i]?.UnlockSlot();
+            }
         }
 
         private void StopApplyEffectsCoroutine()

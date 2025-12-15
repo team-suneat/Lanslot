@@ -44,7 +44,7 @@ namespace TeamSuneat.UserInterface
         public ButtonStateEffectType EffectType = ButtonStateEffectType.Sprite;
 
         private const SoundNames SOUND_POINTER_ENTER = SoundNames.UI_Sound_Move_Button;
-        private const SoundNames SOUND_POIUNTER_CLICK = SoundNames.UI_Sound_Click_Button;
+        private const SoundNames SOUND_POINTER_CLICK = SoundNames.UI_Sound_Click_Button;
 
         public bool IsLocked { get; private set; }
         public bool IsSelected { get; private set; }
@@ -53,6 +53,7 @@ namespace TeamSuneat.UserInterface
         private UnityAction _clickLeftEvent;
         private Coroutine _clickCoroutine;
         private IButtonStateEffect _stateEffect;
+        Tweener _punchScaleTweener ;
 
         public override void AutoSetting()
         {
@@ -108,6 +109,7 @@ namespace TeamSuneat.UserInterface
             base.OnDisabled();
 
             StopLockTweener();
+            StopPunchScaleButton();
         }
 
         private void Prepare()
@@ -153,7 +155,7 @@ namespace TeamSuneat.UserInterface
             base.OnPointerClickLeft();
             HandlePointerDownClickLeft();
 
-            AudioManager.Instance.PlaySFXOneShotUnscaled(SOUND_POIUNTER_CLICK);
+            AudioManager.Instance.PlaySFXOneShotUnscaled(SOUND_POINTER_CLICK);
         }
 
         protected override void OnPointerClickRight()
@@ -161,7 +163,7 @@ namespace TeamSuneat.UserInterface
             base.OnPointerClickRight();
             HandlePointerClickRight();
 
-            AudioManager.Instance.PlaySFXOneShotUnscaled(SOUND_POIUNTER_CLICK);
+            AudioManager.Instance.PlaySFXOneShotUnscaled(SOUND_POINTER_CLICK);
         }
 
         #endregion Pointer Event
@@ -591,6 +593,27 @@ namespace TeamSuneat.UserInterface
             if (NameText != null)
             {
                 NameText.TextPro.raycastTarget = false;
+            }
+        }
+
+
+        private void PunchScaleButton()
+        {
+            StopPunchScaleButton();
+
+            _punchScaleTweener =    transform.DOPunchScale(Vector3.one * 0.1f, 0.1f);
+            _punchScaleTweener.onComplete += () =>
+            {
+                _punchScaleTweener = null;
+            };
+        }
+
+        private void StopPunchScaleButton()
+        {
+            if (_punchScaleTweener != null)
+            {
+                _punchScaleTweener.Kill();
+                _punchScaleTweener = null;
             }
         }
     }

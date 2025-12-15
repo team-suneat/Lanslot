@@ -47,7 +47,7 @@ namespace TeamSuneat
             IsOccupied = monster != null;
         }
 
-        public void Flash(float duration = 0.3f)
+        public void Flash(float duration = 0.3f, Color? color = null, float blend = 1f)
         {
             if (_renderer == null)
             {
@@ -55,7 +55,7 @@ namespace TeamSuneat
             }
 
             StopFlash();
-            _flashCoroutine = StartCoroutine(FlashCoroutine(duration));
+            _flashCoroutine = StartCoroutine(FlashCoroutine(duration, color ?? Color.white, blend));
         }
 
         private void StopFlash()
@@ -72,13 +72,14 @@ namespace TeamSuneat
             }
         }
 
-        private IEnumerator FlashCoroutine(float duration)
+        private IEnumerator FlashCoroutine(float duration, Color color, float blend)
         {
             if (_renderer == null)
             {
                 yield break;
             }
 
+            _renderer.SetHitEffectColor(color, blend);
             _renderer.SetHitEffect(true);
             yield return new WaitForSeconds(duration);
             _renderer.SetHitEffect(false);

@@ -252,20 +252,7 @@ namespace TeamSuneat
             }
 
             TurnManager.Instance.StartPlayerTurn();
-
-            UITurnNotice turnNotice = ResourcesManager.SpawnTurnNotice(TurnNoticeOwner.Player);
-            if (turnNotice != null)
-            {
-                bool isCompleted = false;
-                turnNotice.OnCompleted += () => isCompleted = true;
-
-                while (!isCompleted)
-                {
-                    yield return null;
-                }
-            }
-
-            TurnManager.Instance.NotifyTurnNoticeCompleted();
+            TurnManager.Instance.SpawnPlayerTurnNotice();
         }
     }
 }
