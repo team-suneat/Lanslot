@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,9 +13,12 @@ namespace TeamSuneat.UserInterface
         [FoldoutGroup("#Component")][SerializeField] private UILocalizedText _itemNameText;
         [FoldoutGroup("#Component")][SerializeField] private Image _selectedImage;
 
+        [FoldoutGroup("#Settings")][SerializeField] private float _minSelectionDisplayTime = 0.3f;
+
         private SlotMachineEffectHandler _slotMachineHandler;
         private Sprite[] _shuffledSprites;
         private ItemNames[] _shuffledItemNames;
+        private Coroutine _effectCoroutine;
 
         public SlotState CurrentState { get; private set; } = SlotState.None;
         public Sprite CurrentSprite { get; private set; }
@@ -232,6 +236,13 @@ namespace TeamSuneat.UserInterface
 
         public void ResetSlot()
         {
+            // 효과 적용 코루틴 중지
+            if (_effectCoroutine != null)
+            {
+                StopCoroutine(_effectCoroutine);
+                _effectCoroutine = null;
+            }
+
             // 애니메이션 중지
             if (_animator != null)
             {
@@ -300,24 +311,40 @@ namespace TeamSuneat.UserInterface
                 return;
             }
 
+            // 기존 코루틴이 실행 중이면 중단
+            if (_effectCoroutine != null)
+            {
+                StopCoroutine(_effectCoroutine);
+            }
+
+            // 선택 이미지 활성화 및 효과 적용 코루틴 시작
+            _effectCoroutine = StartCoroutine(ApplyItemEffectCoroutine());
+        }
+
+        private IEnumerator ApplyItemEffectCoroutine()
+        {
             // 선택 이미지 활성화
             SetSelectedImageActive(true);
 
+            // 효과 적용 시작 시간 기록
+            float startTime = Time.time;
+
+            // 효과 적용 시도
             if (TryLoadSlotMachineHandler())
             {
-                _slotMachineHandler.ApplySlotResult(CurrentItemName, OnEffectCompleted);
+                _slotMachineHandler.ApplySlotResult(CurrentItemName, null);
             }
-            else
-            {
-                // 핸들러를 찾을 수 없으면 즉시 비활성화
-                OnEffectCompleted();
-            }
-        }
 
-        private void OnEffectCompleted()
-        {
+            // 최소 표시 시간까지 대기
+            float elapsedTime = Time.time - startTime;
+            if (elapsedTime < _minSelectionDisplayTime)
+            {
+                yield return new WaitForSeconds(_minSelectionDisplayTime - elapsedTime);
+            }
+
             // 선택 이미지 비활성화
             SetSelectedImageActive(false);
+            _effectCoroutine = null;
         }
 
         private void SetSelectedImageActive(bool active)

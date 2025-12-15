@@ -734,9 +734,9 @@ MonoBehaviour:
   - {fileID: 1583884169161362856}
   _statusText: {fileID: 9111877754038968596}
   _slotCount: 6
-  _spinDuration: 2
+  _spinDuration: 1
   _stopDelay: 0.5
-  _effectApplyDelay: 0.3
+  _effectApplyDelay: 0.75
   OnAllSlotsStopped:
     m_PersistentCalls:
       m_Calls: []

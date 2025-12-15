@@ -86,13 +86,13 @@ namespace TeamSuneat
         private IEnumerator ApplyWeaponEffectWithFlash(int targetRow, int targetColumn, WeaponData weaponData, System.Action onCompleted)
         {
             // 공격 영역의 타일들을 깜박임
-            FlashAttackAreaTiles(targetRow, targetColumn, weaponData.AttackRow, weaponData.AttackColumn);
+            FlashAttackAreaTiles(targetRow, targetColumn, weaponData.AttackRow, weaponData.AttackColumn, weaponData.AttackAreaShape);
 
             // 깜박임 효과를 잠시 보여줌
             yield return new WaitForSeconds(0.3f);
 
             // 몬스터 수집 및 공격 적용
-            _tileGroup.CollectMonstersInBox(targetRow, targetColumn, weaponData.AttackRow, weaponData.AttackColumn, _targetBuffer);
+            _tileGroup.CollectMonstersInArea(targetRow, targetColumn, weaponData.AttackRow, weaponData.AttackColumn, weaponData.AttackAreaShape, _targetBuffer);
             if (!_targetBuffer.IsValid())
             {
                 BattlefieldTile targetTile = _tileGroup.GetTile(targetRow, targetColumn);
@@ -116,7 +116,7 @@ namespace TeamSuneat
             onCompleted?.Invoke();
         }
 
-        private void FlashAttackAreaTiles(int centerRow, int centerColumn, int attackRow, int attackColumn)
+        private void FlashAttackAreaTiles(int centerRow, int centerColumn, int attackRow, int attackColumn, AttackAreaShape shape)
         {
             _flashTiles.Clear();
 
@@ -125,6 +125,28 @@ namespace TeamSuneat
                 return;
             }
 
+            switch (shape)
+            {
+                case AttackAreaShape.Rectangle:
+                    FlashRectangleTiles(centerRow, centerColumn, attackRow, attackColumn);
+                    break;
+
+                case AttackAreaShape.Cross:
+                    FlashCrossTiles(centerRow, centerColumn, attackRow, attackColumn);
+                    break;
+
+                case AttackAreaShape.X:
+                    FlashXTiles(centerRow, centerColumn, attackRow, attackColumn);
+                    break;
+
+                default:
+                    FlashRectangleTiles(centerRow, centerColumn, attackRow, attackColumn);
+                    break;
+            }
+        }
+
+        private void FlashRectangleTiles(int centerRow, int centerColumn, int attackRow, int attackColumn)
+        {
             int minRow = Mathf.Max(0, centerRow - attackRow);
             int maxRow = Mathf.Min(_tileGroup.Height - 1, centerRow + attackRow);
             int minColumn = Mathf.Max(0, centerColumn - attackColumn);
@@ -133,6 +155,73 @@ namespace TeamSuneat
             for (int row = minRow; row <= maxRow; row++)
             {
                 for (int column = minColumn; column <= maxColumn; column++)
+                {
+                    BattlefieldTile tile = _tileGroup.GetTile(row, column);
+                    if (tile != null)
+                    {
+                        tile.Flash(0.3f);
+                        _flashTiles.Add(tile);
+                    }
+                }
+            }
+        }
+
+        private void FlashCrossTiles(int centerRow, int centerColumn, int attackRow, int attackColumn)
+        {
+            // 십자가 형태: 중심에서 가로선과 세로선
+            // 가로선 (같은 row, column 범위)
+            int minColumn = Mathf.Max(0, centerColumn - attackColumn);
+            int maxColumn = Mathf.Min(_tileGroup.Width - 1, centerColumn + attackColumn);
+            for (int column = minColumn; column <= maxColumn; column++)
+            {
+                BattlefieldTile tile = _tileGroup.GetTile(centerRow, column);
+                if (tile != null)
+                {
+                    tile.Flash(0.3f);
+                    _flashTiles.Add(tile);
+                }
+            }
+
+            // 세로선 (같은 column, row 범위)
+            int minRow = Mathf.Max(0, centerRow - attackRow);
+            int maxRow = Mathf.Min(_tileGroup.Height - 1, centerRow + attackRow);
+            for (int row = minRow; row <= maxRow; row++)
+            {
+                BattlefieldTile tile = _tileGroup.GetTile(row, centerColumn);
+                if (tile != null)
+                {
+                    tile.Flash(0.3f);
+                    _flashTiles.Add(tile);
+                }
+            }
+        }
+
+        private void FlashXTiles(int centerRow, int centerColumn, int attackRow, int attackColumn)
+        {
+            // 엑스자 형태: 대각선 2개
+            // 대각선 1: 왼쪽 위에서 오른쪽 아래 (row 증가, column 증가)
+            int maxDistance = Mathf.Max(attackRow, attackColumn);
+            for (int i = -maxDistance; i <= maxDistance; i++)
+            {
+                int row = centerRow + i;
+                int column = centerColumn + i;
+                if (_tileGroup.IsValidTile(row, column))
+                {
+                    BattlefieldTile tile = _tileGroup.GetTile(row, column);
+                    if (tile != null)
+                    {
+                        tile.Flash(0.3f);
+                        _flashTiles.Add(tile);
+                    }
+                }
+            }
+
+            // 대각선 2: 오른쪽 위에서 왼쪽 아래 (row 증가, column 감소)
+            for (int i = -maxDistance; i <= maxDistance; i++)
+            {
+                int row = centerRow + i;
+                int column = centerColumn - i;
+                if (_tileGroup.IsValidTile(row, column))
                 {
                     BattlefieldTile tile = _tileGroup.GetTile(row, column);
                     if (tile != null)

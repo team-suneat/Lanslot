@@ -456,5 +456,114 @@ namespace TeamSuneat
                 }
             }
         }
+
+        /// <summary>
+        /// 중심 타일을 기준으로 공격 영역 형태에 따라 몬스터를 수집합니다.
+        /// </summary>
+        public void CollectMonstersInArea(int centerRow, int centerColumn, int attackRow, int attackColumn, AttackAreaShape shape, List<MonsterCharacter> buffer)
+        {
+            buffer.Clear();
+
+            if (_tiles == null)
+            {
+                return;
+            }
+
+            switch (shape)
+            {
+                case AttackAreaShape.Rectangle:
+                    CollectMonstersInRectangle(centerRow, centerColumn, attackRow, attackColumn, buffer);
+                    break;
+
+                case AttackAreaShape.Cross:
+                    CollectMonstersInCross(centerRow, centerColumn, attackRow, attackColumn, buffer);
+                    break;
+
+                case AttackAreaShape.X:
+                    CollectMonstersInX(centerRow, centerColumn, attackRow, attackColumn, buffer);
+                    break;
+
+                default:
+                    CollectMonstersInRectangle(centerRow, centerColumn, attackRow, attackColumn, buffer);
+                    break;
+            }
+        }
+
+        private void CollectMonstersInRectangle(int centerRow, int centerColumn, int attackRow, int attackColumn, List<MonsterCharacter> buffer)
+        {
+            int minRow = Mathf.Max(0, centerRow - attackRow);
+            int maxRow = Mathf.Min(HEIGHT - 1, centerRow + attackRow);
+            int minColumn = Mathf.Max(0, centerColumn - attackColumn);
+            int maxColumn = Mathf.Min(Width - 1, centerColumn + attackColumn);
+
+            for (int row = minRow; row <= maxRow; row++)
+            {
+                for (int column = minColumn; column <= maxColumn; column++)
+                {
+                    AddMonsterFromTile(row, column, buffer);
+                }
+            }
+        }
+
+        private void CollectMonstersInCross(int centerRow, int centerColumn, int attackRow, int attackColumn, List<MonsterCharacter> buffer)
+        {
+            // 십자가 형태: 중심에서 가로선과 세로선
+            // 가로선 (같은 row, column 범위)
+            int minColumn = Mathf.Max(0, centerColumn - attackColumn);
+            int maxColumn = Mathf.Min(Width - 1, centerColumn + attackColumn);
+            for (int column = minColumn; column <= maxColumn; column++)
+            {
+                AddMonsterFromTile(centerRow, column, buffer);
+            }
+
+            // 세로선 (같은 column, row 범위)
+            int minRow = Mathf.Max(0, centerRow - attackRow);
+            int maxRow = Mathf.Min(HEIGHT - 1, centerRow + attackRow);
+            for (int row = minRow; row <= maxRow; row++)
+            {
+                AddMonsterFromTile(row, centerColumn, buffer);
+            }
+        }
+
+        private void CollectMonstersInX(int centerRow, int centerColumn, int attackRow, int attackColumn, List<MonsterCharacter> buffer)
+        {
+            // 엑스자 형태: 대각선 2개
+            // 대각선 1: 왼쪽 위에서 오른쪽 아래 (row 증가, column 증가)
+            int maxDistance = Mathf.Max(attackRow, attackColumn);
+            for (int i = -maxDistance; i <= maxDistance; i++)
+            {
+                int row = centerRow + i;
+                int column = centerColumn + i;
+                if (IsValidTile(row, column))
+                {
+                    AddMonsterFromTile(row, column, buffer);
+                }
+            }
+
+            // 대각선 2: 오른쪽 위에서 왼쪽 아래 (row 증가, column 감소)
+            for (int i = -maxDistance; i <= maxDistance; i++)
+            {
+                int row = centerRow + i;
+                int column = centerColumn - i;
+                if (IsValidTile(row, column))
+                {
+                    AddMonsterFromTile(row, column, buffer);
+                }
+            }
+        }
+
+        private void AddMonsterFromTile(int row, int column, List<MonsterCharacter> buffer)
+        {
+            BattlefieldTile tile = GetTile(row, column);
+            if (tile == null || tile.CurrentMonster == null || !tile.CurrentMonster.IsAlive)
+            {
+                return;
+            }
+
+            if (!buffer.Contains(tile.CurrentMonster))
+            {
+                buffer.Add(tile.CurrentMonster);
+            }
+        }
     }
 }
