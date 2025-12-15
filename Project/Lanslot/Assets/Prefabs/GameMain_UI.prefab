@@ -10026,6 +10026,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUDSlotMachine
       objectReference: {fileID: 0}
+    - target: {fileID: 9046681911225091838, guid: 1ec5c67f0b2221443af961fda73411f9, type: 3}
+      propertyPath: ButtonIcon
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

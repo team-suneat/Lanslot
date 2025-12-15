@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 7033519675538305930}
   - component: {fileID: 1151454521974579227}
   m_Layer: 5
-  m_Name: StageTitle Text
+  m_Name: TurnTitle Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -310,9 +310,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7282433762277298593}
-  - component: {fileID: 9166663464639083084}
+  - component: {fileID: 3396252611190248265}
   m_Layer: 5
-  m_Name: UIStageTitleNotice
+  m_Name: UITurnNotice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -338,7 +338,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &9166663464639083084
+--- !u!114 &3396252611190248265
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -347,8 +347,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8144290836902770559}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cae4516dead1b8041ad504b5fe1ddb84, type: 3}
+  m_Script: {fileID: 11500000, guid: 7cbc12d561dc0c7459aa4119f0f6372e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _titleText: {fileID: 7033519675538305930}
+  _displayDuration: 1.5
   _fader: {fileID: 4765458872486299392}

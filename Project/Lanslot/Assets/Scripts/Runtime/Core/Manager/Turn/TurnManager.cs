@@ -1,3 +1,4 @@
+using TeamSuneat.UserInterface;
 using UnityEngine.Events;
 
 namespace TeamSuneat
@@ -120,6 +121,13 @@ namespace TeamSuneat
             CurrentTurnNumber++;
 
             Log.Info(LogTags.Turn, "플레이어 턴 시작: Turn {0}", CurrentTurnNumber);
+        }
+
+        /// <summary>
+        /// 턴 알림 완료 후 플레이어 턴 시작 이벤트를 발생시킵니다.
+        /// </summary>
+        public void NotifyTurnNoticeCompleted()
+        {
             OnPlayerTurnStart?.Invoke();
         }
 
@@ -209,6 +217,7 @@ namespace TeamSuneat
 
             CurrentState = TurnState.MonsterTurn;
 
+            ResourcesManager.SpawnTurnNotice(TurnNoticeOwner.Monster);
             Log.Info(LogTags.Turn, "몬스터 턴 시작: Turn {0}", CurrentTurnNumber);
             OnMonsterTurnStart?.Invoke();
         }

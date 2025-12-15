@@ -39,6 +39,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Ingame
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 577e02325167be74b8eb99ec2a3eae09
+    m_Address: Assets/Addressables/Atlas/atlas_ui.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Ingame
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5bf0b25f873534042a43d8c1a779f93a
     m_Address: Assets/Addressables/Prefab/Stage/Stage6.prefab
     m_ReadOnly: 0
@@ -89,6 +95,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b28b1b959ac99b847ac38b1d32bc2ec4
     m_Address: Assets/Addressables/Atlas/atlas_character.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Ingame
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c09305cba701e2a42bd514b7cf397ff4
+    m_Address: Assets/Addressables/Prefab/UI/Notice/UITurnNotice.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - Ingame

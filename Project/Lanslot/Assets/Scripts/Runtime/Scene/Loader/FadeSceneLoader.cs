@@ -23,7 +23,7 @@ namespace TeamSuneat
                 if (fader != null)
                 {
                     fader.FadeInDuration = duration;
-                    fader.SetCompeletedCallback(StopKeepWaiting);
+                    fader.SetCompletedCallback(StopKeepWaiting);
                     fader.FadeIn();
                 }
             }
@@ -45,7 +45,7 @@ namespace TeamSuneat
                 if (fader != null)
                 {
                     fader.FadeOutDuration = duration;
-                    fader.SetCompeletedCallback(StopKeepWaiting);
+                    fader.SetCompletedCallback(StopKeepWaiting);
                     fader.FadeOut();
                 }
             }

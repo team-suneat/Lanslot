@@ -61,7 +61,7 @@ namespace TeamSuneat
             CanvasGroup.alpha = alpha;
         }
 
-        public void SetCompeletedCallback(UnityAction callback)
+        public void SetCompletedCallback(UnityAction callback)
         {
             _onCompleteCallback = callback;
         }

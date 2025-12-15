@@ -203,6 +203,33 @@ namespace TeamSuneat
             return notice;
         }
 
+        public static UITurnNotice SpawnTurnNotice(TurnNoticeOwner owner)
+        {
+            if (GameSetting.Instance.Play.HideUserInterface)
+            {
+                return null;
+            }
+
+            CanvasOrder canvasOrder = UIManager.Instance?.GetCanvas(CanvasOrderNames.Notice);
+            if (canvasOrder == null)
+            {
+                return null;
+            }
+
+            GameObject spawnedObject = SpawnPrefab("UITurnNotice", canvasOrder.transform);
+            if (spawnedObject == null)
+            {
+                return null;
+            }
+
+            spawnedObject.ResetLocalTransform();
+
+            UITurnNotice notice = spawnedObject.GetComponent<UITurnNotice>();
+            notice?.Show(owner);
+
+            return notice;
+        }
+
         #endregion Notice
 
         public static UIGauge SpawnGauge(Vital vital)

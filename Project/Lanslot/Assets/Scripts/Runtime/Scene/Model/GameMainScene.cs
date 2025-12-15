@@ -169,8 +169,6 @@ namespace TeamSuneat
                 _currentStageSystem.StartStage();
 
                 Log.Info(LogTags.Stage, "스테이지 시스템 생성 완료: {0}", stageName.ToLogString());
-
-                TurnManager.Instance.StartPlayerTurn();
             }
             else
             {

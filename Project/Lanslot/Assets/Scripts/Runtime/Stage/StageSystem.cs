@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using TeamSuneat.Data;
+using TeamSuneat.UserInterface;
 using UnityEngine;
 
 namespace TeamSuneat
@@ -72,8 +73,6 @@ namespace TeamSuneat
             Vector3 originPosition = transform.position;
             _battlefieldTileGroup.Initialize(_currentStageData.Width, originPosition);
 
-            SpawnStageTitleNotice();
-
             Log.Progress(LogTags.Stage, "1~10웨이브 초기 세팅을 시작합니다.");
 
             StartCoroutine(SetupInitialWavesCoroutine(Name));
@@ -86,6 +85,8 @@ namespace TeamSuneat
             SpawnPlayerCharacter();
 
             Log.Info(LogTags.Stage, "스테이지 초기화 완료: {0}, Width={1}", Name, _currentStageData.Width);
+
+            StartCoroutine(StartStageFlow());
         }
 
         public void StartStage()
@@ -231,9 +232,40 @@ namespace TeamSuneat
             }
         }
 
-        private void SpawnStageTitleNotice()
+        private UIStageTitleNotice SpawnStageTitleNotice()
         {
-            ResourcesManager.SpawnStageTitleNotice(Name);
+            return ResourcesManager.SpawnStageTitleNotice(Name);
+        }
+
+        private IEnumerator StartStageFlow()
+        {
+            UIStageTitleNotice stageNotice = SpawnStageTitleNotice();
+            if (stageNotice != null)
+            {
+                bool isCompleted = false;
+                stageNotice.OnCompleted += () => isCompleted = true;
+
+                while (!isCompleted)
+                {
+                    yield return null;
+                }
+            }
+
+            TurnManager.Instance.StartPlayerTurn();
+
+            UITurnNotice turnNotice = ResourcesManager.SpawnTurnNotice(TurnNoticeOwner.Player);
+            if (turnNotice != null)
+            {
+                bool isCompleted = false;
+                turnNotice.OnCompleted += () => isCompleted = true;
+
+                while (!isCompleted)
+                {
+                    yield return null;
+                }
+            }
+
+            TurnManager.Instance.NotifyTurnNoticeCompleted();
         }
     }
 }

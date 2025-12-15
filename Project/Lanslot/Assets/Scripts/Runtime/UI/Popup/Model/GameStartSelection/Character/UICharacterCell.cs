@@ -10,7 +10,6 @@ namespace TeamSuneat.UserInterface
     public class UICharacterCell : XBehaviour
     {
         [Title("캐릭터 슬롯 UI 컴포넌트")]
-        [SerializeField] private Image _frameImage;                     // 기존 선택 프레임
         [SerializeField] private Image _lockedFrameImage;               // 잠금 상태 프레임
         [SerializeField] private Image _unlockedFrameImage;             // 해금 상태 프레임
         [SerializeField] private Image _lockImage;                      // 잠금 아이콘
@@ -32,13 +31,12 @@ namespace TeamSuneat.UserInterface
         {
             base.AutoGetComponents();
 
-            _frameImage = this.FindComponent<Image>("Frame Image");
-            _lockedFrameImage = this.FindComponent<Image>("Locked Frame Image");
-            _unlockedFrameImage = this.FindComponent<Image>("Unlocked Frame Image");
+            _lockedFrameImage = this.FindComponent<Image>("LockedFrame Image");
+            _unlockedFrameImage = this.FindComponent<Image>("UnlockedFrame Image");
             _lockImage = this.FindComponent<Image>("Lock Image");
             _selectedImage = this.FindComponent<Image>("Selected Image");
             _bonusImage = this.FindComponent<Image>("Bonus Image");
-            _iconImage = this.FindComponent<Image>("Character Icon Image");
+            _iconImage = this.FindComponent<Image>("Background Image/Character Icon Image");
             _nameText = this.FindComponent<UILocalizedText>("Character Name Text");
             _clickButton = this.FindComponent<UIPointerEventButton>("Click Button");
         }
@@ -121,7 +119,6 @@ namespace TeamSuneat.UserInterface
 
         private void SetSelectedImage(bool isSelected)
         {
-            _frameImage?.SetActive(isSelected);
             _selectedImage?.SetActive(isSelected);
         }
 
@@ -155,9 +152,6 @@ namespace TeamSuneat.UserInterface
         public void Select()
         {
             RefreshSelected(true);
-
-            VProfile profieInfo = GameApp.GetSelectedProfile();
-            // profieInfo.Character.Select(CharacterName);
         }
 
         public void Deselect()
@@ -174,14 +168,12 @@ namespace TeamSuneat.UserInterface
         {
             IsLocked = true;
             _isSelected = true;
-            _frameImage?.SetColor(GameColors.ActivateYellow, 0.75f);
             ApplyVisualStates();
         }
 
         public void Unlock()
         {
             IsLocked = false;
-            _frameImage?.SetColor(GameColors.Ivory, 0.75f);
             ApplyVisualStates();
         }
     }
