@@ -304,10 +304,11 @@ namespace TeamSuneat.UserInterface
             }
         }
 
-        public void ApplyItemEffect()
+        public void ApplyItemEffect(System.Action onCompleted = null)
         {
             if (CurrentItemName == ItemNames.None)
             {
+                onCompleted?.Invoke();
                 return;
             }
 
@@ -318,10 +319,10 @@ namespace TeamSuneat.UserInterface
             }
 
             // 선택 이미지 활성화 및 효과 적용 코루틴 시작
-            _effectCoroutine = StartCoroutine(ApplyItemEffectCoroutine());
+            _effectCoroutine = StartCoroutine(ApplyItemEffectCoroutine(onCompleted));
         }
 
-        private IEnumerator ApplyItemEffectCoroutine()
+        private IEnumerator ApplyItemEffectCoroutine(System.Action onCompleted)
         {
             // 선택 이미지 활성화
             SetSelectedImageActive(true);
@@ -329,10 +330,25 @@ namespace TeamSuneat.UserInterface
             // 효과 적용 시작 시간 기록
             float startTime = Time.time;
 
+            // 효과 완료를 기다리기 위한 플래그
+            bool isEffectCompleted = false;
+
             // 효과 적용 시도
             if (TryLoadSlotMachineHandler())
             {
-                _slotMachineHandler.ApplySlotResult(CurrentItemName, null);
+                _slotMachineHandler.ApplySlotResult(CurrentItemName, () => {
+                    isEffectCompleted = true;
+                });
+            }
+            else
+            {
+                isEffectCompleted = true;
+            }
+
+            // 효과가 완료될 때까지 대기
+            while (!isEffectCompleted)
+            {
+                yield return null;
             }
 
             // 최소 표시 시간까지 대기
@@ -345,6 +361,8 @@ namespace TeamSuneat.UserInterface
             // 선택 이미지 비활성화
             SetSelectedImageActive(false);
             _effectCoroutine = null;
+
+            onCompleted?.Invoke();
         }
 
         private void SetSelectedImageActive(bool active)

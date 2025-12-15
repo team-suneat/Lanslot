@@ -1,7 +1,6 @@
-﻿using System;
+﻿using Sirenix.OdinInspector;
+using System;
 using System.Collections;
-using Sirenix.OdinInspector;
-using TeamSuneat;
 using UnityEngine;
 
 namespace TeamSuneat.Feedbacks
@@ -178,6 +177,7 @@ namespace TeamSuneat.Feedbacks
         protected int CurrentSequenceIndex = 0;
         protected float LastBeatTimestamp = 0f;
         protected bool _isHostGameFeedbacksNotNull;
+
         protected override void OnEnabled()
         {
             base.OnEnabled();

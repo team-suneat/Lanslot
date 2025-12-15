@@ -207,7 +207,19 @@ namespace TeamSuneat.UserInterface
                     break;
                 }
 
-                _items[i].ApplyItemEffect();
+                // 효과 완료를 기다리기 위한 플래그
+                bool isEffectCompleted = false;
+
+                _items[i].ApplyItemEffect(() => {
+                    isEffectCompleted = true;
+                });
+
+                // 효과가 완료될 때까지 대기
+                while (!isEffectCompleted)
+                {
+                    yield return null;
+                }
+
                 Log.Info(LogTags.UI_SlotMachine, "슬롯 {0}/{1} 효과 적용 완료", i + 1, _items.Length);
 
                 // 마지막 슬롯이 아니면 딜레이

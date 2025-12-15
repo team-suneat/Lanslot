@@ -1,5 +1,3 @@
-using Lean.Pool;
-
 namespace TeamSuneat
 {
     public enum VFXParentTypes

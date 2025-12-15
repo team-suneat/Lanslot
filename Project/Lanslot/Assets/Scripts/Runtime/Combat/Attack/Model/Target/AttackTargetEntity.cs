@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace TeamSuneat
 {
     public class AttackTargetEntity : AttackEntity
@@ -14,11 +16,15 @@ namespace TeamSuneat
             if (targetVital != null)
             {
                 _damageInfo.SetTargetVital(targetVital);
+                UpdatePositionToTargetTile();
             }
         }
 
         public override void Activate()
         {
+            // Activate에서 피드백이 호출되기 전에 위치를 설정해야 함
+            UpdatePositionToTargetTile();
+            
             base.Activate();
 
             Execute();
@@ -34,6 +40,7 @@ namespace TeamSuneat
             }
 
             RefreshTarget();
+            UpdatePositionToTargetTile();
             ApplyAttack();
         }
 
@@ -62,6 +69,52 @@ namespace TeamSuneat
             }
         }
 
+        private void UpdatePositionToTargetTile()
+        {
+            if (_damageInfo.TargetVital == null)
+            {
+                return;
+            }
+
+            Character targetCharacter = _damageInfo.TargetVital.Owner;
+            if (targetCharacter == null)
+            {
+                return;
+            }
+
+            // BattlefieldTileGroup 가져오기
+            BattlefieldTileGroup tileGroup = GetBattlefieldTileGroup();
+            if (tileGroup == null)
+            {
+                // 타일 그룹을 찾을 수 없으면 타겟의 position 사용
+                transform.position = _damageInfo.TargetVital.position;
+                return;
+            }
+
+            // MonsterCharacter인 경우 타일 위치 찾기
+            if (targetCharacter is MonsterCharacter monsterCharacter)
+            {
+                if (tileGroup.TryFindMonster(monsterCharacter, out int row, out int column))
+                {
+                    transform.position = tileGroup.GetTileWorldPosition(row, column);
+                    return;
+                }
+            }
+
+            // 타일 위치를 찾을 수 없으면 타겟의 position 사용
+            transform.position = _damageInfo.TargetVital.position;
+        }
+
+        private BattlefieldTileGroup GetBattlefieldTileGroup()
+        {
+            if (GameApp.Instance?.gameManager?.CurrentStageSystem != null)
+            {
+                return GameApp.Instance.gameManager.CurrentStageSystem.BattlefieldTileGroup;
+            }
+
+            return null;
+        }
+
         public override Vital GetTargetVital()
         {
             switch (AssetData.AttackTargetType)
@@ -87,28 +140,10 @@ namespace TeamSuneat
             return Owner?.TargetCharacter?.MyVital;
         }
 
-        private bool CheckDamageableVital(Vital targetVital)
-        {
-            if (targetVital == null)
-            {
-                return false;
-            }
-            else if (!targetVital.IsAlive)
-            {
-                return false;
-            }
-            else if (targetVital.Life.CheckInvulnerable())
-            {
-                return false;
-            }
-
-            return true;
-        }
-
         private void ApplyAttack()
         {
-            bool isAttackSuccessed = AttackToTarget();
-            OnExecute(isAttackSuccessed);
+            bool isAttackSucceeded = AttackToTarget();
+            OnExecute(isAttackSucceeded);
         }
 
         private bool AttackToTarget()
@@ -122,104 +157,9 @@ namespace TeamSuneat
             return ProcessDamageResults();
         }
 
-        private bool ValidateAttackConditions()
-        {
-            if (_damageInfo.TargetVital == null)
-            {
-                LogWarning("공격 독립체의 목표 바이탈이 설정되지 않았습니다. Hitmark: {0}, Entity: {1}", _damageInfo.HitmarkAssetData.Name.ToLogString(), this.GetHierarchyPath());
-                return false;
-            }
-
-            if (!_damageInfo.HitmarkAssetData.IsValid())
-            {
-                LogError("피해량 정보의 히트마크 에셋이 올바르지 않습니다. Hitmark:{0}, Entity: {1}", Name.ToLogString(), this.GetHierarchyPath());
-                return false;
-            }
-
-            return true;
-        }
-
         private void ExecuteDamageCalculation()
         {
-            _damageInfo.Execute();
-        }
-
-        private bool ProcessDamageResults()
-        {
-            if (!_damageInfo.DamageResults.IsValid())
-            {
-                LogWarning("공격 독립체의 피해 결과가 설정되지 않았습니다. Hitmark: {0}, Entity: {1}", _damageInfo.HitmarkAssetData.Name.ToLogString(), this.GetHierarchyPath());
-                return false;
-            }
-
-            bool isAttackSuccessed = false;
-            for (int i = 0; i < _damageInfo.DamageResults.Count; i++)
-            {
-                if (ProcessSingleDamageResult(_damageInfo.DamageResults[i]))
-                {
-                    isAttackSuccessed = true;
-                }
-            }
-
-            return isAttackSuccessed;
-        }
-
-        private bool ProcessSingleDamageResult(DamageResult damageResult)
-        {
-            switch (damageResult.DamageType)
-            {
-                case DamageTypes.Heal:
-                case DamageTypes.HealOverTime:
-                    return ProcessHealDamage(damageResult);
-
-                case DamageTypes.Charge:
-                    return ProcessChargeDamage(damageResult);
-
-                default:
-                    return ProcessRegularDamage(damageResult);
-            }
-        }
-
-        private bool ProcessHealDamage(DamageResult damageResult)
-        {
-            _damageInfo.TargetVital.Heal(damageResult.DamageValueToInt);
-            _damageInfo.TargetVital.DamageBuffOnHit(damageResult);
-            return true;
-        }
-
-        private bool ProcessChargeDamage(DamageResult damageResult)
-        {
-            _damageInfo.TargetVital.Charge(damageResult.DamageValueToInt);
-            _damageInfo.TargetVital.DamageBuffOnHit(damageResult);
-            return true;
-        }
-
-        private bool ProcessRegularDamage(DamageResult damageResult)
-        {
-            if (_damageInfo.TargetVital.CheckDamageImmunity(damageResult))
-            {
-                return false;
-            }
-
-            if (_damageInfo.TargetVital.TakeDamage(damageResult))
-            {
-                TriggerDamageFeedback();
-                return true;
-            }
-
-            return false;
-        }
-
-        private void TriggerDamageFeedback()
-        {
-            if (_damageInfo.TargetVital.IsAlive)
-            {
-                TriggerAttackOnHitDamageableFeedback(_damageInfo.TargetVital.position);
-            }
-            else
-            {
-                TriggerAttackOnKillFeedback(_damageInfo.TargetVital.position);
-            }
+            _damageInfo?.Execute();
         }
     }
 }

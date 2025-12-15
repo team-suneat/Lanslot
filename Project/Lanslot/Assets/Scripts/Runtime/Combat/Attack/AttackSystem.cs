@@ -85,8 +85,6 @@ namespace TeamSuneat
                     item.Value.OnBattleReady();
                 }
             }
-
-            Activate(_basicAttackHitmark);
         }
 
         //───────────────────────────────────────────────────────────────────────────────────────────────────────────────

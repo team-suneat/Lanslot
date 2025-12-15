@@ -221,24 +221,10 @@ namespace TeamSuneat
 
             CurrentState = TurnState.MonsterTurn;
 
-            ResourcesManager.SpawnTurnNotice(TurnNoticeOwner.Monster);
             Log.Info(LogTags.Turn, "몬스터 턴 시작: Turn {0}", CurrentTurnNumber);
             OnMonsterTurnStart?.Invoke();
 
-            if (GameApp.Instance != null && _monsterAdvanceCoroutine != null)
-            {
-                GameApp.Instance.StopCoroutine(_monsterAdvanceCoroutine);
-            }
-
-            if (GameApp.Instance != null)
-            {
-                _monsterAdvanceCoroutine = GameApp.Instance.StartCoroutine(AdvanceMonstersOneStepCoroutine());
-            }
-            else
-            {
-                // GameApp이 없으면 즉시 처리
-                AdvanceMonstersOneStepImmediate();
-            }
+            SpawnMonsterTurnNotice();
         }
 
         /// <summary>
@@ -432,8 +418,11 @@ namespace TeamSuneat
                 yield break;
             }
 
-            StartPlayerTurn();
-            SpawnPlayerTurnNotice();
+               if (characterManager.Player != null && characterManager.Player.IsAlive)
+            {
+                StartPlayerTurn();
+                SpawnPlayerTurnNotice();
+            }
             _monsterAdvanceCoroutine = null;
         }
 
@@ -505,8 +494,11 @@ namespace TeamSuneat
                 return;
             }
 
-            StartPlayerTurn();
-            SpawnPlayerTurnNotice();
+            if (characterManager.Player != null && characterManager.Player.IsAlive)
+            {
+                StartPlayerTurn();
+                SpawnPlayerTurnNotice();
+            }
         }
 
         public void SpawnPlayerTurnNotice()
@@ -521,6 +513,38 @@ namespace TeamSuneat
 
             // 턴 알림 완료 시 플레이어 턴 시작 이벤트 호출
             turnNotice.OnCompleted += NotifyTurnNoticeCompleted;
+        }
+
+        private void SpawnMonsterTurnNotice()
+        {
+            UITurnNotice turnNotice = ResourcesManager.SpawnTurnNotice(TurnNoticeOwner.Monster);
+
+            if (turnNotice == null)
+            {
+                StartMonsterAdvance();
+                return;
+            }
+
+            // 턴 알림 완료 시 몬스터 전진 시작
+            turnNotice.OnCompleted += StartMonsterAdvance;
+        }
+
+        private void StartMonsterAdvance()
+        {
+            if (GameApp.Instance != null && _monsterAdvanceCoroutine != null)
+            {
+                GameApp.Instance.StopCoroutine(_monsterAdvanceCoroutine);
+            }
+
+            if (GameApp.Instance != null)
+            {
+                _monsterAdvanceCoroutine = GameApp.Instance.StartCoroutine(AdvanceMonstersOneStepCoroutine());
+            }
+            else
+            {
+                // GameApp이 없으면 즉시 처리
+                AdvanceMonstersOneStepImmediate();
+            }
         }
     }
 }

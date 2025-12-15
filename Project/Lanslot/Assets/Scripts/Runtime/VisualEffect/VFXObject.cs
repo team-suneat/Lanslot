@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using Lean.Pool;
+﻿using Lean.Pool;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
@@ -21,10 +20,7 @@ namespace TeamSuneat
 
         [Title("VFXObject", "Values")]
         public bool OnlyOne;
-
         public bool HaveParent;
-        [EnableIf("HaveParent")] public VFXParentTypes ParentType;
-        [DisableIf("HaveParent")] public VFXPositionTypes PositionType;
         [EnableIf("HaveParent")] public bool BreakParentPosition;
         [EnableIf("BreakParentPosition")] public float BreakDelayTime;
 
@@ -60,11 +56,6 @@ namespace TeamSuneat
         private void Awake()
         {
             _defaultLocalScale = transform.localScale;
-
-            if (ParentType == VFXParentTypes.None && BreakParentPosition)
-            {
-                Log.Error("parnet type이 설정되지 않은 VFXObject는 BreakParentPosition를 활성화할 수 없습니다. {0}", this.GetHierarchyPath());
-            }
         }
 
         public void OnSpawn()

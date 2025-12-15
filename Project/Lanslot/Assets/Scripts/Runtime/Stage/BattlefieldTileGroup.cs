@@ -585,12 +585,26 @@ namespace TeamSuneat
             }
         }
 
+        /// <summary>
+        /// 사각형 영역의 범위를 계산합니다. 정확히 attackRow x attackColumn 크기의 영역입니다.
+        /// 주의: WeaponData에서 AttackRow는 실제로 가로(column) 방향, AttackColumn은 실제로 세로(row) 방향을 의미합니다.
+        /// </summary>
+        public void GetRectangleBounds(int centerRow, int centerColumn, int attackRow, int attackColumn, out int minRow, out int maxRow, out int minColumn, out int maxColumn)
+        {
+            // WeaponData의 AttackRow와 AttackColumn은 용어와 실제 의미가 반대입니다.
+            // AttackRow = 가로(column) 방향, AttackColumn = 세로(row) 방향
+            int halfRow = (attackColumn - 1) / 2;  // AttackColumn을 row 범위에 사용
+            int halfColumn = (attackRow - 1) / 2;  // AttackRow를 column 범위에 사용
+            
+            minRow = Mathf.Max(0, centerRow - halfRow);
+            maxRow = Mathf.Min(HEIGHT - 1, centerRow + attackColumn / 2);
+            minColumn = Mathf.Max(0, centerColumn - halfColumn);
+            maxColumn = Mathf.Min(Width - 1, centerColumn + attackRow / 2);
+        }
+
         private void CollectMonstersInRectangle(int centerRow, int centerColumn, int attackRow, int attackColumn, List<MonsterCharacter> buffer)
         {
-            int minRow = Mathf.Max(0, centerRow - attackRow);
-            int maxRow = Mathf.Min(HEIGHT - 1, centerRow + attackRow);
-            int minColumn = Mathf.Max(0, centerColumn - attackColumn);
-            int maxColumn = Mathf.Min(Width - 1, centerColumn + attackColumn);
+            GetRectangleBounds(centerRow, centerColumn, attackRow, attackColumn, out int minRow, out int maxRow, out int minColumn, out int maxColumn);
 
             for (int row = minRow; row <= maxRow; row++)
             {
@@ -601,20 +615,42 @@ namespace TeamSuneat
             }
         }
 
+        /// <summary>
+        /// 십자가 형태의 가로선 범위를 계산합니다.
+        /// 주의: WeaponData에서 AttackRow는 실제로 가로(column) 방향을 의미합니다.
+        /// </summary>
+        public void GetCrossHorizontalBounds(int centerRow, int centerColumn, int attackRow, out int minColumn, out int maxColumn)
+        {
+            // AttackRow는 실제로 가로(column) 방향
+            int halfColumn = (attackRow - 1) / 2;
+            minColumn = Mathf.Max(0, centerColumn - halfColumn);
+            maxColumn = Mathf.Min(Width - 1, centerColumn + attackRow / 2);
+        }
+
+        /// <summary>
+        /// 십자가 형태의 세로선 범위를 계산합니다.
+        /// 주의: WeaponData에서 AttackColumn은 실제로 세로(row) 방향을 의미합니다.
+        /// </summary>
+        public void GetCrossVerticalBounds(int centerRow, int centerColumn, int attackColumn, out int minRow, out int maxRow)
+        {
+            // AttackColumn은 실제로 세로(row) 방향
+            int halfRow = (attackColumn - 1) / 2;
+            minRow = Mathf.Max(0, centerRow - halfRow);
+            maxRow = Mathf.Min(HEIGHT - 1, centerRow + attackColumn / 2);
+        }
+
         private void CollectMonstersInCross(int centerRow, int centerColumn, int attackRow, int attackColumn, List<MonsterCharacter> buffer)
         {
             // 십자가 형태: 중심에서 가로선과 세로선
-            // 가로선 (같은 row, column 범위)
-            int minColumn = Mathf.Max(0, centerColumn - attackColumn);
-            int maxColumn = Mathf.Min(Width - 1, centerColumn + attackColumn);
+            // 가로선 (같은 row, column 범위) - 정확히 attackColumn 크기
+            GetCrossHorizontalBounds(centerRow, centerColumn, attackColumn, out int minColumn, out int maxColumn);
             for (int column = minColumn; column <= maxColumn; column++)
             {
                 AddMonsterFromTile(centerRow, column, buffer);
             }
 
-            // 세로선 (같은 column, row 범위)
-            int minRow = Mathf.Max(0, centerRow - attackRow);
-            int maxRow = Mathf.Min(HEIGHT - 1, centerRow + attackRow);
+            // 세로선 (같은 column, row 범위) - 정확히 attackRow 크기
+            GetCrossVerticalBounds(centerRow, centerColumn, attackRow, out int minRow, out int maxRow);
             for (int row = minRow; row <= maxRow; row++)
             {
                 AddMonsterFromTile(row, centerColumn, buffer);

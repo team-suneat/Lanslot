@@ -8,6 +8,13 @@ namespace TeamSuneat
 {
     public class PlayerWeaponAbility : CharacterAbility
     {
+        private const float FLASH_DURATION = 0.3f;        
+        private const float AREA_ATTACK_DELAY = 0.3f;
+        private const float CENTER_TILE_BLEND = 0.5f;
+        private const float NORMAL_TILE_BLEND = 0.1f;
+        private const int MIN_HIT_COUNT = 1;
+        private const int MIN_ATTACK_RANGE = 0;
+
         private StageSystem _stageSystem;
         private BattlefieldTileGroup _tileGroup;
         private List<MonsterCharacter> _targetBuffer = new();
@@ -58,10 +65,9 @@ namespace TeamSuneat
                 return;
             }
 
-            if (weaponData.AttackRange <= 0)
+            if (weaponData.AttackRange <= MIN_ATTACK_RANGE)
             {
-                ApplyWeaponEffectToCharacter(Owner, weaponData);
-                onCompleted?.Invoke();
+                StartCoroutine(ApplyWeaponEffectToCharacterCoroutine(Owner, weaponData, onCompleted));
                 return;
             }
 
@@ -85,29 +91,11 @@ namespace TeamSuneat
 
         private IEnumerator ApplyWeaponEffectWithFlash(int targetRow, int targetColumn, WeaponData weaponData, System.Action onCompleted)
         {
-            // 공격 영역의 타일들을 깜박임
-            FlashAttackAreaTiles(targetRow, targetColumn, weaponData.AttackRow, weaponData.AttackColumn, weaponData.AttackAreaShape);
-
-            // 깜박임 효과를 잠시 보여줌
-            yield return new WaitForSeconds(0.3f);
-
-            // 몬스터 수집 및 공격 적용
-            _tileGroup.CollectMonstersInArea(targetRow, targetColumn, weaponData.AttackRow, weaponData.AttackColumn, weaponData.AttackAreaShape, _targetBuffer);
-            if (!_targetBuffer.IsValid())
+            bool isAreaApplied = false;
+            yield return StartCoroutine(TryApplyAreaWeaponEffect(targetRow, targetColumn, weaponData, (result) => isAreaApplied = result));
+            if (!isAreaApplied)
             {
-                BattlefieldTile targetTile = _tileGroup.GetTile(targetRow, targetColumn);
-                if (targetTile != null && targetTile.CurrentMonster != null)
-                {
-                    _targetBuffer.Add(targetTile.CurrentMonster);
-                }
-            }
-
-            for (int i = 0; i < _targetBuffer.Count; i++)
-            {
-                if (_targetBuffer[i] != null)
-                {
-                    ApplyWeaponEffectToCharacter(_targetBuffer[i], weaponData);
-                }
+                yield return StartCoroutine(ApplyWeaponEffectFallback(targetRow, targetColumn, weaponData));
             }
 
             // 공격이 들어간 후 깜박임 해제
@@ -147,10 +135,7 @@ namespace TeamSuneat
 
         private void FlashRectangleTiles(int centerRow, int centerColumn, int attackRow, int attackColumn)
         {
-            int minRow = Mathf.Max(0, centerRow - attackRow);
-            int maxRow = Mathf.Min(_tileGroup.Height - 1, centerRow + attackRow);
-            int minColumn = Mathf.Max(0, centerColumn - attackColumn);
-            int maxColumn = Mathf.Min(_tileGroup.Width - 1, centerColumn + attackColumn);
+            _tileGroup.GetRectangleBounds(centerRow, centerColumn, attackRow, attackColumn, out int minRow, out int maxRow, out int minColumn, out int maxColumn);
 
             for (int row = minRow; row <= maxRow; row++)
             {
@@ -159,7 +144,8 @@ namespace TeamSuneat
                     BattlefieldTile tile = _tileGroup.GetTile(row, column);
                     if (tile != null)
                     {
-                        tile.Flash(0.3f, Color.red, 0.1f);
+                        float blend = row == centerRow && column == centerColumn ? CENTER_TILE_BLEND : NORMAL_TILE_BLEND;
+                        tile.Flash(FLASH_DURATION, Color.red, blend);
                         _flashTiles.Add(tile);
                     }
                 }
@@ -169,30 +155,30 @@ namespace TeamSuneat
         private void FlashCrossTiles(int centerRow, int centerColumn, int attackRow, int attackColumn)
         {
             // 십자가 형태: 중심에서 가로선과 세로선
-            // 가로선 (같은 row, column 범위)
-            int minColumn = Mathf.Max(0, centerColumn - attackColumn);
-            int maxColumn = Mathf.Min(_tileGroup.Width - 1, centerColumn + attackColumn);
+            // 가로선 (같은 row, column 범위) - AttackRow는 실제로 가로(column) 방향
+            _tileGroup.GetCrossHorizontalBounds(centerRow, centerColumn, attackRow, out int minColumn, out int maxColumn);
             for (int column = minColumn; column <= maxColumn; column++)
             {
-            BattlefieldTile tile = _tileGroup.GetTile(centerRow, column);
-            if (tile != null)
-            {
-                tile.Flash(0.3f, Color.red, 0.1f);
-                _flashTiles.Add(tile);
-            }
+                BattlefieldTile tile = _tileGroup.GetTile(centerRow, column);
+                if (tile != null)
+                {
+                    float blend = column == centerColumn ? CENTER_TILE_BLEND : NORMAL_TILE_BLEND;
+                    tile.Flash(FLASH_DURATION, Color.red, blend);
+                    _flashTiles.Add(tile);
+                }
             }
 
-            // 세로선 (같은 column, row 범위)
-            int minRow = Mathf.Max(0, centerRow - attackRow);
-            int maxRow = Mathf.Min(_tileGroup.Height - 1, centerRow + attackRow);
+            // 세로선 (같은 column, row 범위) - AttackColumn은 실제로 세로(row) 방향
+            _tileGroup.GetCrossVerticalBounds(centerRow, centerColumn, attackColumn, out int minRow, out int maxRow);
             for (int row = minRow; row <= maxRow; row++)
             {
-            BattlefieldTile tile = _tileGroup.GetTile(row, centerColumn);
-            if (tile != null)
-            {
-                tile.Flash(0.3f, Color.red, 0.1f);
-                _flashTiles.Add(tile);
-            }
+                BattlefieldTile tile = _tileGroup.GetTile(row, centerColumn);
+                if (tile != null)
+                {
+                    float blend = row == centerRow ? CENTER_TILE_BLEND : NORMAL_TILE_BLEND;
+                    tile.Flash(FLASH_DURATION, Color.red, blend);
+                    _flashTiles.Add(tile);
+                }
             }
         }
 
@@ -210,7 +196,8 @@ namespace TeamSuneat
                 BattlefieldTile tile = _tileGroup.GetTile(row, column);
                 if (tile != null)
                 {
-                    tile.Flash(0.3f, Color.red, 0.1f);
+                    float blend = row == centerRow && column == centerColumn ? CENTER_TILE_BLEND : NORMAL_TILE_BLEND;
+                    tile.Flash(FLASH_DURATION, Color.red, blend);
                     _flashTiles.Add(tile);
                 }
                 }
@@ -226,7 +213,8 @@ namespace TeamSuneat
                 BattlefieldTile tile = _tileGroup.GetTile(row, column);
                 if (tile != null)
                 {
-                    tile.Flash(0.3f, Color.red, 0.1f);
+                    float blend = row == centerRow && column == centerColumn ? CENTER_TILE_BLEND : NORMAL_TILE_BLEND;
+                    tile.Flash(FLASH_DURATION, Color.red, blend);
                     _flashTiles.Add(tile);
                 }
                 }
@@ -276,14 +264,14 @@ namespace TeamSuneat
             ProfileInfo.Currency.Add(weaponData.RewardCurrency, amount + additionalAmount);
         }
 
-        private void ApplyWeaponEffectToCharacter(Character targetCharacter, WeaponData weaponData)
+        private IEnumerator ApplyWeaponEffectToCharacter(Character targetCharacter, WeaponData weaponData)
         {
             if (targetCharacter == null || targetCharacter.MyVital == null)
             {
-                return;
+                yield break;
             }
 
-            int hitCount = Mathf.Max(1, weaponData.MultiHitCount);
+            int hitCount = Mathf.Max(MIN_HIT_COUNT, weaponData.MultiHitCount);
 
             Log.Info(LogTags.Weapon, "무기 효과 적용: 대상={0}, HitCount={1}", targetCharacter.Name.ToLogString(), hitCount.ToSelectString());
 
@@ -297,6 +285,97 @@ namespace TeamSuneat
             for (int i = 0; i < hitCount; i++)
             {
                 Owner.Attack.Activate(weaponData.Hitmark, weaponDamageOverride);
+                // 각 공격 사이에 작은 지연 추가
+                if (i < hitCount - 1)
+                {
+                    yield return null;
+                }
+            }
+        }
+
+        private IEnumerator ApplyWeaponEffectToCharacterCoroutine(Character targetCharacter, WeaponData weaponData, System.Action onCompleted)
+        {
+            yield return StartCoroutine(ApplyWeaponEffectToCharacter(targetCharacter, weaponData));
+            onCompleted?.Invoke();
+        }
+
+        private IEnumerator TryApplyAreaWeaponEffect(int targetRow, int targetColumn, WeaponData weaponData, System.Action<bool> onResult)
+        {
+            AttackAreaEntity areaEntity = FindOrSpawnAttackAreaEntity(weaponData.Hitmark);
+            if (areaEntity == null)
+            {
+                onResult?.Invoke(false);
+                yield break;
+            }
+
+            int hitCount = Mathf.Max(MIN_HIT_COUNT, weaponData.MultiHitCount);
+            float? weaponDamageOverride = weaponData.Damage;
+
+            for (int i = 0; i < hitCount; i++)
+            {
+                // 각 공격 전에 타일을 깜박임
+                FlashAttackAreaTiles(targetRow, targetColumn, weaponData.AttackRow, weaponData.AttackColumn, weaponData.AttackAreaShape);
+                
+                // 깜박임 효과를 잠시 보여줌
+                yield return new WaitForSeconds(FLASH_DURATION);
+
+                areaEntity.SetWeaponDamageOverride(weaponDamageOverride);
+                areaEntity.SetAreaByTile(targetRow, targetColumn, weaponData.AttackRow, weaponData.AttackColumn, weaponData.AttackAreaShape, _tileGroup);
+                areaEntity.Activate();
+                
+                // 각 공격 사이에 지연 추가
+                if (i < hitCount - 1)
+                {
+                    yield return new WaitForSeconds(AREA_ATTACK_DELAY);
+                }
+            }
+
+            onResult?.Invoke(true);
+        }
+
+        private AttackAreaEntity FindOrSpawnAttackAreaEntity(HitmarkNames hitmark)
+        {
+            if (Owner == null || Owner.Attack == null)
+            {
+                return null;
+            }
+
+            AttackEntity attackEntity = Owner.Attack.FindEntity(hitmark);
+            if (attackEntity == null)
+            {
+                attackEntity = Owner.Attack.SpawnAndRegisterEntity(hitmark);
+            }
+
+            AttackAreaEntity areaEntity = attackEntity as AttackAreaEntity;
+            if (areaEntity == null)
+            {
+                Log.Warning(LogTags.Weapon, "영역 공격용 AttackAreaEntity를 찾을 수 없습니다. Hitmark: {0}", hitmark.ToLogString());
+                return null;
+            }
+
+            areaEntity.SetOwner(Owner);
+            return areaEntity;
+        }
+
+        private IEnumerator ApplyWeaponEffectFallback(int targetRow, int targetColumn, WeaponData weaponData)
+        {
+            _targetBuffer.Clear();
+            _tileGroup.CollectMonstersInArea(targetRow, targetColumn, weaponData.AttackRow, weaponData.AttackColumn, weaponData.AttackAreaShape, _targetBuffer);
+            if (!_targetBuffer.IsValid())
+            {
+                BattlefieldTile targetTile = _tileGroup.GetTile(targetRow, targetColumn);
+                if (targetTile != null && targetTile.CurrentMonster != null)
+                {
+                    _targetBuffer.Add(targetTile.CurrentMonster);
+                }
+            }
+
+            for (int i = 0; i < _targetBuffer.Count; i++)
+            {
+                if (_targetBuffer[i] != null)
+                {
+                    yield return StartCoroutine(ApplyWeaponEffectToCharacter(_targetBuffer[i], weaponData));
+                }
             }
         }
     }

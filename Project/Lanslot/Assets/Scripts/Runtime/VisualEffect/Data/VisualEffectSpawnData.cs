@@ -14,7 +14,6 @@ namespace TeamSuneat
         [SuffixLabel("캐릭터와는 별개로 위치를 지정할 수 있습니다.")]
         [FoldoutGroup("#Toggle")] public bool IgnoreCharacterPosition;
 
-        [FoldoutGroup("#Position")] public VFXPositionTypes SpawnPositionType;
         [FoldoutGroup("#Position")] public Vector2 SpawnArea;
         [FoldoutGroup("#Position")] public Vector3 SpawnOffset;
         [FoldoutGroup("#Position")] public Transform SpawnPoint;
@@ -89,17 +88,6 @@ namespace TeamSuneat
             {
                 return position;
             }
-        }
-
-        private Vector3 GetGroundPositionByRaycast(Vector3 position)
-        {
-            RaycastHit2D hit = Physics2D.Raycast(position, Vector3.down, 18f, GameLayers.Mask.Collision);
-            if (hit)
-            {
-                return (Vector3)hit.point;
-            }
-
-            return position;
         }
 
         private Vector3 GetRandomAreaPosition(Vector3 position)

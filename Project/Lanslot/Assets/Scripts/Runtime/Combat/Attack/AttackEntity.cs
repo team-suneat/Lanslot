@@ -18,6 +18,8 @@ namespace TeamSuneat
             base.AutoGetComponents();
 
             Owner = this.FindFirstParentComponent<Character>();
+
+            AutoGetFeedbackComponents();
         }
 
         private void OnValidate()
@@ -104,6 +106,8 @@ namespace TeamSuneat
         public virtual void Activate()
         {
             LogInfo("공격을 활성화합니다.");
+
+            TriggerAttackStartFeedback();
         }
 
         public virtual void Deactivate()
@@ -146,6 +150,119 @@ namespace TeamSuneat
         public virtual Vital GetTargetVital(int index)
         {
             return TargetVital;
+        }
+
+        protected virtual bool CheckDamageableVital(Vital targetVital)
+        {
+            if (targetVital == null)
+            {
+                return false;
+            }
+            else if (!targetVital.IsAlive)
+            {
+                return false;
+            }
+            else if (targetVital.Life.CheckInvulnerable())
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        protected virtual bool ValidateAttackConditions()
+        {
+            if (_damageInfo.TargetVital == null)
+            {
+                LogWarning("공격 독립체의 목표 바이탈이 설정되지 않았습니다. Hitmark: {0}, Entity: {1}", _damageInfo.HitmarkAssetData.Name.ToLogString(), this.GetHierarchyPath());
+                return false;
+            }
+
+            if (!_damageInfo.HitmarkAssetData.IsValid())
+            {
+                LogError("피해량 정보의 히트마크 에셋이 올바르지 않습니다. Hitmark:{0}, Entity: {1}", Name.ToLogString(), this.GetHierarchyPath());
+                return false;
+            }
+
+            return true;
+        }
+
+        protected virtual bool ProcessDamageResults()
+        {
+            if (!_damageInfo.DamageResults.IsValid())
+            {
+                LogWarning("공격 독립체의 피해 결과가 설정되지 않았습니다. Hitmark: {0}, Entity: {1}", _damageInfo.HitmarkAssetData.Name.ToLogString(), this.GetHierarchyPath());
+                return false;
+            }
+
+            bool isAttackSuccessed = false;
+            for (int i = 0; i < _damageInfo.DamageResults.Count; i++)
+            {
+                if (ProcessSingleDamageResult(_damageInfo.DamageResults[i]))
+                {
+                    isAttackSuccessed = true;
+                }
+            }
+
+            return isAttackSuccessed;
+        }
+
+        protected virtual bool ProcessSingleDamageResult(DamageResult damageResult)
+        {
+            switch (damageResult.DamageType)
+            {
+                case DamageTypes.Heal:
+                case DamageTypes.HealOverTime:
+                    return ProcessHealDamage(damageResult);
+
+                case DamageTypes.Charge:
+                    return ProcessChargeDamage(damageResult);
+
+                default:
+                    return ProcessRegularDamage(damageResult);
+            }
+        }
+
+        protected virtual bool ProcessHealDamage(DamageResult damageResult)
+        {
+            _damageInfo.TargetVital.Heal(damageResult.DamageValueToInt);
+            _damageInfo.TargetVital.DamageBuffOnHit(damageResult);
+            return true;
+        }
+
+        protected virtual bool ProcessChargeDamage(DamageResult damageResult)
+        {
+            _damageInfo.TargetVital.Charge(damageResult.DamageValueToInt);
+            _damageInfo.TargetVital.DamageBuffOnHit(damageResult);
+            return true;
+        }
+
+        protected virtual bool ProcessRegularDamage(DamageResult damageResult)
+        {
+            if (_damageInfo.TargetVital.CheckDamageImmunity(damageResult))
+            {
+                return false;
+            }
+
+            if (_damageInfo.TargetVital.TakeDamage(damageResult))
+            {
+                TriggerDamageFeedback();
+                return true;
+            }
+
+            return false;
+        }
+
+        protected virtual void TriggerDamageFeedback()
+        {
+            if (_damageInfo.TargetVital.IsAlive)
+            {
+                TriggerAttackOnHitDamageableFeedback(_damageInfo.TargetVital.position);
+            }
+            else
+            {
+                TriggerAttackOnKillFeedback(_damageInfo.TargetVital.position);
+            }
         }
     }
 }
