@@ -199,6 +199,11 @@ namespace TeamSuneat
             Log.Info(LogTags.Weapon, "무기 효과 적용: 대상={0}, HitCount={1}", targetCharacter.Name.ToLogString(), hitCount.ToSelectString());
 
             Owner.SetTarget(targetCharacter);
+            AttackEntity attackEntity = Owner.Attack.FindEntity(weaponData.Hitmark);
+            if (attackEntity != null)
+            {
+                attackEntity.SetTarget(targetCharacter.MyVital);
+            }
             float? weaponDamageOverride = weaponData.Damage;
             for (int i = 0; i < hitCount; i++)
             {

@@ -7,6 +7,16 @@ namespace TeamSuneat
             SetGameObjectName(Name.ToString());
         }
 
+        public override void SetTarget(Vital targetVital)
+        {
+            base.SetTarget(targetVital);
+
+            if (targetVital != null)
+            {
+                _damageInfo.SetTargetVital(targetVital);
+            }
+        }
+
         public override void Activate()
         {
             base.Activate();
