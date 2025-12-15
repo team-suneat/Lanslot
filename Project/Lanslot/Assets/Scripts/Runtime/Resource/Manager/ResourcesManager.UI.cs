@@ -232,7 +232,7 @@ namespace TeamSuneat
 
         #endregion Notice
 
-        public static UIGauge SpawnGauge(Vital vital)
+        public static EnemyHealthShieldView SpawnMonsterGauge(Vital vital)
         {
             if (GameSetting.Instance.Play.HideUserInterface)
             {
@@ -244,13 +244,13 @@ namespace TeamSuneat
                 return null;
             }
 
-            GameObject spawnedObject = SpawnPrefab("UIGauge", canvasOrder.transform);
+            GameObject spawnedObject = SpawnPrefab("UIMonsterGauge", canvasOrder.transform);
             if (spawnedObject == null)
             {
                 return null;
             }
 
-            return spawnedObject.GetComponent<UIGauge>();
+            return spawnedObject.GetComponent<EnemyHealthShieldView>();
         }
 
         internal static UIDetails SpawnDetails(UIDetailsNames detailsName, Transform parent)

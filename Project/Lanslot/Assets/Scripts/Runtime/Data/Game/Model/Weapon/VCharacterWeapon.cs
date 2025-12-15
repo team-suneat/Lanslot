@@ -194,7 +194,6 @@ namespace TeamSuneat.Data.Game
 
             // 최초 슬롯 해금
             defaultWeapons.UnlockedSlotCount = GameDefine.WEAPON_SLOT_DEFAULT_UNLOCK_COUNT;
-
             return defaultWeapons;
         }
 

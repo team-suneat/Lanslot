@@ -1,4 +1,5 @@
 using TeamSuneat.Data;
+using TeamSuneat.UserInterface;
 using UnityEngine;
 
 namespace TeamSuneat
@@ -15,6 +16,7 @@ namespace TeamSuneat
         {
             base.OnRelease();
             Life?.UnregisterOnDeathEvent(OnDeath);
+            UIManager.Instance?.GaugeManager?.UnregisterEnemy(this);
         }
 
         public virtual void OnBattleReady()
@@ -31,7 +33,7 @@ namespace TeamSuneat
 
             if (UseSpawnGaugeOnInit)
             {
-                SpawnGauge();
+                SpawnEnemyGauge();
             }
 
             Generate();

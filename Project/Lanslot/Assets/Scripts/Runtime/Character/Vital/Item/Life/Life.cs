@@ -384,9 +384,9 @@ namespace TeamSuneat
                 }
 
                 EnablePostDamageInvulnerability(InvincibilityDurationOnDamage);
-                if (Vital.Gauge == null)
+                if (Vital.EnemyGauge == null)
                 {
-                    Vital.SpawnGauge();
+                    Vital.SpawnEnemyGauge();
                 }
             }
 
@@ -619,7 +619,7 @@ namespace TeamSuneat
 
         private void MarkDespawnToGauge()
         {
-            Vital?.Gauge?.SetDespawnMark();
+            Vital?.EnemyGauge?.SetDespawnMark();
         }
 
         private void SendKillGlobalEvent(DamageResult damageResult)

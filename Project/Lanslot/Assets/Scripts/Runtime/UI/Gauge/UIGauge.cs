@@ -8,38 +8,29 @@ namespace TeamSuneat.UserInterface
 {
     public partial class UIGauge : XBehaviour, IPoolable
     {
-        [Title("#UI Gauge", "Component")]
+        [FoldoutGroup("#UI Gauge-Component")]
         public Slider FrontSlider;
 
+        [FoldoutGroup("#UI Gauge-Component")]
         public Slider ResourceSlider;
+
+        [FoldoutGroup("#UI Gauge-Component")]
         public TextMeshProUGUI ValueText;
 
-        public UIFollowObject FollowObject;
+        [FoldoutGroup("#UI Gauge-Component")]
         public UIBackGauge BackGauge;
 
-        [Title("#UI Gauge", "Toggle")]
+        [FoldoutGroup("#UI Gauge-Toggle")]
         public bool UseFrontValueText;
-
-        public bool UseDespawnOnMissingVital;
-        public bool IgnoreDespawn;
 
         public delegate void OnDespawnedDelegate();
 
-        [Title("#UI Gauge", "Event")]
+        [FoldoutGroup("#UI Gauge-Event")]
         public OnDespawnedDelegate OnDespawned;
 
         //
 
         [ReadOnly] public float FrontValue;
-
-        /// <summary> 삭제 표시가 되지 않은 게이지는 현재 생명력 값이 0이 되어도 삭제하지 않습니다. </summary>
-        [ReadOnly] public bool DespawnMark;
-
-        /// <summary> 연결된 바이탈 </summary>
-        [ReadOnly] public Vital LinkedVital;
-
-        /// <summary> 연결된 바이탈을 잃어버릴 경우 한 번에 한하여 디스폰합니다. </summary>
-        [ReadOnly] public bool UseDespawnOnceOnMissingVital;
 
         public bool IsSpawned { get; set; }
         public bool IsDespawned { get; set; }
@@ -62,7 +53,6 @@ namespace TeamSuneat.UserInterface
                 ValueText = rect.FindComponent<TextMeshProUGUI>("Value Text");
             }
 
-            FollowObject = GetComponent<UIFollowObject>();
         }
 
         protected override void OnStart()
@@ -74,27 +64,7 @@ namespace TeamSuneat.UserInterface
 
         private void LateUpdate()
         {
-            if (DespawnMark)
-            {
-                Despawn();
-            }
-            else if (LinkedVital != null)
-            {
-                BackGauge?.Decrease(FrontValue);
-            }
-            else if (LinkedVital == null)
-            {
-                if (UseDespawnOnMissingVital)
-                {
-                    Despawn();
-                }
-                else if (UseDespawnOnceOnMissingVital)
-                {
-                    UseDespawnOnceOnMissingVital = false;
-
-                    Despawn();
-                }
-            }
+            BackGauge?.Decrease(FrontValue);
         }
 
         // Poolable
@@ -102,7 +72,6 @@ namespace TeamSuneat.UserInterface
         public virtual void OnSpawn()
         {
             LogProgress("게이지의 스폰을 완료합니다. (OnSpawn)");
-            ResetDespawnMark();
             IsSpawned = true;
             IsDespawned = false;
         }
@@ -116,102 +85,17 @@ namespace TeamSuneat.UserInterface
         {
             if (IsSpawned)
             {
-                // Object Pool을 이용해 인게임에서 스폰한 게이지를 디스폰합니다.
                 if (!IsDespawned)
                 {
                     IsDespawned = true;
                     LogInfo("게이지를 디스폰합니다.");
                     OnDespawned?.Invoke();
-                    FollowObject?.Setup(null);
-
-                    UnlinkVital();
 
                     if (!IsDestroyed)
                     {
                         ResourcesManager.Despawn(gameObject, Time.deltaTime);
                     }
                 }
-            }
-        }
-
-        // 따라다니는 타겟 설정
-
-        public void SetFollowingTarget(Transform transform)
-        {
-            LogProgress("게이지의 따라가는 목표를 설정합니다.");
-
-            if (FollowObject != null)
-            {
-                FollowObject.IsWorldSpaceCanvas = true;
-                FollowObject.Setup(transform);
-            }
-        }
-
-        public void SetFollowingWorldOffset(Vector3 offset)
-        {
-            if (FollowObject != null)
-            {
-                FollowObject.SetWorldOffset(offset);
-            }
-        }
-
-        // 바이탈 연결 (Link Vital)
-
-        public void LinkVital(Vital vital, VitalResourceTypes resourceType)
-        {
-            if (vital != null)
-            {
-                if (LinkedVital != vital)
-                {
-                    LogProgress("게이지의 바이탈을 연결합니다.");
-                    LinkedVital = vital;
-                    BackGauge?.SetLinkedVital(vital, resourceType);
-                    SetValueByType(vital, resourceType);
-                }
-                else
-                {
-                    LogWarning("게이지의 바이탈이 이미 연결되어있습니다.");
-                }
-            }
-            else
-            {
-                LogWarning("게이지의 바이탈을 설정할 수 없습니다.");
-            }
-        }
-
-        private void SetValueByType(Vital vital, VitalResourceTypes resourceType)
-        {
-            switch (resourceType)
-            {
-                case VitalResourceTypes.Life:
-                    {
-                        SetValueText(vital.CurrentLife, vital.MaxLife);
-                        SetFrontValue(vital.LifeRate);
-                    }
-                    break;
-
-                case VitalResourceTypes.Shield:
-                    {
-                        SetValueText(vital.CurrentShield, vital.MaxShield);
-                        SetFrontValue(vital.ShieldRate);
-                    }
-                    break;
-            }
-        }
-
-        private void UnlinkVital()
-        {
-            if (LinkedVital != null)
-            {
-                LogProgress("게이지의 바이탈과의 연결을 해제합니다.");
-
-                _ = UIManager.Instance.GaugeManager.Unregister(LinkedVital);
-                LinkedVital = null;
-                BackGauge?.ResetLinkedVital();
-            }
-            else
-            {
-                LogError("게이지를 할당 해제할 수 없습니다. 등록된 바이탈이 없습니다.");
             }
         }
 
@@ -296,42 +180,9 @@ namespace TeamSuneat.UserInterface
             }
         }
 
-        // 삭제 표시 (Despawn Mark)
-
-        public void SetDespawnMark()
-        {
-            if (IgnoreDespawn) { return; }
-
-            if (!DespawnMark)
-            {
-                DespawnMark = true;
-                LogProgress("게이지의 삭제 표시를 활성화합니다.");
-            }
-            else
-            {
-                LogWarning("이미 게이지의 삭제 표시가 활성화되어있습니다.");
-            }
-        }
-
-        private void ResetDespawnMark()
-        {
-            if (IgnoreDespawn) { return; }
-
-            if (DespawnMark)
-            {
-                DespawnMark = false;
-                LogProgress("게이지의 삭제 표시를 비활성화합니다.");
-            }
-            else
-            {
-                LogWarning("이미 게이지의 삭제 표시가 비활성화되어있습니다.");
-            }
-        }
-
         public void SetBackValue(float value)
         {
             BackGauge?.SetBackValue(value);
         }
-
     }
 }

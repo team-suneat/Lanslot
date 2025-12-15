@@ -30,11 +30,21 @@ namespace TeamSuneat.UserInterface
 
             if (_vital != null)
             {
-                _vital.Life.OnValueChanged += OnLifeChanged;
-                _vital.Shield.OnValueChanged += OnShieldChanged;
+                if (_vital.Life != null)
+                {
+                    _vital.Life.OnValueChanged += OnLifeChanged;
+                    SetHealth(_vital.Life.Current, _vital.Life.Max);
+                }
 
-                SetHealth(_vital.Life.Current, _vital.Life.Max);
-                SetShield(_vital.Shield.Current, _vital.Shield.Max);
+                if (_vital.Shield != null)
+                {
+                    _vital.Shield.OnValueChanged += OnShieldChanged;
+                    SetShield(_vital.Shield.Current, _vital.Shield.Max);
+                }
+                else
+                {
+                    SetShield(0, 0);
+                }
             }
         }
 
@@ -42,8 +52,15 @@ namespace TeamSuneat.UserInterface
         {
             if (_vital != null)
             {
-                _vital.Life.OnValueChanged -= OnLifeChanged;
-                _vital.Shield.OnValueChanged -= OnShieldChanged;
+                if (_vital.Life != null)
+                {
+                    _vital.Life.OnValueChanged -= OnLifeChanged;
+                }
+
+                if (_vital.Shield != null)
+                {
+                    _vital.Shield.OnValueChanged -= OnShieldChanged;
+                }
             }
 
             _vital = null;

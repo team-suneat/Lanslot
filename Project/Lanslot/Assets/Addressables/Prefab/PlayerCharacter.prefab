@@ -112,7 +112,7 @@ MonoBehaviour:
   BlockDamageFeedbacks: {fileID: 0}
   DeathFeedbacks: {fileID: 0}
   KilledFeedbacks: {fileID: 0}
-  SuisideFeedbacks: {fileID: 0}
+  SuicideFeedbacks: {fileID: 0}
   ProfileInfo:
     IssuedItemSID: 0
     Character:

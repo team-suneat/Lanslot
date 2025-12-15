@@ -117,6 +117,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Ingame
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d0e914d5f9f147b47abcacd3abec69b4
+    m_Address: Assets/Addressables/Prefab/UI/Gauge/UIMonsterGauge.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Ingame
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d9d084fd7e3a5b843acd2ae79a1c4734
     m_Address: Assets/Addressables/Prefab/Stage/Stage2.prefab
     m_ReadOnly: 0

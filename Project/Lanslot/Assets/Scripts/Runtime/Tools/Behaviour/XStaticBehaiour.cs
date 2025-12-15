@@ -3,7 +3,7 @@
     /// <summary>
     /// 씬 이동시 할당 해제되는 전역 클래스
     /// </summary>
-    public class XStaticBehaiour<T> : XBehaviour where T : XBehaviour
+    public class XStaticBehaviour<T> : XBehaviour where T : XBehaviour
     {
         public static T Instance;
 

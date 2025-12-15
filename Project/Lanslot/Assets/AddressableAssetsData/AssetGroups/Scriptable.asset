@@ -39,6 +39,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Scriptable
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6be5caaa6eb86994abbe0f98d5b43400
+    m_Address: Assets/Addressables/Scriptable/Hitmark/Monster/Hitmark_HeartoftheLegion.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scriptable
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7517224cbbcd5f542a9945d3b5c1cd57
     m_Address: Assets/Addressables/Scriptable/LogSetting.asset
     m_ReadOnly: 0
@@ -53,6 +59,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9d452892f14649e41b88926b8554bade
     m_Address: Assets/Addressables/Scriptable/Floaty_PhysicalCritical.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scriptable
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a2bd63d9e3131e74fbab72ded5a7cfd6
+    m_Address: Assets/Addressables/Scriptable/Hitmark/Monster/Hitmark_BoneGeneral.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Scriptable
@@ -81,8 +93,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - Scriptable
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c71aa68bfc28c0b4e991df7aa4324bd4
+    m_Address: Assets/Addressables/Scriptable/Hitmark/Monster/Hitmark_MaceWraith.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scriptable
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d001a1d224ea2734e987ddfb9057038e
     m_Address: Assets/Addressables/Scriptable/Hitmark/Hitmark_Stone.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scriptable
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d1533f8a9d2b2584cb611b6b3360d79a
+    m_Address: Assets/Addressables/Scriptable/Hitmark/Monster/Hitmark_AshGrayInfantry.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Scriptable
@@ -101,6 +125,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f51bf8d86da26c34dbe9c80795357e16
     m_Address: Assets/Addressables/Scriptable/Hitmark/Hitmark_ExecutionerDagger.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scriptable
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f6518ba50211edd42a8ac423fdbb3ab5
+    m_Address: Assets/Addressables/Scriptable/Hitmark/Monster/Hitmark_AshBeast.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Scriptable

@@ -96,6 +96,7 @@ namespace TeamSuneat.UserInterface
 
                 _screenPosition = MainCamera.WorldToScreenPoint(_worldPosition);
                 _screenPosition /= GameSetting.Instance.Video.ResolutionRate;
+                _screenPosition += ScreenOffset;
                 _screenPosition.z = 0f;
 
                 anchoredPosition3D = _screenPosition;
@@ -149,6 +150,7 @@ namespace TeamSuneat.UserInterface
 
                 _screenPosition = MainCamera.WorldToScreenPoint(_worldPosition);
                 _screenPosition *= GameSetting.Instance.Video.ResolutionRate;
+                _screenPosition += ScreenOffset;
                 _screenPosition.z = 0f;
 
                 anchoredPosition3D = _screenPosition;

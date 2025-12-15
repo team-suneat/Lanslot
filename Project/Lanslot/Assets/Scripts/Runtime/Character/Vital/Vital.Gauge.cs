@@ -16,10 +16,9 @@ namespace TeamSuneat
         {
             if (Life != null)
             {
-                if (Gauge != null)
+                if (EnemyGauge != null)
                 {
-                    Gauge.SetValueText(Life.Current, Life.Max);
-                    Gauge.SetFrontValue(Life.Rate);
+                    EnemyGauge.SetHealth(Life.Current, Life.Max);
                 }
             }
         }
@@ -30,32 +29,31 @@ namespace TeamSuneat
 
         //
 
-        public void SpawnGauge()
+        public void SpawnEnemyGauge()
         {
             if (!GameSetting.Instance.Play.UseMonsterGauge) { return; }
             if (!UseGauge) { return; }
             if (!IsAlive) { return; }
-            if (Gauge != null) { return; }
-            if (Gauge == null)
+            if (Owner == null) { return; }
+
+            MonsterCharacter monster = Owner as MonsterCharacter;
+            if (monster == null) { return; }
+
+            if (UIManager.Instance == null || UIManager.Instance.GaugeManager == null) { return; }
+            if (UIManager.Instance.GaugeManager.FindEnemy(this) != null) { return; }
+
+            EnemyHealthShieldView view = UIManager.Instance.GaugeManager.SpawnEnemyGauge(Owner);
+            if (view != null)
             {
-                UIGauge gauge = UIManager.Instance.GaugeManager.SpawnLifeGauge(Owner);
-                if (gauge != null)
-                {
-                    gauge.SetFollowingTarget(GaugePoint);
-                    gauge.LinkVital(this, VitalResourceTypes.Life);
-                    gauge.UseDespawnOnceOnMissingVital = true;
-
-                    UIManager.Instance.GaugeManager.Register(this, gauge);
-
-                    Log.Info(LogTags.UI_Gauge, "게이지를 생성하여 바이탈의 게이지로 할당합니다. {0}, {1}",
-                        gauge.GetHierarchyName(), this.GetHierarchyPath());
-                }
+                view.Bind(monster);
+                Log.Info(LogTags.UI_Gauge, "몬스터 게이지를 생성하여 바이탈에 바인드합니다. {0}, {1}",
+                    view.GetHierarchyName(), this.GetHierarchyPath());
             }
         }
 
         //
 
-        public virtual void ComsumeLifePotion(int healValue, int healValueOverTime, float duration)
+        public virtual void ConsumeLifePotion(int healValue, int healValueOverTime, float duration)
         { }
     }
 }

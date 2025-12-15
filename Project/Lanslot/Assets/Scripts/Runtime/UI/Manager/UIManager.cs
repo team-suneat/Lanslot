@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TeamSuneat.UserInterface
 {
-    public partial class UIManager : XStaticBehaiour<UIManager>
+    public partial class UIManager : XStaticBehaviour<UIManager>
     {
         [Title("Manager")]
         public UICanvasManager CanvasManager;

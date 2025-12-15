@@ -42,7 +42,7 @@
         }
 
         public const bool USE_ES3 = false;
-        public const bool USE_AES_EDITOR = true;
+        public const bool USE_AES_EDITOR = false;
 
         public const bool USE_DEBUG_LOG_ERROR = true;
         public const bool USE_DEBUG_LOG_WARNING = true;

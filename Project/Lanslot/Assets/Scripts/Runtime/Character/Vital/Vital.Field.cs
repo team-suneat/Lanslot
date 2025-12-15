@@ -49,13 +49,14 @@ namespace TeamSuneat
 
         [FoldoutGroup("#Vital-Gauge")]
         [ReadOnly]
-        public UIGauge Gauge
+        public EnemyHealthShieldView EnemyGauge
         {
             get
             {
                 if (UIManager.Instance != null)
                 {
-                    return UIManager.Instance.GaugeManager.Find(this);
+                    IEnemyGaugeView view = UIManager.Instance.GaugeManager.FindEnemy(this);
+                    return view as EnemyHealthShieldView;
                 }
 
                 return null;

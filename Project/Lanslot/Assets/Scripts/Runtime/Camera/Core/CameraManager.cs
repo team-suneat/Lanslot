@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace TeamSuneat
 {
-    public class CameraManager : XStaticBehaiour<CameraManager>
+    public class CameraManager : XStaticBehaviour<CameraManager>
     {
         // 상수 정의
         private const float DEFAULT_GLOBAL_SHAKE_FORCE = 1f;
