@@ -22,7 +22,7 @@ namespace TeamSuneat
             _attackColumn = attackColumn;
             _attackAreaShape = shape;
             _tileGroup = tileGroup;
-            
+
             // 중앙 위치를 transform.position에 설정
             if (_tileGroup != null)
             {

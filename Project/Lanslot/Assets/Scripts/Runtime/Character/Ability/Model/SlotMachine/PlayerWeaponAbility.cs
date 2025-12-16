@@ -315,14 +315,14 @@ namespace TeamSuneat
             {
                 // 각 공격 전에 타일을 깜박임
                 FlashAttackAreaTiles(targetRow, targetColumn, weaponData.AttackRow, weaponData.AttackColumn, weaponData.AttackAreaShape);
-                
+
                 // 깜박임 효과를 잠시 보여줌
                 yield return new WaitForSeconds(FLASH_DURATION);
 
                 areaEntity.SetWeaponDamageOverride(weaponDamageOverride);
                 areaEntity.SetAreaByTile(targetRow, targetColumn, weaponData.AttackRow, weaponData.AttackColumn, weaponData.AttackAreaShape, _tileGroup);
                 areaEntity.Activate();
-                
+
                 // 각 공격 사이에 지연 추가
                 if (i < hitCount - 1)
                 {

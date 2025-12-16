@@ -1,4 +1,3 @@
-using UnityEngine;
 using UnityEngine.UI;
 
 namespace TeamSuneat.UserInterface
@@ -8,4 +7,3 @@ namespace TeamSuneat.UserInterface
         void Apply(Image target, ToggleButtonStates state, UIPointerEventButton button);
     }
 }
-

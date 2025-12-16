@@ -111,7 +111,17 @@ namespace TeamSuneat
                 for (int i = 0; i < _damageInfo.DamageResults.Count; i++)
                 {
                     damageResult = _damageInfo.DamageResults[i];
-                    if (damageResult.DamageType.IsHeal()) continue;
+                    if (damageResult.DamageType.IsHeal())
+                    {
+                        Owner.MyVital.Heal(damageResult.DamageValueToInt);
+                        continue;
+                    }
+
+                    if (damageResult.DamageType == DamageTypes.Charge)
+                    {
+                        Owner.MyVital.Charge(damageResult.DamageValueToInt);
+                        continue;
+                    }
 
                     if (!Owner.MyVital.CheckDamageImmunity(damageResult))
                     {

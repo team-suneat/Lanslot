@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace TeamSuneat
 {
     public class AttackTargetEntity : AttackEntity
@@ -24,7 +22,7 @@ namespace TeamSuneat
         {
             // Activate에서 피드백이 호출되기 전에 위치를 설정해야 함
             UpdatePositionToTargetTile();
-            
+
             base.Activate();
 
             Execute();

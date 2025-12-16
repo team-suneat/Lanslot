@@ -46,4 +46,3 @@ namespace TeamSuneat.UserInterface
         }
     }
 }
-

@@ -7,4 +7,3 @@ namespace TeamSuneat.UserInterface
         Color,
     }
 }
-
